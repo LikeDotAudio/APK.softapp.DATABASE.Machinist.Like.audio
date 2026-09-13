@@ -1,4 +1,4 @@
 # Architecture Notes & Technical Specs — Machinist.Like.audio
 
-## 🛠 Integration Details
-Includes Metallurgy specs, sheet metal bend deduction formulas, and welding heat input calculation notes.
+## 🛠 Technical Specifications & Integration
+Houses metallurgy data files, bend deduction formulas for sheet metal fabrication, welding heat input calculations, and technical shop diagrams.

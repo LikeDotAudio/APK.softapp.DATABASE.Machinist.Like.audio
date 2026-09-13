@@ -1,4 +1,4 @@
 # Roadmap & Development Plans — Machinist.Like.audio
 
 ## 🛣 Development Goals
-Add interactive feeds-and-speeds calculator, CNC G-code previewer, and material tolerance charts.
+Build interactive feeds-and-speeds machining calculator, CNC G-code previewer, material tolerance charts, and 3D tooling geometry visualizer.
