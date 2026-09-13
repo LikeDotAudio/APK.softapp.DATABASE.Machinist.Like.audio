@@ -1,0 +1,13 @@
+{
+  "id": "Machinist",
+  "name": "Machinist",
+  "icon": "🔩",
+  "group": "Pipeline",
+  "subGroup": "10 · Device Under Test",
+  "kind": "web",
+  "class": "execution",
+  "description": "DEVICE UNDER TEST: MACHINIST — machinist.like.audio, 33 precision-metrology calculators behind one React shell: Jo-block stacks, the Hardinge dividing head, speeds and feeds, bolt circles, sine bars, taps and dies, fits and tolerances, hardness and surface finish. Every calculator reads the shared UnitContext, so metric/imperial is one setting for the whole app and not one per panel. The build is relative-base, so the bundle runs from any web root.",
+  "topic": "APK.audio/Gui/Display/Machinist",
+  "autostart": false,
+  "app": "dist/index.html"
+}
