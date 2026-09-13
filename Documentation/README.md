@@ -1,12 +1,22 @@
-# Machinist.Like.audio — Metalworking & Engineering Guide
+# Documentation Index — Machinist.Like.audio
 
-## 📌 Overview
-Comprehensive machinist reference guide, metallurgy tables (`Metalurgy.md`), sheet metal bend calculators (`sheetmetal expanded.md`), welding specs (`welding Calc.md`), and shop notes.
+## 📌 Documentation Overview
+This repository contains technical documentation, architecture notes, roadmap plans, and issue tracking for `Machinist.Like.audio`, aligned with `APK:Documentation` standards.
 
-## 📁 Documentation Structure
-- [Plans/ROADMAP.md](Plans/ROADMAP.md) — Feature plans, development goals, and roadmap
-- [Notes/ARCHITECTURE_NOTES.md](Notes/ARCHITECTURE_NOTES.md) — Technical specifications, architecture notes, and integration details
-- [Issues/KNOWN_ISSUES.md](Issues/KNOWN_ISSUES.md) — Bug tracking, known edge cases, and active tasks
+## 📁 Document Categories
+
+### Issues
+- [Known Issues](Issues/KNOWN_ISSUES.md)
+
+### Notes
+- [Architecture Notes](Notes/ARCHITECTURE_NOTES.md)
+- [Edits](Notes/Edits.md)
+- [Metalurgy](Notes/Metalurgy.md)
+- [Sheetmetal Expanded](Notes/sheetmetal expanded.md)
+- [Welding Calc](Notes/welding Calc.md)
+
+### Plans
+- [Roadmap](Plans/ROADMAP.md)
 
 ---
 *Aligned with `APK:Documentation` standards.*
