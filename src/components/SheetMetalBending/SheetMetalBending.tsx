@@ -1,95 +1,10 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { SENDCUTSEND_BENDING_SPECS, UNIQUE_MATERIALS } from './data/bendingSpecs';
+import { resolveActiveParams, solveFlatPattern, solveSimulator } from './bend.math';
 
-// SendCutSend Material Bending Specifications Database
-export interface BendingSpec {
-  material: string;
-  thicknessInches: number;
-  thicknessMm: number;
-  kFactor: number;
-  bendDeduction90Inches: number;
-  effectiveRadius90Inches: number;
-  dieWidthInches: number;
-  minFlangeLength90Inches: number;
-  minCornerReliefInches: number;
-  bendReliefDepthInches: number;
-}
-
-export const SENDCUTSEND_BENDING_SPECS: BendingSpec[] = [
-  // 4130 Chromoly
-  { material: '4130 Chromoly', thicknessInches: 0.050, thicknessMm: 1.27, kFactor: 0.38, bendDeduction90Inches: 0.0945, effectiveRadius90Inches: 0.050, dieWidthInches: 0.472, minFlangeLength90Inches: 0.302, minCornerReliefInches: 0.018, bendReliefDepthInches: 0.120 },
-  { material: '4130 Chromoly', thicknessInches: 0.063, thicknessMm: 1.60, kFactor: 0.41, bendDeduction90Inches: 0.1065, effectiveRadius90Inches: 0.050, dieWidthInches: 0.472, minFlangeLength90Inches: 0.308, minCornerReliefInches: 0.025, bendReliefDepthInches: 0.133 },
-  { material: '4130 Chromoly', thicknessInches: 0.125, thicknessMm: 3.18, kFactor: 0.43, bendDeduction90Inches: 0.2050, effectiveRadius90Inches: 0.090, dieWidthInches: 0.984, minFlangeLength90Inches: 0.723, minCornerReliefInches: 0.038, bendReliefDepthInches: 0.235 },
-  { material: '4130 Chromoly', thicknessInches: 0.190, thicknessMm: 4.83, kFactor: 0.37, bendDeduction90Inches: 0.3240, effectiveRadius90Inches: 0.125, dieWidthInches: 0.984, minFlangeLength90Inches: 0.782, minCornerReliefInches: 0.043, bendReliefDepthInches: 0.335 },
-  { material: '4130 Chromoly', thicknessInches: 0.250, thicknessMm: 6.35, kFactor: 0.36, bendDeduction90Inches: 0.4335, effectiveRadius90Inches: 0.170, dieWidthInches: 1.575, minFlangeLength90Inches: 1.367, minCornerReliefInches: 0.048, bendReliefDepthInches: 0.440 },
-
-  // 5052 Aluminum
-  { material: '5052 Aluminum', thicknessInches: 0.040, thicknessMm: 1.02, kFactor: 0.45, bendDeduction90Inches: 0.0620, effectiveRadius90Inches: 0.024, dieWidthInches: 0.472, minFlangeLength90Inches: 0.286, minCornerReliefInches: 0.024, bendReliefDepthInches: 0.084 },
-  { material: '5052 Aluminum', thicknessInches: 0.063, thicknessMm: 1.60, kFactor: 0.42, bendDeduction90Inches: 0.0960, effectiveRadius90Inches: 0.035, dieWidthInches: 0.472, minFlangeLength90Inches: 0.303, minCornerReliefInches: 0.030, bendReliefDepthInches: 0.118 },
-  { material: '5052 Aluminum', thicknessInches: 0.080, thicknessMm: 2.03, kFactor: 0.48, bendDeduction90Inches: 0.1160, effectiveRadius90Inches: 0.038, dieWidthInches: 0.472, minFlangeLength90Inches: 0.313, minCornerReliefInches: 0.037, bendReliefDepthInches: 0.138 },
-  { material: '5052 Aluminum', thicknessInches: 0.090, thicknessMm: 2.29, kFactor: 0.37, bendDeduction90Inches: 0.1420, effectiveRadius90Inches: 0.032, dieWidthInches: 0.472, minFlangeLength90Inches: 0.326, minCornerReliefInches: 0.034, bendReliefDepthInches: 0.142 },
-  { material: '5052 Aluminum', thicknessInches: 0.100, thicknessMm: 2.54, kFactor: 0.40, bendDeduction90Inches: 0.1910, effectiveRadius90Inches: 0.125, dieWidthInches: 0.630, minFlangeLength90Inches: 0.463, minCornerReliefInches: 0.020, bendReliefDepthInches: 0.245 },
-  { material: '5052 Aluminum', thicknessInches: 0.125, thicknessMm: 3.18, kFactor: 0.44, bendDeduction90Inches: 0.2160, effectiveRadius90Inches: 0.125, dieWidthInches: 0.630, minFlangeLength90Inches: 0.476, minCornerReliefInches: 0.032, bendReliefDepthInches: 0.270 },
-  { material: '5052 Aluminum', thicknessInches: 0.187, thicknessMm: 4.75, kFactor: 0.43, bendDeduction90Inches: 0.3560, effectiveRadius90Inches: 0.250, dieWidthInches: 0.984, minFlangeLength90Inches: 0.798, minCornerReliefInches: 0.024, bendReliefDepthInches: 0.457 },
-  { material: '5052 Aluminum', thicknessInches: 0.250, thicknessMm: 6.35, kFactor: 0.42, bendDeduction90Inches: 0.4420, effectiveRadius90Inches: 0.250, dieWidthInches: 1.575, minFlangeLength90Inches: 1.371, minCornerReliefInches: 0.044, bendReliefDepthInches: 0.520 },
-
-  // Brass
-  { material: 'Brass', thicknessInches: 0.040, thicknessMm: 1.02, kFactor: 0.38, bendDeduction90Inches: 0.0740, effectiveRadius90Inches: 0.040, dieWidthInches: 0.472, minFlangeLength90Inches: 0.292, minCornerReliefInches: 0.018, bendReliefDepthInches: 0.100 },
-  { material: 'Brass', thicknessInches: 0.063, thicknessMm: 1.60, kFactor: 0.38, bendDeduction90Inches: 0.1050, effectiveRadius90Inches: 0.040, dieWidthInches: 0.472, minFlangeLength90Inches: 0.308, minCornerReliefInches: 0.026, bendReliefDepthInches: 0.123 },
-  { material: 'Brass', thicknessInches: 0.125, thicknessMm: 3.18, kFactor: 0.36, bendDeduction90Inches: 0.2050, effectiveRadius90Inches: 0.060, dieWidthInches: 0.630, minFlangeLength90Inches: 0.471, minCornerReliefInches: 0.038, bendReliefDepthInches: 0.205 },
-  { material: 'Brass', thicknessInches: 0.187, thicknessMm: 4.75, kFactor: 0.38, bendDeduction90Inches: 0.3240, effectiveRadius90Inches: 0.095, dieWidthInches: 0.984, minFlangeLength90Inches: 0.782, minCornerReliefInches: 0.040, bendReliefDepthInches: 0.302 },
-  { material: 'Brass', thicknessInches: 0.250, thicknessMm: 6.35, kFactor: 0.38, bendDeduction90Inches: 0.4240, effectiveRadius90Inches: 0.130, dieWidthInches: 1.575, minFlangeLength90Inches: 1.362, minCornerReliefInches: 0.053, bendReliefDepthInches: 0.400 },
-
-  // Copper
-  { material: 'Copper', thicknessInches: 0.040, thicknessMm: 1.02, kFactor: 0.34, bendDeduction90Inches: 0.0810, effectiveRadius90Inches: 0.052, dieWidthInches: 0.472, minFlangeLength90Inches: 0.296, minCornerReliefInches: 0.015, bendReliefDepthInches: 0.112 },
-  { material: 'Copper', thicknessInches: 0.063, thicknessMm: 1.60, kFactor: 0.36, bendDeduction90Inches: 0.0990, effectiveRadius90Inches: 0.024, dieWidthInches: 0.472, minFlangeLength90Inches: 0.305, minCornerReliefInches: 0.029, bendReliefDepthInches: 0.107 },
-  { material: 'Copper', thicknessInches: 0.125, thicknessMm: 3.18, kFactor: 0.34, bendDeduction90Inches: 0.2050, effectiveRadius90Inches: 0.050, dieWidthInches: 0.630, minFlangeLength90Inches: 0.471, minCornerReliefInches: 0.038, bendReliefDepthInches: 0.195 },
-  { material: 'Copper', thicknessInches: 0.187, thicknessMm: 4.75, kFactor: 0.36, bendDeduction90Inches: 0.3200, effectiveRadius90Inches: 0.118, dieWidthInches: 0.984, minFlangeLength90Inches: 0.780, minCornerReliefInches: 0.042, bendReliefDepthInches: 0.325 },
-  { material: 'Copper', thicknessInches: 0.250, thicknessMm: 6.35, kFactor: 0.33, bendDeduction90Inches: 0.4300, effectiveRadius90Inches: 0.140, dieWidthInches: 1.575, minFlangeLength90Inches: 1.365, minCornerReliefInches: 0.050, bendReliefDepthInches: 0.410 },
-
-  // G90 Steel
-  { material: 'G90 Steel', thicknessInches: 0.030, thicknessMm: 0.76, kFactor: 0.38, bendDeduction90Inches: 0.0610, effectiveRadius90Inches: 0.045, dieWidthInches: 0.472, minFlangeLength90Inches: 0.286, minCornerReliefInches: 0.015, bendReliefDepthInches: 0.095 },
-  { material: 'G90 Steel', thicknessInches: 0.048, thicknessMm: 1.22, kFactor: 0.38, bendDeduction90Inches: 0.0860, effectiveRadius90Inches: 0.045, dieWidthInches: 0.472, minFlangeLength90Inches: 0.298, minCornerReliefInches: 0.020, bendReliefDepthInches: 0.113 },
-  { material: 'G90 Steel', thicknessInches: 0.059, thicknessMm: 1.50, kFactor: 0.36, bendDeduction90Inches: 0.1120, effectiveRadius90Inches: 0.063, dieWidthInches: 0.472, minFlangeLength90Inches: 0.311, minCornerReliefInches: 0.018, bendReliefDepthInches: 0.142 },
-  { material: 'G90 Steel', thicknessInches: 0.074, thicknessMm: 1.88, kFactor: 0.40, bendDeduction90Inches: 0.1290, effectiveRadius90Inches: 0.063, dieWidthInches: 0.472, minFlangeLength90Inches: 0.320, minCornerReliefInches: 0.025, bendReliefDepthInches: 0.157 },
-
-  // Mild Steel
-  { material: 'Mild Steel', thicknessInches: 0.030, thicknessMm: 0.76, kFactor: 0.38, bendDeduction90Inches: 0.0610, effectiveRadius90Inches: 0.045, dieWidthInches: 0.472, minFlangeLength90Inches: 0.286, minCornerReliefInches: 0.015, bendReliefDepthInches: 0.095 },
-  { material: 'Mild Steel', thicknessInches: 0.048, thicknessMm: 1.22, kFactor: 0.38, bendDeduction90Inches: 0.0860, effectiveRadius90Inches: 0.045, dieWidthInches: 0.472, minFlangeLength90Inches: 0.298, minCornerReliefInches: 0.020, bendReliefDepthInches: 0.113 },
-  { material: 'Mild Steel', thicknessInches: 0.059, thicknessMm: 1.50, kFactor: 0.40, bendDeduction90Inches: 0.1080, effectiveRadius90Inches: 0.063, dieWidthInches: 0.472, minFlangeLength90Inches: 0.309, minCornerReliefInches: 0.020, bendReliefDepthInches: 0.142 },
-  { material: 'Mild Steel', thicknessInches: 0.074, thicknessMm: 1.88, kFactor: 0.40, bendDeduction90Inches: 0.1290, effectiveRadius90Inches: 0.063, dieWidthInches: 0.472, minFlangeLength90Inches: 0.320, minCornerReliefInches: 0.025, bendReliefDepthInches: 0.157 },
-  { material: 'Mild Steel', thicknessInches: 0.104, thicknessMm: 2.64, kFactor: 0.34, bendDeduction90Inches: 0.1815, effectiveRadius90Inches: 0.063, dieWidthInches: 0.630, minFlangeLength90Inches: 0.459, minCornerReliefInches: 0.028, bendReliefDepthInches: 0.187 },
-  { material: 'Mild Steel', thicknessInches: 0.119, thicknessMm: 3.02, kFactor: 0.38, bendDeduction90Inches: 0.1955, effectiveRadius90Inches: 0.063, dieWidthInches: 0.630, minFlangeLength90Inches: 0.466, minCornerReliefInches: 0.036, bendReliefDepthInches: 0.202 },
-  { material: 'Mild Steel', thicknessInches: 0.135, thicknessMm: 3.43, kFactor: 0.32, bendDeduction90Inches: 0.2440, effectiveRadius90Inches: 0.100, dieWidthInches: 0.984, minFlangeLength90Inches: 0.742, minCornerReliefInches: 0.028, bendReliefDepthInches: 0.255 },
-  { material: 'Mild Steel', thicknessInches: 0.187, thicknessMm: 4.75, kFactor: 0.36, bendDeduction90Inches: 0.3225, effectiveRadius90Inches: 0.125, dieWidthInches: 0.984, minFlangeLength90Inches: 0.781, minCornerReliefInches: 0.041, bendReliefDepthInches: 0.332 },
-  { material: 'Mild Steel', thicknessInches: 0.250, thicknessMm: 6.35, kFactor: 0.36, bendDeduction90Inches: 0.4215, effectiveRadius90Inches: 0.150, dieWidthInches: 1.575, minFlangeLength90Inches: 1.361, minCornerReliefInches: 0.054, bendReliefDepthInches: 0.420 },
-
-  // Polycarbonate
-  { material: 'Polycarbonate', thicknessInches: 0.118, thicknessMm: 3.00, kFactor: 0.33, bendDeduction90Inches: 0.1950, effectiveRadius90Inches: 0.040, dieWidthInches: 0.472, minFlangeLength90Inches: 0.386, minCornerReliefInches: 0.083, bendReliefDepthInches: 0.178 },
-  { material: 'Polycarbonate', thicknessInches: 0.177, thicknessMm: 4.50, kFactor: 0.33, bendDeduction90Inches: 0.2960, effectiveRadius90Inches: 0.085, dieWidthInches: 0.984, minFlangeLength90Inches: 0.848, minCornerReliefInches: 0.214, bendReliefDepthInches: 0.282 },
-  { material: 'Polycarbonate', thicknessInches: 0.220, thicknessMm: 5.59, kFactor: 0.33, bendDeduction90Inches: 0.3670, effectiveRadius90Inches: 0.100, dieWidthInches: 0.984, minFlangeLength90Inches: 0.884, minCornerReliefInches: 0.235, bendReliefDepthInches: 0.340 },
-
-  // 304 Stainless Steel
-  { material: '304 Stainless Steel', thicknessInches: 0.030, thicknessMm: 0.76, kFactor: 0.36, bendDeduction90Inches: 0.0785, effectiveRadius90Inches: 0.080, dieWidthInches: 0.472, minFlangeLength90Inches: 0.294, minCornerReliefInches: 0.006, bendReliefDepthInches: 0.130 },
-  { material: '304 Stainless Steel', thicknessInches: 0.048, thicknessMm: 1.22, kFactor: 0.36, bendDeduction90Inches: 0.1045, effectiveRadius90Inches: 0.080, dieWidthInches: 0.472, minFlangeLength90Inches: 0.307, minCornerReliefInches: 0.011, bendReliefDepthInches: 0.148 },
-  { material: '304 Stainless Steel', thicknessInches: 0.060, thicknessMm: 1.52, kFactor: 0.34, bendDeduction90Inches: 0.1185, effectiveRadius90Inches: 0.070, dieWidthInches: 0.472, minFlangeLength90Inches: 0.314, minCornerReliefInches: 0.016, bendReliefDepthInches: 0.150 },
-  { material: '304 Stainless Steel', thicknessInches: 0.074, thicknessMm: 1.88, kFactor: 0.36, bendDeduction90Inches: 0.1370, effectiveRadius90Inches: 0.075, dieWidthInches: 0.472, minFlangeLength90Inches: 0.324, minCornerReliefInches: 0.021, bendReliefDepthInches: 0.169 },
-  { material: '304 Stainless Steel', thicknessInches: 0.100, thicknessMm: 2.54, kFactor: 0.36, bendDeduction90Inches: 0.2230, effectiveRadius90Inches: 0.187, dieWidthInches: 0.984, minFlangeLength90Inches: 0.732, minCornerReliefInches: 0.004, bendReliefDepthInches: 0.307 },
-  { material: '304 Stainless Steel', thicknessInches: 0.125, thicknessMm: 3.18, kFactor: 0.38, bendDeduction90Inches: 0.2400, effectiveRadius90Inches: 0.150, dieWidthInches: 0.984, minFlangeLength90Inches: 0.740, minCornerReliefInches: 0.020, bendReliefDepthInches: 0.295 },
-  { material: '304 Stainless Steel', thicknessInches: 0.187, thicknessMm: 4.75, kFactor: 0.35, bendDeduction90Inches: 0.3285, effectiveRadius90Inches: 0.130, dieWidthInches: 0.984, minFlangeLength90Inches: 0.784, minCornerReliefInches: 0.038, bendReliefDepthInches: 0.337 },
-  { material: '304 Stainless Steel', thicknessInches: 0.250, thicknessMm: 6.35, kFactor: 0.34, bendDeduction90Inches: 0.4620, effectiveRadius90Inches: 0.225, dieWidthInches: 1.575, minFlangeLength90Inches: 1.381, minCornerReliefInches: 0.034, bendReliefDepthInches: 0.495 },
-
-  // 316 Stainless Steel
-  { material: '316 Stainless Steel', thicknessInches: 0.060, thicknessMm: 1.52, kFactor: 0.34, bendDeduction90Inches: 0.1185, effectiveRadius90Inches: 0.070, dieWidthInches: 0.472, minFlangeLength90Inches: 0.314, minCornerReliefInches: 0.016, bendReliefDepthInches: 0.150 },
-  { material: '316 Stainless Steel', thicknessInches: 0.125, thicknessMm: 3.18, kFactor: 0.38, bendDeduction90Inches: 0.2400, effectiveRadius90Inches: 0.150, dieWidthInches: 0.984, minFlangeLength90Inches: 0.740, minCornerReliefInches: 0.020, bendReliefDepthInches: 0.295 },
-  { material: '316 Stainless Steel', thicknessInches: 0.187, thicknessMm: 4.75, kFactor: 0.35, bendDeduction90Inches: 0.3285, effectiveRadius90Inches: 0.130, dieWidthInches: 0.984, minFlangeLength90Inches: 0.784, minCornerReliefInches: 0.038, bendReliefDepthInches: 0.337 },
-  { material: '316 Stainless Steel', thicknessInches: 0.250, thicknessMm: 6.35, kFactor: 0.34, bendDeduction90Inches: 0.4620, effectiveRadius90Inches: 0.225, dieWidthInches: 1.575, minFlangeLength90Inches: 1.381, minCornerReliefInches: 0.034, bendReliefDepthInches: 0.495 },
-
-  // Titanium Grade 2
-  { material: 'Titanium Grade 2', thicknessInches: 0.040, thicknessMm: 1.02, kFactor: 0.38, bendDeduction90Inches: 0.0790, effectiveRadius90Inches: 0.045, dieWidthInches: 0.472, minFlangeLength90Inches: 0.295, minCornerReliefInches: 0.016, bendReliefDepthInches: 0.105 },
-];
-
-const UNIQUE_MATERIALS = Array.from(new Set(SENDCUTSEND_BENDING_SPECS.map(s => s.material)));
+export { SENDCUTSEND_BENDING_SPECS } from './data/bendingSpecs';
+export type { BendingSpec } from './types';
 
 export const SheetMetalBending: React.FC = () => {
   // Global Unit context
@@ -126,35 +41,10 @@ export const SheetMetalBending: React.FC = () => {
   const [simFlange2, setSimFlange2] = useState<string>('4.000');
 
   // Simulator Math Engine (60 FPS Reactive Solvers)
-  const simCalc = useMemo(() => {
-    const angle = Math.min(179, Math.max(1, simAngle)); // degrees
-    const R = parseFloat(simRadius) || 0.125;
-    const T = parseFloat(simThickness) || 0.100;
-    const K = parseFloat(simKFactor) || 0.42;
-    const L1 = parseFloat(simFlange1) || 4.0;
-    const L2 = parseFloat(simFlange2) || 4.0;
-
-    // Y-Factor = K * (pi / 2)
-    const Y = K * (Math.PI / 2);
-    // Neutral Axis Radius = R + K * T
-    const r_neutral = R + K * T;
-
-    // Bend Allowance BA = DL = (pi / 180) * (R + K * T) * angle
-    const BA = (Math.PI / 180) * r_neutral * angle;
-    const DL = BA;
-
-    // Outside Setback OSSB = (R + T) * tan(angle / 2 in rad)
-    const halfRad = ((angle / 2) * Math.PI) / 180;
-    const OSSB = (R + T) * Math.tan(halfRad);
-
-    // Bend Deduction BD = 2 * OSSB - BA
-    const BD = (2 * OSSB) - BA;
-
-    // Flat Pattern Length FL = L1 + L2 - BD
-    const FL = L1 + L2 - BD;
-
-    return { angle, R, T, K, L1, L2, Y, r_neutral, BA, DL, OSSB, BD, FL };
-  }, [simAngle, simRadius, simThickness, simKFactor, simFlange1, simFlange2]);
+  const simCalc = useMemo(
+    () => solveSimulator({ simAngle, simRadius, simThickness, simKFactor, simFlange1, simFlange2 }),
+    [simAngle, simRadius, simThickness, simKFactor, simFlange1, simFlange2],
+  );
 
   useEffect(() => {
     if (prevUnitRef.current === unit) return;
@@ -188,91 +78,16 @@ export const SheetMetalBending: React.FC = () => {
   }, [selectedMaterial]);
 
   // Active Bending Parameters
-  const activeParams = useMemo(() => {
-    if (isCustomSpec) {
-      const T_in = unit === 'in' ? (parseFloat(customThickness) || 0.1) : (parseFloat(customThickness) || 2.54) / 25.4;
-      const R_in = unit === 'in' ? (parseFloat(customRadius) || 0.063) : (parseFloat(customRadius) || 1.6) / 25.4;
-      const K = parseFloat(customKFactor) || 0.38;
-      return {
-        thickness_in: T_in,
-        radius_in: R_in,
-        kFactor: K,
-        minFlange_in: R_in * 3 + T_in * 2, // approximation for custom
-        dieWidth_in: T_in * 8,
-        specName: 'Custom Specification',
-      };
-    } else {
-      const spec = availableSpecs[selectedSpecIdx] || availableSpecs[0] || SENDCUTSEND_BENDING_SPECS[0];
-      return {
-        thickness_in: spec.thicknessInches,
-        radius_in: spec.effectiveRadius90Inches,
-        kFactor: spec.kFactor,
-        minFlange_in: spec.minFlangeLength90Inches,
-        dieWidth_in: spec.dieWidthInches,
-        specName: `${spec.thicknessInches}" (${spec.thicknessMm}mm) ${spec.material}`,
-      };
-    }
-  }, [isCustomSpec, availableSpecs, selectedSpecIdx, unit, customThickness, customRadius, customKFactor]);
+  const activeParams = useMemo(
+    () => resolveActiveParams({ isCustomSpec, availableSpecs, selectedSpecIdx, unit, customThickness, customRadius, customKFactor }),
+    [isCustomSpec, availableSpecs, selectedSpecIdx, unit, customThickness, customRadius, customKFactor],
+  );
 
   // Mathematical Bending Solver
-  const calculations = useMemo(() => {
-    const T = activeParams.thickness_in;
-    const R = activeParams.radius_in;
-    const K = activeParams.kFactor;
-    const A = bendAngle; // degrees
-    const A_rad = (A * Math.PI) / 180;
-
-    // Bend Allowance Formula: BA = Pi * (R + K * T) * A / 180
-    const BA = (Math.PI * (R + K * T) * A) / 180;
-
-    // Outside Setback Formula: OSSB = tan(A / 2) * (R + T)
-    const OSSB = Math.tan(A_rad / 2) * (R + T);
-
-    // Bend Deduction Formula: BD = 2 * OSSB - BA
-    const BD = 2 * OSSB - BA;
-
-    // Convert lengths from UI units to inches for uniform math
-    const L_base = unit === 'in' ? (parseFloat(baseLength) || 0) : (parseFloat(baseLength) || 0) / 25.4;
-    const L_left = unit === 'in' ? (parseFloat(leftFlange) || 0) : (parseFloat(leftFlange) || 0) / 25.4;
-    const L_right = unit === 'in' ? (parseFloat(rightFlange) || 0) : (parseFloat(rightFlange) || 0) / 25.4;
-
-    const numBends = (L_left > 0 ? 1 : 0) + (L_right > 0 ? 1 : 0);
-
-    // Total Flat Pattern Length = Sum of outside dimensions - (numBends * BD)
-    const totalOutside = L_base + L_left + L_right;
-    const flatLength = totalOutside - numBends * BD;
-
-    // Bend line positions from outer edges of flat pattern
-    // From Left Edge to Bend Line 1:
-    const leftBendLine = L_left > 0 ? L_left - BD / 2 : 0;
-    // From Right Edge to Bend Line 2:
-    const rightBendLine = L_right > 0 ? L_right - BD / 2 : 0;
-
-    // Inside dimensions after bending
-    const insideBase = L_base - (numBends * T);
-    const insideLeft = L_left > 0 ? L_left - T : 0;
-    const insideRight = L_right > 0 ? L_right - T : 0;
-
-    // Scale results back to display units
-    const scale = unit === 'in' ? 1 : 25.4;
-
-    return {
-      BA: BA * scale,
-      OSSB: OSSB * scale,
-      BD: BD * scale,
-      flatLength: flatLength * scale,
-      leftBendLine: leftBendLine * scale,
-      rightBendLine: rightBendLine * scale,
-      insideBase: insideBase * scale,
-      insideLeft: insideLeft * scale,
-      insideRight: insideRight * scale,
-      minFlangeRequired: activeParams.minFlange_in * scale,
-      dieWidth: activeParams.dieWidth_in * scale,
-      numBends,
-      isLeftFlangeTooShort: L_left > 0 && L_left < activeParams.minFlange_in,
-      isRightFlangeTooShort: L_right > 0 && L_right < activeParams.minFlange_in,
-    };
-  }, [activeParams, bendAngle, baseLength, leftFlange, rightFlange, unit]);
+  const calculations = useMemo(
+    () => solveFlatPattern({ activeParams, bendAngle, baseLength, leftFlange, rightFlange, unit }),
+    [activeParams, bendAngle, baseLength, leftFlange, rightFlange, unit],
+  );
 
   // Handle Material switch
   const handleMaterialChange = (mat: string) => {
