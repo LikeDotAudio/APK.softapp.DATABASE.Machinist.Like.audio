@@ -1,104 +1,10 @@
 import React, { useState } from 'react';
 import { useUnit } from '../../context/UnitContext';
-
-// Standard Factory Reduction Table data from Gorton P1-2 Manual (Pages 31-33)
-interface TableRow {
-  ratio: string;
-  lowerInches: number;
-  upperInches: number;
-  lowerMm: number;
-  upperMm: number;
-}
-
-const FACTORY_TABLE: TableRow[] = [
-  { ratio: '2 to 1', lowerInches: 0.000, upperInches: 0.000, lowerMm: 0.00, upperMm: 0.00 },
-  { ratio: '2.1 to 1', lowerInches: 0.477, upperInches: 0.137, lowerMm: 12.12, upperMm: 3.48 },
-  { ratio: '2.2 to 1', lowerInches: 0.911, upperInches: 0.265, lowerMm: 23.14, upperMm: 6.74 },
-  { ratio: '2.3 to 1', lowerInches: 1.307, upperInches: 0.386, lowerMm: 33.19, upperMm: 9.81 },
-  { ratio: '2.4 to 1', lowerInches: 1.670, upperInches: 0.500, lowerMm: 42.42, upperMm: 12.69 },
-  { ratio: '2.5 to 1', lowerInches: 2.004, upperInches: 0.607, lowerMm: 50.90, upperMm: 15.41 },
-  { ratio: '2.6 to 1', lowerInches: 2.312, upperInches: 0.708, lowerMm: 58.73, upperMm: 17.98 },
-  { ratio: '2.7 to 1', lowerInches: 2.598, upperInches: 0.804, lowerMm: 65.98, upperMm: 20.41 },
-  { ratio: '2.8 to 1', lowerInches: 2.863, upperInches: 0.894, lowerMm: 72.71, upperMm: 22.72 },
-  { ratio: '2.9 to 1', lowerInches: 3.109, upperInches: 0.980, lowerMm: 78.98, upperMm: 24.90 },
-  { ratio: '3 to 1', lowerInches: 3.340, upperInches: 1.062, lowerMm: 84.83, upperMm: 26.98 },
-  { ratio: '3.5 to 1', lowerInches: 4.294, upperInches: 1.416, lowerMm: 109.07, upperMm: 35.97 },
-  { ratio: '4 to 1', lowerInches: 5.010, upperInches: 1.699, lowerMm: 127.25, upperMm: 43.16 },
-  { ratio: '4.5 to 1', lowerInches: 5.566, upperInches: 1.931, lowerMm: 141.39, upperMm: 49.05 },
-  { ratio: '5 to 1', lowerInches: 6.012, upperInches: 2.124, lowerMm: 152.70, upperMm: 53.95 },
-  { ratio: '6 to 1', lowerInches: 6.680, upperInches: 2.428, lowerMm: 169.66, upperMm: 61.66 },
-  { ratio: '7 to 1', lowerInches: 7.157, upperInches: 2.655, lowerMm: 181.78, upperMm: 67.44 },
-  { ratio: '8 to 1', lowerInches: 7.515, upperInches: 2.832, lowerMm: 190.87, upperMm: 71.94 },
-  { ratio: '9 to 1', lowerInches: 7.793, upperInches: 2.974, lowerMm: 197.94, upperMm: 75.53 },
-  { ratio: '10 to 1', lowerInches: 8.016, upperInches: 3.090, lowerMm: 203.60, upperMm: 78.48 },
-  { ratio: '12 to 1', lowerInches: 8.350, upperInches: 3.268, lowerMm: 212.08, upperMm: 83.01 },
-  { ratio: '16 to 1', lowerInches: 8.767, upperInches: 3.499, lowerMm: 222.68, upperMm: 88.86 },
-];
-
-// Gorton P1-2 Cutting Chart Data (Page 35)
-interface GortonMaterial {
-  category: 'Cast Iron' | 'Steels' | 'Aluminum' | 'Copper & Brass & Bronze';
-  name: string;
-  tensile: string;
-  carbideDry: string;
-  carbideWet: string;
-  carbideCoolant: string;
-  hssDry: string;
-  hssWet: string;
-  hssCoolant: string;
-}
-
-const GORTON_MATERIALS: GortonMaterial[] = [
-  // Cast Iron
-  { category: 'Cast Iron', name: 'Average Brinell 150-170', tensile: '18,000 - 26,000', carbideDry: '250', carbideWet: '275', carbideCoolant: 'Dry or Soluble Oil', hssDry: '90', hssWet: '110', hssCoolant: 'Dry or Soluble Oil' },
-  { category: 'Cast Iron', name: 'C.I. up to 1.5% Nickel (Brinell 170-195)', tensile: '20,000 - 28,000', carbideDry: '-', carbideWet: '275 - 300', carbideCoolant: 'Soluble Oil / Dry', hssDry: '70', hssWet: '80', hssCoolant: 'Soluble Oil' },
-  { category: 'Cast Iron', name: 'C.I. up to 1% Cr. 3.5% Ni. (Brinell 200-210)', tensile: '30,000 - 36,000', carbideDry: '-', carbideWet: '210 - 230', carbideCoolant: 'Soluble Oil', hssDry: '65', hssWet: '70', hssCoolant: 'Soluble Oil' },
-  { category: 'Cast Iron', name: 'Semi Steel 20-30% Scrap w/ 2% Si', tensile: '30,000 - 36,000', carbideDry: '-', carbideWet: '175 - 200', carbideCoolant: 'Soluble Oil', hssDry: '62', hssWet: '72', hssCoolant: 'Soluble Oil' },
-
-  // Steels
-  { category: 'Steels', name: 'Bessemer Screw Stock S.A.E. #1112', tensile: '70,000 - 90,000', carbideDry: '-', carbideWet: '220 - 230', carbideCoolant: 'Cutting Oil', hssDry: '160', hssWet: '170', hssCoolant: 'Cutting Oil' },
-  { category: 'Steels', name: 'Free Cutting Bessemer (High Sulphur)', tensile: '70,000 - 90,000', carbideDry: '-', carbideWet: '240 - 260', carbideCoolant: 'Cutting Oil', hssDry: '175', hssWet: '185', hssCoolant: 'Cutting Oil' },
-  { category: 'Steels', name: '#2 Bessemer High Sulphur', tensile: '70,000 - 90,000', carbideDry: '-', carbideWet: '270 - 300', carbideCoolant: 'Cutting Oil', hssDry: '165', hssWet: '175', hssCoolant: 'Cutting Oil' },
-  { category: 'Steels', name: 'Ultra Cut High Manganese (same as #2)', tensile: '90,000 - 110,000', carbideDry: '-', carbideWet: '270 - 300', carbideCoolant: 'Cutting Oil', hssDry: '180', hssWet: '200', hssCoolant: 'Cutting Oil' },
-  { category: 'Steels', name: 'Open Hearth Screw Stock S.A.E. #1120', tensile: '70,000 - 85,000', carbideDry: '-', carbideWet: '250 - 260', carbideCoolant: 'Cutting Oil', hssDry: '135', hssWet: '145', hssCoolant: 'Soda Compound' },
-  { category: 'Steels', name: 'Soft Forging Steel S.A.E. #1020 (Low S)', tensile: '63,000 - 80,000', carbideDry: '-', carbideWet: '240 - 250', carbideCoolant: 'Soda Compound', hssDry: '110', hssWet: '120', hssCoolant: 'Soda Compound' },
-  { category: 'Steels', name: 'S.A.E. #1045 Carbon Steel', tensile: '95,000 - 125,000', carbideDry: '-', carbideWet: '200 - 240', carbideCoolant: 'Soda Compound', hssDry: '80', hssWet: '90', hssCoolant: 'Soda Compound' },
-  { category: 'Steels', name: 'Alloy Steels 3.5% Ni. S.A.E. #2315', tensile: '80,000 - 115,000', carbideDry: '-', carbideWet: '165 - 175', carbideCoolant: 'Soda Compound', hssDry: '110', hssWet: '120', hssCoolant: 'Soda Compound' },
-  { category: 'Steels', name: 'Chrome Ni. S.A.E. #3120 (Heat Treated Blanks)', tensile: '80,000 - 110,000', carbideDry: '-', carbideWet: '140 - 160', carbideCoolant: 'Soda Compound', hssDry: '90', hssWet: '100', hssCoolant: 'Soda Compound' },
-
-  // Aluminum
-  { category: 'Aluminum', name: 'Pure Cast Aluminum #43', tensile: '19,000', carbideDry: '-', carbideWet: '400 Up', carbideCoolant: 'Kerosene & Lard Oil', hssDry: '220', hssWet: '230', hssCoolant: 'Kerosene & Lard Oil' },
-  { category: 'Aluminum', name: 'Commercially Hard Temper Alum #2 SH.', tensile: '24,000', carbideDry: '-', carbideWet: '200 - 250', carbideCoolant: 'Kerosene & Lard Oil', hssDry: '130', hssWet: '140', hssCoolant: 'Kerosene & Lard Oil' },
-  { category: 'Aluminum', name: 'Dural High Tensile #17 ST.', tensile: '58,000', carbideDry: '-', carbideWet: '275 - 300', carbideCoolant: 'Soluble Oil', hssDry: '190', hssWet: '200', hssCoolant: 'Soluble Oil' },
-
-  // Copper, Brass & Bronze
-  { category: 'Copper & Brass & Bronze', name: 'Copper One-Half Hard Commercial', tensile: '31,000', carbideDry: '-', carbideWet: '180 - 200', carbideCoolant: 'Soluble Oil', hssDry: '100', hssWet: '120', hssCoolant: 'Soluble Oil' },
-  { category: 'Copper & Brass & Bronze', name: 'Brass, Cast Yellow', tensile: '20,000', carbideDry: '-', carbideWet: '400 - 600', carbideCoolant: 'Soluble Oil', hssDry: '200', hssWet: '220', hssCoolant: 'Soluble Oil' },
-  { category: 'Copper & Brass & Bronze', name: 'Brass One-Half Hard Commercial', tensile: '25,000 - 30,000', carbideDry: '-', carbideWet: '250 - 300', carbideCoolant: 'Soluble Oil', hssDry: '135', hssWet: '165', hssCoolant: 'Soluble Oil' },
-  { category: 'Copper & Brass & Bronze', name: 'Bronze, Gun Metal', tensile: '35,000', carbideDry: '-', carbideWet: '200 - 220', carbideCoolant: 'Soluble Oil', hssDry: '130', hssWet: '150', hssCoolant: 'Soluble Oil' },
-  { category: 'Copper & Brass & Bronze', name: 'Bronze, Phosphor', tensile: '50,000', carbideDry: '-', carbideWet: '160 - 180', carbideCoolant: 'Soluble Oil', hssDry: '95', hssWet: '115', hssCoolant: 'Soluble Oil' },
-];
-
-// Speed Chart Matrix Data (Page 34)
-const SPEED_MATRIX = [
-  { sfm: 30, d16: 1833, d8: 917, d316: 611, d4: 458, d516: 367, d38: 306 },
-  { sfm: 40, d16: 2445, d8: 1222, d316: 815, d4: 611, d516: 489, d38: 408 },
-  { sfm: 50, d16: 3056, d8: 1528, d316: 1019, d4: 764, d516: 611, d38: 509 },
-  { sfm: 60, d16: 3667, d8: 1833, d316: 1222, d4: 917, d516: 733, d38: 611 },
-  { sfm: 70, d16: 4278, d8: 2139, d316: 1426, d4: 1070, d516: 856, d38: 713 },
-  { sfm: 80, d16: 4889, d8: 2445, d316: 1630, d4: 1222, d516: 978, d38: 815 },
-  { sfm: 100, d16: 6112, d8: 3056, d316: 2037, d4: 1528, d516: 1222, d38: 1019 },
-  { sfm: 125, d16: 7641, d8: 3820, d316: 2546, d4: 1910, d516: 1528, d38: 1274 },
-  { sfm: 150, d16: 9169, d8: 4584, d316: 3056, d4: 2292, d516: 1833, d38: 1527 },
-  { sfm: 175, d16: 10714, d8: 5348, d316: 3565, d4: 2674, d516: 2139, d38: 1784 },
-  { sfm: 200, d16: 12224, d8: 6112, d316: 4074, d4: 3056, d516: 2444, d38: 2036 },
-  { sfm: 250, d16: 15281, d8: 7640, d316: 5092, d4: 3820, d516: 3055, d38: 2548 },
-  { sfm: 300, d16: 18337, d8: 9168, d316: 6111, d4: 4584, d516: 3666, d38: 3057 },
-  { sfm: 400, d16: 24450, d8: 12224, d316: 8148, d4: 6112, d516: 4888, d38: 4076 },
-  { sfm: 500, d16: 30562, d8: 15280, d316: 10185, d4: 7640, d516: 6110, d38: 5095 },
-  { sfm: 700, d16: 42787, d8: 21392, d316: 14259, d4: 10696, d516: 8554, d38: 7133 },
-  { sfm: 900, d16: 55012, d8: 27504, d316: 18333, d4: 13752, d516: 10998, d38: 9170 },
-];
+import { FACTORY_TABLE } from './data/factoryTable';
+import { GORTON_MATERIALS } from './data/cuttingChart';
+import { SPEED_MATRIX } from './data/speedMatrix';
+import { pantographGeometry, parseRatio, parseSfm, pickCuttingData, rebalance, rollMasterLength, rpmFromSfm, solveBarSettings, syncRollerCutter } from './gorton.math';
+import type { CalcTarget } from './types';
 
 export const GortonP12: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'calculator' | 'roll_sync' | 'speeds_materials' | 'table' | 'guide'>('calculator');
@@ -109,7 +15,7 @@ export const GortonP12: React.FC = () => {
   const [ratioVal, setRatioVal] = useState<string>('5.0');
   const [copyLength, setCopyLength] = useState<string>('10.0');
   const [workLength, setWorkLength] = useState<string>('2.0');
-  const [calcTarget, setCalcTarget] = useState<'ratio' | 'work' | 'copy'>('ratio');
+  const [calcTarget, setCalcTarget] = useState<CalcTarget>('ratio');
 
   // Stylus & Cutter Synchronizer inputs
   const [cutterDia, setCutterDia] = useState<string>('0.125');
@@ -127,143 +33,33 @@ export const GortonP12: React.FC = () => {
   const [speedCutterDia, setSpeedCutterDia] = useState<string>('0.125');
 
   // Parse ratio
-  const ratio = Math.max(1.1, parseFloat(ratioVal) || 2.0);
+  const ratio = parseRatio(ratioVal);
 
-  // Gorton Factory Constants (Page 29 & 30)
-  // Standard Range (2:1 to 40:1)
-  const A_std = 20.0390;
-  const B_std = 12.7450;
-  const C_std = 10.0195;
-  const D_std = 4.2483;
-
-  // Low Ratio Range (1:1 to 2:1)
-  const A_low = 10.0195;
-  const B_low = 12.7450;
-  const C_low = 6.3725;
-
-  let lowerBarSettingInches = 0;
-  let upperBarSettingInches = 0;
-  let lowerBarSettingMm = 0;
-  let upperBarSettingMm = 0;
-  let lowerGraduationLabel = 'Graduation "2" on Lower Slider Bar';
-  let upperGraduationLabel = 'Graduation "2" on Upper Slider Bar';
-
-  if (rangeMode === 'standard') {
-    // Step 1: A ÷ Required Reduction = E
-    const E = A_std / ratio;
-    // Step 2: C - E = Setting Distance from Graduation "2" on Lower Bar
-    lowerBarSettingInches = Math.max(0, C_std - E);
-    lowerBarSettingMm = lowerBarSettingInches * 25.4;
-
-    // Step 3: B ÷ (Required Reduction + 1) = F
-    const F = B_std / (ratio + 1);
-    // Step 4: D - F = Setting Distance from Graduation "2" on Upper Bar
-    upperBarSettingInches = Math.max(0, D_std - F);
-    upperBarSettingMm = upperBarSettingInches * 25.4;
-
-    lowerGraduationLabel = 'Graduation "2" on Lower Slider Bar';
-    upperGraduationLabel = 'Graduation "2" on Upper Slider Bar';
-  } else {
-    // Low Ratio Mode (1:1 to 2:1)
-    // Step 1: A ÷ Required Reduction = D
-    const D = A_low / ratio;
-    // Step 2: A - D = Setting Distance from Graduation "1" and "2" on Lower Block
-    lowerBarSettingInches = Math.max(0, A_low - D);
-    lowerBarSettingMm = lowerBarSettingInches * 25.4;
-
-    // Step 3: B ÷ (Required Reduction + 1) = E
-    const E = B_low / (ratio + 1);
-    // Step 4: C - E = Setting Distance from Graduation "1" on Upper Bar
-    upperBarSettingInches = Math.max(0, C_low - E);
-    upperBarSettingMm = upperBarSettingInches * 25.4;
-
-    lowerGraduationLabel = 'Graduation "1" and "2" on Lower Slider Block';
-    upperGraduationLabel = 'Graduation "1" on Upper Slider Bar';
-  }
+  const { lowerBarSettingInches, upperBarSettingInches, lowerBarSettingMm, upperBarSettingMm, lowerGraduationLabel, upperGraduationLabel } = solveBarSettings(ratio, rangeMode);
 
   // Handle dimension recalculations
-  const handleDimensionChange = (field: 'ratio' | 'copy' | 'work', value: string) => {
-    if (field === 'ratio') {
-      setRatioVal(value);
-      const r = parseFloat(value) || 2.0;
-      if (calcTarget === 'work') {
-        const c = parseFloat(copyLength) || 10.0;
-        setWorkLength((c / r).toFixed(3));
-      } else if (calcTarget === 'copy') {
-        const w = parseFloat(workLength) || 2.0;
-        setCopyLength((w * r).toFixed(3));
-      }
-    } else if (field === 'copy') {
-      setCopyLength(value);
-      const c = parseFloat(value) || 10.0;
-      if (calcTarget === 'ratio') {
-        const w = parseFloat(workLength) || 2.0;
-        const newR = w > 0 ? c / w : 2.0;
-        setRatioVal(newR.toFixed(2));
-      } else if (calcTarget === 'work') {
-        const r = parseFloat(ratioVal) || 2.0;
-        setWorkLength((c / r).toFixed(3));
-      }
-    } else if (field === 'work') {
-      setWorkLength(value);
-      const w = parseFloat(value) || 2.0;
-      if (calcTarget === 'ratio') {
-        const c = parseFloat(copyLength) || 10.0;
-        const newR = w > 0 ? c / w : 2.0;
-        setRatioVal(newR.toFixed(2));
-      } else if (calcTarget === 'copy') {
-        const r = parseFloat(ratioVal) || 2.0;
-        setCopyLength((w * r).toFixed(3));
-      }
-    }
+  const handleDimensionChange = (field: CalcTarget, value: string) => {
+    const next = rebalance(field, value, calcTarget, { ratioVal, copyLength, workLength });
+    if (next.ratioVal !== undefined) setRatioVal(next.ratioVal);
+    if (next.copyLength !== undefined) setCopyLength(next.copyLength);
+    if (next.workLength !== undefined) setWorkLength(next.workLength);
   };
 
   // Roll Attachment Circumference calculation (Page 27)
-  const rollDiameter = parseFloat(rollDia) || 2.0;
-  const rollCircumference = rollDiameter * Math.PI;
-  const masterRollLength = rollCircumference * ratio;
+  const masterRollLength = rollMasterLength(rollDia, ratio);
 
   // Stylus/Cutter Roller Synchronizer calculation (Page 20)
-  const cDia = parseFloat(cutterDia) || 0.125;
-  const rDia = parseFloat(rollerDia) || 0.625;
-  const calculatedRoller = cDia * ratio;
-  const calculatedCutter = rDia / ratio;
+  const { calculatedRoller, calculatedCutter } = syncRollerCutter(cutterDia, rollerDia, ratio);
 
   // Speeds & Materials calculation (Page 34 & 35)
   const currentMat = GORTON_MATERIALS[selectedMatIdx] || GORTON_MATERIALS[0];
-  const sfmRaw = toolMat === 'carbide' 
-    ? (cutMode === 'wet' ? currentMat.carbideWet : currentMat.carbideDry)
-    : (cutMode === 'wet' ? currentMat.hssWet : currentMat.hssDry);
-  const coolantRec = toolMat === 'carbide' ? currentMat.carbideCoolant : currentMat.hssCoolant;
-  
-  // Parse numeric SFM for RPM math (taking average if range e.g. "220 - 230" -> 225, or "400 Up" -> 400)
-  let sfmNum = 0;
-  if (sfmRaw && sfmRaw !== '-') {
-    const cleanStr = sfmRaw.replace(/Up/i, '').trim();
-    const parts = cleanStr.split('-').map(p => parseFloat(p.trim())).filter(n => !isNaN(n));
-    if (parts.length === 2) sfmNum = (parts[0] + parts[1]) / 2;
-    else if (parts.length === 1) sfmNum = parts[0];
-  }
-  const spdDiaNum = parseFloat(speedCutterDia) || 0.125;
-  const calculatedRpm = (sfmNum > 0 && spdDiaNum > 0) ? Math.round((sfmNum * 12) / (Math.PI * spdDiaNum)) : 0;
+  const { sfmRaw, coolantRec } = pickCuttingData(currentMat, toolMat, cutMode);
+  const sfmNum = parseSfm(sfmRaw);
+  const calculatedRpm = rpmFromSfm(sfmNum, speedCutterDia);
 
   // SVG Visualizer Geometry (Kinematic Pantograph Linkage)
-  const svgW = 480;
-  const svgH = 340;
-  const anchorX = 120; // Pivot on column base
-  const anchorY = 70;
-  
-  const visualScale = Math.min(1.0, Math.max(0.15, 2.0 / ratio));
-  const armLen = 260;
-  const lowerBlockX = anchorX + (armLen * visualScale);
-  const lowerBlockY = anchorY + 120;
-  const upperBlockX = anchorX + (armLen * visualScale * 0.7);
-  const upperBlockY = anchorY + 60;
-  
-  const stylusX = anchorX + armLen + 20;
-  const stylusY = anchorY + 220;
-  const spindleX = anchorX + (stylusX - anchorX) * (1 / ratio);
-  const spindleY = anchorY + (stylusY - anchorY) * (1 / ratio);
+  const { svgW, svgH, anchorX, anchorY, lowerBlockX, lowerBlockY, upperBlockX, upperBlockY, stylusX, stylusY, spindleX, spindleY } = pantographGeometry(ratio);
+
 
   return (
     <div style={{ maxWidth: '1400px', margin: '0 auto', paddingBottom: '90px', color: 'var(--text-primary)' }}>
@@ -338,14 +134,14 @@ export const GortonP12: React.FC = () => {
                 🔄 Select Variable To Calculate:
               </label>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
-                {[
+                {([
                   { id: 'ratio', label: 'Ratio (R)' },
                   { id: 'work', label: 'Work Size' },
                   { id: 'copy', label: 'Master Copy' },
-                ].map((t) => (
+                ] as { id: CalcTarget; label: string }[]).map((t) => (
                   <button
                     key={t.id}
-                    onClick={() => setCalcTarget(t.id as any)}
+                    onClick={() => setCalcTarget(t.id)}
                     style={{
                       padding: '8px',
                       borderRadius: '4px',
