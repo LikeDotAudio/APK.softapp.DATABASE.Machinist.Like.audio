@@ -1,0 +1,1 @@
+export { SpeedsFeeds } from './SpeedsFeeds';
