@@ -23,6 +23,11 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci || npm install
 
+      # dist/ is committed and served as-is by apk.audio and every node; this
+      # site builds its own. Fail before deploying when the two would differ.
+      - name: 🔍 Committed dist/ matches src/
+        run: npm run check:dist
+
       - name: 🛠️ Build project
         run: npm run build
 

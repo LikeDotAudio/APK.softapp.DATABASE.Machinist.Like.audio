@@ -80,6 +80,7 @@ imperial), switched from the header. Every tool reads it through `useUnit()` or
 npm install
 npm run dev        # Vite dev server
 npm run build      # tsc -b && vite build  ->  dist/ (committed: rebuild and commit it with src/)
+npm run check:dist # fails if the committed dist/ is not the build of src/
 npm run lint       # oxlint
 npm run preview
 ```
@@ -96,7 +97,7 @@ draws at the root of machinist.like.audio and one level down under `APK:Softapps
 ## Publishing
 
 `.github/workflows/deploy.yml` (“Deploy to FTPS Server”) runs on every push to `main` and on
-demand: Node 20, `npm ci || npm install`, `npm run build`, then uploads `dist/` over FTPS with
+demand: Node 20, `npm ci || npm install`, `npm run check:dist`, `npm run build`, then uploads `dist/` over FTPS with
 `SamKirkland/FTP-Deploy-Action@v4.4.0` using the `FTP_SERVER`, `FTP_USERNAME` and `FTP_PASSWORD`
 secrets, to `./` on the server.
 

@@ -14,6 +14,6 @@ Each principle with the code that keeps it. Ecosystem rules: the APK.audio root'
 
 ## Where it falls short
 - One ~900 kB JS chunk; nothing is code-split (Vite warns).
-- `dist/` is committed by hand: nothing checks it matches `src/`.
+- `dist/` is committed by hand; `npm run check:dist` (`scripts/check-dist.mjs`) holds it to `src/`, run by the deploy workflow, not by a commit hook.
 - `oxlint` warns (`react-hooks/exhaustive-deps` in `Knurling.tsx`, `ThreadingChangeGears.tsx`; `only-export-components` in data-exporting components).
 - Installable but no service worker, so no offline mode.

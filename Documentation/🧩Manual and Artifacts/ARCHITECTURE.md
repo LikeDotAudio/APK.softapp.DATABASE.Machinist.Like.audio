@@ -7,6 +7,7 @@ A single-page React 19 + TypeScript 6 app built by Vite 8. No back end, no fetch
 npm install
 npm run dev        # Vite dev server
 npm run build      # tsc -b && vite build -> dist/ (committed; rebuild and commit with every src/ change)
+npm run check:dist # scripts/check-dist.mjs: the committed dist/ must equal a fresh build
 npm run lint       # oxlint
 npm run preview
 ```
