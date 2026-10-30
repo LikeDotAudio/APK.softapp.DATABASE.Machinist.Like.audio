@@ -8,7 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+# dist/ IS TRACKED: the OS launcher, apk.audio and the node images serve this folder as
+# plain files, and index.html (the Vite source) hands over to dist/index.html. Rebuild and
+# commit dist/ with every src/ change: npm run build.
 dist-ssr
 *.local
 

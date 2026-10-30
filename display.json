@@ -6,7 +6,7 @@
   "subGroup": "10 · Device Under Test",
   "kind": "web",
   "class": "execution",
-  "description": "DEVICE UNDER TEST: MACHINIST — machinist.like.audio, 28 shop tools (the welding suite holding six calculators) behind one React shell: Jo-block stacks, the Hardinge dividing head, speeds and feeds, bolt circles, sine bars, taps and dies, fits and tolerances, hardness and surface finish. Every tool but the dividing head and the screw-head library reads the shared UnitContext, so metric/imperial is one setting for the whole app and not one per panel. The build is root-based (no Vite base), so dist/ runs at the root of a site.",
+  "description": "DEVICE UNDER TEST: MACHINIST — machinist.like.audio, 28 shop tools (the welding suite holding six calculators) behind one React shell: Jo-block stacks, the Hardinge dividing head, speeds and feeds, bolt circles, sine bars, taps and dies, fits and tolerances, hardness and surface finish. Every tool but the dividing head (divisions, no units) reads the shared UnitContext, so metric/imperial is one setting for the whole app and not one per panel. The build is relative (Vite base './') and dist/ is committed, so it runs at the root of machinist.like.audio and one level down in APK:Softapps; the source index.html hands a plain-file open over to dist/index.html.",
   "topic": "APK.audio/Gui/Display/Machinist",
   "autostart": false,
   "app": "dist/index.html"

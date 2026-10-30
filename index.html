@@ -20,5 +20,12 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Served as a plain file (the OS launcher, apk.audio, a node's image) this page is the Vite
+      // SOURCE and draws nothing, so hand over to the committed build. Vite's dev server injects
+      // /@vite/client and the build carries ./assets/…; with neither present, go to dist/.
+      if (!document.querySelector('script[src*="@vite/client"], script[src*="assets/"]'))
+        location.replace('dist/index.html' + location.search + location.hash);
+    </script>
   </body>
 </html>
