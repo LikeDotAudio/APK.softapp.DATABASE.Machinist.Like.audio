@@ -108,8 +108,9 @@ declares it to the launcher (`walk_project()` in `PODS/POD.THIN/WEB.OsApi/SRC/se
 reader finds `index.html` at the root and files it at pipeline stage 10 from
 `subGroup: "10 · Device Under Test"`. That root `index.html` is the Vite source page; served as a
 plain file (no `/@vite/client`, no `./assets/…`) its inline script hands over to
-`dist/index.html`, which `app` names. `app: dist/index.html` and `topic`
-are not read by that reader, and nothing publishes on `APK.audio/Gui/Display/Machinist`; the app
+`dist/index.html`, which `app` names as a portal path
+(`APK:Softapps/DATABASE/DATABASE.Machinist.Like.audio/dist/index.html`), so the Launch Pad frames the
+build directly (`place_app`, `OS.projectAppUrl`). `topic` is not read by that reader, and nothing publishes on `APK.audio/Gui/Display/Machinist`; the app
 holds no bus connection.
 
 ## Documentation
