@@ -17,3 +17,22 @@ in APK.audio, philosophy). This folder holds:
 - [Roadmap](Plans/ROADMAP.md) — a pointer to where plans live
 
 `image.png`, `image-1.png` and `image-2.png` are the reference sheets the notes cite.
+
+<!-- wiki:lanes -->
+| Lane | Pages | What |
+|---|---:|---|
+| [🏛Philosophy](%F0%9F%8F%9BPhilosophy/INDEX.md) | 0 | The principles this code keeps, each pointed at the code that keeps it. |
+| [🧩Manual and Artifacts](%F0%9F%A7%A9Manual%20and%20Artifacts/INDEX.md) | 5 | How to use it and how it is built. |
+| [🌍Publishing](%F0%9F%8C%8DPublishing/INDEX.md) | 0 | How it is built, shipped, and where it lands — its delivery. |
+| [🔍Audits](%F0%9F%94%8DAudits/INDEX.md) | 1 | Findings against the built thing; known issues, measured. |
+| [🛣Roadmap](%F0%9F%9B%A3Roadmap/INDEX.md) | 1 | Plans are not kept here: every plan is a card in the APK.audio monorepo's `Documentation/🛣Roadmap/roadmap.htm`. |
+| [💡Notes and Ideas](%F0%9F%92%A1Notes%20and%20Ideas/INDEX.md) | 0 | Loose notes and ideas not yet filed. |
+
+**Books and pages of its own**
+
+| Page | What |
+|---|---|
+| [image-1.png](image-1.png) | image-1 |
+| [image-2.png](image-2.png) | image-2 |
+| [image.png](image.png) | image |
+<!-- /wiki:lanes -->

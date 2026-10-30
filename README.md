@@ -41,7 +41,7 @@ filtered as ferrous, aluminum, copper/brass, and specialty (titanium, zinc die-c
 *   **Stock Volume and Weight:** starting stock for round, square, hex, tubing and tapered bars. For example, the volume of a cylinder is determined by: $$V = \frac{\pi \times d^2 \times h}{4}$$.
 *   **Thermal Expansion Calculator:** linear growth across a temperature difference, for shrink-fitting collars, sleeves and bearings.
 
-There is no heat-colour chart and no precious-metal data in the code; `Documentation/Notes/Metalurgy.md` covers both as reference text.
+There is no heat-colour chart and no precious-metal data in the code; `Documentation/🧩Manual and Artifacts/Metalurgy.md` covers both as reference text.
 
 ---
 
@@ -114,10 +114,10 @@ holds no bus connection.
 
 ## Documentation
 
-`Documentation/Notes/` holds the long-form references the suites were built from
+`Documentation/🧩Manual and Artifacts/` holds the long-form references the suites were built from
 (`Metalurgy.md`, `sheetmetal expanded.md`, `welding Calc.md`) and `Edits.md`, a requested
 re-grouping of the hub categories that the code does not follow yet. Plans live in the APK.audio
-roadmap — see `Documentation/Plans/ROADMAP.md`.
+roadmap — see `Documentation/🛣Roadmap/ROADMAP.md`.
 
 ## Philosophy
 
