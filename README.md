@@ -8,18 +8,20 @@ machinist.like.audio.
 
 ## The tools
 
-The hub (`src/App.tsx`, `HUB_TOOLS`) lists **28 tools** under seven category filters
+The hub (`src/App.tsx`, `HUB_TOOLS`) lists **28 tools** under nine category filters
 (`HUB_CATEGORIES`); the welding entry is itself six calculators.
 
 | Category | Tools |
 |---|---|
-| 📐 Metrology & GD&T | Jo Block & Height Gauge (81-pc imperial / 87-pc metric sets) · Sine Bar & Sine Vise Angle · True Position (GD&T, MMC/LMC bonus, PASS/FAIL) · Fits & Tolerances (ISO/ANSI) · Surface Finish Conversion (Ra, RMS, Rz, CLA, ISO N) · Hardness & Tensile Conversion (HRC/HRB, HBW, HV) |
-| ⚡ Machining & Milling | Gorton P1-2 Pantomill · Speeds & Feeds · Bolt Circle Layout · Bolt Circle Reverse-Engineering · Drill Point & Countersink Depth (118°/135°) · CNC Thread Milling Generator (G02/G03 G-code) |
-| 🔩 Threading & Gears | Hardinge Dividing Head · Tap, Drill & Die Reference · Lathe Threading Change Gears · Interactive Drill Size Index · Interactive Tap & Thread Index (ISO metric, UNC/UNF) · Geometric Die Head Chasers · Spur Gear Calculator (Hardinge cutter M1–M8) · Screw Head & Drive Library |
+| 📐 Metrology, Inspection & GD&T | Jo Block & Height Gauge (81-pc imperial / 87-pc metric sets) · Sine Bar & Sine Vise Angle · True Position (GD&T, MMC/LMC bonus, PASS/FAIL) · Fits & Tolerances (ISO/ANSI) · Surface Finish Conversion (Ra, RMS, Rz, CLA, ISO N) · Hardness & Tensile Conversion (HRC/HRB, HBW, HV) |
+| 🟢 Holemaking & Layout | Bolt Circle Layout · Bolt Circle Reverse-Engineering · Interactive Drill Size Index · Drill Point & Countersink Depth (118°/135°) |
+| 🔩 Threading & Fasteners | Tap, Drill & Die Reference · Interactive Tap & Thread Index (ISO metric, UNC/UNF) · Geometric Die Head Chasers · CNC Thread Milling Generator (G02/G03 G-code) · Screw Head & Drive Library |
+| ⭕ Lathe & Turning | Knurling Blank Diameter · Lathe Threading Change Gears · Taper Angle & Standard Tapers (Morse, B&S, R8, CAT/BT) |
+| ⚙️ Milling, Gearing & Machine Setup | Hardinge Dividing Head · Gorton P1-2 Pantomill · Spur Gear Calculator (Hardinge cutter M1–M8) |
+| ⚡ Machining Math & Geometry | Speeds & Feeds · Right Triangle Trig Solver · Polar ⇄ Rectangular Converter |
 | 🔥 Metallurgy & Materials | Material Weight & Stock Calc · Metallurgy & Thermal Suite (21 alloys) |
-| 🧑‍🏭 Welding & Fabrication | Welding & Fabrication Suite — heat input, deposition, preheat & CE, weld volume, cost analysis, duty cycle |
-| 🏗️ Sheet Metal Forming | Knurling Blank Diameter · Sheet Metal Bending Simulator |
-| 🧭 Math & Geometry | Right Triangle Trig Solver · Polar ⇄ Rectangular Converter · Taper Angle & Standard Tapers (Morse, B&S, R8, CAT/BT) |
+| 🧑‍🏭 Welding | Welding & Fabrication Suite — heat input, deposition, preheat & CE, weld volume, cost analysis, duty cycle |
+| 🏗️ Fabrication | Sheet Metal Bending Simulator |
 
 The three larger suites are worth describing in full.
 
@@ -59,8 +61,7 @@ This master fabrication suite contains six independent computational modules for
 
 `src/context/UnitContext.tsx` holds one `imperial`/`metric` setting for the whole app (default
 imperial), switched from the header. Every tool reads it through `useUnit()` or
-`components/common/useUnitChange.ts` except the Hardinge dividing head (divisions, no units) and
-the Screw Head & Drive Library, which does not read it. `src/lib/units.ts` is the only place the
+`components/common/useUnitChange.ts` except the Hardinge dividing head (divisions, no units). `src/lib/units.ts` is the only place the
 25.4 factor and the field rewrites on a unit flip live.
 
 ## Shell
@@ -72,15 +73,13 @@ the Screw Head & Drive Library, which does not read it. `src/lib/units.ts` is th
   offline.
 - Shared panel parts live in `src/components/common/` (`ToolHeader`, `ModuleTabBar`,
   `ToolFooterNote`, `FormulaSheet`, `InfoBox`, `SvgGridPattern`).
-- `src/components/HardingeDivigingHead/` is a misspelt alias that only re-exports
-  `HardingeDividingHead`.
 
 ## Build, lint, run
 
 ```bash
 npm install
 npm run dev        # Vite dev server
-npm run build      # tsc -b && vite build  ->  dist/
+npm run build      # tsc -b && vite build  ->  dist/ (committed: rebuild and commit it with src/)
 npm run lint       # oxlint
 npm run preview
 ```
@@ -90,9 +89,9 @@ chunk-size warning; `oxlint` exits 0 with warnings (`react-hooks/exhaustive-deps
 `Knurling.tsx` and `ThreadingChangeGears.tsx`, `only-export-components` in several data-exporting
 components).
 
-`vite.config.ts` sets no `base`, so the built `dist/index.html` asks for `/assets/…`,
-`/favicon.svg` and `/manifest.json` from the web root: the bundle works at the root of a site,
-not from a sub-path. `dist/` is gitignored.
+`vite.config.ts` sets `base: './'` and `public/manifest.json` is relative, so the same `dist/`
+draws at the root of machinist.like.audio and one level down under `APK:Softapps/…/dist/`.
+`dist/` is committed so a plain-file host has a build to serve.
 
 ## Publishing
 
@@ -106,18 +105,18 @@ secrets, to `./` on the server.
 A submodule at `PODS/POD.THIN/Softapps/DATABASE/DATABASE.Machinist.Like.audio`. `display.json`
 declares it to the launcher (`walk_project()` in `PODS/POD.THIN/WEB.OsApi/SRC/server.py`); the
 reader finds `index.html` at the root and files it at pipeline stage 10 from
-`subGroup: "10 · Device Under Test"`. That root `index.html` is the Vite source page — it loads
-`/src/main.tsx` — so opened from the launcher without the Vite dev server it draws nothing; the
-runnable page is `dist/index.html`, which `app` names. `app: dist/index.html` and `topic`
+`subGroup: "10 · Device Under Test"`. That root `index.html` is the Vite source page; served as a
+plain file (no `/@vite/client`, no `./assets/…`) its inline script hands over to
+`dist/index.html`, which `app` names. `app: dist/index.html` and `topic`
 are not read by that reader, and nothing publishes on `APK.audio/Gui/Display/Machinist`; the app
 holds no bus connection.
 
 ## Documentation
 
-`Documentation/🧩Manual and Artifacts/` holds the long-form references the suites were built from
-(`Metalurgy.md`, `sheetmetal expanded.md`, `welding Calc.md`) and `Edits.md`, a requested
-re-grouping of the hub categories that the code does not follow yet. Plans live in the APK.audio
-roadmap — see `Documentation/🛣Roadmap/ROADMAP.md`.
+The wiki is [Documentation/README.md](Documentation/README.md): principles with code anchors,
+architecture, delivery, known issues, and the long-form references the suites were built from
+(`Metalurgy.md`, `sheetmetal expanded.md`, `welding Calc.md`). Plans live in the APK.audio
+roadmap.
 
 ## Philosophy
 
