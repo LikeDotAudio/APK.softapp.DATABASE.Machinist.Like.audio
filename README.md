@@ -35,11 +35,13 @@ These modules calculate flat pattern cut lengths, bend allowances, and deduction
 ---
 
 ## Metallurgy & Thermal Processing
-This suite acts as an authoritative reference for forging, melting, and thermal processing.
-*   **Stock Volume and Weight Formulas:** Calculates the starting raw material required for rectangular, flat, round, and tapered stock. For example, the volume of a cylinder is determined by: $$V = \frac{\pi \times d^2 \times h}{4}$$.
-*   **Heat and Color Cheat Sheet:** Correlates the incandescent color of heated steel with its temperature and process stage, such as Forge Welding (2,300° – 2,500°F) or Normalizing (1,450° – 1,600°F).
-*   **Heating, Melting, & Casting Temperatures Guide:** Provides specific solidus, liquidus, and casting pouring temperatures for ferrous metals, aluminum alloys, copper/brass/bronze, and precious metals.
-*   **Thermal Expansion Calculator:** Determines linear expansion across temperature differentials, which is essential for shrink-fitting collars, sleeves, and bearings.
+`src/components/Metallurgy/Metallurgy.tsx` is a property table and two calculators over **21 alloys**
+filtered as ferrous, aluminum, copper/brass, and specialty (titanium, zinc die-cast, lead).
+*   **Alloy properties:** for each alloy, density, thermal expansion coefficient, forging range, annealing/normalizing range, solidus, liquidus and casting pour range, in °F and °C, with shop notes (e.g. gray cast iron: "do not forge").
+*   **Stock Volume and Weight:** starting stock for round, square, hex, tubing and tapered bars. For example, the volume of a cylinder is determined by: $$V = \frac{\pi \times d^2 \times h}{4}$$.
+*   **Thermal Expansion Calculator:** linear growth across a temperature difference, for shrink-fitting collars, sleeves and bearings.
+
+There is no heat-colour chart and no precious-metal data in the code; `Documentation/Notes/Metalurgy.md` covers both as reference text.
 
 ---
 
