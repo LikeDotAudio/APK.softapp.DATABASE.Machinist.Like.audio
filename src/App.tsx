@@ -84,37 +84,39 @@ interface HubTool {
 
 const HUB_CATEGORIES = [
   { id: 'all', label: '🌟 All Tools', description: 'Complete precision engineering and metrology library.' },
-  { id: 'metrology', label: '📐 Metrology & GD&T', description: 'Precision measurement, gauge block stacks, geometric dimensioning & tolerancing (GD&T), and material surface inspection utilities.' },
-  { id: 'machining', label: '⚡ Machining & Milling', description: 'Spindle speeds, table feeds, material removal rates, hole pattern coordinate layouts, and specialized pantograph setups.' },
-  { id: 'threading', label: '🔩 Threading & Gears', description: 'Comprehensive thread indices, tap drill selection, change gear calculations, dividing head indexing, and spur gear geometry.' },
-  { id: 'metallurgy', label: '🔥 Metallurgy & Materials', description: 'Phase transition temperatures, forging heat colors, casting superheat ranges, thermal expansion, and stock weight estimation.' },
-  { id: 'welding', label: '🧑‍🏭 Welding & Fabrication', description: 'Arc energy heat input, filler deposition rates, hydrogen cracking preheat estimation, weld groove volume, cost analysis, and duty cycle limits.' },
-  { id: 'forming', label: '🏗️ Sheet Metal Forming', description: 'Press brake bend deductions, bend allowances, flat pattern development, OSSB, K-Factors, and turned knurling blank sizing.' },
-  { id: 'geometry', label: '🧭 Math & Geometry', description: 'Trigonometric triangle resolution, Cartesian-to-polar coordinate transformations, and machine taper angle conversions.' }
+  { id: 'metrology', label: '📐 Metrology, Inspection & GD&T', description: 'Precise measurement, angle setup, hardness and surface checks, and quality-control verification.' },
+  { id: 'holemaking', label: '🟢 Holemaking & Layout', description: 'Drilling, drill-point depth, and bolt-pattern layout and reverse-engineering.' },
+  { id: 'threading', label: '🔩 Threading & Fasteners', description: 'Cutting internal and external threads, and identifying hardware.' },
+  { id: 'lathe', label: '⭕ Lathe & Turning', description: 'Cylindrical parts on manual or CNC lathes: knurl blanks, change gears, tapers.' },
+  { id: 'milling', label: '⚙️ Milling, Gearing & Machine Setup', description: 'Dividing heads, pantograph setups and gear cutting.' },
+  { id: 'machining', label: '⚡ Machining Math & Geometry', description: 'Speeds and feeds, right-triangle trig, and polar/rectangular coordinates.' },
+  { id: 'metallurgy', label: '🔥 Metallurgy & Materials', description: 'Forging, annealing, solidus/liquidus and casting temperature ranges, thermal expansion, and stock weight estimation.' },
+  { id: 'welding', label: '🧑‍🏭 Welding', description: 'Arc energy heat input, filler deposition rates, hydrogen cracking preheat estimation, weld groove volume, cost analysis, and duty cycle limits.' },
+  { id: 'forming', label: '🏗️ Fabrication', description: 'Sheet metal: press brake bend deductions, bend allowances, flat pattern development, OSSB and K-factors.' }
 ];
 
 const HUB_TOOLS: HubTool[] = [
   { id: 'calculator', category: 'metrology', icon: '📐', title: 'Jo Block & Height Gauge', description: 'Calculate exact gauge block combinations for precise metrology setups in Imperial (81-pc) and Metric (87-pc) sets.', borderColor: '#a855f7' },
-  { id: 'dividing_head', category: 'threading', icon: '⚙️', title: 'Hardinge Dividing Head', description: 'Find exact index plates, hole circles, and crank handle turns for precision gear cutting and angular divisions.', borderColor: '#38bdf8' },
-  { id: 'gorton_p12', category: 'machining', icon: '⚡', title: 'Gorton P1-2 Pantomill', description: 'Set slider bar distances, master-to-workpiece ratios, and roll engraving indexing for Gorton P1-2 pantographs.', borderColor: '#f59e0b' },
+  { id: 'dividing_head', category: 'milling', icon: '⚙️', title: 'Hardinge Dividing Head', description: 'Find exact index plates, hole circles, and crank handle turns for precision gear cutting and angular divisions.', borderColor: '#38bdf8' },
+  { id: 'gorton_p12', category: 'milling', icon: '⚡', title: 'Gorton P1-2 Pantomill', description: 'Set slider bar distances, master-to-workpiece ratios, and roll engraving indexing for Gorton P1-2 pantographs.', borderColor: '#f59e0b' },
   { id: 'speeds_feeds', category: 'machining', icon: '🏎️', title: 'Speeds & Feeds Calculator', description: 'Optimize cutting speeds (SFM/RPM), chip loads, and table feeds (IPM) for carbide and HSS end mills across alloys.', borderColor: '#00ff80' },
-  { id: 'bolt_circle_layout', category: 'machining', icon: '⭕', title: 'Bolt Circle Layout', description: 'Compute absolute Cartesian (X, Y) hole center coordinates on a Pitch Circle Diameter (PCD) for manual milling or DRO entry.', borderColor: '#ec4899' },
-  { id: 'bolt_circle_diameter', category: 'machining', icon: '🔍', title: 'Bolt Circle Reverse-Engineering', description: 'Reverse-engineer unknown bolt circle diameters (PCD) from caliper measurements across adjacent holes.', borderColor: '#38bdf8' },
+  { id: 'bolt_circle_layout', category: 'holemaking', icon: '⭕', title: 'Bolt Circle Layout', description: 'Compute absolute Cartesian (X, Y) hole center coordinates on a Pitch Circle Diameter (PCD) for manual milling or DRO entry.', borderColor: '#ec4899' },
+  { id: 'bolt_circle_diameter', category: 'holemaking', icon: '🔍', title: 'Bolt Circle Reverse-Engineering', description: 'Reverse-engineer unknown bolt circle diameters (PCD) from caliper measurements across adjacent holes.', borderColor: '#38bdf8' },
   { id: 'sine_bar_vise', category: 'metrology', icon: '📐', title: 'Sine Bar & Sine Vise Angle', description: 'Calculate gauge block stack heights required to tilt 5-inch or 10-inch sine bars and toolmaker vises to precise angles.', borderColor: '#a855f7' },
   { id: 'tap_drill_die', category: 'threading', icon: '🔩', title: 'Tap, Drill & Die Reference', description: 'Find standard tap drill sizes, custom thread percentage engagement bit selection, and die rod blank turning diameters.', borderColor: '#f59e0b' },
-  { id: 'knurling', category: 'forming', icon: '💎', title: 'Knurling Blank Diameter', description: 'Calculate optimal turned blank diameters that synchronize with knurl wheel pitch teeth to prevent tool chatter and double-tracking.', borderColor: '#00ff80' },
-  { id: 'threading_change_gears', category: 'threading', icon: '⚙️', title: 'Lathe Threading Change Gears', description: 'Calculate simple and compound gear train combinations for manual lathes to cut metric, imperial, or custom module thread pitches.', borderColor: '#ec4899' },
+  { id: 'knurling', category: 'lathe', icon: '💎', title: 'Knurling Blank Diameter', description: 'Calculate optimal turned blank diameters that synchronize with knurl wheel pitch teeth to prevent tool chatter and double-tracking.', borderColor: '#00ff80' },
+  { id: 'threading_change_gears', category: 'lathe', icon: '⚙️', title: 'Lathe Threading Change Gears', description: 'Calculate simple and compound gear train combinations for manual lathes to cut metric, imperial, or custom module thread pitches.', borderColor: '#ec4899' },
   { id: 'sheet_metal_bending', category: 'forming', icon: '🏗️', title: 'Sheet Metal Bending Simulator', description: 'Develop exact flat pattern cut blanks using industry standard bending tables, featuring a live interactive bend angle animation simulator.', borderColor: '#38bdf8' },
-  { id: 'drill_size_index', category: 'threading', icon: '🔢', title: 'Interactive Drill Size Index', description: 'Search standard twist bit diameters (#1–#107, A–Z, Fractional, Metric) with live scaled SVG drill point visualizers.', borderColor: '#a855f7' },
+  { id: 'drill_size_index', category: 'holemaking', icon: '🔢', title: 'Interactive Drill Size Index', description: 'Search standard twist bit diameters (#1–#107, A–Z, Fractional, Metric) with live scaled SVG drill point visualizers.', borderColor: '#a855f7' },
   { id: 'tap_thread_index', category: 'threading', icon: '📐', title: 'Interactive Tap & Thread Index', description: 'Explore ISO Metric & ASME UNC/UNF thread pitch diameters, root depths, and Class 2A/3A fit limits with interactive SVG previews.', borderColor: '#f59e0b' },
   { id: 'geometric_die_head', category: 'threading', icon: '🔩', title: 'Geometric Die Head Chasers', description: 'Select chaser part numbers, pitch diameters, 3-wire over-wire measurements, and rod blank tolerances for automatic die heads.', borderColor: '#00ff80' },
-  { id: 'spur_gears', category: 'threading', icon: '⚙️', title: 'Spur Gear Calculator', description: 'Calculate addendum, dedendum, whole depth, and center distances with Hardinge pre-cut gear cutter number mapping (M1–M8).', borderColor: '#ec4899' },
+  { id: 'spur_gears', category: 'milling', icon: '⚙️', title: 'Spur Gear Calculator', description: 'Calculate addendum, dedendum, whole depth, and center distances with Hardinge pre-cut gear cutter number mapping (M1–M8).', borderColor: '#ec4899' },
   { id: 'screw_head_index', category: 'threading', icon: '🪛', title: 'Screw Head & Drive Library', description: 'Visualize fastener head dimensions, drive recess profiles (Hex, Torx, Socket), counterbore diameters, and hex key clearances.', borderColor: '#38bdf8' },
-  { id: 'drill_point_length', category: 'machining', icon: '📐', title: 'Drill Point & Countersink Depth', description: 'Determine the extra point length of 118° and 135° drill bits to ensure complete breakthrough or accurate cylindrical depth in blind holes.', borderColor: '#a855f7' },
-  { id: 'thread_milling', category: 'machining', icon: '🌀', title: 'CNC Thread Milling Generator', description: 'Generate ready-to-paste helical G-code (G02/G03) and compensated feed rates for internal and external CNC thread milling cycles.', borderColor: '#f59e0b' },
-  { id: 'trig_solver', category: 'geometry', icon: '📐', title: 'Right Triangle Trig Solver', description: 'Solve unknown side lengths and angles from two known variables for daily shop floor chamfers, tapers, and dovetails.', borderColor: '#00ff80' },
-  { id: 'polar_rectangular', category: 'geometry', icon: '🧭', title: 'Polar ⇄ Rectangular Converter', description: 'Convert bolt hole radii and angular positions into X/Y table coordinates (and vice versa) with live 4-quadrant plotting.', borderColor: '#ec4899' },
-  { id: 'taper_angle', category: 'geometry', icon: '📐', title: 'Taper Angle & Standard Tapers', description: 'Convert between Taper Per Foot (TPF), compound rest angles, and standard toolroom tapers (Morse, B&S, R8, CAT/BT).', borderColor: '#38bdf8' },
+  { id: 'drill_point_length', category: 'holemaking', icon: '📐', title: 'Drill Point & Countersink Depth', description: 'Determine the extra point length of 118° and 135° drill bits to ensure complete breakthrough or accurate cylindrical depth in blind holes.', borderColor: '#a855f7' },
+  { id: 'thread_milling', category: 'threading', icon: '🌀', title: 'CNC Thread Milling Generator', description: 'Generate ready-to-paste helical G-code (G02/G03) and compensated feed rates for internal and external CNC thread milling cycles.', borderColor: '#f59e0b' },
+  { id: 'trig_solver', category: 'machining', icon: '📐', title: 'Right Triangle Trig Solver', description: 'Solve unknown side lengths and angles from two known variables for daily shop floor chamfers, tapers, and dovetails.', borderColor: '#00ff80' },
+  { id: 'polar_rectangular', category: 'machining', icon: '🧭', title: 'Polar ⇄ Rectangular Converter', description: 'Convert bolt hole radii and angular positions into X/Y table coordinates (and vice versa) with live 4-quadrant plotting.', borderColor: '#ec4899' },
+  { id: 'taper_angle', category: 'lathe', icon: '📐', title: 'Taper Angle & Standard Tapers', description: 'Convert between Taper Per Foot (TPF), compound rest angles, and standard toolroom tapers (Morse, B&S, R8, CAT/BT).', borderColor: '#38bdf8' },
   { id: 'true_position', category: 'metrology', icon: '🎯', title: 'True Position (GD&T) Calculator', description: 'Verify hole location deviations against MMC/LMC bonus tolerance limits with instant PASS/FAIL inspection verdicts.', borderColor: '#a855f7' },
   { id: 'fits_tolerances', category: 'metrology', icon: '📏', title: 'Fits & Tolerances (ISO/ANSI)', description: 'Determine exact shaft and hole tolerance limits (H7/g6, H7/p6, etc.) for clearance, transition, and interference fits.', borderColor: '#f59e0b' },
   { id: 'surface_finish', category: 'metrology', icon: '✨', title: 'Surface Finish Conversion', description: 'Translate roughness measurements across global standards (Ra, RMS, Rz, CLA, ISO N-Grades) and map them to shop capabilities.', borderColor: '#00ff80' },
@@ -210,7 +212,7 @@ export function App() {
 
   const renderMachinistHub = () => (
     <div style={{ maxWidth: '1400px', margin: '0 auto', paddingBottom: '90px' }}>
-      {/* Categorized Tool Sections mapped from Edits.md Taxonomy */}
+      {/* Categorized tool sections, in HUB_CATEGORIES order */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
         {HUB_CATEGORIES.filter((cat) => cat.id !== 'all' && (hubCategory === 'all' || hubCategory === cat.id)).map((cat) => {
           const categoryTools = HUB_TOOLS.filter((tool) => tool.category === cat.id);
