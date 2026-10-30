@@ -1,5 +1,6 @@
 import React from 'react';
 import { useUnit } from '../../../context/UnitContext';
+import { toIn } from '../../../lib/units';
 
 interface SizeChipListProps {
   heading: string;
@@ -25,7 +26,7 @@ export const SizeChipList: React.FC<SizeChipListProps> = ({ heading, color, back
         <span key={k.size} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', background: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: '6px', padding: '4px 8px' }}>
           <strong style={{ color: '#fff' }}>{k.size}</strong>
           <span style={{ color }}>
-            {unit === 'imperial' ? ` → ${(k.mm / 25.4).toFixed(3)}" (${k.mm} mm)` : ` → ${k.mm} mm`}
+            {unit === 'imperial' ? ` → ${toIn(k.mm).toFixed(3)}" (${k.mm} mm)` : ` → ${k.mm} mm`}
           </span>
         </span>
       ))}
