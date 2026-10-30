@@ -1,7 +1,7 @@
 # Sheet Metal Forming & Bending Reference Guide
-![Bend Formulas Reference](image-1.png) ![Sheet Metal Types Reference](image-2.png)
+![Bend Formulas Reference](../image-1.png) ![Sheet Metal Types Reference](../image-2.png)
 
-Here is a comprehensive breakdown of the sheet metal working formulas provided in **image-1.png**, along with pseudocode and their direct integration into the **Machinist.like.audio** interactive press brake suite ([SheetMetalBending.tsx](file:///home/anthony/Documents/GitProjects/Machinist.like.audio/src/components/SheetMetalBending/SheetMetalBending.tsx)). 
+Here is a comprehensive breakdown of the sheet metal working formulas provided in **image-1.png**, along with pseudocode and their direct integration into the **Machinist.like.audio** interactive press brake suite ([SheetMetalBending.tsx](../../src/components/SheetMetalBending/SheetMetalBending.tsx)). 
 
 Before diving into the formulas, let's establish the standard industrial variables used across these calculations:
 *   **$R$** = Inside Bend Radius

@@ -1,4 +1,4 @@
-![alt text](image.png)
+![Metallurgy reference](../image.png)
 
 # Comprehensive Metallurgy & Thermal Processing Guide
 
