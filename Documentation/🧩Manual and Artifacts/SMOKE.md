@@ -13,4 +13,4 @@ Is `DATABASE.Machinist.Like.audio` deployed? Written by `.apk.scripts/smoke.py` 
 
 Re-run: `python3 .apk.scripts/smoke.py PODS/POD.THIN/Softapps/DATABASE/DATABASE.Machinist.Like.audio`
 
-<!-- smoke:sig 33088ed0bf3c since 2026-10-30 12:51 EDT -->
+<!-- smoke:sig f96f59677994 since 2026-10-30 12:51 EDT -->
