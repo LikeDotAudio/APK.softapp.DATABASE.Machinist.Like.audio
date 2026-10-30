@@ -36,3 +36,7 @@ in APK.audio, philosophy). This folder holds:
 | [image-2.png](image-2.png) | image-2 |
 | [image.png](image.png) | image |
 <!-- /wiki:lanes -->
+
+<!-- wiki:smoke -->
+**Smoke test** — ✅ PASS 2/2 since 2026-10-30 12:51 EDT — [results](%F0%9F%A7%A9Manual%20and%20Artifacts/SMOKE.md)
+<!-- /wiki:smoke -->

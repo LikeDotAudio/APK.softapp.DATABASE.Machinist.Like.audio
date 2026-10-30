@@ -131,3 +131,7 @@ roadmap — see `Documentation/🛣Roadmap/ROADMAP.md`.
   `solveCut`, `ScrewHeadIndex/{data,hooks,library}` (PLAN-3358.01, PLAN-3359.01 in the git log).
 - **Nothing leaves the browser.** No fetch, no storage, no bus: every number is computed locally
   from the inputs on screen (`src/`, no `fetch`/`localStorage`/MQTT).
+
+<!-- wiki:smoke -->
+**Smoke test** — ✅ PASS 2/2 since 2026-10-30 12:51 EDT — [results](Documentation/%F0%9F%A7%A9Manual%20and%20Artifacts/SMOKE.md)
+<!-- /wiki:smoke -->
