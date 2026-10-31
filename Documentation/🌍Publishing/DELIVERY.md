@@ -7,7 +7,7 @@
 | Where | How | URL |
 |---|---|---|
 | **machinist.like.audio** | `.github/workflows/deploy.yml` on every push to `main` (and on demand): Node 20, `npm ci \|\| npm install`, `npm test`, `npm run lint`, `npm run check:dist` (a stale committed `dist/` fails the deploy), `npm run build`, then `SamKirkland/FTP-Deploy-Action@v4.4.0` uploads `dist/` to `./` with the `FTP_SERVER` / `FTP_USERNAME` / `FTP_PASSWORD` secrets. `.apk.scripts/deploy_all.py` at the APK.audio root re-runs it. | https://machinist.like.audio/ |
-| **apk.audio** | the root repo's `.github/workflows/ci.yml` uploads the Softapps tree over FTPS (`WEB.Frontend-Assets/.apk.scripts/deploy.py`) after a submodule bump; the committed `dist/` goes with it. | `https://apk.audio/APK:Softapps/DATABASE/DATABASE.Machinist.Like.audio/index.html` (hands over to `dist/index.html`) |
+| **apk.audio** | the root repo's `.github/workflows/ci.yml` uploads the Softapps tree over FTPS (`.apk.scripts/deploy.py (root)`) after a submodule bump; the committed `dist/` goes with it. | `https://apk.audio/APK:Softapps/DATABASE/DATABASE.Machinist.Like.audio/index.html` (hands over to `dist/index.html`) |
 | **A node** | copied with the Softapps tree into WEB.Frontend-Assets and Storage-Portal (`:8080/Softapps/…`); the OS walker lists the root `index.html`. After an edit: `up-stack.sh WEB.Frontend-Assets` and `up-stack.sh DATABASE.server.SQL`. | `http://<node>:8080/Softapps/DATABASE/DATABASE.Machinist.Like.audio/index.html` |
 
 ## Not automated
