@@ -29,7 +29,7 @@ export const FlatPatternStrip: React.FC<FlatPatternStripProps> = ({ calculations
         1. Flat Pattern Layout (Top View Blank) — Total Cut Length: {calculations.flatLength.toFixed(3)} {unitLabel}
       </h4>
 
-      <svg viewBox="0 0 800 180" style={{ width: '100%', height: 'auto', background: '#0a0e17', borderRadius: '8px', border: '1px solid rgba(244, 144, 44, 0.2)' }}>
+      <svg viewBox="0 0 800 180" style={{ width: '100%', height: 'auto', background: '#0a0e17', borderRadius: '8px', border: '1px solid rgba(var(--apk-accent-rgb), 0.2)' }}>
         <defs>
           <SvgGridPattern id="grid" size={20} opacity={0.05} />
         </defs>
@@ -37,7 +37,7 @@ export const FlatPatternStrip: React.FC<FlatPatternStripProps> = ({ calculations
 
         <g>
           {/* Blank outline */}
-          <rect x={margin} y={y0} width={availableW} height={h} fill="rgba(244, 144, 44, 0.15)" stroke="var(--accent)" strokeWidth="2" rx="2" />
+          <rect x={margin} y={y0} width={availableW} height={h} fill="rgba(var(--apk-accent-rgb), 0.15)" stroke="var(--accent)" strokeWidth="2" rx="2" />
 
           {/* Overall dimension bar */}
           <line x1={margin} y1={25} x2={margin + availableW} y2={25} stroke="#fff" strokeWidth="1.5" />

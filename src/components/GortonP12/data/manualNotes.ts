@@ -34,7 +34,7 @@ export const ROLL_CARD: NoteCardData = {
   color: '#f59e0b',
   intro: 'The Gorton 727 Roll Attachment replaces the standard slider head to engrave cylindrical workpieces (0.75" to 3.0" dia, up to 7" length) without requiring a curved forming guide.',
   items: [
-    { color: '#f4902c', title: '1. Master Circumference Scaling Rule:', body: 'Flat master length = Cylinder Circumference (π × D) × Reduction Ratio (R). Example: 2" cylinder at 2:1 ratio requires 6.2832 × 2 = 12.5664" master template length.' },
+    { color: 'var(--accent)', title: '1. Master Circumference Scaling Rule:', body: 'Flat master length = Cylinder Circumference (π × D) × Reduction Ratio (R). Example: 2" cylinder at 2:1 ratio requires 6.2832 × 2 = 12.5664" master template length.' },
     { color: '#f59e0b', title: '2. Steel Band & Roll Tensioning:', body: 'Rotation is synchronized via steel bands running over rollers. Release band tension lever before mounting work; return lever to lock position to automatically re-apply exact factory tension.' },
     { color: '#ef4444', title: '3. Caution on Slide Cleaning (Page 27):', body: 'Never use an air blast to clean chips from roll attachment ball bearing slides! Air pressure forces abrasive chips into precision bearings. Always use a soft brush.' },
   ],
@@ -43,10 +43,10 @@ export const ROLL_CARD: NoteCardData = {
 // Card 4: Special Reductions & Corrective Screw "X" (Pages 15, 28-30)
 export const SPECIAL_REDUCTIONS_CARD: NoteCardData = {
   title: '🎯 Special Reductions & Screw "X" (P. 15, 28)',
-  color: '#f4902c',
+  color: 'var(--accent)',
   intro: 'When engraving non-standard odd ratios (from 2:1 to infinity) or correcting table alignment, follow official factory calibration rules from Pages 15, 28, and 29-30.',
   items: [
-    { color: '#f4902c', title: '1. Magnifying Glass Alignment Rule (Page 15):', body: 'To obtain true reproduction through the pantograph bars, settings must be made with a magnifying glass so index lines on slider blocks align perfectly with bar calibrations.' },
+    { color: 'var(--accent)', title: '1. Magnifying Glass Alignment Rule (Page 15):', body: 'To obtain true reproduction through the pantograph bars, settings must be made with a magnifying glass so index lines on slider blocks align perfectly with bar calibrations.' },
     { color: '#38bdf8', title: '2. Corrective Screw "X" Parallelism (P. 15 Note & P. 28):', body: 'If parallelism between copy table and machine table deviates after setting bar reductions, adjust corrective screw **"X"** (Page 28). This mechanical alignment compensation does **not** alter pantograph bar calibrations or reproduction accuracy!' },
     { color: '#a855f7', title: '3. Trial Cut Verification (Page 15):', body: 'After setting a special reduction, verify by inserting a point in the spindle, raising work table until clearing by 1/64", and tracing copyholder T-slots. If point follows an arc or angle, recalculate and tap slider block until true.' },
   ],
@@ -62,7 +62,7 @@ export interface GuideBox {
 export const GUIDE_BOXES: GuideBox[] = [
   {
     title: '🛠️ Setting & Installing Pantograph Bars (Page 12)',
-    color: '#f4902c',
+    color: 'var(--accent)',
     body: '1. Remove eye nut on top of slider head and push down forming guide bar to release the hinged cutter head and link.\n'
       + '2. Move slider head to the position indicating on the numbered scale the ratio of reduction to be used, then tighten acorn hex nut.\n'
       + '3. Place slider bar **"E"** in slider block **"F"** with index line to the front.\n'

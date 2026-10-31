@@ -30,7 +30,7 @@ const PAIRS: PairDef[] = [
 const FIELD_META: Record<FieldKey, { label: string; color: string }> = {
   a: { label: 'Side a — Opposite Leg (Rise)', color: '#38bdf8' },
   b: { label: 'Side b — Adjacent Leg (Run)', color: '#00ff80' },
-  c: { label: 'Side c — Hypotenuse', color: '#f4902c' },
+  c: { label: 'Side c — Hypotenuse', color: 'var(--accent)' },
   A: { label: 'Angle A (Decimal Degrees)', color: '#f59e0b' },
 };
 
@@ -244,7 +244,7 @@ export const TrigSolver: React.FC = () => {
                     border: '1px solid',
                     borderColor: active ? 'var(--accent)' : 'var(--border-color)',
                     borderRadius: '8px',
-                    background: active ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-primary)',
+                    background: active ? 'rgba(var(--apk-accent-rgb), 0.15)' : 'var(--bg-primary)',
                     color: active ? 'var(--accent)' : 'var(--text-secondary)',
                     fontWeight: 700,
                     fontSize: '0.88rem',
@@ -333,7 +333,7 @@ export const TrigSolver: React.FC = () => {
                   <defs>
                     <linearGradient id="trigFill" x1="0" y1="0" x2="1" y2="1">
                       <stop offset="0%" stopColor="rgba(56, 189, 248, 0.10)" />
-                      <stop offset="100%" stopColor="rgba(244, 144, 44, 0.10)" />
+                      <stop offset="100%" stopColor="rgba(var(--apk-accent-rgb), 0.10)" />
                     </linearGradient>
                   </defs>
 
@@ -349,7 +349,7 @@ export const TrigSolver: React.FC = () => {
                   {/* Side a (rise, right) */}
                   <line x1={svg.cx} y1={svg.ay} x2={svg.bx} y2={svg.by} stroke="#38bdf8" strokeWidth="2" />
                   {/* Hypotenuse c — highlighted */}
-                  <line x1={svg.ax} y1={svg.ay} x2={svg.bx} y2={svg.by} stroke="#f4902c" strokeWidth="3" strokeLinecap="round" />
+                  <line x1={svg.ax} y1={svg.ay} x2={svg.bx} y2={svg.by} stroke="var(--accent)" strokeWidth="3" strokeLinecap="round" />
 
                   {/* Right-angle square at C */}
                   <path
@@ -384,7 +384,7 @@ export const TrigSolver: React.FC = () => {
                   <text x={svg.cx + 10} y={svg.ay - svg.h / 2 + 4} fill="#38bdf8" fontSize="10" style={monoLabel}>
                     a = {fmtSide(r!.a)} {unitStr}
                   </text>
-                  <text x={svg.labC.x} y={svg.labC.y} fill="#f4902c" fontSize="10" textAnchor="end" style={monoLabel}>
+                  <text x={svg.labC.x} y={svg.labC.y} fill="var(--accent)" fontSize="10" textAnchor="end" style={monoLabel}>
                     c = {fmtSide(r!.c)} {unitStr}
                   </text>
                 </svg>
@@ -394,7 +394,7 @@ export const TrigSolver: React.FC = () => {
               <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px 16px', borderRadius: '8px' }}>
                 {resultRow('Side a (rise)', `${fmtSide(r!.a)} ${unitStr}`, null, '#38bdf8')}
                 {resultRow('Side b (run)', `${fmtSide(r!.b)} ${unitStr}`, null, '#00ff80')}
-                {resultRow('Side c (hypotenuse)', `${fmtSide(r!.c)} ${unitStr}`, null, '#f4902c')}
+                {resultRow('Side c (hypotenuse)', `${fmtSide(r!.c)} ${unitStr}`, null, 'var(--accent)')}
                 {resultRow('Angle A', `${r!.A.toFixed(4)}°`, toDMS(r!.A), '#f59e0b')}
                 {resultRow('Angle B', `${angleB.toFixed(4)}°`, toDMS(angleB), '#c084fc')}
                 {resultRow('Area (a·b / 2)', `${area.toFixed(decPlaces)} ${unitStr}²`, null, '#fff')}
@@ -402,11 +402,11 @@ export const TrigSolver: React.FC = () => {
               </div>
 
               {/* Big headline result: hypotenuse */}
-              <div style={{ background: 'var(--bg-primary)', padding: '18px', borderRadius: 'var(--radius-md)', border: '2px solid var(--accent)', textAlign: 'center', boxShadow: '0 15px 35px -10px rgba(244, 144, 44, 0.2)' }}>
+              <div style={{ background: 'var(--bg-primary)', padding: '18px', borderRadius: 'var(--radius-md)', border: '2px solid var(--accent)', textAlign: 'center', boxShadow: '0 15px 35px -10px rgba(var(--apk-accent-rgb), 0.2)' }}>
                 <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '6px', fontWeight: 600 }}>
                   HYPOTENUSE c
                 </span>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.2rem', fontWeight: 800, color: '#f4902c', textShadow: '0 0 20px rgba(244, 144, 44, 0.5)' }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.2rem', fontWeight: 800, color: 'var(--accent)', textShadow: '0 0 20px rgba(var(--apk-accent-rgb), 0.5)' }}>
                   {fmtSide(r!.c)}
                 </div>
                 <span style={{ fontSize: '0.95rem', color: 'var(--text-primary)', fontWeight: 600 }}>{unitStr}</span>
@@ -426,7 +426,7 @@ export const TrigSolver: React.FC = () => {
           solved — chamfer depths, edge breaks, dovetail pin measurements, hole offsets, and taper setups. Convention:
           the right angle sits at <strong style={{ color: '#fff' }}>C</strong>, side <strong style={{ color: '#38bdf8' }}>a</strong> is
           the opposite leg (rise), side <strong style={{ color: '#00ff80' }}>b</strong> the adjacent leg (run), and
-          side <strong style={{ color: '#f4902c' }}>c</strong> the hypotenuse, with A + B = 90°. SOH-CAH-TOA:
+          side <strong style={{ color: 'var(--accent)' }}>c</strong> the hypotenuse, with A + B = 90°. SOH-CAH-TOA:
           sin&nbsp;A = a/c (Opposite over Hypotenuse), cos&nbsp;A = b/c (Adjacent over Hypotenuse),
           tan&nbsp;A = a/b (Opposite over Adjacent); Pythagoras closes the loop with a² + b² = c². Angles are reported in
           decimal degrees and D°M'S" for sine-bar and rotary-table work.

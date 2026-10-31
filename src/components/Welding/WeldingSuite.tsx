@@ -200,7 +200,7 @@ export const WeldingSuite: React.FC = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{ fontSize: '1.4rem' }}>🔥</span>
           <h1 style={{ fontSize: '1.3rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>Welding Mathematics Suite</h1>
-          <span style={{ fontSize: '0.75rem', background: 'rgba(244, 144, 44, 0.15)', color: 'var(--accent)', padding: '2px 10px', borderRadius: '12px', fontWeight: 700, border: '1px solid rgba(244, 144, 44, 0.3)' }}>6 Modular Sub-Pages</span>
+          <span style={{ fontSize: '0.75rem', background: 'rgba(var(--apk-accent-rgb), 0.15)', color: 'var(--accent)', padding: '2px 10px', borderRadius: '12px', fontWeight: 700, border: '1px solid rgba(var(--apk-accent-rgb), 0.3)' }}>6 Modular Sub-Pages</span>
         </div>
         <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
           Arc energy, deposition, CE preheat, volume & cost
@@ -241,7 +241,7 @@ export const WeldingSuite: React.FC = () => {
               </div>
             </div>
 
-            <div style={{ background: 'linear-gradient(135deg, rgba(244, 144, 44, 0.12), rgba(15, 23, 42, 0.6))', border: '2px solid rgba(244, 144, 44, 0.5)', borderRadius: '12px', padding: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}>
+            <div style={{ background: 'linear-gradient(135deg, rgba(var(--apk-accent-rgb), 0.12), rgba(15, 23, 42, 0.6))', border: '2px solid rgba(var(--apk-accent-rgb), 0.5)', borderRadius: '12px', padding: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}>
               <div style={{ fontSize: '0.85rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '10px' }}>
                 Total Heat Input ($HI$)
               </div>
@@ -615,7 +615,7 @@ export const WeldingSuite: React.FC = () => {
         right: 0,
         background: 'rgba(10, 13, 20, 0.95)',
         backdropFilter: 'blur(16px)',
-        borderTop: '2px solid rgba(244, 144, 44, 0.4)',
+        borderTop: '2px solid rgba(var(--apk-accent-rgb), 0.4)',
         boxShadow: '0 -6px 25px rgba(0, 0, 0, 0.7)',
         padding: '10px 20px',
         display: 'flex',
@@ -651,7 +651,7 @@ export const WeldingSuite: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              boxShadow: activeTab === tab.id ? '0 0 12px rgba(244, 144, 44, 0.5)' : 'none'
+              boxShadow: activeTab === tab.id ? '0 0 12px rgba(var(--apk-accent-rgb), 0.5)' : 'none'
             }}
           >
             {tab.label}

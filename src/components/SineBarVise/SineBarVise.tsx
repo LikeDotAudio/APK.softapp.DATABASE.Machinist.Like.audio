@@ -139,14 +139,14 @@ export const SineBarVise: React.FC<SineBarViseProps> = ({ onNavigateToStack }) =
                 const blockTopY = rightY + 12;
                 return (
                   <g>
-                    <rect x={rightX - 16} y={blockTopY} width="32" height={Math.max(2, 110 - blockTopY)} fill="url(#blockGrad)" stroke="#f4902c" strokeWidth="1.5" rx="1" />
+                    <rect x={rightX - 16} y={blockTopY} width="32" height={Math.max(2, 110 - blockTopY)} fill="url(#blockGrad)" stroke="var(--accent)" strokeWidth="1.5" rx="1" />
                     <defs>
                       <linearGradient id="blockGrad" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="#0284c7" />
                         <stop offset="100%" stopColor="#0369a1" />
                       </linearGradient>
                     </defs>
-                    <text x={rightX + 24} y={(blockTopY + 110) / 2 + 4} fill="#f4902c" fontSize="11" fontWeight="700" fontFamily="var(--font-mono)">
+                    <text x={rightX + 24} y={(blockTopY + 110) / 2 + 4} fill="var(--accent)" fontSize="11" fontWeight="700" fontFamily="var(--font-mono)">
                       H={calculatedHeight.toFixed(decPlaces)}
                     </text>
                     <circle cx={rightX} cy={rightY} r="12" fill="#94a3b8" stroke="#cbd5e1" strokeWidth="2" />
@@ -169,7 +169,7 @@ export const SineBarVise: React.FC<SineBarViseProps> = ({ onNavigateToStack }) =
             </div>
             <div style={{ textAlign: 'right' }}>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', display: 'block' }}>Required Height (H)</span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 700, color: '#f4902c' }}>{calculatedHeight.toFixed(decPlaces)} {unitStr}</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent)' }}>{calculatedHeight.toFixed(decPlaces)} {unitStr}</span>
             </div>
           </div>
         </div>
@@ -191,7 +191,7 @@ export const SineBarVise: React.FC<SineBarViseProps> = ({ onNavigateToStack }) =
             <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
               <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Standard Sizes:</span>
               {(unit === 'imperial' ? imperialBarPresets : metricBarPresets).map((p) => (
-                <button key={p} type="button" onClick={() => setBarLength(p)} style={{ background: barLength === p ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-tertiary)', border: `1px solid ${barLength === p ? 'var(--accent)' : 'var(--border-color)'}`, color: barLength === p ? 'var(--accent)' : 'var(--text-primary)', padding: '4px 8px', fontSize: '0.78rem', fontFamily: 'var(--font-mono)', cursor: 'pointer' }}>{parseFloat(p)} {unitStr}</button>
+                <button key={p} type="button" onClick={() => setBarLength(p)} style={{ background: barLength === p ? 'rgba(var(--apk-accent-rgb), 0.15)' : 'var(--bg-tertiary)', border: `1px solid ${barLength === p ? 'var(--accent)' : 'var(--border-color)'}`, color: barLength === p ? 'var(--accent)' : 'var(--text-primary)', padding: '4px 8px', fontSize: '0.78rem', fontFamily: 'var(--font-mono)', cursor: 'pointer' }}>{parseFloat(p)} {unitStr}</button>
               ))}
             </div>
           </div>
@@ -232,10 +232,10 @@ export const SineBarVise: React.FC<SineBarViseProps> = ({ onNavigateToStack }) =
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '15px', alignItems: 'center', marginBottom: '15px' }}>
           <div style={{ background: 'var(--bg-primary)', padding: '20px', border: '1px solid var(--accent)', textAlign: 'center' }}>
             <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '6px', fontWeight: 600 }}>{calcMode === 'findHeight' ? 'GAGE BLOCK STACK HEIGHT (H)' : 'INCLINATION ANGLE (θ)'}</span>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: 800, color: '#f4902c' }}>{calcMode === 'findHeight' ? calculatedHeight.toFixed(decPlaces) : activeAngleDeg.toFixed(4) + '°'}</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: 800, color: 'var(--accent)' }}>{calcMode === 'findHeight' ? calculatedHeight.toFixed(decPlaces) : activeAngleDeg.toFixed(4) + '°'}</div>
             <span style={{ fontSize: '1rem', color: 'var(--text-primary)', fontWeight: 600, display: 'block', marginTop: '4px' }}>{calcMode === 'findHeight' ? unitStr : `${dInt}° ${mInt}' ${sVal.toFixed(1)}"`}</span>
             {calcMode === 'findHeight' && (
-              <button onClick={() => onNavigateToStack && onNavigateToStack(parseFloat(calculatedHeight.toFixed(decPlaces)))} className="btn-precision" style={{ marginTop: '12px', width: '100%', fontSize: '0.88rem', fontWeight: 700, background: 'linear-gradient(90deg, rgba(244, 144, 44, 0.2), rgba(0, 128, 255, 0.2))', border: '1px solid var(--accent)', color: '#fff', cursor: 'pointer', padding: '10px' }}>= take me to the stack calculator ➔</button>
+              <button onClick={() => onNavigateToStack && onNavigateToStack(parseFloat(calculatedHeight.toFixed(decPlaces)))} className="btn-precision" style={{ marginTop: '12px', width: '100%', fontSize: '0.88rem', fontWeight: 700, background: 'linear-gradient(90deg, rgba(var(--apk-accent-rgb), 0.2), rgba(0, 128, 255, 0.2))', border: '1px solid var(--accent)', color: '#fff', cursor: 'pointer', padding: '10px' }}>= take me to the stack calculator ➔</button>
             )}
           </div>
           <div style={{ background: 'var(--bg-primary)', padding: '16px', border: '1px solid var(--border-color)' }}>

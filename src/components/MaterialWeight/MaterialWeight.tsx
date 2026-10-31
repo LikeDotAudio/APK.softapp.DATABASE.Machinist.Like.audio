@@ -232,7 +232,7 @@ export const MaterialWeight: React.FC = () => {
         <line x1={x0} y1={y - 5} x2={x0} y2={y + 5} stroke="#94a3b8" strokeWidth="0.8" />
         <line x1={x1} y1={y - 5} x2={x1} y2={y + 5} stroke="#94a3b8" strokeWidth="0.8" />
         <line x1={x0} y1={y} x2={x1} y2={y} stroke="#94a3b8" strokeWidth="0.8" />
-        <text x={(x0 + x1) / 2} y={y - 6} fill="#f4902c" fontSize="10" textAnchor="middle" style={dimText}>
+        <text x={(x0 + x1) / 2} y={y - 6} fill="var(--accent)" fontSize="10" textAnchor="middle" style={dimText}>
           L = {fmtDim(length)}
         </text>
       </g>
@@ -255,11 +255,11 @@ export const MaterialWeight: React.FC = () => {
             <ellipse cx="270" cy="95" rx={16 * ratio} ry={42 * ratio} fill="#0f172a" stroke="#94a3b8" strokeWidth="1" />
           )}
           {/* OD dimension */}
-          <line x1="300" y1="53" x2="300" y2="137" stroke="#f4902c" strokeWidth="0.8" />
-          <line x1="272" y1="53" x2="304" y2="53" stroke="rgba(244,144,44,0.4)" strokeWidth="0.6" />
-          <line x1="272" y1="137" x2="304" y2="137" stroke="rgba(244,144,44,0.4)" strokeWidth="0.6" />
-          <text x="306" y="88" fill="#f4902c" fontSize="10" style={dimText}>{shape === 'tube' ? 'OD' : 'Ø D'}</text>
-          <text x="306" y="100" fill="#f4902c" fontSize="9" style={dimText}>{fmtDim(dia)}</text>
+          <line x1="300" y1="53" x2="300" y2="137" stroke="var(--accent)" strokeWidth="0.8" />
+          <line x1="272" y1="53" x2="304" y2="53" stroke="rgba(var(--apk-accent-rgb), 0.4)" strokeWidth="0.6" />
+          <line x1="272" y1="137" x2="304" y2="137" stroke="rgba(var(--apk-accent-rgb), 0.4)" strokeWidth="0.6" />
+          <text x="306" y="88" fill="var(--accent)" fontSize="10" style={dimText}>{shape === 'tube' ? 'OD' : 'Ø D'}</text>
+          <text x="306" y="100" fill="var(--accent)" fontSize="9" style={dimText}>{fmtDim(dia)}</text>
           {shape === 'tube' && (
             <g>
               <line x1={270} y1={95 - 42 * ratio} x2={296} y2={30} stroke="#38bdf8" strokeWidth="0.7" />
@@ -287,11 +287,11 @@ export const MaterialWeight: React.FC = () => {
           <polygon points="287,95 278.5,137 261.5,137 253,95 261.5,53 278.5,53" fill="#3b4859" stroke="#cbd5e1" strokeWidth="1.2" />
           <line x1="70" y1="95" x2="253" y2="95" stroke="rgba(148,163,184,0.45)" strokeWidth="0.8" />
           {/* Across-flats dimension */}
-          <line x1="305" y1="53" x2="305" y2="137" stroke="#f4902c" strokeWidth="0.8" />
-          <line x1="280" y1="53" x2="309" y2="53" stroke="rgba(244,144,44,0.4)" strokeWidth="0.6" />
-          <line x1="280" y1="137" x2="309" y2="137" stroke="rgba(244,144,44,0.4)" strokeWidth="0.6" />
-          <text x="311" y="88" fill="#f4902c" fontSize="10" style={dimText}>AF</text>
-          <text x="311" y="100" fill="#f4902c" fontSize="9" style={dimText}>{fmtDim(af)}</text>
+          <line x1="305" y1="53" x2="305" y2="137" stroke="var(--accent)" strokeWidth="0.8" />
+          <line x1="280" y1="53" x2="309" y2="53" stroke="rgba(var(--apk-accent-rgb), 0.4)" strokeWidth="0.6" />
+          <line x1="280" y1="137" x2="309" y2="137" stroke="rgba(var(--apk-accent-rgb), 0.4)" strokeWidth="0.6" />
+          <text x="311" y="88" fill="var(--accent)" fontSize="10" style={dimText}>AF</text>
+          <text x="311" y="100" fill="var(--accent)" fontSize="9" style={dimText}>{fmtDim(af)}</text>
           {lengthDim(70, 270, 168)}
         </svg>
       );
@@ -314,8 +314,8 @@ export const MaterialWeight: React.FC = () => {
         {/* side face */}
         <polygon points={`240,${yt} 270,${yt - 20} 270,${yt - 20 + fh} 240,${yb}`} fill="#22303f" stroke="#94a3b8" strokeWidth="1.2" />
         {/* W (depth) dimension along receding edge */}
-        <line x1="245" y1={yt + 6} x2="275" y2={yt - 14} stroke="#f4902c" strokeWidth="0.8" />
-        <text x="280" y={yt - 12} fill="#f4902c" fontSize="10" style={dimText}>W {fmtDim(width)}</text>
+        <line x1="245" y1={yt + 6} x2="275" y2={yt - 14} stroke="var(--accent)" strokeWidth="0.8" />
+        <text x="280" y={yt - 12} fill="var(--accent)" fontSize="10" style={dimText}>W {fmtDim(width)}</text>
         {/* height dimension: W for square, T for rect/plate/sheet */}
         <line x1="288" y1={yt - 20 + fh} x2="288" y2={yb + 14} stroke="#38bdf8" strokeWidth="0.8" opacity="0" />
         <line x1="50" y1={yt} x2="50" y2={yb} stroke="#38bdf8" strokeWidth="0.8" />
@@ -340,7 +340,7 @@ export const MaterialWeight: React.FC = () => {
           <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'var(--bg-primary)', border: '1px solid var(--border-color)', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
             <strong style={{ color: '#fff' }}>{MATERIALS.length}</strong> materials
           </div>
-          <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'rgba(244, 144, 44, 0.12)', border: '1px solid rgba(244, 144, 44, 0.35)', fontSize: '0.78rem', color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
+          <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'rgba(var(--apk-accent-rgb), 0.12)', border: '1px solid rgba(var(--apk-accent-rgb), 0.35)', fontSize: '0.78rem', color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
             ρ = {isMetric ? `${densityGCm3.toFixed(2)} g/cm³` : `${densityLbIn3.toFixed(4)} lb/in³`}
           </div>
         </div>
@@ -371,7 +371,7 @@ export const MaterialWeight: React.FC = () => {
                       borderRadius: '8px',
                       border: '1px solid',
                       borderColor: active ? 'var(--accent)' : 'var(--border-color)',
-                      background: active ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-primary)',
+                      background: active ? 'rgba(var(--apk-accent-rgb), 0.15)' : 'var(--bg-primary)',
                       color: active ? 'var(--accent)' : 'var(--text-secondary)',
                       fontWeight: 700,
                       fontSize: '0.74rem',
@@ -512,12 +512,12 @@ export const MaterialWeight: React.FC = () => {
             borderRadius: 'var(--radius-md)',
             border: '2px solid var(--accent)',
             textAlign: 'center',
-            boxShadow: '0 15px 35px -10px rgba(244, 144, 44, 0.2)'
+            boxShadow: '0 15px 35px -10px rgba(var(--apk-accent-rgb), 0.2)'
           }}>
             <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '8px', fontWeight: 600 }}>
               WEIGHT PER PIECE
             </span>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.6rem', fontWeight: 800, color: '#f4902c', textShadow: '0 0 20px rgba(244, 144, 44, 0.5)' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.6rem', fontWeight: 800, color: 'var(--accent)', textShadow: '0 0 20px rgba(var(--apk-accent-rgb), 0.5)' }}>
               {dimError ? '—' : fmtPrimary(weightLb, weightKg)}
             </div>
             <span style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)', display: 'block', marginTop: '4px' }}>
@@ -543,7 +543,7 @@ export const MaterialWeight: React.FC = () => {
               `Total Weight (× ${qtyN})`,
               dimError ? '—' : fmtPrimary(totalLb, totalKg),
               dimError ? undefined : fmtSecondary(totalLb, totalKg),
-              '#f4902c'
+              'var(--accent)'
             )}
             {resultRow(
               'Volume / Piece',

@@ -132,7 +132,7 @@ export const DrillPointLength: React.FC = () => {
           <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'var(--bg-primary)', border: '1px solid var(--border-color)', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
             θ = <strong style={{ color: '#fff' }}>{theta.toFixed(theta % 1 === 0 ? 0 : 1)}°</strong>{activePreset && activePreset.note ? ` ${activePreset.note}` : ''}
           </div>
-          <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'rgba(244, 144, 44, 0.12)', border: '1px solid rgba(244, 144, 44, 0.35)', fontSize: '0.78rem', color: '#f4902c' }}>
+          <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'rgba(var(--apk-accent-rgb), 0.12)', border: '1px solid rgba(var(--apk-accent-rgb), 0.35)', fontSize: '0.78rem', color: 'var(--accent)' }}>
             P ≈ <strong>{ratio.toFixed(3)}</strong> × D
           </div>
         </div>
@@ -143,12 +143,12 @@ export const DrillPointLength: React.FC = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '12px', marginBottom: '12px', alignItems: 'start' }}>
 
           {/* 1. VISUAL: Interactive SVG Diagram (First in DOM order) */}
-          <div className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', background: 'radial-gradient(circle at center, rgba(15, 23, 42, 0.9) 0%, rgba(10, 15, 30, 0.95) 100%)', border: '1px solid rgba(244, 144, 44, 0.2)' }}>
+          <div className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', background: 'radial-gradient(circle at center, rgba(15, 23, 42, 0.9) 0%, rgba(10, 15, 30, 0.95) 100%)', border: '1px solid rgba(var(--apk-accent-rgb), 0.2)' }}>
             <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700 }}>
                 {mode === 'through' ? 'THROUGH HOLE — SIDE VIEW' : 'BLIND HOLE — SIDE VIEW'}
               </span>
-              <span style={{ fontSize: '0.78rem', color: '#f4902c', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+              <span style={{ fontSize: '0.78rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
                 θ = {theta.toFixed(0)}° LIVE
               </span>
             </div>
@@ -195,7 +195,7 @@ export const DrillPointLength: React.FC = () => {
               <path
                 d={`M ${cx - R} ${fullDiaY} L ${cx} ${apexY} L ${cx + R} ${fullDiaY} Z`}
                 fill="url(#dplDrillGrad)"
-                stroke="#f4902c"
+                stroke="var(--accent)"
                 strokeWidth="1.5"
                 strokeLinejoin="round"
               />
@@ -227,10 +227,10 @@ export const DrillPointLength: React.FC = () => {
               </text>
 
               {/* Z dimension */}
-              <line x1="396" y1={topY} x2="396" y2={apexY} stroke="#f4902c" strokeWidth="1.2" />
-              <line x1={cx + 2} y1={apexY} x2="400" y2={apexY} stroke="rgba(244,144,44,0.4)" strokeWidth="0.6" />
-              <line x1="392" y1={topY} x2="400" y2={topY} stroke="rgba(244,144,44,0.6)" strokeWidth="0.8" />
-              <text x="402" y={(topY + apexY) / 2 + 3} fill="#f4902c" fontSize="10" style={dimText}>
+              <line x1="396" y1={topY} x2="396" y2={apexY} stroke="var(--accent)" strokeWidth="1.2" />
+              <line x1={cx + 2} y1={apexY} x2="400" y2={apexY} stroke="rgba(var(--apk-accent-rgb), 0.4)" strokeWidth="0.6" />
+              <line x1="392" y1={topY} x2="400" y2={topY} stroke="rgba(var(--apk-accent-rgb), 0.6)" strokeWidth="0.8" />
+              <text x="402" y={(topY + apexY) / 2 + 3} fill="var(--accent)" fontSize="10" style={dimText}>
                 Z = {fmt(travelZ)}
               </text>
 
@@ -342,7 +342,7 @@ export const DrillPointLength: React.FC = () => {
                     onClick={() => setAngleDeg(String(p.deg))}
                     title={p.note || undefined}
                     style={{
-                      background: active ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-tertiary)',
+                      background: active ? 'rgba(var(--apk-accent-rgb), 0.15)' : 'var(--bg-tertiary)',
                       border: `1px solid ${active ? 'var(--accent)' : 'var(--border-color)'}`,
                       color: active ? 'var(--accent)' : 'var(--text-primary)',
                       padding: '4px 10px',
@@ -436,12 +436,12 @@ export const DrillPointLength: React.FC = () => {
             borderRadius: 'var(--radius-md)',
             border: '2px solid var(--accent)',
             textAlign: 'center',
-            boxShadow: '0 15px 35px -10px rgba(244, 144, 44, 0.2)'
+            boxShadow: '0 15px 35px -10px rgba(var(--apk-accent-rgb), 0.2)'
           }}>
             <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '10px', fontWeight: 600 }}>
               {mode === 'through' ? 'DRILL TRAVEL Z = T + P + C' : 'DRILL DEPTH Z = F + P'}
             </span>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.8rem', fontWeight: 800, color: '#f4902c', textShadow: '0 0 20px rgba(244, 144, 44, 0.5)' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.8rem', fontWeight: 800, color: 'var(--accent)', textShadow: '0 0 20px rgba(var(--apk-accent-rgb), 0.5)' }}>
               {fmt(travelZ)}
             </div>
             <span style={{ fontSize: '1.05rem', color: 'var(--text-primary)', fontWeight: 600, display: 'block', marginTop: '4px' }}>
@@ -462,7 +462,7 @@ export const DrillPointLength: React.FC = () => {
                 : resultRow('Z = F + P:', `${fmt(F)} + ${fmt(pointLength)}`, 'var(--text-primary)')}
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Total Depth to Tip (Z):</span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#f4902c', fontSize: '0.95rem' }}>{fmt(travelZ)} {unitStr}</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--accent)', fontSize: '0.95rem' }}>{fmt(travelZ)} {unitStr}</span>
               </div>
             </div>
           </div>
@@ -478,8 +478,8 @@ export const DrillPointLength: React.FC = () => {
         <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>
           A twist drill's conical tip adds extra depth beyond the full-diameter portion of the hole:{' '}
           <strong style={{ color: '#00ff80' }}>P = (D/2) / tan(θ/2)</strong>, where θ is the point included angle.
-          At the standard <strong style={{ color: '#f4902c' }}>118°</strong> point P ≈ 0.300 × D; the flatter{' '}
-          <strong style={{ color: '#f4902c' }}>135°</strong> split point (common on cobalt and jobber drills for harder
+          At the standard <strong style={{ color: 'var(--accent)' }}>118°</strong> point P ≈ 0.300 × D; the flatter{' '}
+          <strong style={{ color: 'var(--accent)' }}>135°</strong> split point (common on cobalt and jobber drills for harder
           materials, and self-centering) gives a shorter P ≈ 0.207 × D, while a 90° spot or chamfer drill gives
           P = 0.500 × D. For a <strong style={{ color: '#38bdf8' }}>through hole</strong>, drill travel must be
           Z = T + P + C — thickness plus the point plus a small breakthrough clearance (the usual habit is 0.010" / 0.25 mm,

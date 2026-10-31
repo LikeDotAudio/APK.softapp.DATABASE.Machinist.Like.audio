@@ -201,7 +201,7 @@ export const SurfaceFinish: React.FC = () => {
           ✨ Surface Finish <span style={{ color: 'var(--accent)', fontWeight: 400 }}>// Ra · RMS · Rz · N Grade Conversion</span>
         </h2>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-          <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'rgba(244, 144, 44, 0.12)', border: '1px solid rgba(244, 144, 44, 0.35)', fontSize: '0.78rem', color: '#f4902c', fontFamily: 'var(--font-mono)' }}>
+          <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'rgba(var(--apk-accent-rgb), 0.12)', border: '1px solid rgba(var(--apk-accent-rgb), 0.35)', fontSize: '0.78rem', color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
             Ra <strong>{valid ? fmt(raUin) : '—'}</strong> µin
           </div>
           <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'rgba(56, 189, 248, 0.1)', border: '1px solid rgba(56, 189, 248, 0.35)', fontSize: '0.78rem', color: '#38bdf8', fontFamily: 'var(--font-mono)' }}>
@@ -304,14 +304,14 @@ export const SurfaceFinish: React.FC = () => {
                       padding: '6px 12px',
                       borderRadius: '6px',
                       border: '1px solid',
-                      borderColor: active ? 'rgba(244, 144, 44, 0.5)' : 'var(--border-color)',
-                      background: active ? 'rgba(244, 144, 44, 0.12)' : 'var(--bg-primary)',
+                      borderColor: active ? 'rgba(var(--apk-accent-rgb), 0.5)' : 'var(--border-color)',
+                      background: active ? 'rgba(var(--apk-accent-rgb), 0.12)' : 'var(--bg-primary)',
                       cursor: 'pointer',
                       transition: 'all 0.15s ease',
                       textAlign: 'left',
                     }}
                   >
-                    <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '0.88rem', color: active ? '#f4902c' : '#fff', minWidth: '48px' }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '0.88rem', color: active ? 'var(--accent)' : '#fff', minWidth: '48px' }}>
                       {step.uin}
                     </span>
                     <span style={{ fontSize: '0.76rem', color: active ? 'var(--text-primary)' : 'var(--text-secondary)' }}>
@@ -330,7 +330,7 @@ export const SurfaceFinish: React.FC = () => {
             <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>
               Equivalent Callouts
             </span>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2rem', fontWeight: 800, color: '#f4902c', textShadow: '0 0 20px rgba(244, 144, 44, 0.4)', marginTop: '2px' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2rem', fontWeight: 800, color: 'var(--accent)', textShadow: '0 0 20px rgba(var(--apk-accent-rgb), 0.4)', marginTop: '2px' }}>
               {valid ? fmt(raUin) : '—'} <span style={{ fontSize: '1rem', color: 'var(--text-secondary)', fontWeight: 600 }}>µin Ra</span>
               <span style={{ fontSize: '1rem', color: 'var(--text-muted)', fontWeight: 400, marginLeft: '12px' }}>= {valid ? fmt(raUm) : '—'} µm</span>
             </div>
@@ -350,14 +350,14 @@ export const SurfaceFinish: React.FC = () => {
               {/* Current profile strip */}
               <rect x={svg.x0 - 4} y={svg.mainY - 42} width={svg.x1 - svg.x0 + 8} height={84} fill="rgba(0,0,0,0.45)" rx="3" />
               {/* Ra band shading */}
-              <rect x={svg.x0} y={svg.mainY - svg.amp} width={svg.x1 - svg.x0} height={2 * svg.amp} fill="rgba(244, 144, 44, 0.14)" />
-              <line x1={svg.x0} y1={svg.mainY - svg.amp} x2={svg.x1} y2={svg.mainY - svg.amp} stroke="rgba(244,144,44,0.45)" strokeWidth="0.7" strokeDasharray="4 3" />
-              <line x1={svg.x0} y1={svg.mainY + svg.amp} x2={svg.x1} y2={svg.mainY + svg.amp} stroke="rgba(244,144,44,0.45)" strokeWidth="0.7" strokeDasharray="4 3" />
+              <rect x={svg.x0} y={svg.mainY - svg.amp} width={svg.x1 - svg.x0} height={2 * svg.amp} fill="rgba(var(--apk-accent-rgb), 0.14)" />
+              <line x1={svg.x0} y1={svg.mainY - svg.amp} x2={svg.x1} y2={svg.mainY - svg.amp} stroke="rgba(var(--apk-accent-rgb), 0.45)" strokeWidth="0.7" strokeDasharray="4 3" />
+              <line x1={svg.x0} y1={svg.mainY + svg.amp} x2={svg.x1} y2={svg.mainY + svg.amp} stroke="rgba(var(--apk-accent-rgb), 0.45)" strokeWidth="0.7" strokeDasharray="4 3" />
               {/* Mean line */}
               <line x1={svg.x0} y1={svg.mainY} x2={svg.x1} y2={svg.mainY} stroke="rgba(255,255,255,0.3)" strokeWidth="0.8" strokeDasharray="12 4 3 4" />
               {/* Jagged profile */}
-              <polyline points={svg.mainPts} fill="none" stroke="#f4902c" strokeWidth="1.4" strokeLinejoin="round" />
-              <text x={svg.x0} y={svg.mainY - 46} fill="#f4902c" fontSize="10" fontFamily="var(--font-mono)" fontWeight="700">
+              <polyline points={svg.mainPts} fill="none" stroke="var(--accent)" strokeWidth="1.4" strokeLinejoin="round" />
+              <text x={svg.x0} y={svg.mainY - 46} fill="var(--accent)" fontSize="10" fontFamily="var(--font-mono)" fontWeight="700">
                 CURRENT — Ra {valid ? fmt(raUin) : '—'} µin ({valid ? fmt(raUm) : '—'} µm)
               </text>
               {/* Reference profile strip at 32 µin */}
@@ -372,7 +372,7 @@ export const SurfaceFinish: React.FC = () => {
 
           {/* Equivalents table */}
           <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px 16px', borderRadius: '8px' }}>
-            {resultRow('Ra — Arithmetic Avg', valid ? `${fmt(raUm)} µm` : '—', valid ? `${fmt(raUin)} µin` : null, '#f4902c')}
+            {resultRow('Ra — Arithmetic Avg', valid ? `${fmt(raUm)} µm` : '—', valid ? `${fmt(raUin)} µin` : null, 'var(--accent)')}
             {resultRow('RMS ≈ 1.11 × Ra', valid ? `${fmt(rmsUin)} µin` : '—', valid ? `${fmt(rmsUin / UM_TO_UIN)} µm` : null, '#00ff80')}
             {resultRow('CLA (= Ra)', valid ? `${fmt(claUin)} µin` : '—', valid ? `${fmt(raUm)} µm` : null, '#38bdf8')}
             {resultRow('Rz ≈ 4 × Ra', valid ? `≈ ${fmt(rzUm)} µm` : '—', valid ? `range ${fmt(rzLoUm)}–${fmt(rzHiUm)} µm (3–7×)` : null, '#c084fc')}
@@ -453,7 +453,7 @@ export const SurfaceFinish: React.FC = () => {
           SURFACE FINISH CONVERSION // Ra · RMS · CLA · Rz · ISO N GRADES (ASME B46.1 / ISO 1302)
         </div>
         <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>
-          <strong style={{ color: '#f4902c' }}>Ra</strong> (arithmetic average roughness) is the mean absolute deviation of the
+          <strong style={{ color: 'var(--accent)' }}>Ra</strong> (arithmetic average roughness) is the mean absolute deviation of the
           profile from its centerline — the standard callout on modern drawings (ASME B46.1 / ISO 1302).{' '}
           <strong style={{ color: '#00ff80' }}>RMS</strong> is the root-mean-square deviation, common on older US drawings;
           for a typical machined profile RMS ≈ 1.11 × Ra. <strong style={{ color: '#38bdf8' }}>CLA</strong> (center line

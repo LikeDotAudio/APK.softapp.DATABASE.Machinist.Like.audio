@@ -125,7 +125,7 @@ export const BoltCircleDiameter: React.FC = () => {
                 return (
                   <g key={idx}>
                     <line x1="0" y1="0" x2={svgX} y2={svgY} stroke="#1e293b" strokeWidth="1" />
-                    <circle cx={svgX} cy={svgY} r={isTarget ? "10" : "7"} fill="#0f172a" stroke={isTarget ? "#f4902c" : "#00ff80"} strokeWidth={isTarget ? "2.5" : "1.5"} />
+                    <circle cx={svgX} cy={svgY} r={isTarget ? "10" : "7"} fill="#0f172a" stroke={isTarget ? "var(--accent)" : "#00ff80"} strokeWidth={isTarget ? "2.5" : "1.5"} />
                     <text x={svgX * 1.25} y={svgY * 1.25} fill="#f8fafc" fontSize="10" fontWeight="700" textAnchor="middle" dominantBaseline="middle" fontFamily="var(--font-mono)">
                       #{idx + 1}
                     </text>
@@ -143,9 +143,9 @@ export const BoltCircleDiameter: React.FC = () => {
                 const y1 = -85 * Math.sin(rad1);
                 return (
                   <g>
-                    <line x1={x0} y1={y0} x2={x1} y2={y1} stroke="#f4902c" strokeWidth="2.5" strokeDasharray="3,3" />
-                    <circle cx={(x0 + x1) / 2} cy={(y0 + y1) / 2} r="14" fill="#0f172a" stroke="#f4902c" strokeWidth="1.5" />
-                    <text x={(x0 + x1) / 2} y={(y0 + y1) / 2} fill="#f4902c" fontSize="11" fontWeight="800" textAnchor="middle" dominantBaseline="middle" fontFamily="var(--font-mono)">
+                    <line x1={x0} y1={y0} x2={x1} y2={y1} stroke="var(--accent)" strokeWidth="2.5" strokeDasharray="3,3" />
+                    <circle cx={(x0 + x1) / 2} cy={(y0 + y1) / 2} r="14" fill="#0f172a" stroke="var(--accent)" strokeWidth="1.5" />
+                    <text x={(x0 + x1) / 2} y={(y0 + y1) / 2} fill="var(--accent)" fontSize="11" fontWeight="800" textAnchor="middle" dominantBaseline="middle" fontFamily="var(--font-mono)">
                       {method === 'adjacent' ? 'C' : 'M'}
                     </text>
                   </g>
@@ -251,7 +251,7 @@ export const BoltCircleDiameter: React.FC = () => {
                     onClick={() => setCaliperMode('outer')}
                     style={{
                       padding: '8px',
-                      background: caliperMode === 'outer' ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-tertiary)',
+                      background: caliperMode === 'outer' ? 'rgba(var(--apk-accent-rgb), 0.15)' : 'var(--bg-tertiary)',
                       border: `1px solid ${caliperMode === 'outer' ? 'var(--accent)' : 'var(--border-color)'}`,
                       color: caliperMode === 'outer' ? 'var(--accent)' : 'var(--text-primary)',
                       fontWeight: 600,
@@ -266,7 +266,7 @@ export const BoltCircleDiameter: React.FC = () => {
                     onClick={() => setCaliperMode('inner')}
                     style={{
                       padding: '8px',
-                      background: caliperMode === 'inner' ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-tertiary)',
+                      background: caliperMode === 'inner' ? 'rgba(var(--apk-accent-rgb), 0.15)' : 'var(--bg-tertiary)',
                       border: `1px solid ${caliperMode === 'inner' ? 'var(--accent)' : 'var(--border-color)'}`,
                       color: caliperMode === 'inner' ? 'var(--accent)' : 'var(--text-primary)',
                       fontWeight: 600,
@@ -348,7 +348,7 @@ export const BoltCircleDiameter: React.FC = () => {
             <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '6px', fontWeight: 600 }}>
               EXACT BOLT CIRCLE DIAMETER (BCD)
             </span>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: 800, color: '#f4902c' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: 800, color: 'var(--accent)' }}>
               {bcd > 0 ? bcd.toFixed(decPlaces) : '---'}
             </div>
             <span style={{ fontSize: '1rem', color: 'var(--text-primary)', fontWeight: 600 }}>

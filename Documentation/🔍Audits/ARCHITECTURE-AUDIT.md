@@ -19,7 +19,7 @@ machinist.like.audio: 28 shop calculators (dividing head, speeds & feeds, bolt c
 |---|---|---|
 | Coupling & Cohesion | 3 | No sibling paths, no bus, no shared state; runs at its own domain and one level down in APK:Softapps (`base: './'`). |
 | Boundary Integrity | 3 | Only React as a runtime dependency; domain math sits in `*.math.ts` and `data/` files separate from components. |
-| Duplication Control | 2 | Conversions go through `src/lib/units.ts` and the stylesheet takes the accent from the brand token (delivered); inline accent literals remain in component styles and SVG attributes. |
+| Duplication Control | 3 | Conversions go through `src/lib/units.ts`; every accent reads the brand token — stylesheet and the 271 inline literals in components (delivered). |
 | Testing & Contracts | 3 | Vitest table tests of every `*.math.ts` and `units.ts`, plus oxlint, run before `check:dist` in the deploy workflow (delivered). |
 | Change management | 2 | `check:dist` guards the two copies; `version: 1.0.0`; one chunk per tool (delivered). No release tag — needs owner. |
 Score key: 3 meets the standard · 2 minor gaps · 1 significant gaps · 0 absent / violated.
@@ -27,7 +27,6 @@ Score key: 3 meets the standard · 2 minor gaps · 1 significant gaps · 0 absen
 ## Findings
 1. GOOD — one unit setting for the whole app: [src/context/UnitContext.tsx](../../src/context/UnitContext.tsx) read by ~30 components, with helpers in [src/lib/units.ts](../../src/lib/units.ts).
 2. GOOD — [scripts/check-dist.mjs](../../scripts/check-dist.mjs) rebuilds into a temp dir and byte-compares with the committed `dist/`, and [.github/workflows/deploy.yml](../../.github/workflows/deploy.yml) runs it before deploying, so the APK:Softapps copy and the public site cannot silently diverge.
-3. **Inline accent literals.** About 130 `#f4902c` and 130 `rgba(244, 144, 44, …)` literals remain in component style objects and SVG `fill`/`stroke`/`stopColor` attributes (49 files). The stylesheet now reads the token; moving these needs a per-site check that `var()` is valid where each is used (SVG presentation attributes, colour props passed to components).
-4. **No release tag.** `package.json` is `1.0.0`; tagging a deploy is the owner's to publish.
+3. **No release tag.** `package.json` is `1.0.0`; tagging a deploy is the owner's to publish.
 
 Delivered items were removed from this page; see [🌍Publishing/DELIVERY.md](../%F0%9F%8C%8DPublishing/DELIVERY.md#delivered-from-the-2026-10-30-audit).

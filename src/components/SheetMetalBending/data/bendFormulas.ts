@@ -70,7 +70,7 @@ export const BEND_FORMULAS: BendFormula[] = [
     title: '7. Flat Pattern Length (FL)',
     color: 'var(--accent)',
     badge: 'Final Blank',
-    badgeBg: 'rgba(244, 144, 44, 0.15)',
+    badgeBg: 'rgba(var(--apk-accent-rgb), 0.15)',
     formula: 'FL = L₁ + L₂ - BD',
     formulaFontSize: '1.05rem',
     body: 'The actionable flat sheet metal blank cut length required for laser cutting or punching. Guarantees precision formed parts after brake bending.',

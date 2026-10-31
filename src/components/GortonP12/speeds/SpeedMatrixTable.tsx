@@ -49,7 +49,7 @@ export const SpeedMatrixTable: React.FC<SpeedMatrixTableProps> = ({ sfmNum, spee
                   {row.sfm} SFM
                 </td>
                 {MATRIX_COLUMNS.map(col => (
-                  <td key={col.key} style={{ padding: '11px', fontFamily: 'var(--font-mono)', color: speedCutterDia === col.dia && isCurrent ? '#f4902c' : 'var(--text-secondary)', fontWeight: speedCutterDia === col.dia && isCurrent ? 800 : 400 }}>{row[col.key].toLocaleString()}</td>
+                  <td key={col.key} style={{ padding: '11px', fontFamily: 'var(--font-mono)', color: speedCutterDia === col.dia && isCurrent ? 'var(--accent)' : 'var(--text-secondary)', fontWeight: speedCutterDia === col.dia && isCurrent ? 800 : 400 }}>{row[col.key].toLocaleString()}</td>
                 ))}
               </tr>
             );

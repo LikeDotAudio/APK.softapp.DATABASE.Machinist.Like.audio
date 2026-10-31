@@ -18,4 +18,4 @@ Each principle with the code that keeps it. Ecosystem rules: the APK.audio root'
 - `oxlint` warns (`react-hooks/exhaustive-deps` in `Knurling.tsx`, `ThreadingChangeGears.tsx`; `only-export-components` in data-exporting components).
 - Installable but no service worker, so no offline mode.
 | **A calculator's value is its numbers.** Every `*.math.ts` has table tests against textbook values, run before deploy. | `src/**/*.math.test.ts`, `npm test`, `.github/workflows/deploy.yml` |
-| **The brand's accent, not a retyped hex.** The stylesheet reads `--apk-accent` from a held copy of the contracts tokens. | `src/vendor/apk-contracts/apk-tokens.css`, `src/index.css` | Inline accent literals remain in component styles and SVG attributes (Roadmap IMPROVEMENTS) |
+| **The brand's accent, not a retyped hex.** The stylesheet reads `--apk-accent` from a held copy of the contracts tokens. | `src/vendor/apk-contracts/apk-tokens.css`, `src/index.css`; components use `var(--accent)` / `rgba(var(--apk-accent-rgb), …)` | — |

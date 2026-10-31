@@ -332,7 +332,7 @@ export const DividingHeadVisualizer: React.FC<DividingHeadVisualizerProps> = ({
                     fill={
                       isTargetHole ? '#00ff80' :
                       isStartHole ? '#ffaa00' :
-                      isSelected ? '#f4902c' : '#475569'
+                      isSelected ? 'var(--accent)' : '#475569'
                     }
                     stroke={isTargetHole ? '#fff' : isSelected ? '#00a8ff' : 'none'}
                     strokeWidth={isTargetHole ? 2 : 1}

@@ -24,7 +24,7 @@ export const FlatPatternResults: React.FC<FlatPatternResultsProps> = ({ b, onSho
 
         {/* HERO RESULT: TOTAL FLAT PATTERN LENGTH */}
         <div style={{ 
-          background: 'linear-gradient(135deg, rgba(0, 255, 128, 0.12), rgba(244, 144, 44, 0.08))', 
+          background: 'linear-gradient(135deg, rgba(0, 255, 128, 0.12), rgba(var(--apk-accent-rgb), 0.08))', 
           border: '2px solid rgba(0, 255, 128, 0.5)', 
           borderRadius: '12px', 
           padding: '24px', 
@@ -57,7 +57,7 @@ export const FlatPatternResults: React.FC<FlatPatternResultsProps> = ({ b, onSho
             border: 'none',
             cursor: 'pointer',
             marginBottom: '25px',
-            boxShadow: '0 4px 15px rgba(244, 144, 44, 0.3)',
+            boxShadow: '0 4px 15px rgba(var(--apk-accent-rgb), 0.3)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -93,7 +93,7 @@ export const FlatPatternResults: React.FC<FlatPatternResultsProps> = ({ b, onSho
 
         {/* BEND LINE LOCATIONS FROM OUTER EDGES */}
         {calculations.numBends > 0 && (
-          <div style={{ background: 'rgba(244, 144, 44, 0.04)', borderRadius: '8px', border: '1px solid rgba(244, 144, 44, 0.3)', padding: '16px', marginBottom: '20px' }}>
+          <div style={{ background: 'rgba(var(--apk-accent-rgb), 0.04)', borderRadius: '8px', border: '1px solid rgba(var(--apk-accent-rgb), 0.3)', padding: '16px', marginBottom: '20px' }}>
             <h4 style={{ fontSize: '0.85rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}>
               <span>📍</span> Press Brake Bend Line Layout (From Outer Edge)
             </h4>

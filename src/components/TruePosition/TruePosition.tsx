@@ -217,7 +217,7 @@ export const TruePosition: React.FC = () => {
                 {inputWrap(actY, setActY)}
               </div>
               <div style={{ gridColumn: '1 / -1', marginBottom: '12px', fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text-muted)', background: 'rgba(0,0,0,0.25)', padding: '8px 12px', borderRadius: '6px' }}>
-                ΔX = <span style={{ color: '#f4902c', fontWeight: 700 }}>{fmt(dx)}</span> {unitStr} · ΔY = <span style={{ color: '#f4902c', fontWeight: 700 }}>{fmt(dy)}</span> {unitStr}
+                ΔX = <span style={{ color: 'var(--accent)', fontWeight: 700 }}>{fmt(dx)}</span> {unitStr} · ΔY = <span style={{ color: 'var(--accent)', fontWeight: 700 }}>{fmt(dy)}</span> {unitStr}
               </div>
             </div>
           )}
@@ -302,12 +302,12 @@ export const TruePosition: React.FC = () => {
             borderRadius: 'var(--radius-md)',
             border: '2px solid var(--accent)',
             textAlign: 'center',
-            boxShadow: '0 15px 35px -10px rgba(244, 144, 44, 0.2)'
+            boxShadow: '0 15px 35px -10px rgba(var(--apk-accent-rgb), 0.2)'
           }}>
             <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '8px', fontWeight: 600 }}>
               TP = 2 × √(ΔX² + ΔY²)
             </span>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.6rem', fontWeight: 800, color: '#f4902c', textShadow: '0 0 20px rgba(244, 144, 44, 0.5)' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.6rem', fontWeight: 800, color: 'var(--accent)', textShadow: '0 0 20px rgba(var(--apk-accent-rgb), 0.5)' }}>
               ⌀{fmt(tp)}
             </div>
             <span style={{ fontSize: '1rem', color: 'var(--text-primary)', fontWeight: 600 }}>{unitStr}</span>
@@ -336,7 +336,7 @@ export const TruePosition: React.FC = () => {
             {resultRow('Radial Deviation √(ΔX²+ΔY²)', `${fmt(radial)} ${unitStr}`)}
             {resultRow('Stated Tolerance ⌀ (T)', `${fmt(T)} ${unitStr}`, '#f59e0b')}
             {resultRow('MMC Bonus Tolerance', mmcOn ? `+${fmt(bonus)} ${unitStr}` : '— (off)', mmcOn ? '#38bdf8' : 'var(--text-muted)')}
-            {resultRow('Total Allowable ⌀', `${fmt(totalAllow)} ${unitStr}`, '#f4902c')}
+            {resultRow('Total Allowable ⌀', `${fmt(totalAllow)} ${unitStr}`, 'var(--accent)')}
             {resultRow('Remaining Margin', `${fmt(margin)} ${unitStr}`, margin >= 0 ? '#00ff80' : '#ef4444')}
             {resultRow('% of Tolerance Used', isFinite(pctUsed) ? `${pctUsed.toFixed(1)} %` : '∞', pctUsed <= 100 ? '#00ff80' : '#ef4444')}
           </div>
@@ -362,8 +362,8 @@ export const TruePosition: React.FC = () => {
               )}
 
               {/* Stated tolerance zone */}
-              <circle cx={cx} cy={cy} r={zoneR} fill="rgba(244, 144, 44, 0.08)" stroke="#f4902c" strokeWidth="1.5" />
-              <text x={cx + zoneR * 0.72 + 4} y={cy + zoneR * 0.72 + 14} fill="#f4902c" fontSize="10" fontFamily="var(--font-mono)" fontWeight="700">
+              <circle cx={cx} cy={cy} r={zoneR} fill="rgba(var(--apk-accent-rgb), 0.08)" stroke="var(--accent)" strokeWidth="1.5" />
+              <text x={cx + zoneR * 0.72 + 4} y={cy + zoneR * 0.72 + 14} fill="var(--accent)" fontSize="10" fontFamily="var(--font-mono)" fontWeight="700">
                 ⌀{fmt(T)} zone
               </text>
 
@@ -394,7 +394,7 @@ export const TruePosition: React.FC = () => {
         </div>
         <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>
           Computes the actual positional deviation of a hole or pin from its measured X/Y deviations using{' '}
-          <strong style={{ color: '#f4902c' }}>TP = 2 × √(ΔX² + ΔY²)</strong> — the radial error is doubled because a
+          <strong style={{ color: 'var(--accent)' }}>TP = 2 × √(ΔX² + ΔY²)</strong> — the radial error is doubled because a
           position callout defines a cylindrical <em>diameter</em> zone centered on true (nominal) position, per ASME Y14.5.
           When the feature control frame carries the <strong style={{ color: '#38bdf8' }}>Ⓜ (MMC) modifier</strong>, bonus
           tolerance becomes available as the feature departs from its Maximum Material Condition: a hole at MMC is its

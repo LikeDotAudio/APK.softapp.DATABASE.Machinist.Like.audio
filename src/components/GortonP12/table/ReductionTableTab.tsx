@@ -19,7 +19,7 @@ export const ReductionTableTab: React.FC<ReductionTableTabProps> = ({ ratio, onL
           Standard calibration distances from Graduation "2" for Lower Bar and Upper Bar. Click any row to load settings into calculator!
         </p>
       </div>
-      <div style={{ fontSize: '0.85rem', color: 'var(--accent)', fontWeight: 700, background: 'rgba(244, 144, 44, 0.1)', padding: '6px 14px', borderRadius: '20px' }}>
+      <div style={{ fontSize: '0.85rem', color: 'var(--accent)', fontWeight: 700, background: 'rgba(var(--apk-accent-rgb), 0.1)', padding: '6px 14px', borderRadius: '20px' }}>
         22 Standard Factory Ratios
       </div>
     </div>
@@ -44,14 +44,14 @@ export const ReductionTableTab: React.FC<ReductionTableTabProps> = ({ ratio, onL
               <tr 
                 key={row.ratio}
                 style={{ 
-                  background: isCurrent ? 'rgba(244, 144, 44, 0.12)' : idx % 2 === 0 ? 'var(--bg-primary)' : 'var(--bg-tertiary)',
+                  background: isCurrent ? 'rgba(var(--apk-accent-rgb), 0.12)' : idx % 2 === 0 ? 'var(--bg-primary)' : 'var(--bg-tertiary)',
                   borderBottom: '1px solid rgba(255,255,255,0.05)',
                   transition: 'background 0.2s ease',
                   cursor: 'pointer'
                 }}
                 onClick={() => onLoadRatio(numVal.toString())}
               >
-                <td style={{ padding: '12px', fontWeight: 700, color: isCurrent ? '#f4902c' : '#fff' }}>{row.ratio}</td>
+                <td style={{ padding: '12px', fontWeight: 700, color: isCurrent ? 'var(--accent)' : '#fff' }}>{row.ratio}</td>
                 <td style={{ padding: '12px', fontFamily: 'var(--font-mono)', color: '#38bdf8' }}>{row.lowerInches.toFixed(3)}"</td>
                 <td style={{ padding: '12px', fontFamily: 'var(--font-mono)', color: '#f59e0b' }}>{row.upperInches.toFixed(3)}"</td>
                 <td style={{ padding: '12px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>{row.lowerMm.toFixed(2)} mm</td>

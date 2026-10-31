@@ -40,8 +40,8 @@ export const PantographLinkageSvg: React.FC<PantographLinkageSvgProps> = ({ rati
           <text x={stylusX} y={stylusY + 55} fill="#64748b" fontSize="10" textAnchor="middle" fontWeight="bold">COPY / MASTER TABLE</text>
 
           {/* Work Table Outline (Left Side under Spindle) */}
-          <rect x={spindleX - 45} y={spindleY - 35} width="90" height="70" fill="rgba(244, 144, 44, 0.04)" stroke="#f4902c" strokeDasharray="4 2" rx="4" />
-          <text x={spindleX} y={spindleY + 50} fill="#f4902c" fontSize="10" textAnchor="middle" fontWeight="bold">WORK TABLE (ENGRAVING)</text>
+          <rect x={spindleX - 45} y={spindleY - 35} width="90" height="70" fill="rgba(var(--apk-accent-rgb), 0.04)" stroke="var(--accent)" strokeDasharray="4 2" rx="4" />
+          <text x={spindleX} y={spindleY + 50} fill="var(--accent)" fontSize="10" textAnchor="middle" fontWeight="bold">WORK TABLE (ENGRAVING)</text>
 
           {/* LINKAGE BARS */}
           {/* 1. Tracer Arm (Long Arm from Pivot to Stylus) */}
@@ -49,7 +49,7 @@ export const PantographLinkageSvg: React.FC<PantographLinkageSvgProps> = ({ rati
           <line x1={anchorX} y1={anchorY} x2={stylusX} y2={stylusY} stroke="#cbd5e1" strokeWidth="4" strokeLinecap="round" />
 
           {/* 2. Lower Slider Bar (From Lower Block to Spindle Link) */}
-          <line x1={lowerBlockX} y1={lowerBlockY} x2={spindleX} y2={spindleY} stroke="#f4902c" strokeWidth="7" strokeLinecap="round" />
+          <line x1={lowerBlockX} y1={lowerBlockY} x2={spindleX} y2={spindleY} stroke="var(--accent)" strokeWidth="7" strokeLinecap="round" />
           <line x1={lowerBlockX} y1={lowerBlockY} x2={spindleX} y2={spindleY} stroke="#7dd3fc" strokeWidth="3" strokeLinecap="round" />
 
           {/* 3. Upper Slider Bar (Parallel support) */}
@@ -65,8 +65,8 @@ export const PantographLinkageSvg: React.FC<PantographLinkageSvgProps> = ({ rati
           <text x={anchorX - 15} y={anchorY - 12} fill="#cbd5e1" fontSize="11" fontWeight="bold">Column Pivot</text>
 
           {/* Lower Slider Block (Graduation setting point!) */}
-          <rect x={lowerBlockX - 12} y={lowerBlockY - 12} width="24" height="24" fill="#f4902c" stroke="#000" strokeWidth="2" rx="4" />
-          <text x={lowerBlockX + 18} y={lowerBlockY + 4} fill="#f4902c" fontSize="11" fontWeight="bold">Lower Block ("F")</text>
+          <rect x={lowerBlockX - 12} y={lowerBlockY - 12} width="24" height="24" fill="var(--accent)" stroke="#000" strokeWidth="2" rx="4" />
+          <text x={lowerBlockX + 18} y={lowerBlockY + 4} fill="var(--accent)" fontSize="11" fontWeight="bold">Lower Block ("F")</text>
 
           {/* Upper Slider Block */}
           <rect x={upperBlockX - 10} y={upperBlockY - 10} width="20" height="20" fill="#f59e0b" stroke="#000" strokeWidth="2" rx="4" />
@@ -85,7 +85,7 @@ export const PantographLinkageSvg: React.FC<PantographLinkageSvgProps> = ({ rati
 
         {/* Telemetry Footer Overlay */}
         <div style={{ position: 'absolute', bottom: '10px', left: '10px', background: 'rgba(15, 23, 42, 0.9)', padding: '6px 12px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.1)', fontSize: '0.75rem', color: '#cbd5e1', fontFamily: 'var(--font-mono)' }}>
-          <span>Ratio: </span><strong style={{ color: '#f4902c' }}>{ratio.toFixed(2)} : 1</strong>
+          <span>Ratio: </span><strong style={{ color: 'var(--accent)' }}>{ratio.toFixed(2)} : 1</strong>
         </div>
         <div style={{ position: 'absolute', bottom: '10px', right: '10px', background: 'rgba(15, 23, 42, 0.9)', padding: '6px 12px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.1)', fontSize: '0.75rem', color: '#cbd5e1', fontFamily: 'var(--font-mono)' }}>
           <span>Scale Notch: </span><strong style={{ color: '#f59e0b' }}>Fig "{Math.round(ratio)}"</strong>
@@ -94,7 +94,7 @@ export const PantographLinkageSvg: React.FC<PantographLinkageSvgProps> = ({ rati
 
       <div style={{ display: 'flex', gap: '25px', marginTop: '14px', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <span style={{ width: '10px', height: '10px', background: '#f4902c', borderRadius: '2px', display: 'inline-block' }}></span>
+          <span style={{ width: '10px', height: '10px', background: 'var(--accent)', borderRadius: '2px', display: 'inline-block' }}></span>
           <span>Lower Bar ("E" / "F")</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>

@@ -186,7 +186,7 @@ export const TaperAngle: React.FC = () => {
           📏 Taper Angle <span style={{ color: 'var(--accent)', fontWeight: 400 }}>// Dimensions ⇄ TPF ⇄ Angle</span>
         </h2>
         <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'var(--bg-primary)', border: '1px solid var(--border-color)', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-          Compound set to <strong style={{ color: '#f4902c', fontFamily: 'var(--font-mono)' }}>{halfDeg.toFixed(4)}°</strong>
+          Compound set to <strong style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>{halfDeg.toFixed(4)}°</strong>
         </div>
       </div>
 
@@ -375,12 +375,12 @@ export const TaperAngle: React.FC = () => {
             borderRadius: 'var(--radius-md)',
             border: '2px solid var(--accent)',
             textAlign: 'center',
-            boxShadow: '0 15px 35px -10px rgba(244, 144, 44, 0.2)',
+            boxShadow: '0 15px 35px -10px rgba(var(--apk-accent-rgb), 0.2)',
           }}>
             <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '8px', fontWeight: 600 }}>
               SET COMPOUND TO (HALF ANGLE)
             </span>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.6rem', fontWeight: 800, color: '#f4902c', textShadow: '0 0 20px rgba(244, 144, 44, 0.5)' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.6rem', fontWeight: 800, color: 'var(--accent)', textShadow: '0 0 20px rgba(var(--apk-accent-rgb), 0.5)' }}>
               {halfDeg.toFixed(4)}°
             </div>
             <span style={{ fontSize: '1.02rem', color: 'var(--text-primary)', fontWeight: 600, display: 'block', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
@@ -407,7 +407,7 @@ export const TaperAngle: React.FC = () => {
               <polygon
                 points={`${xL},${cy - hl} ${xR},${cy - hs} ${xR},${cy + hs} ${xL},${cy + hl}`}
                 fill="url(#taperBodyGrad)"
-                stroke="#f4902c"
+                stroke="var(--accent)"
                 strokeWidth="1.5"
                 strokeLinejoin="round"
               />
@@ -466,7 +466,7 @@ export const TaperAngle: React.FC = () => {
               TAPER CONVERSIONS
             </div>
             {resRow('Included Angle', `${includedDeg.toFixed(4)}°`, { accent: '#38bdf8', sub: toDMS(includedDeg) })}
-            {resRow('Half Angle (per side)', `${halfDeg.toFixed(4)}°`, { accent: '#f4902c', sub: toDMS(halfDeg) })}
+            {resRow('Half Angle (per side)', `${halfDeg.toFixed(4)}°`, { accent: 'var(--accent)', sub: toDMS(halfDeg) })}
             {resRow(`Taper per ${unit === 'imperial' ? 'Inch' : 'mm'}`, `${taperPerUnit.toFixed(5)} ${unitStr}/${unitStr}`)}
             {unit === 'imperial' && resRow('Taper per Foot (TPF)', `${tpfOut.toFixed(4)} in/ft`, { accent: '#00ff80' })}
             {resRow('Taper Ratio', ratioDen !== 0 ? `1 : ${Math.abs(ratioDen).toFixed(3)}` : '—', { accent: '#c084fc' })}
@@ -503,19 +503,19 @@ export const TaperAngle: React.FC = () => {
                     padding: '8px 12px',
                     borderRadius: '6px',
                     border: '1px solid',
-                    borderColor: active ? 'rgba(244, 144, 44, 0.4)' : 'transparent',
-                    background: active ? 'linear-gradient(90deg, rgba(244, 144, 44, 0.12), transparent)' : 'transparent',
+                    borderColor: active ? 'rgba(var(--apk-accent-rgb), 0.4)' : 'transparent',
+                    background: active ? 'linear-gradient(90deg, rgba(var(--apk-accent-rgb), 0.12), transparent)' : 'transparent',
                     cursor: 'pointer',
                     transition: 'all 0.15s ease',
                   }}
                 >
-                  <span style={{ fontSize: '0.88rem', fontWeight: 700, color: active ? '#f4902c' : '#fff' }}>
+                  <span style={{ fontSize: '0.88rem', fontWeight: 700, color: active ? 'var(--accent)' : '#fff' }}>
                     {t.name}
                     {t.note && (
                       <span style={{ display: 'block', fontSize: '0.66rem', fontWeight: 400, color: 'var(--text-muted)' }}>{t.note}</span>
                     )}
                   </span>
-                  <span style={{ textAlign: 'right', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: active ? '#f4902c' : 'var(--text-secondary)' }}>
+                  <span style={{ textAlign: 'right', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: active ? 'var(--accent)' : 'var(--text-secondary)' }}>
                     {t.tpf.toFixed(4)}
                   </span>
                   <span style={{ textAlign: 'right', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: '#38bdf8' }}>
@@ -538,7 +538,7 @@ export const TaperAngle: React.FC = () => {
           Converts between taper dimensions, taper rates, and angles for lathe compound / taper-attachment setup and
           inspecting conical features. Included angle = 2·atan((D−d)/2L); taper per foot TPF = 12·(D−d)/L;
           taper per inch (or mm) = (D−d)/L. The lathe compound is always set to the{' '}
-          <strong style={{ color: '#f4902c' }}>half angle</strong> — the angle between one flank and the centerline —
+          <strong style={{ color: 'var(--accent)' }}>half angle</strong> — the angle between one flank and the centerline —
           not the included angle. Metric tapers are usually specified as ratios (e.g. 1:20), where the diameter changes
           1 unit over k units of length. The reference table lists common machine tapers (Morse, Jarno, Brown &amp; Sharpe,
           Jacobs, steep 7:24 NMTB/CAT/BT, and R8) — click any row to load it.

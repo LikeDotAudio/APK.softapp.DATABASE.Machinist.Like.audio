@@ -382,7 +382,7 @@ export function App() {
               fontWeight: 800,
               color: '#000',
               fontSize: '1.15rem',
-              boxShadow: '0 0 15px rgba(244, 144, 44, 0.3)'
+              boxShadow: '0 0 15px rgba(var(--apk-accent-rgb), 0.3)'
             }}>
               M
             </div>
@@ -406,11 +406,11 @@ export function App() {
                   alignItems: 'center',
                   gap: '6px',
                   padding: '5px 12px',
-                  background: 'rgba(244, 144, 44, 0.15)',
+                  background: 'rgba(var(--apk-accent-rgb), 0.15)',
                   color: '#f59e0b',
                   fontWeight: 800,
                   fontSize: '0.78rem',
-                  border: '1px solid rgba(244, 144, 44, 0.4)',
+                  border: '1px solid rgba(var(--apk-accent-rgb), 0.4)',
                   borderRadius: '6px',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease'

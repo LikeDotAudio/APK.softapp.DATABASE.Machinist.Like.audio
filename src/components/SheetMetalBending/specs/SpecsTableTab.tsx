@@ -64,7 +64,7 @@ export const SpecsTableTab: React.FC<SpecsTableTabProps> = ({ unit, searchMateri
                   background: idx % 2 === 0 ? 'rgba(255, 255, 255, 0.01)' : 'transparent',
                   transition: 'background 0.15s ease'
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(244, 144, 44, 0.08)')}
+                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(var(--apk-accent-rgb), 0.08)')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = idx % 2 === 0 ? 'rgba(255, 255, 255, 0.01)' : 'transparent')}
               >
                 <td style={{ padding: '10px 14px', fontWeight: 700, color: '#fff', fontFamily: 'var(--font-sans)' }}>{spec.material}</td>
@@ -92,9 +92,9 @@ export const SpecsTableTab: React.FC<SpecsTableTabProps> = ({ unit, searchMateri
                     type="button"
                     onClick={() => onUseSpec(spec)}
                     style={{
-                      background: 'rgba(244, 144, 44, 0.15)',
+                      background: 'rgba(var(--apk-accent-rgb), 0.15)',
                       color: 'var(--accent)',
-                      border: '1px solid rgba(244, 144, 44, 0.4)',
+                      border: '1px solid rgba(var(--apk-accent-rgb), 0.4)',
                       padding: '4px 10px',
                       borderRadius: '4px',
                       fontSize: '0.72rem',

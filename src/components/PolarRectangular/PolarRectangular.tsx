@@ -152,12 +152,12 @@ export const PolarRectangular: React.FC = () => {
     </div>
   );
 
-  const resultRow = (label: string, value: string, color = '#f4902c') => (
+  const resultRow = (label: string, value: string, color = 'var(--accent)') => (
     <div style={{ background: 'var(--bg-primary)', padding: '16px 20px', borderRadius: 'var(--radius-md)', border: '2px solid var(--accent)', textAlign: 'center', flex: 1, minWidth: '150px' }}>
       <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '6px', fontWeight: 600 }}>
         {label}
       </span>
-      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.9rem', fontWeight: 800, color, textShadow: '0 0 20px rgba(244, 144, 44, 0.35)' }}>
+      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.9rem', fontWeight: 800, color, textShadow: '0 0 20px rgba(var(--apk-accent-rgb), 0.35)' }}>
         {value}
       </div>
     </div>
@@ -292,7 +292,7 @@ export const PolarRectangular: React.FC = () => {
             <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', maxWidth: '440px', height: 'auto', display: 'block', margin: '0 auto' }}>
               {/* Reference circle at R */}
               {!atOrigin && (
-                <circle cx={C} cy={C} r={resR * scale} fill="none" stroke="rgba(244,144,44,0.18)" strokeWidth="1" strokeDasharray="4 5" />
+                <circle cx={C} cy={C} r={resR * scale} fill="none" stroke="rgba(var(--apk-accent-rgb), 0.18)" strokeWidth="1" strokeDasharray="4 5" />
               )}
 
               {/* Axes */}
@@ -339,12 +339,12 @@ export const PolarRectangular: React.FC = () => {
               )}
 
               {/* Radius line from origin to point */}
-              <line x1={C} y1={C} x2={sx} y2={sy} stroke="#f4902c" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1={C} y1={C} x2={sx} y2={sy} stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round" />
               {!atOrigin && (
                 <text
                   x={(C + sx) / 2 + 10 * Math.cos(thetaRad + Math.PI / 2)}
                   y={(C + sy) / 2 - 10 * Math.sin(thetaRad + Math.PI / 2)}
-                  fill="#f4902c"
+                  fill="var(--accent)"
                   fontSize="11"
                   fontWeight="700"
                   textAnchor="middle"
@@ -355,7 +355,7 @@ export const PolarRectangular: React.FC = () => {
               )}
 
               {/* The point */}
-              <circle cx={sx} cy={sy} r="6" fill="#f4902c" stroke="#fff" strokeWidth="1.5" />
+              <circle cx={sx} cy={sy} r="6" fill="var(--accent)" stroke="#fff" strokeWidth="1.5" />
             </svg>
           </div>
 
@@ -367,7 +367,7 @@ export const PolarRectangular: React.FC = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.92rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                 <span style={{ color: 'var(--text-muted)' }}>Radius (R):</span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 600, color: '#f4902c' }}>{fmt(resR)} {unitStr}</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 600, color: 'var(--accent)' }}>{fmt(resR)} {unitStr}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                 <span style={{ color: 'var(--text-muted)' }}>Angle θ (decimal):</span>
@@ -400,7 +400,7 @@ export const PolarRectangular: React.FC = () => {
         </div>
         <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>
           Converts between polar (R, θ) and rectangular (X, Y) machine coordinates using{' '}
-          <strong style={{ color: '#f4902c' }}>X = R·cos θ</strong>, <strong style={{ color: '#f4902c' }}>Y = R·sin θ</strong>,{' '}
+          <strong style={{ color: 'var(--accent)' }}>X = R·cos θ</strong>, <strong style={{ color: 'var(--accent)' }}>Y = R·sin θ</strong>,{' '}
           <strong style={{ color: '#38bdf8' }}>R = √(X² + Y²)</strong> and <strong style={{ color: '#00ff80' }}>θ = atan2(Y, X)</strong> normalized
           to 0–360°. The angle is measured counter-clockwise from the +X axis (3 o'clock) — the standard machine and DRO convention.
           Add work-origin offsets Xc/Yc for bolt-hole style layout about a center point, and read the final ABS coordinates directly.

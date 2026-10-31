@@ -75,7 +75,7 @@ export const RatioInputsPanel: React.FC<RatioInputsPanelProps> = ({ r, unit }) =
         <div>
           <label style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontWeight: 600, fontSize: '0.85rem', color: calcTarget === 'ratio' ? 'var(--accent)' : 'var(--text-secondary)', textTransform: 'uppercase' }}>
             <span>Reduction Ratio (e.g. 5 for 5:1)</span>
-            {calcTarget === 'ratio' && <span style={{ color: '#f4902c', fontWeight: 800 }}>[ CALCULATED ]</span>}
+            {calcTarget === 'ratio' && <span style={{ color: 'var(--accent)', fontWeight: 800 }}>[ CALCULATED ]</span>}
           </label>
           <input
             type="number"
@@ -89,9 +89,9 @@ export const RatioInputsPanel: React.FC<RatioInputsPanelProps> = ({ r, unit }) =
             style={{ 
               fontWeight: 700, 
               fontSize: '1.2rem', 
-              color: calcTarget === 'ratio' ? '#f4902c' : '#fff',
-              background: calcTarget === 'ratio' ? 'rgba(244, 144, 44, 0.08)' : 'var(--bg-tertiary)',
-              borderColor: calcTarget === 'ratio' ? '#f4902c' : 'var(--border-color)'
+              color: calcTarget === 'ratio' ? 'var(--accent)' : '#fff',
+              background: calcTarget === 'ratio' ? 'rgba(var(--apk-accent-rgb), 0.08)' : 'var(--bg-tertiary)',
+              borderColor: calcTarget === 'ratio' ? 'var(--accent)' : 'var(--border-color)'
             }}
           />
         </div>
@@ -101,7 +101,7 @@ export const RatioInputsPanel: React.FC<RatioInputsPanelProps> = ({ r, unit }) =
           <div>
             <label style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontWeight: 600, fontSize: '0.8rem', color: calcTarget === 'copy' ? 'var(--accent)' : 'var(--text-secondary)', textTransform: 'uppercase' }}>
               <span>Master Copy Length</span>
-              {calcTarget === 'copy' && <span style={{ color: '#f4902c', fontWeight: 800 }}>[ CALC ]</span>}
+              {calcTarget === 'copy' && <span style={{ color: 'var(--accent)', fontWeight: 800 }}>[ CALC ]</span>}
             </label>
             <input
               type="number"
@@ -112,8 +112,8 @@ export const RatioInputsPanel: React.FC<RatioInputsPanelProps> = ({ r, unit }) =
               className="input-precision"
               style={{ 
                 fontWeight: 700, 
-                color: calcTarget === 'copy' ? '#f4902c' : '#fff',
-                background: calcTarget === 'copy' ? 'rgba(244, 144, 44, 0.08)' : 'var(--bg-tertiary)'
+                color: calcTarget === 'copy' ? 'var(--accent)' : '#fff',
+                background: calcTarget === 'copy' ? 'rgba(var(--apk-accent-rgb), 0.08)' : 'var(--bg-tertiary)'
               }}
             />
             <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>
@@ -125,7 +125,7 @@ export const RatioInputsPanel: React.FC<RatioInputsPanelProps> = ({ r, unit }) =
           <div>
             <label style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontWeight: 600, fontSize: '0.8rem', color: calcTarget === 'work' ? 'var(--accent)' : 'var(--text-secondary)', textTransform: 'uppercase' }}>
               <span>Finished Work Size</span>
-              {calcTarget === 'work' && <span style={{ color: '#f4902c', fontWeight: 800 }}>[ CALC ]</span>}
+              {calcTarget === 'work' && <span style={{ color: 'var(--accent)', fontWeight: 800 }}>[ CALC ]</span>}
             </label>
             <input
               type="number"
@@ -136,8 +136,8 @@ export const RatioInputsPanel: React.FC<RatioInputsPanelProps> = ({ r, unit }) =
               className="input-precision"
               style={{ 
                 fontWeight: 700, 
-                color: calcTarget === 'work' ? '#f4902c' : '#fff',
-                background: calcTarget === 'work' ? 'rgba(244, 144, 44, 0.08)' : 'var(--bg-tertiary)'
+                color: calcTarget === 'work' ? 'var(--accent)' : '#fff',
+                background: calcTarget === 'work' ? 'rgba(var(--apk-accent-rgb), 0.08)' : 'var(--bg-tertiary)'
               }}
             />
             <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>

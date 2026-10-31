@@ -58,7 +58,7 @@ export const StylusCutterSync: React.FC<StylusCutterSyncProps> = ({
           disabled={syncTarget === 'cutter'}
           onChange={(e) => setCutterDia(e.target.value)}
           className="input-precision"
-          style={{ fontWeight: 700, color: syncTarget === 'cutter' ? '#f4902c' : '#fff' }}
+          style={{ fontWeight: 700, color: syncTarget === 'cutter' ? 'var(--accent)' : '#fff' }}
         />
       </div>
 

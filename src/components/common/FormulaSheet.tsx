@@ -61,7 +61,7 @@ export const FormulaSheet: React.FC<FormulaSheetProps> = ({ title, intro, refere
                 <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   {idx + 1}. {item.name}
                 </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1rem', fontWeight: 700, color: 'var(--accent)', background: 'rgba(244, 144, 44, 0.07)', border: '1px solid rgba(244, 144, 44, 0.2)', borderRadius: '6px', padding: '8px 12px' }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1rem', fontWeight: 700, color: 'var(--accent)', background: 'rgba(var(--apk-accent-rgb), 0.07)', border: '1px solid rgba(var(--apk-accent-rgb), 0.2)', borderRadius: '6px', padding: '8px 12px' }}>
                   {item.formula}
                 </div>
                 {item.diagram && (

@@ -20,9 +20,9 @@ export const CutterDiameterPicker: React.FC<CutterDiameterPickerProps> = ({ spee
           style={{
             padding: '10px 6px',
             borderRadius: '6px',
-            border: speedCutterDia === btn.val ? '2px solid #f4902c' : '1px solid var(--border-color)',
-            background: speedCutterDia === btn.val ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-tertiary)',
-            color: speedCutterDia === btn.val ? '#f4902c' : 'var(--text-secondary)',
+            border: speedCutterDia === btn.val ? '2px solid var(--accent)' : '1px solid var(--border-color)',
+            background: speedCutterDia === btn.val ? 'rgba(var(--apk-accent-rgb), 0.15)' : 'var(--bg-tertiary)',
+            color: speedCutterDia === btn.val ? 'var(--accent)' : 'var(--text-secondary)',
             fontWeight: 700,
             fontSize: '0.85rem',
             cursor: 'pointer'
@@ -43,7 +43,7 @@ export const CutterDiameterPicker: React.FC<CutterDiameterPickerProps> = ({ spee
         step="0.01"
         onChange={(e) => setSpeedCutterDia(e.target.value)}
         className="input-precision"
-        style={{ fontWeight: 700, fontSize: '1.1rem', color: '#f4902c' }}
+        style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--accent)' }}
       />
     </div>
   </div>

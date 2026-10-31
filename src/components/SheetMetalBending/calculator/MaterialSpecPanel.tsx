@@ -104,7 +104,7 @@ export const MaterialSpecPanel: React.FC<{ b: BendInputs }> = ({ b }) => {
       )}
 
       {/* Active Spec Mini Dashboard */}
-      <div style={{ background: 'rgba(244, 144, 44, 0.05)', border: '1px solid rgba(244, 144, 44, 0.2)', borderRadius: '8px', padding: '12px 16px', marginBottom: '25px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', textAlign: 'center' }}>
+      <div style={{ background: 'rgba(var(--apk-accent-rgb), 0.05)', border: '1px solid rgba(var(--apk-accent-rgb), 0.2)', borderRadius: '8px', padding: '12px 16px', marginBottom: '25px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', textAlign: 'center' }}>
         <div>
           <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>K-Factor</div>
           <div style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>

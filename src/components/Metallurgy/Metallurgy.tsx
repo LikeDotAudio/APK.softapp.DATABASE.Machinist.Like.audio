@@ -185,7 +185,7 @@ export const Metallurgy: React.FC = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{ fontSize: '1.4rem' }}>🔥</span>
           <h1 style={{ fontSize: '1.3rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>Metallurgy & Thermal Properties Suite</h1>
-          <span style={{ fontSize: '0.75rem', background: 'rgba(244, 144, 44, 0.15)', color: 'var(--accent)', padding: '2px 10px', borderRadius: '12px', fontWeight: 700, border: '1px solid rgba(244, 144, 44, 0.3)' }}>Phase Transitions</span>
+          <span style={{ fontSize: '0.75rem', background: 'rgba(var(--apk-accent-rgb), 0.15)', color: 'var(--accent)', padding: '2px 10px', borderRadius: '12px', fontWeight: 700, border: '1px solid rgba(var(--apk-accent-rgb), 0.3)' }}>Phase Transitions</span>
         </div>
         <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
           Heating, melting, casting superheat & shrink-fitting
@@ -209,7 +209,7 @@ export const Metallurgy: React.FC = () => {
                 type="button"
                 onClick={() => setSelectedCategory(cat.id as any)}
                 style={{
-                  background: selectedCategory === cat.id ? 'rgba(244, 144, 44, 0.2)' : 'var(--bg-primary)',
+                  background: selectedCategory === cat.id ? 'rgba(var(--apk-accent-rgb), 0.2)' : 'var(--bg-primary)',
                   color: selectedCategory === cat.id ? 'var(--accent)' : 'var(--text-secondary)',
                   border: `1px solid ${selectedCategory === cat.id ? 'var(--accent)' : 'var(--border-color)'}`,
                   padding: '6px 14px',
@@ -238,7 +238,7 @@ export const Metallurgy: React.FC = () => {
                     style={{
                       padding: '12px 14px',
                       borderRadius: '8px',
-                      background: selectedMetalId === mat.id ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-primary)',
+                      background: selectedMetalId === mat.id ? 'rgba(var(--apk-accent-rgb), 0.15)' : 'var(--bg-primary)',
                       border: `1px solid ${selectedMetalId === mat.id ? 'var(--accent)' : 'var(--border-color)'}`,
                       cursor: 'pointer',
                       transition: 'all 0.2s ease',
@@ -705,7 +705,7 @@ export const Metallurgy: React.FC = () => {
         right: 0,
         background: 'rgba(10, 13, 20, 0.95)',
         backdropFilter: 'blur(16px)',
-        borderTop: '2px solid rgba(244, 144, 44, 0.4)',
+        borderTop: '2px solid rgba(var(--apk-accent-rgb), 0.4)',
         boxShadow: '0 -6px 25px rgba(0, 0, 0, 0.7)',
         padding: '10px 20px',
         display: 'flex',
@@ -732,7 +732,7 @@ export const Metallurgy: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             gap: '6px',
-            boxShadow: activeTab === 'thermal_explorer' ? '0 0 12px rgba(244, 144, 44, 0.5)' : 'none'
+            boxShadow: activeTab === 'thermal_explorer' ? '0 0 12px rgba(var(--apk-accent-rgb), 0.5)' : 'none'
           }}
         >
           <span>🔥</span> Thermal Phase & Casting Explorer
@@ -753,7 +753,7 @@ export const Metallurgy: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             gap: '6px',
-            boxShadow: activeTab === 'stock_weight' ? '0 0 12px rgba(244, 144, 44, 0.5)' : 'none'
+            boxShadow: activeTab === 'stock_weight' ? '0 0 12px rgba(var(--apk-accent-rgb), 0.5)' : 'none'
           }}
         >
           <span>⚖️</span> Stock Volume & Weight Calculator
@@ -774,7 +774,7 @@ export const Metallurgy: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             gap: '6px',
-            boxShadow: activeTab === 'shrink_fitting' ? '0 0 12px rgba(244, 144, 44, 0.5)' : 'none'
+            boxShadow: activeTab === 'shrink_fitting' ? '0 0 12px rgba(var(--apk-accent-rgb), 0.5)' : 'none'
           }}
         >
           <span>🔧</span> Thermal Expansion & Shrink-Fitting

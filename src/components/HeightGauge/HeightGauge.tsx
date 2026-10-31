@@ -232,7 +232,7 @@ export const HeightGauge: React.FC<HeightGaugeProps> = ({ initialTargetValue }) 
               key={preset}
               onClick={() => setTargetValue(preset)}
               style={{
-                background: targetValue === preset ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-tertiary)',
+                background: targetValue === preset ? 'rgba(var(--apk-accent-rgb), 0.15)' : 'var(--bg-tertiary)',
                 border: `1px solid ${targetValue === preset ? 'var(--accent)' : 'var(--border-color)'}`,
                 color: targetValue === preset ? 'var(--accent)' : 'var(--text-primary)',
                 padding: '5px 10px',

@@ -340,15 +340,15 @@ export const FitsTolerances: React.FC = () => {
                 <rect
                   x={diag.shaftX} y={diag.y(res.es)}
                   width={diag.shaftW} height={Math.max(diag.y(res.ei) - diag.y(res.es), 2)}
-                  fill="rgba(244, 144, 44, 0.28)" stroke="#f4902c" strokeWidth="1.5"
+                  fill="rgba(var(--apk-accent-rgb), 0.28)" stroke="var(--accent)" strokeWidth="1.5"
                 />
-                <text x={diag.shaftX + diag.shaftW / 2} y={diag.y(res.es) - 7} fill="#f4902c" fontSize="10" textAnchor="middle" style={dimText}>
+                <text x={diag.shaftX + diag.shaftW / 2} y={diag.y(res.es) - 7} fill="var(--accent)" fontSize="10" textAnchor="middle" style={dimText}>
                   SHAFT {fit.shaftLetter}{fit.shaftGrade}
                 </text>
-                <text x={diag.shaftX + diag.shaftW + 5} y={diag.y(res.es) + 4} fill="#f4902c" fontSize="9" style={dimText}>
+                <text x={diag.shaftX + diag.shaftW + 5} y={diag.y(res.es) + 4} fill="var(--accent)" fontSize="9" style={dimText}>
                   es {um(res.es)}
                 </text>
-                <text x={diag.shaftX + diag.shaftW + 5} y={diag.y(res.ei) + 12} fill="#f4902c" fontSize="9" style={dimText}>
+                <text x={diag.shaftX + diag.shaftW + 5} y={diag.y(res.ei) + 12} fill="var(--accent)" fontSize="9" style={dimText}>
                   ei {um(res.ei)}
                 </text>
               </svg>
@@ -399,7 +399,7 @@ export const FitsTolerances: React.FC = () => {
             </div>
             <div style={{ background: 'var(--bg-primary)', padding: '16px', borderRadius: 'var(--radius-md)', border: '1px solid rgba(56, 189, 248, 0.4)', textAlign: 'center', marginBottom: '12px' }}>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block' }}>Hole Dimension</span>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.7rem', fontWeight: 800, color: '#f4902c' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.7rem', fontWeight: 800, color: 'var(--accent)' }}>
                 {dim(res.holeMin)} <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>/</span> {dim(res.holeMax)}
               </div>
               {unit === 'imperial' && (
@@ -424,9 +424,9 @@ export const FitsTolerances: React.FC = () => {
                 {fit.family.toUpperCase()}
               </span>
             </div>
-            <div style={{ background: 'var(--bg-primary)', padding: '16px', borderRadius: 'var(--radius-md)', border: '1px solid rgba(244, 144, 44, 0.4)', textAlign: 'center', marginBottom: '12px' }}>
+            <div style={{ background: 'var(--bg-primary)', padding: '16px', borderRadius: 'var(--radius-md)', border: '1px solid rgba(var(--apk-accent-rgb), 0.4)', textAlign: 'center', marginBottom: '12px' }}>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block' }}>Shaft Dimension</span>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.7rem', fontWeight: 800, color: '#f4902c' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.7rem', fontWeight: 800, color: 'var(--accent)' }}>
                 {dim(res.shaftMin)} <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>/</span> {dim(res.shaftMax)}
               </div>
               {unit === 'imperial' && (
@@ -437,8 +437,8 @@ export const FitsTolerances: React.FC = () => {
             </div>
             {devRow('Upper Deviation es', res.es)}
             {devRow('Lower Deviation ei', res.ei)}
-            {limitRow('Max Shaft Ø', res.shaftMax, '#f4902c')}
-            {limitRow('Min Shaft Ø', res.shaftMin, '#f4902c')}
+            {limitRow('Max Shaft Ø', res.shaftMax, 'var(--accent)')}
+            {limitRow('Min Shaft Ø', res.shaftMin, 'var(--accent)')}
           </div>
         )}
       </div>

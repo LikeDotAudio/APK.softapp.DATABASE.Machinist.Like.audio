@@ -42,7 +42,7 @@ export const SpeedsFeeds: React.FC = () => {
         title="Speeds & Feeds & Chip Thinning Suite"
         badge="HEM Enabled"
         badgeColor="var(--accent)"
-        badgeRgb="244, 144, 44"
+        badgeRgb="var(--apk-accent-rgb)"
         subtitle="Spindle RPM, table feed rates & dynamic milling telemetry"
       />
 
@@ -79,8 +79,8 @@ export const SpeedsFeeds: React.FC = () => {
         active={activeTab}
         onSelect={setActiveTab}
         accent="var(--accent)"
-        glow="rgba(244, 144, 44, 0.5)"
-        border="rgba(244, 144, 44, 0.4)"
+        glow="rgba(var(--apk-accent-rgb), 0.5)"
+        border="rgba(var(--apk-accent-rgb), 0.4)"
         padX={16}
       />
     </div>

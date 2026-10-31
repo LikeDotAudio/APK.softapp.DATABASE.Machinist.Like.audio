@@ -22,7 +22,7 @@ export const CutterEngagementPanel: React.FC<CutterEngagementPanelProps> = ({
 }) => {
   const { svgSize, contactAngleDeg } = geo;
   return (
-    <div className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', background: 'radial-gradient(circle at center, rgba(15, 23, 42, 0.9) 0%, rgba(10, 15, 30, 0.95) 100%)', border: '1px solid rgba(244, 144, 44, 0.2)' }}>
+    <div className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', background: 'radial-gradient(circle at center, rgba(15, 23, 42, 0.9) 0%, rgba(10, 15, 30, 0.95) 100%)', border: '1px solid rgba(var(--apk-accent-rgb), 0.2)' }}>
 
       <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
         <div>
@@ -62,7 +62,7 @@ export const CutterEngagementPanel: React.FC<CutterEngagementPanelProps> = ({
 
         {/* Telemetry Badges overlaid on corners */}
         <div style={{ position: 'absolute', bottom: '10px', left: '10px', background: 'rgba(15, 23, 42, 0.85)', padding: '6px 10px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.1)', fontSize: '0.75rem', color: '#cbd5e1', fontFamily: 'var(--font-mono)' }}>
-          <span>Spindle: </span><strong style={{ color: '#f4902c' }}>{Math.round(rpm)} RPM</strong>
+          <span>Spindle: </span><strong style={{ color: 'var(--accent)' }}>{Math.round(rpm)} RPM</strong>
         </div>
 
         <div style={{ position: 'absolute', bottom: '10px', right: '10px', background: 'rgba(15, 23, 42, 0.85)', padding: '6px 10px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.1)', fontSize: '0.75rem', color: '#cbd5e1', fontFamily: 'var(--font-mono)' }}>
@@ -74,7 +74,7 @@ export const CutterEngagementPanel: React.FC<CutterEngagementPanelProps> = ({
       {/* Visualizer Legend */}
       <div style={{ display: 'flex', gap: '15px', marginTop: '12px', fontSize: '0.72rem', color: 'var(--text-secondary)', flexWrap: 'wrap', justifyContent: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#f4902c', display: 'inline-block' }}></span>
+          <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--accent)', display: 'inline-block' }}></span>
           <span>Cutter Flutes ({flutes})</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>

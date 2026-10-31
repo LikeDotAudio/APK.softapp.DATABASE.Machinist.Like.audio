@@ -43,7 +43,7 @@ export const FormedProfile: React.FC<FormedProfileProps> = ({ activeParams, unit
         2. Formed Profile Preview (Side Elevation View @ {bendAngle}° Bends)
       </h4>
 
-      <svg viewBox="0 0 800 220" style={{ width: '100%', height: 'auto', background: '#0a0e17', borderRadius: '8px', border: '1px solid rgba(244, 144, 44, 0.2)' }}>
+      <svg viewBox="0 0 800 220" style={{ width: '100%', height: 'auto', background: '#0a0e17', borderRadius: '8px', border: '1px solid rgba(var(--apk-accent-rgb), 0.2)' }}>
         {/* Its own grid: this drawing used to borrow #grid from the flat-pattern SVG. */}
         <defs>
           <SvgGridPattern id="profileGrid" size={20} opacity={0.05} />

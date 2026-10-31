@@ -206,7 +206,7 @@ export const TapDrillDie: React.FC = () => {
                           onClick={() => handleSelectThread(idx)}
                           style={{
                             borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-                            background: isSel ? 'rgba(244, 144, 44, 0.15)' : 'transparent',
+                            background: isSel ? 'rgba(var(--apk-accent-rgb), 0.15)' : 'transparent',
                             cursor: 'pointer',
                             transition: 'background 0.15s ease'
                           }}
@@ -283,7 +283,7 @@ export const TapDrillDie: React.FC = () => {
               {theoreticalDrillDia.toFixed(decPlaces)} <span style={{ fontSize: '1.2rem' }}>{unitStr}</span>
             </div>
             {!isCustom && activeThread && (
-              <span style={{ display: 'inline-block', background: 'rgba(244, 144, 44, 0.15)', color: 'var(--accent)', padding: '4px 12px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 600, marginTop: '10px' }}>
+              <span style={{ display: 'inline-block', background: 'rgba(var(--apk-accent-rgb), 0.15)', color: 'var(--accent)', padding: '4px 12px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 600, marginTop: '10px' }}>
                 Standard Toolroom Tap Drill: {activeThread.standardDrill}
               </span>
             )}

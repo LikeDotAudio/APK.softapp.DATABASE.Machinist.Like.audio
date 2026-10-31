@@ -37,7 +37,7 @@ export interface FormulaBox {
 export const FORMULA_BOXES: FormulaBox[] = [
   {
     title: '⚡ Spindle Speed & Surface Velocity',
-    color: '#f4902c',
+    color: 'var(--accent)',
     monoFontSize: '0.9rem',
     lines: [
       { label: 'Imperial (RPM):', text: ' (SFM × 3.82) ÷ Diameter' },
@@ -91,7 +91,7 @@ export const FORMULA_BOXES: FormulaBox[] = [
     groups: [
       {
         title: 'Spindle Power (HP & kW):',
-        color: '#f4902c',
+        color: 'var(--accent)',
         lines: [
           { label: 'HP:', text: ' (MRR [in³/min] × K-Factor) ÷ Efficiency (0.80)' },
           { label: 'kW:', text: ' HP × 0.7457' },

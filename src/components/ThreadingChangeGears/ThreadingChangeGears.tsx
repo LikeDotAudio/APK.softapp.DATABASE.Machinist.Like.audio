@@ -194,7 +194,7 @@ export const ThreadingChangeGears: React.FC = () => {
             </div>
 
             {/* Target Thread */}
-            <div style={{ background: 'var(--bg-primary)', padding: '16px', borderRadius: 'var(--radius-md)', border: '1px solid rgba(244, 144, 44, 0.4)' }}>
+            <div style={{ background: 'var(--bg-primary)', padding: '16px', borderRadius: 'var(--radius-md)', border: '1px solid rgba(var(--apk-accent-rgb), 0.4)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                 <label style={{ fontWeight: 600, fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
                   Target Thread Pitch
@@ -245,7 +245,7 @@ export const ThreadingChangeGears: React.FC = () => {
                   onClick={() => handleToggleGear(g)}
                   title="Click to remove gear"
                   style={{
-                    background: g === 127 ? 'rgba(0, 255, 128, 0.2)' : 'rgba(244, 144, 44, 0.15)',
+                    background: g === 127 ? 'rgba(0, 255, 128, 0.2)' : 'rgba(var(--apk-accent-rgb), 0.15)',
                     border: `1px solid ${g === 127 ? '#00ff80' : 'var(--accent)'}`,
                     color: g === 127 ? '#00ff80' : 'var(--accent)',
                     padding: '4px 10px',
@@ -316,7 +316,7 @@ export const ThreadingChangeGears: React.FC = () => {
                       key={idx}
                       style={{
                         borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-                        background: r.errorPercent === 0 ? 'rgba(0, 255, 128, 0.12)' : r.errorPercent < 0.1 ? 'rgba(244, 144, 44, 0.08)' : 'transparent',
+                        background: r.errorPercent === 0 ? 'rgba(0, 255, 128, 0.12)' : r.errorPercent < 0.1 ? 'rgba(var(--apk-accent-rgb), 0.08)' : 'transparent',
                         fontWeight: r.errorPercent === 0 ? 700 : 400
                       }}
                     >

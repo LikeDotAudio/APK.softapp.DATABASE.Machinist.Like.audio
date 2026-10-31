@@ -156,8 +156,8 @@ export const Knurling: React.FC = () => {
 
               {/* Knurl Wheel pressing at top (0, -60) */}
               <g transform="translate(0, -95)">
-                <circle cx="0" cy="0" r="35" fill="#0f172a" stroke="#f4902c" strokeWidth="2.5" />
-                <circle cx="0" cy="0" r="8" fill="#334155" stroke="#f4902c" strokeWidth="1" />
+                <circle cx="0" cy="0" r="35" fill="#0f172a" stroke="var(--accent)" strokeWidth="2.5" />
+                <circle cx="0" cy="0" r="8" fill="#334155" stroke="var(--accent)" strokeWidth="1" />
                 {Array.from({ length: 16 }).map((_, idx) => {
                   const rad = (idx * (360 / 16) * Math.PI) / 180;
                   const x1 = 28 * Math.cos(rad);
@@ -165,7 +165,7 @@ export const Knurling: React.FC = () => {
                   const x2 = 35 * Math.cos(rad);
                   const y2 = 35 * Math.sin(rad);
                   return (
-                    <line key={idx} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#f4902c" strokeWidth="2" />
+                    <line key={idx} x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--accent)" strokeWidth="2" />
                   );
                 })}
               </g>
@@ -291,10 +291,10 @@ export const Knurling: React.FC = () => {
             <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '6px', fontWeight: 600 }}>
               OPTIMAL BLANK DIAMETER ({bestCandidate.teeth} EXACT TEETH)
             </span>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: 800, color: '#f4902c' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: 800, color: 'var(--accent)' }}>
               {bestCandidate.diameter.toFixed(decPlaces)} <span style={{ fontSize: '1.1rem' }}>{unitStr}</span>
             </div>
-            <span style={{ display: 'inline-block', background: 'rgba(244, 144, 44, 0.15)', color: 'var(--accent)', padding: '4px 12px', fontSize: '0.82rem', fontWeight: 600, marginTop: '8px' }}>
+            <span style={{ display: 'inline-block', background: 'rgba(var(--apk-accent-rgb), 0.15)', color: 'var(--accent)', padding: '4px 12px', fontSize: '0.82rem', fontWeight: 600, marginTop: '8px' }}>
               {bestCandidate.diffFromTarget >= 0 ? `+${bestCandidate.diffFromTarget.toFixed(decPlaces)}` : bestCandidate.diffFromTarget.toFixed(decPlaces)} {unitStr} from entered target
             </span>
           </div>

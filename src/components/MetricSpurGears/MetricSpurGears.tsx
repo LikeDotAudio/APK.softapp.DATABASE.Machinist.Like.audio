@@ -216,7 +216,7 @@ export const MetricSpurGears: React.FC = () => {
             <svg viewBox="-150 -150 300 300" style={{ width: '100%', height: '320px', overflow: 'visible' }}>
               <defs>
                 <radialGradient id="gearGrad1" cx="30%" cy="30%" r="70%">
-                  <stop offset="0%" stopColor="#f4902c" stopOpacity="0.3" />
+                  <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.3" />
                   <stop offset="100%" stopColor="#0080ff" stopOpacity="0.05" />
                 </radialGradient>
                 <radialGradient id="gearGrad2" cx="30%" cy="30%" r="70%">
@@ -448,7 +448,7 @@ export const MetricSpurGears: React.FC = () => {
               </div>
 
               {/* Module ↔ DP Equivalence */}
-              <div style={{ background: 'rgba(244, 144, 44, 0.06)', border: '1px solid rgba(244, 144, 44, 0.25)', padding: '10px 14px', borderRadius: '6px', marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+              <div style={{ background: 'rgba(var(--apk-accent-rgb), 0.06)', border: '1px solid rgba(var(--apk-accent-rgb), 0.25)', padding: '10px 14px', borderRadius: '6px', marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
                 <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 700 }}>
                   {isDP ? 'Equivalent Module (25.4 / DP)' : 'Equivalent Diametral Pitch (25.4 / MOD)'}
                 </span>
@@ -483,14 +483,14 @@ export const MetricSpurGears: React.FC = () => {
                       justifyContent: 'space-between',
                       alignItems: 'center',
                       padding: '10px 14px',
-                      background: row.highlight ? 'rgba(244, 144, 44, 0.08)' : 'var(--bg-primary)',
+                      background: row.highlight ? 'rgba(var(--apk-accent-rgb), 0.08)' : 'var(--bg-primary)',
                       borderRadius: '6px',
-                      border: row.highlight ? '1px solid rgba(244, 144, 44, 0.3)' : '1px solid var(--border-color)',
+                      border: row.highlight ? '1px solid rgba(var(--apk-accent-rgb), 0.3)' : '1px solid var(--border-color)',
                       cursor: 'pointer',
                       transition: 'background 0.15s ease'
                     }}
-                    onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(244, 144, 44, 0.15)'}
-                    onMouseLeave={(e) => e.currentTarget.style.background = row.highlight ? 'rgba(244, 144, 44, 0.08)' : 'var(--bg-primary)'}
+                    onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(var(--apk-accent-rgb), 0.15)'}
+                    onMouseLeave={(e) => e.currentTarget.style.background = row.highlight ? 'rgba(var(--apk-accent-rgb), 0.08)' : 'var(--bg-primary)'}
                   >
                     <div>
                       <span style={{ fontSize: '0.88rem', fontWeight: row.highlight ? 700 : 600, color: 'var(--text-primary)' }}>{row.label}</span>

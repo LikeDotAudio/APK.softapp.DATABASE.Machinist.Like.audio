@@ -243,7 +243,7 @@ export const HardingeDividingHead: React.FC = () => {
                       key={val}
                       onClick={() => setDivisionsStr(val.toString())}
                       style={{
-                        background: isActive ? 'rgba(244, 144, 44, 0.2)' : 'rgba(255, 255, 255, 0.04)',
+                        background: isActive ? 'rgba(var(--apk-accent-rgb), 0.2)' : 'rgba(255, 255, 255, 0.04)',
                         border: `1px solid ${isActive ? 'var(--accent)' : 'var(--border-color)'}`,
                         color: isActive ? 'var(--accent)' : 'var(--text-secondary)',
                         padding: '5px 10px',
@@ -335,7 +335,7 @@ export const HardingeDividingHead: React.FC = () => {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '10px',
-                    background: isChecked ? 'rgba(244, 144, 44, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+                    background: isChecked ? 'rgba(var(--apk-accent-rgb), 0.08)' : 'rgba(255, 255, 255, 0.02)',
                     border: `1px solid ${isChecked ? (isCustom ? 'var(--accent-gold)' : 'var(--accent)') : 'rgba(255, 255, 255, 0.08)'}`,
                     padding: '10px 14px',
                     borderRadius: 'var(--radius-sm)',
@@ -535,9 +535,9 @@ export const HardingeDividingHead: React.FC = () => {
                         window.scrollTo({ top: 350, behavior: 'smooth' });
                       }}
                       style={{
-                        background: activeVizMatch?.plateName === match.plateName && activeVizMatch?.circleHoles === match.circleHoles ? 'var(--accent)' : 'rgba(244, 144, 44, 0.15)',
+                        background: activeVizMatch?.plateName === match.plateName && activeVizMatch?.circleHoles === match.circleHoles ? 'var(--accent)' : 'rgba(var(--apk-accent-rgb), 0.15)',
                         color: activeVizMatch?.plateName === match.plateName && activeVizMatch?.circleHoles === match.circleHoles ? '#000' : 'var(--accent)',
-                        border: '1px solid rgba(244, 144, 44, 0.4)',
+                        border: '1px solid rgba(var(--apk-accent-rgb), 0.4)',
                         padding: '6px 12px',
                         borderRadius: '6px',
                         fontWeight: 700,
@@ -614,9 +614,9 @@ export const HardingeDividingHead: React.FC = () => {
                                 window.scrollTo({ top: 350, behavior: 'smooth' });
                               }}
                               style={{
-                                background: activeVizMatch?.plateName === app.plateName && activeVizMatch?.circleHoles === app.circleHoles ? 'var(--accent)' : 'rgba(244, 144, 44, 0.15)',
+                                background: activeVizMatch?.plateName === app.plateName && activeVizMatch?.circleHoles === app.circleHoles ? 'var(--accent)' : 'rgba(var(--apk-accent-rgb), 0.15)',
                                 color: activeVizMatch?.plateName === app.plateName && activeVizMatch?.circleHoles === app.circleHoles ? '#000' : 'var(--accent)',
-                                border: '1px solid rgba(244, 144, 44, 0.4)',
+                                border: '1px solid rgba(var(--apk-accent-rgb), 0.4)',
                                 padding: '4px 10px',
                                 borderRadius: '4px',
                                 fontWeight: 700,

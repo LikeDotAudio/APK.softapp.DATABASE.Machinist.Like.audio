@@ -47,14 +47,14 @@ export const BarSettingCards: React.FC<BarSettingCardsProps> = ({ ratio, unit, b
   const imperial = unit === 'imperial';
   const unitWord = imperial ? 'Inches' : 'Millimeters';
   return (
-    <div className="glass-panel" style={{ padding: '30px', background: 'linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 100%)', borderTop: '3px solid #f4902c' }}>
+    <div className="glass-panel" style={{ padding: '30px', background: 'linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 100%)', borderTop: '3px solid var(--accent)' }}>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid var(--border-color)', paddingBottom: '15px', marginBottom: '22px' }}>
         <div>
           <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700 }}>
             OFFICIAL GORTON FACTORY CALIBRATION
           </span>
-          <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#f4902c', marginTop: '4px' }}>
+          <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent)', marginTop: '4px' }}>
             {ratio.toFixed(2)} : 1 Reduction Ratio Settings
           </h3>
         </div>
@@ -71,8 +71,8 @@ export const BarSettingCards: React.FC<BarSettingCardsProps> = ({ ratio, unit, b
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
         <BarCard
           tag="LOWER BAR"
-          color="#f4902c"
-          rgb="244, 144, 44"
+          color="var(--accent)"
+          rgb="var(--apk-accent-rgb)"
           value={imperial ? bars.lowerBarSettingInches.toFixed(3) : bars.lowerBarSettingMm.toFixed(2)}
           caption={`${unitWord} from ${bars.lowerGraduationLabel}`}
         />

@@ -203,7 +203,7 @@ export const HardnessConversion: React.FC = () => {
       <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>
         {label}
       </div>
-      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.7rem', fontWeight: 800, color: val === undefined ? 'var(--text-muted)' : '#f4902c', lineHeight: 1.25 }}>
+      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.7rem', fontWeight: 800, color: val === undefined ? 'var(--text-muted)' : 'var(--accent)', lineHeight: 1.25 }}>
         {val === undefined ? '—' : val.toFixed(decimals)}
       </div>
       <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
@@ -218,8 +218,8 @@ export const HardnessConversion: React.FC = () => {
         fontFamily: 'var(--font-mono)',
         fontSize: primary ? '2rem' : '1.35rem',
         fontWeight: 800,
-        color: primary ? '#f4902c' : 'var(--text-primary)',
-        textShadow: primary ? '0 0 18px rgba(244, 144, 44, 0.35)' : 'none',
+        color: primary ? 'var(--accent)' : 'var(--text-primary)',
+        textShadow: primary ? '0 0 18px rgba(var(--apk-accent-rgb), 0.35)' : 'none',
       }}>
         {Math.round(v)}
       </div>
@@ -340,7 +340,7 @@ export const HardnessConversion: React.FC = () => {
                     type="button"
                     onClick={() => applyPreset(p)}
                     style={{
-                      background: active ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-tertiary)',
+                      background: active ? 'rgba(var(--apk-accent-rgb), 0.15)' : 'var(--bg-tertiary)',
                       border: `1px solid ${active ? 'var(--accent)' : 'var(--border-color)'}`,
                       color: active ? 'var(--accent)' : 'var(--text-primary)',
                       padding: '6px 12px',
@@ -380,7 +380,7 @@ export const HardnessConversion: React.FC = () => {
           </div>
 
           {/* Tensile strength */}
-          <div style={{ background: 'rgba(244, 144, 44, 0.06)', border: '1px solid rgba(244, 144, 44, 0.25)', borderRadius: '8px', padding: '14px 16px' }}>
+          <div style={{ background: 'rgba(var(--apk-accent-rgb), 0.06)', border: '1px solid rgba(var(--apk-accent-rgb), 0.25)', borderRadius: '8px', padding: '14px 16px' }}>
             <div style={{ fontSize: '0.72rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', fontWeight: 700 }}>
               Approx. Tensile Strength
             </div>
@@ -423,7 +423,7 @@ export const HardnessConversion: React.FC = () => {
           <div style={{
             height: '14px',
             borderRadius: '7px',
-            background: 'linear-gradient(90deg, #00ff80 0%, #f59e0b 40%, #f4902c 70%, #ef4444 100%)',
+            background: 'linear-gradient(90deg, #00ff80 0%, #f59e0b 40%, var(--accent) 70%, #ef4444 100%)',
             border: '1px solid rgba(255, 255, 255, 0.15)',
             boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.35)',
           }} />
@@ -456,7 +456,7 @@ export const HardnessConversion: React.FC = () => {
               transform: 'translateX(-50%)',
               background: '#fff',
               borderRadius: '2px',
-              boxShadow: '0 0 10px rgba(255, 255, 255, 0.85), 0 0 22px rgba(244, 144, 44, 0.6)',
+              boxShadow: '0 0 10px rgba(255, 255, 255, 0.85), 0 0 22px rgba(var(--apk-accent-rgb), 0.6)',
               transition: 'left 0.25s ease',
             }} />
           )}

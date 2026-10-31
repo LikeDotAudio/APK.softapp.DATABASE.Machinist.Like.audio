@@ -19,8 +19,8 @@ export const CutterEngagementSvg: React.FC<CutterEngagementSvgProps> = ({ geo, r
       <defs>
         <SvgGridPattern id="cutterGrid" size={20} opacity={0.04} />
         <radialGradient id="cutterGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="rgba(244, 144, 44, 0.2)" />
-          <stop offset="100%" stopColor="rgba(244, 144, 44, 0)" />
+          <stop offset="0%" stopColor="rgba(var(--apk-accent-rgb), 0.2)" />
+          <stop offset="100%" stopColor="rgba(var(--apk-accent-rgb), 0)" />
         </radialGradient>
         <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="#334155" />
@@ -59,9 +59,9 @@ export const CutterEngagementSvg: React.FC<CutterEngagementSvgProps> = ({ geo, r
 
       {/* Cutter Glow & Outer Diameter Circle */}
       <circle cx={center} cy={center} r={maxRadiusPx + 10} fill="url(#cutterGlow)" />
-      <circle cx={center} cy={center} r={maxRadiusPx} fill="rgba(15, 23, 42, 0.8)" stroke="#f4902c" strokeWidth="2.5" />
+      <circle cx={center} cy={center} r={maxRadiusPx} fill="rgba(15, 23, 42, 0.8)" stroke="var(--accent)" strokeWidth="2.5" />
       <circle cx={center} cy={center} r={maxRadiusPx * 0.4} fill="#1e293b" stroke="#38bdf8" strokeWidth="1.5" />
-      <circle cx={center} cy={center} r={5} fill="#f4902c" />
+      <circle cx={center} cy={center} r={5} fill="var(--accent)" />
 
       {/* Rotating Flutes */}
       <g transform={`rotate(${rotation}, ${center}, ${center})`}>
@@ -82,8 +82,8 @@ export const CutterEngagementSvg: React.FC<CutterEngagementSvgProps> = ({ geo, r
             <g key={i}>
               <path
                 d={`M ${xInner} ${yInner} L ${x2} ${y2} Q ${xTip} ${yTip} ${xInner} ${yInner}`}
-                fill="rgba(244, 144, 44, 0.3)"
-                stroke="#f4902c"
+                fill="rgba(var(--apk-accent-rgb), 0.3)"
+                stroke="var(--accent)"
                 strokeWidth="1.5"
               />
               <circle cx={x2} cy={y2} r="3" fill="#fff" />

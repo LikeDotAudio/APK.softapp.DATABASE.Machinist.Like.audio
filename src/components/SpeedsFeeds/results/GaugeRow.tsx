@@ -21,10 +21,10 @@ export const GaugeRow: React.FC<GaugeRowProps> = ({ r, unit, activeTab }) => {
         title="SPINDLE SPEED (RPM)"
         value={Math.round(r.rpm).toLocaleString()}
         caption="Rev / Minute"
-        color="#f4902c"
-        border="1px solid rgba(244, 144, 44, 0.3)"
-        boxShadow="0 10px 25px -5px rgba(244, 144, 44, 0.1)"
-        textShadow="0 0 15px rgba(244, 144, 44, 0.4)"
+        color="var(--accent)"
+        border="1px solid rgba(var(--apk-accent-rgb), 0.3)"
+        boxShadow="0 10px 25px -5px rgba(var(--apk-accent-rgb), 0.1)"
+        textShadow="0 0 15px rgba(var(--apk-accent-rgb), 0.4)"
       />
 
       {/* Table Feed Rate (Programmed vs Revised) */}

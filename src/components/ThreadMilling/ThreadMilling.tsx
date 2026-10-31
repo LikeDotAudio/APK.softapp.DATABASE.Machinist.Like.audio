@@ -236,7 +236,7 @@ export const ThreadMilling: React.FC = () => {
           <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'var(--bg-primary)', border: '1px solid var(--border-color)', fontSize: '0.78rem', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
             <strong style={{ color: '#fff' }}>{inputsValid ? Math.round(rpm) : '—'}</strong> RPM
           </div>
-          <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'rgba(244, 144, 44, 0.12)', border: '1px solid rgba(244, 144, 44, 0.35)', fontSize: '0.78rem', color: '#f4902c', fontFamily: 'var(--font-mono)' }}>
+          <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'rgba(var(--apk-accent-rgb), 0.12)', border: '1px solid rgba(var(--apk-accent-rgb), 0.35)', fontSize: '0.78rem', color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
             <strong>{inputsValid ? fProg.toFixed(1) : '—'}</strong> {feedUnit} prog.
           </div>
         </div>
@@ -319,12 +319,12 @@ export const ThreadMilling: React.FC = () => {
             borderRadius: 'var(--radius-md)',
             border: '2px solid var(--accent)',
             textAlign: 'center',
-            boxShadow: '0 15px 35px -10px rgba(244, 144, 44, 0.2)',
+            boxShadow: '0 15px 35px -10px rgba(var(--apk-accent-rgb), 0.2)',
           }}>
             <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '8px', fontWeight: 600 }}>
               PROGRAMMED CENTERLINE FEED (F_prog) — USE THIS IN THE PROGRAM
             </span>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.6rem', fontWeight: 800, color: '#f4902c', textShadow: '0 0 20px rgba(244, 144, 44, 0.5)' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.6rem', fontWeight: 800, color: 'var(--accent)', textShadow: '0 0 20px rgba(var(--apk-accent-rgb), 0.5)' }}>
               {inputsValid ? fProg.toFixed(unit === 'imperial' ? 2 : 1) : '—'}
             </div>
             <span style={{ fontSize: '1rem', color: 'var(--text-primary)', fontWeight: 600 }}>{feedUnit}</span>
@@ -350,7 +350,7 @@ export const ThreadMilling: React.FC = () => {
                   <circle cx={svg.C} cy={svg.C} r={svg.holeR} fill="rgba(71, 85, 105, 0.45)" stroke="#94a3b8" strokeWidth="1.5" />
                 )}
                 {/* Interpolation (centerline) circle */}
-                <circle cx={svg.C} cy={svg.C} r={svg.pathR} fill="none" stroke="#f4902c" strokeWidth="1.4" strokeDasharray="6 4" />
+                <circle cx={svg.C} cy={svg.C} r={svg.pathR} fill="none" stroke="var(--accent)" strokeWidth="1.4" strokeDasharray="6 4" />
                 {/* Direction arc + arrowhead */}
                 <path d={svg.arcPath} fill="none" stroke="#00ff80" strokeWidth="2" />
                 <polygon points={svg.arrow} fill="#00ff80" />
@@ -364,7 +364,7 @@ export const ThreadMilling: React.FC = () => {
                 <text x={svg.C} y={svg.C - svg.holeR - 6} fill="#94a3b8" fontSize="10" fontWeight="700" textAnchor="middle" fontFamily="var(--font-mono)">
                   Dm {fmt(dm)}
                 </text>
-                <text x={svg.C - svg.pathR - 4} y={svg.C + 14} fill="#f4902c" fontSize="10" fontWeight="700" textAnchor="end" fontFamily="var(--font-mono)">
+                <text x={svg.C - svg.pathR - 4} y={svg.C + 14} fill="var(--accent)" fontSize="10" fontWeight="700" textAnchor="end" fontFamily="var(--font-mono)">
                   Di {fmt(di)}
                 </text>
                 <text x={svg.cutCx} y={svg.C + svg.cutR + 13} fill="#38bdf8" fontSize="10" fontWeight="700" textAnchor="middle" fontFamily="var(--font-mono)">
@@ -385,7 +385,7 @@ export const ThreadMilling: React.FC = () => {
           <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px 16px', borderRadius: '8px' }}>
             {resultRow('Spindle Speed (RPM)', inputsValid ? `${Math.round(rpm)} RPM` : '—')}
             {resultRow(`Linear Feed at Thread (F_lin)`, inputsValid ? `${fLin.toFixed(unit === 'imperial' ? 2 : 1)} ${feedUnit}` : '—', '#38bdf8')}
-            {resultRow('Programmed Feed (F_prog)', inputsValid ? `${fProg.toFixed(unit === 'imperial' ? 2 : 1)} ${feedUnit}` : '—', '#f4902c')}
+            {resultRow('Programmed Feed (F_prog)', inputsValid ? `${fProg.toFixed(unit === 'imperial' ? 2 : 1)} ${feedUnit}` : '—', 'var(--accent)')}
             {resultRow(`Interpolation Ø (Di = Dm ${internal ? '−' : '+'} Dc)`, inputsValid ? `${fmt(di)} ${unitStr}` : '—')}
             {resultRow('Arc Radius (Di / 2)', inputsValid ? `${fmt(di / 2)} ${unitStr}` : '—')}
             {resultRow('Z Advance per Rev (= Pitch)', pitch > 0 ? `${fmt(pitch)} ${unitStr}` : '—', '#00ff80')}
@@ -436,8 +436,8 @@ export const ThreadMilling: React.FC = () => {
           cutting edge sees at the thread surface. Speeds are conventional — RPM = (SFM × 12)/(π × Dc) imperial or
           (m/min × 1000)/(π × Dc) metric, and straight-line feed F_lin = RPM × z × fz — but because an internal cutter's
           centerline travels a smaller circle of diameter Di = Dm − Dc than the thread it produces, the programmed feed must
-          be <strong style={{ color: '#f4902c' }}>reduced</strong> by the ratio (Dm − Dc)/Dm; externally the centerline
-          circle Di = Dm + Dc is larger, so feed is <strong style={{ color: '#f4902c' }}>increased</strong> by
+          be <strong style={{ color: 'var(--accent)' }}>reduced</strong> by the ratio (Dm − Dc)/Dm; externally the centerline
+          circle Di = Dm + Dc is larger, so feed is <strong style={{ color: 'var(--accent)' }}>increased</strong> by
           (Dm + Dc)/Dm. Programming F_lin directly on an internal thread overfeeds the cutting edge and typically breaks
           the tool. The helix follows the one-pitch-per-rev rule: each full 360° circular move advances Z by exactly one
           thread pitch, so the arc command carries a Z word of one pitch. Climb milling a right-hand thread means G3
