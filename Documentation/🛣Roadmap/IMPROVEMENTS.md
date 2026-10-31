@@ -5,6 +5,4 @@ What this repo should change to meet the standard, most valuable first. Source: 
 
 Delivered items are in [🌍Publishing/DELIVERY.md](../%F0%9F%8C%8DPublishing/DELIVERY.md#delivered-from-the-2026-10-30-audit). Still open:
 
-| # | Improvement | Category | Effort (S/M/L) | Evidence |
-|---|---|---|---|---|
-| 1 | Tag releases on deploy (`v1.0.0` …). **Needs owner** — agents do not publish tags. | Change management | S | `package.json` `1.0.0` |
+All audit items delivered — see [🌍Publishing/DELIVERY.md](../%F0%9F%8C%8DPublishing/DELIVERY.md).

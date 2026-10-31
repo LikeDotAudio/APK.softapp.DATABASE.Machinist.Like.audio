@@ -17,6 +17,7 @@
 - Tagging a release: Needs owner (agents do not publish tags).
 
 ## Delivered from the 2026-10-30 audit
+- **Release tag `v1.0.0`** — annotated tag at df154d2, pushed 2026-10-31 with the owner's go-ahead.
 
 - **Vitest table tests + lint before deploy** — `vitest` 5 added; `src/components/{SheetMetalBending/bend,SpeedsFeeds/cutting,GortonP12/gorton}.math.test.ts` and `src/lib/units.test.ts` check bend allowance/setback/deduction, SFM↔RPM (inch and metric), chip thinning (2/√3 at 25 % stepover), Ra, Gorton bar settings (2:1 → 0), rebalance, roll/roller sync. `deploy.yml` runs `npm test` and `npm run lint` before `check:dist`. Verified: `npm test` 43 passed; `npm run lint` 0 errors.
 - **No inline 25.4 in the tools** — 104 `* 25.4` / `/ 25.4` sites in 17 components now call `toMm`/`toIn`/`MM_PER_IN` from `src/lib/units.ts` (left: data tables and prose). Same IEEE operations, so the numbers do not change. Verified: `tsc -b` clean, tests pass.
