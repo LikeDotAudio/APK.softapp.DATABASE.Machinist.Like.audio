@@ -14,7 +14,7 @@ export const CalculatorTab: React.FC<CalculatorTabProps> = ({ b, onShowDiagram }
   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: '25px' }}>
 
     {/* LEFT PANEL: INPUT PARAMETERS */}
-    <div className="glass-panel" style={{ padding: '25px', borderTop: '3px solid var(--accent-cyan)' }}>
+    <div className="glass-panel" style={{ padding: '25px', borderTop: '3px solid var(--accent)' }}>
       <MaterialSpecPanel b={b} />
 
       <FormedDimensionsPanel b={b} />

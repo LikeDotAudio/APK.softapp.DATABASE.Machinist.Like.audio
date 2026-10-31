@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { MM_PER_IN, toIn, toMm } from '../../lib/units';
 
 interface GearCombination {
   type: 'simple' | 'compound';
@@ -30,9 +31,9 @@ export const ThreadingChangeGears: React.FC = () => {
 
     const val = parseFloat(targetVal) || 0;
     if (targetUnit === 'mm' && oldUnit === 'tpi' && val > 0) {
-      setTargetVal((25.4 / val).toFixed(3));
+      setTargetVal((MM_PER_IN / val).toFixed(3));
     } else if (targetUnit === 'tpi' && oldUnit === 'mm' && val > 0) {
-      setTargetVal(Math.max(1, Math.round(25.4 / val)).toString());
+      setTargetVal(Math.max(1, Math.round(MM_PER_IN / val)).toString());
     }
   }, [targetUnit]);
 
@@ -64,9 +65,9 @@ export const ThreadingChangeGears: React.FC = () => {
     const tgVal = parseFloat(targetVal) || 1;
 
     // Convert Lead Screw to linear lead in inches
-    const lsLeadInches = leadScrewUnit === 'tpi' ? 1 / lsVal : lsVal / 25.4;
+    const lsLeadInches = leadScrewUnit === 'tpi' ? 1 / lsVal : toIn(lsVal);
     // Convert Target to linear lead in inches
-    const tgLeadInches = targetUnit === 'tpi' ? 1 / tgVal : tgVal / 25.4;
+    const tgLeadInches = targetUnit === 'tpi' ? 1 / tgVal : toIn(tgVal);
 
     if (lsLeadInches <= 0 || tgLeadInches <= 0 || availableGears.length < 2) return [];
 
@@ -82,7 +83,7 @@ export const ThreadingChangeGears: React.FC = () => {
         const B = gears[j];
         const actualRatio = A / B;
         const actualLeadInches = actualRatio * lsLeadInches;
-        const actualPitchVal = targetUnit === 'tpi' ? 1 / actualLeadInches : actualLeadInches * 25.4;
+        const actualPitchVal = targetUnit === 'tpi' ? 1 / actualLeadInches : toMm(actualLeadInches);
         const errorPercent = Math.abs((actualRatio - targetRatio) / targetRatio) * 100;
 
         if (errorPercent < 5) {
@@ -113,7 +114,7 @@ export const ThreadingChangeGears: React.FC = () => {
               const D = gears[l];
               const actualRatio = (A * C) / (B * D);
               const actualLeadInches = actualRatio * lsLeadInches;
-              const actualPitchVal = targetUnit === 'tpi' ? 1 / actualLeadInches : actualLeadInches * 25.4;
+              const actualPitchVal = targetUnit === 'tpi' ? 1 / actualLeadInches : toMm(actualLeadInches);
               const errorPercent = Math.abs((actualRatio - targetRatio) / targetRatio) * 100;
 
               if (errorPercent < 0.5) { // strict tolerance for compound
@@ -171,14 +172,14 @@ export const ThreadingChangeGears: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setLeadScrewUnit('tpi')}
-                  style={{ flex: 1, padding: '4px', fontSize: '0.75rem', background: leadScrewUnit === 'tpi' ? 'var(--accent-cyan)' : 'var(--bg-tertiary)', color: leadScrewUnit === 'tpi' ? '#000' : 'var(--text-primary)', border: 'none', borderRadius: '4px', fontWeight: 600, cursor: 'pointer' }}
+                  style={{ flex: 1, padding: '4px', fontSize: '0.75rem', background: leadScrewUnit === 'tpi' ? 'var(--accent)' : 'var(--bg-tertiary)', color: leadScrewUnit === 'tpi' ? '#000' : 'var(--text-primary)', border: 'none', borderRadius: '4px', fontWeight: 600, cursor: 'pointer' }}
                 >
                   TPI
                 </button>
                 <button
                   type="button"
                   onClick={() => setLeadScrewUnit('mm')}
-                  style={{ flex: 1, padding: '4px', fontSize: '0.75rem', background: leadScrewUnit === 'mm' ? 'var(--accent-cyan)' : 'var(--bg-tertiary)', color: leadScrewUnit === 'mm' ? '#000' : 'var(--text-primary)', border: 'none', borderRadius: '4px', fontWeight: 600, cursor: 'pointer' }}
+                  style={{ flex: 1, padding: '4px', fontSize: '0.75rem', background: leadScrewUnit === 'mm' ? 'var(--accent)' : 'var(--bg-tertiary)', color: leadScrewUnit === 'mm' ? '#000' : 'var(--text-primary)', border: 'none', borderRadius: '4px', fontWeight: 600, cursor: 'pointer' }}
                 >
                   mm Lead
                 </button>
@@ -201,7 +202,7 @@ export const ThreadingChangeGears: React.FC = () => {
                 <select
                   value={maxResults}
                   onChange={(e) => setMaxResults(parseInt(e.target.value) || 10)}
-                  style={{ background: 'var(--bg-tertiary)', color: 'var(--accent-cyan)', border: '1px solid var(--border-color)', borderRadius: '4px', fontSize: '0.72rem', padding: '2px 6px', cursor: 'pointer', fontFamily: 'var(--font-mono)' }}
+                  style={{ background: 'var(--bg-tertiary)', color: 'var(--accent)', border: '1px solid var(--border-color)', borderRadius: '4px', fontSize: '0.72rem', padding: '2px 6px', cursor: 'pointer', fontFamily: 'var(--font-mono)' }}
                 >
                   <option value={5}>Top 5 Results</option>
                   <option value={10}>Top 10 Results</option>
@@ -245,8 +246,8 @@ export const ThreadingChangeGears: React.FC = () => {
                   title="Click to remove gear"
                   style={{
                     background: g === 127 ? 'rgba(0, 255, 128, 0.2)' : 'rgba(244, 144, 44, 0.15)',
-                    border: `1px solid ${g === 127 ? '#00ff80' : 'var(--accent-cyan)'}`,
-                    color: g === 127 ? '#00ff80' : 'var(--accent-cyan)',
+                    border: `1px solid ${g === 127 ? '#00ff80' : 'var(--accent)'}`,
+                    color: g === 127 ? '#00ff80' : 'var(--accent)',
                     padding: '4px 10px',
                     borderRadius: '4px',
                     fontSize: '0.85rem',
@@ -335,15 +336,15 @@ export const ThreadingChangeGears: React.FC = () => {
                       </td>
                       <td style={{ padding: '12px 14px', fontFamily: 'var(--font-mono)', fontSize: '0.92rem', color: '#fff', fontWeight: 600 }}>
                         {r.type === 'simple' ? (
-                          <span>Spindle <strong style={{ color: 'var(--accent-cyan)' }}>{r.gearA}T</strong> ➔ Lead Screw <strong style={{ color: '#00ff80' }}>{r.gearB}T</strong></span>
+                          <span>Spindle <strong style={{ color: 'var(--accent)' }}>{r.gearA}T</strong> ➔ Lead Screw <strong style={{ color: '#00ff80' }}>{r.gearB}T</strong></span>
                         ) : (
-                          <span>Spindle <strong style={{ color: 'var(--accent-cyan)' }}>{r.gearA}T</strong> ➔ Stud <strong style={{ color: '#f59e0b' }}>{r.gearB}T</strong> / <strong style={{ color: '#f59e0b' }}>{r.gearC}T</strong> ➔ LS <strong style={{ color: '#00ff80' }}>{r.gearD}T</strong></span>
+                          <span>Spindle <strong style={{ color: 'var(--accent)' }}>{r.gearA}T</strong> ➔ Stud <strong style={{ color: '#f59e0b' }}>{r.gearB}T</strong> / <strong style={{ color: '#f59e0b' }}>{r.gearC}T</strong> ➔ LS <strong style={{ color: '#00ff80' }}>{r.gearD}T</strong></span>
                         )}
                       </td>
                       <td style={{ padding: '12px 14px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: r.errorPercent === 0 ? '#00ff80' : 'var(--text-primary)' }}>
                         {r.actualPitchVal.toFixed(4)} {targetUnit === 'tpi' ? 'TPI' : 'mm'}
                       </td>
-                      <td style={{ padding: '12px 14px', textAlign: 'right', fontFamily: 'var(--font-mono)', fontWeight: 700, color: r.errorPercent === 0 ? '#00ff80' : r.errorPercent < 0.5 ? 'var(--accent-cyan)' : '#f59e0b' }}>
+                      <td style={{ padding: '12px 14px', textAlign: 'right', fontFamily: 'var(--font-mono)', fontWeight: 700, color: r.errorPercent === 0 ? '#00ff80' : r.errorPercent < 0.5 ? 'var(--accent)' : '#f59e0b' }}>
                         {r.errorPercent === 0 ? 'EXACT 0.00%' : `${r.errorPercent.toFixed(3)}%`}
                       </td>
                     </tr>
@@ -371,7 +372,7 @@ export const ThreadingChangeGears: React.FC = () => {
 
       {/* Footer: tool description */}
       <div className="glass-panel" style={{ marginTop: '25px', padding: '14px 20px' }}>
-        <div style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>
+        <div style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>
           Machinist Calculator #7 // Tool Guidance
         </div>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', margin: 0, lineHeight: 1.5 }}>

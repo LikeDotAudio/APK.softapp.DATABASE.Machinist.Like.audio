@@ -63,8 +63,8 @@ export const BendVectorSvg: React.FC<{ simCalc: SimResults }> = ({ simCalc }) =>
         </g>
 
         {/* Live Angle Arc Indicator */}
-        <path d={`M 400 280 A 60 60 0 0 0 ${400 - 60 * Math.cos((simCalc.angle * Math.PI)/180)} ${280 - 60 * Math.sin((simCalc.angle * Math.PI)/180)}`} fill="none" stroke="var(--accent-cyan)" strokeWidth="2" />
-        <text x="430" y="250" fill="var(--accent-cyan)" fontSize="16" fontWeight="bold" fontFamily="monospace">θ = {simCalc.angle}°</text>
+        <path d={`M 400 280 A 60 60 0 0 0 ${400 - 60 * Math.cos((simCalc.angle * Math.PI)/180)} ${280 - 60 * Math.sin((simCalc.angle * Math.PI)/180)}`} fill="none" stroke="var(--accent)" strokeWidth="2" />
+        <text x="430" y="250" fill="var(--accent)" fontSize="16" fontWeight="bold" fontFamily="monospace">θ = {simCalc.angle}°</text>
       </svg>
     </div>
   </div>

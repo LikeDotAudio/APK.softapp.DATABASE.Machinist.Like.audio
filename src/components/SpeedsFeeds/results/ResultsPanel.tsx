@@ -17,9 +17,9 @@ interface ResultsPanelProps {
 export const ResultsPanel: React.FC<ResultsPanelProps> = ({ r, unit, activeTab, materialName, contactAngleDeg }) => {
   const { cutMinutes, cutSeconds } = r;
   return (
-    <div className="glass-panel" style={{ padding: '25px', background: 'linear-gradient(145deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.7) 100%)', borderTop: activeTab === 'chip_thinning' ? '3px solid #a855f7' : '3px solid var(--accent-cyan)' }}>
+    <div className="glass-panel" style={{ padding: '25px', background: 'linear-gradient(145deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.7) 100%)', borderTop: activeTab === 'chip_thinning' ? '3px solid #a855f7' : '3px solid var(--accent)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', flexWrap: 'wrap', borderBottom: '1px solid var(--border-color)', paddingBottom: '12px', marginBottom: '18px' }}>
-        <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: activeTab === 'chip_thinning' ? '#c084fc' : 'var(--accent-cyan)', margin: 0 }}>
+        <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: activeTab === 'chip_thinning' ? '#c084fc' : 'var(--accent)', margin: 0 }}>
           📐 EXPLANATION // {activeTab === 'chip_thinning' ? 'HEM CHIP THINNING DASHBOARD' : 'OPTIMAL MACHINING PARAMETERS'} — {materialName}
         </h3>
 

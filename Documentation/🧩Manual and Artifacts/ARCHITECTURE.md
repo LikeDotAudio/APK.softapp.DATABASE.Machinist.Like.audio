@@ -24,7 +24,10 @@ npm run preview
 - **Categories** — Metrology, Inspection & GD&T · Holemaking & Layout · Threading & Fasteners · Lathe & Turning · Milling, Gearing & Machine Setup · Machining Math & Geometry · Metallurgy & Materials · Welding · Fabrication.
 - **Tools** — one folder per tool under `src/components/`, each exporting its page from `index.ts`. The large ones are split into pure math, data, hooks and view parts under a thin page: `SheetMetalBending/` (`bend.math.ts`, `calculator/`, `data/`, `diagram/`, `hooks/`, `simulator/`, `specs/`), `SpeedsFeeds/` (`cutting.math.ts` → `solveCut`), `ScrewHeadIndex/` (`data/`, `hooks/`, `library/`, `browse/`, `detail/`, `glyphs/`).
 - **Shared parts** — `src/components/common/`: `ToolHeader`, `ModuleTabBar`, `ToolFooterNote`, `FormulaSheet`, `InfoBox`, `SvgGridPattern`, and the `useUnitChange` hook.
-- **Units** — `src/context/UnitContext.tsx` holds one `imperial`/`metric` value (default imperial), switched from the header; `src/lib/units.ts` holds `MM_PER_IN`, `toMm`, `toIn` and the field rewrites on a flip. Every tool reads the context except the Hardinge dividing head (divisions, no units).
+- **Units** — `src/context/UnitContext.tsx` holds one `imperial`/`metric` value (default imperial), switched from the header; `src/lib/units.ts` holds `MM_PER_IN`, `toMm`, `toIn` and the field rewrites on a flip. Every tool reads the context except the Hardinge dividing head (divisions, no units); conversions call `toMm`/`toIn`.
+- **Loading** — `App.tsx` imports the default Jo-block stack directly and every other tool with `React.lazy` behind one `Suspense`, so each tool is its own chunk.
+- **Tests** — `npm test` (Vitest) runs `*.math.test.ts` and `src/lib/units.test.ts`.
+- **Brand** — `src/main.tsx` imports `src/vendor/apk-contracts/apk-tokens.css` before `index.css`; `--accent` is `var(--apk-accent)`.
 - **Install** — `public/manifest.json` (relative `start_url`/`scope`) makes it installable; there is no service worker, so it does not work offline.
 
 ## Reference pages

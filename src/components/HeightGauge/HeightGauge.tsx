@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { toIn, toMm } from '../../lib/units';
 
 interface Block {
   value: number;
@@ -154,9 +155,9 @@ export const HeightGauge: React.FC<HeightGaugeProps> = ({ initialTargetValue }) 
     let metTarget = val;
 
     if (inputUnit === 'imperial') {
-      metTarget = val * 25.4;
+      metTarget = toMm(val);
     } else {
-      impTarget = val / 25.4;
+      impTarget = toIn(val);
     }
 
     setImperialStack(computeImperialStack(impTarget));
@@ -180,9 +181,9 @@ export const HeightGauge: React.FC<HeightGaugeProps> = ({ initialTargetValue }) 
     const val = parseFloat(targetValue);
     if (!isNaN(val) && val > 0) {
       if (inputUnit === 'metric' && oldUnit === 'imperial') {
-        setTargetValue((val * 25.4).toFixed(3));
+        setTargetValue(toMm(val).toFixed(3));
       } else if (inputUnit === 'imperial' && oldUnit === 'metric') {
-        setTargetValue((val / 25.4).toFixed(4));
+        setTargetValue(toIn(val).toFixed(4));
       }
     }
   }, [inputUnit]);
@@ -212,7 +213,7 @@ export const HeightGauge: React.FC<HeightGaugeProps> = ({ initialTargetValue }) 
                 right: '18px', 
                 top: '50%', 
                 transform: 'translateY(-50%)', 
-                color: 'var(--accent-cyan)', 
+                color: 'var(--accent)', 
                 fontFamily: 'var(--font-mono)',
                 fontWeight: 700
               }}>
@@ -232,8 +233,8 @@ export const HeightGauge: React.FC<HeightGaugeProps> = ({ initialTargetValue }) 
               onClick={() => setTargetValue(preset)}
               style={{
                 background: targetValue === preset ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-tertiary)',
-                border: `1px solid ${targetValue === preset ? 'var(--accent-cyan)' : 'var(--border-color)'}`,
-                color: targetValue === preset ? 'var(--accent-cyan)' : 'var(--text-primary)',
+                border: `1px solid ${targetValue === preset ? 'var(--accent)' : 'var(--border-color)'}`,
+                color: targetValue === preset ? 'var(--accent)' : 'var(--text-primary)',
                 padding: '5px 10px',
                 borderRadius: 'var(--radius-sm)',
                 fontSize: '0.85rem',
@@ -270,7 +271,7 @@ export const HeightGauge: React.FC<HeightGaugeProps> = ({ initialTargetValue }) 
                 )}
               </h3>
               <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                Target: {inputUnit === 'imperial' ? `${targetValue} in` : `${(parseFloat(targetValue) / 25.4).toFixed(4)} in (converted)`}
+                Target: {inputUnit === 'imperial' ? `${targetValue} in` : `${toIn(parseFloat(targetValue)).toFixed(4)} in (converted)`}
               </span>
             </div>
 
@@ -414,7 +415,7 @@ export const HeightGauge: React.FC<HeightGaugeProps> = ({ initialTargetValue }) 
                 )}
               </h3>
               <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                Target: {inputUnit === 'metric' ? `${targetValue} mm` : `${(parseFloat(targetValue) * 25.4).toFixed(3)} mm (converted)`}
+                Target: {inputUnit === 'metric' ? `${targetValue} mm` : `${toMm(parseFloat(targetValue)).toFixed(3)} mm (converted)`}
               </span>
             </div>
 
@@ -542,7 +543,7 @@ export const HeightGauge: React.FC<HeightGaugeProps> = ({ initialTargetValue }) 
 
       {/* Footer: tool description */}
       <div className="glass-panel" style={{ marginTop: '25px', padding: '14px 20px' }}>
-        <div style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>
+        <div style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>
           Side-By-Side Precision Metrology // Tool Guidance
         </div>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', margin: 0, lineHeight: 1.5 }}>

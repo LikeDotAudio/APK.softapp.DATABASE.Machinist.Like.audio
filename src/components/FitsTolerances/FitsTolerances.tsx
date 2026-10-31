@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { toIn, toMm } from '../../lib/units';
 
 // ---------------------------------------------------------------------------
 // ISO 286 Fits & Tolerances — hole-basis system, formula method.
@@ -119,16 +120,16 @@ export const FitsTolerances: React.FC = () => {
     prevUnitRef.current = unit;
     const val = parseFloat(nominalStr) || 0;
     if (unit === 'metric' && oldUnit === 'imperial') {
-      setNominalStr((val * 25.4).toFixed(3));
+      setNominalStr(toMm(val).toFixed(3));
     } else if (unit === 'imperial' && oldUnit === 'metric') {
-      setNominalStr((val / 25.4).toFixed(4));
+      setNominalStr(toIn(val).toFixed(4));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [unit]);
 
   const fit = FITS.find(f => f.code === fitCode) ?? FITS[3];
   const inputVal = parseFloat(nominalStr);
-  const nominalMm = unit === 'imperial' ? inputVal * 25.4 : inputVal;
+  const nominalMm = unit === 'imperial' ? toMm(inputVal) : inputVal;
   const valid = Number.isFinite(nominalMm) && nominalMm >= 1 && nominalMm <= 500;
   const res = useMemo<FitResult | null>(
     () => (valid ? computeFit(nominalMm, fit) : null),
@@ -139,11 +140,11 @@ export const FitsTolerances: React.FC = () => {
 
   // --- Formatting helpers ---
   const um = (v: number) => `${v > 0 ? '+' : ''}${v} µm`;
-  const dim = (mm: number) => (unit === 'metric' ? `${mm.toFixed(3)} mm` : `${(mm / 25.4).toFixed(5)}"`);
+  const dim = (mm: number) => (unit === 'metric' ? `${mm.toFixed(3)} mm` : `${toIn(mm).toFixed(5)}"`);
   const dimSub = (mm: number) => (unit === 'metric' ? '' : `${mm.toFixed(3)} mm`);
   const clr = (umVal: number) => {
     const mm = umVal / 1000;
-    return unit === 'metric' ? `${mm.toFixed(3)} mm` : `${(mm / 25.4).toFixed(5)}"`;
+    return unit === 'metric' ? `${mm.toFixed(3)} mm` : `${toIn(mm).toFixed(5)}"`;
   };
 
   const limitRow = (label: string, mm: number, accent: string) => (
@@ -192,7 +193,7 @@ export const FitsTolerances: React.FC = () => {
       {/* Compact Title Bar */}
       <div style={{ marginBottom: '18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-          🔧 Fits &amp; Tolerances <span style={{ color: 'var(--accent-cyan)', fontWeight: 400 }}>// ISO 286 Hole-Basis</span>
+          🔧 Fits &amp; Tolerances <span style={{ color: 'var(--accent)', fontWeight: 400 }}>// ISO 286 Hole-Basis</span>
         </h2>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'var(--bg-primary)', border: '1px solid var(--border-color)', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
@@ -227,7 +228,7 @@ export const FitsTolerances: React.FC = () => {
                 onChange={(e) => setNominalStr(e.target.value)}
                 className="input-precision"
               />
-              <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+              <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
                 {unitStr}
               </span>
             </div>

@@ -225,7 +225,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, isModal 
           color: '#fff',
           textShadow: '0 0 20px rgba(56, 189, 248, 0.6)'
         }}>
-          MACHINIST <span style={{ color: 'var(--accent-cyan)', fontWeight: 300 }}>// LIKE.AUDIO</span>
+          MACHINIST <span style={{ color: 'var(--accent)', fontWeight: 300 }}>// LIKE.AUDIO</span>
         </div>
         <div style={{ 
           fontSize: isModal ? '0.75rem' : '0.95rem', 
@@ -286,7 +286,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, isModal 
           onMouseEnter={(e) => {
             e.currentTarget.style.background = 'rgba(56, 189, 248, 0.2)';
             e.currentTarget.style.color = '#fff';
-            e.currentTarget.style.borderColor = 'var(--accent-cyan)';
+            e.currentTarget.style.borderColor = 'var(--accent)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';

@@ -39,7 +39,7 @@ export const FormulaSheet: React.FC<FormulaSheetProps> = ({ title, intro, refere
         style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', gap: '10px' }}
       >
         <div>
-          <div style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
+          <div style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
             📐 FORMULA REFERENCE — HOW THE MATH WORKS
           </div>
           <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fff', margin: '4px 0 0' }}>{title}</h3>
@@ -61,7 +61,7 @@ export const FormulaSheet: React.FC<FormulaSheetProps> = ({ title, intro, refere
                 <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   {idx + 1}. {item.name}
                 </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1rem', fontWeight: 700, color: 'var(--accent-cyan)', background: 'rgba(244, 144, 44, 0.07)', border: '1px solid rgba(244, 144, 44, 0.2)', borderRadius: '6px', padding: '8px 12px' }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1rem', fontWeight: 700, color: 'var(--accent)', background: 'rgba(244, 144, 44, 0.07)', border: '1px solid rgba(244, 144, 44, 0.2)', borderRadius: '6px', padding: '8px 12px' }}>
                   {item.formula}
                 </div>
                 {item.diagram && (

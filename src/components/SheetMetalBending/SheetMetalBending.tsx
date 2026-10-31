@@ -67,7 +67,7 @@ export const SheetMetalBending: React.FC = () => {
         tabs={SHEET_TABS}
         active={activeTab}
         onSelect={setActiveTab}
-        accent="var(--accent-cyan)"
+        accent="var(--accent)"
         glow="rgba(56, 189, 248, 0.5)"
         border="rgba(56, 189, 248, 0.4)"
         padX={16}

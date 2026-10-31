@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { toIn, toMm } from '../../lib/units';
 
 interface ThreadSpec {
   name: string;
@@ -68,10 +69,10 @@ export const TapDrillDie: React.FC = () => {
     if (isCustom) {
       const maj = parseFloat(customMajor) || 0;
       if (globalUnit === 'metric' && oldUnit === 'imperial') {
-        setCustomMajor((maj * 25.4).toFixed(3));
+        setCustomMajor(toMm(maj).toFixed(3));
         setCustomUnit('metric');
       } else if (globalUnit === 'imperial' && oldUnit === 'metric') {
-        setCustomMajor((maj / 25.4).toFixed(4));
+        setCustomMajor(toIn(maj).toFixed(4));
         setCustomUnit('imperial');
       }
     } else {
@@ -210,7 +211,7 @@ export const TapDrillDie: React.FC = () => {
                             transition: 'background 0.15s ease'
                           }}
                         >
-                          <td style={{ padding: '10px 14px', fontWeight: 700, color: isSel ? 'var(--accent-cyan)' : 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
+                          <td style={{ padding: '10px 14px', fontWeight: 700, color: isSel ? 'var(--accent)' : 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
                             {t.name}
                           </td>
                           <td style={{ padding: '10px 14px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
@@ -234,7 +235,7 @@ export const TapDrillDie: React.FC = () => {
               <label style={{ fontWeight: 600, fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
                 Target Thread Engagement (%)
               </label>
-              <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--accent-cyan)' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--accent)' }}>
                 {targetEngagement}%
               </span>
             </div>
@@ -245,7 +246,7 @@ export const TapDrillDie: React.FC = () => {
               step="1"
               value={targetEngagement}
               onChange={(e) => setTargetEngagement(parseInt(e.target.value) || 75)}
-              style={{ width: '100%', accentColor: 'var(--accent-cyan)', cursor: 'pointer' }}
+              style={{ width: '100%', accentColor: 'var(--accent)', cursor: 'pointer' }}
             />
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>
               <span>50% (Hard Metals / Stainless)</span>
@@ -261,7 +262,7 @@ export const TapDrillDie: React.FC = () => {
             <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>
               RECOMMENDED TOOLING SETUP
             </span>
-            <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--accent-cyan)', marginTop: '4px' }}>
+            <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--accent)', marginTop: '4px' }}>
               {isCustom ? `Custom Thread (${major} ${unitStr})` : activeThread?.name}
             </h3>
           </div>
@@ -282,7 +283,7 @@ export const TapDrillDie: React.FC = () => {
               {theoreticalDrillDia.toFixed(decPlaces)} <span style={{ fontSize: '1.2rem' }}>{unitStr}</span>
             </div>
             {!isCustom && activeThread && (
-              <span style={{ display: 'inline-block', background: 'rgba(244, 144, 44, 0.15)', color: 'var(--accent-cyan)', padding: '4px 12px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 600, marginTop: '10px' }}>
+              <span style={{ display: 'inline-block', background: 'rgba(244, 144, 44, 0.15)', color: 'var(--accent)', padding: '4px 12px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 600, marginTop: '10px' }}>
                 Standard Toolroom Tap Drill: {activeThread.standardDrill}
               </span>
             )}
@@ -340,7 +341,7 @@ export const TapDrillDie: React.FC = () => {
 
       {/* Footer: tool description */}
       <div className="glass-panel" style={{ marginTop: '25px', padding: '14px 20px' }}>
-        <div style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>
+        <div style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>
           Machinist Calculator #5 // Tool Guidance
         </div>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', margin: 0, lineHeight: 1.5 }}>

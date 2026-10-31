@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { toIn, toMm } from '../../lib/units';
 
 // ---------------------------------------------------------------------------
 // Right Triangle / Trigonometry Solver
@@ -109,8 +110,8 @@ export const TrigSolver: React.FC = () => {
     const conv = (s: string): string => {
       const v = parseFloat(s) || 0;
       return unit === 'metric' && oldUnit === 'imperial'
-        ? (v * 25.4).toFixed(3)
-        : (v / 25.4).toFixed(4);
+        ? toMm(v).toFixed(3)
+        : toIn(v).toFixed(4);
     };
     setSideA(prev => conv(prev));
     setSideB(prev => conv(prev));
@@ -214,7 +215,7 @@ export const TrigSolver: React.FC = () => {
       {/* Compact Title Bar */}
       <div style={{ marginBottom: '18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-          📐 Trig Solver <span style={{ color: 'var(--accent-cyan)', fontWeight: 400 }}>// Right Triangle Calculator</span>
+          📐 Trig Solver <span style={{ color: 'var(--accent)', fontWeight: 400 }}>// Right Triangle Calculator</span>
         </h2>
         <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'var(--bg-primary)', border: '1px solid var(--border-color)', fontSize: '0.78rem', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
           A + B = 90° · right angle at C
@@ -241,10 +242,10 @@ export const TrigSolver: React.FC = () => {
                   style={{
                     padding: '10px 8px',
                     border: '1px solid',
-                    borderColor: active ? 'var(--accent-cyan)' : 'var(--border-color)',
+                    borderColor: active ? 'var(--accent)' : 'var(--border-color)',
                     borderRadius: '8px',
                     background: active ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-primary)',
-                    color: active ? 'var(--accent-cyan)' : 'var(--text-secondary)',
+                    color: active ? 'var(--accent)' : 'var(--text-secondary)',
                     fontWeight: 700,
                     fontSize: '0.88rem',
                     fontFamily: 'var(--font-mono)',
@@ -278,7 +279,7 @@ export const TrigSolver: React.FC = () => {
                     onChange={(e) => setValue(e.target.value)}
                     className="input-precision"
                   />
-                  <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+                  <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
                     {isAngle ? '°' : unitStr}
                   </span>
                 </div>
@@ -294,7 +295,7 @@ export const TrigSolver: React.FC = () => {
             {uses.map(u => (
               <div key={u.title} style={{ background: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '10px 14px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '6px' }}>
-                  <span style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '1px', color: 'var(--accent-cyan)' }}>{u.title}</span>
+                  <span style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '1px', color: 'var(--accent)' }}>{u.title}</span>
                   <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: '#00ff80' }}>{u.formula}</span>
                 </div>
                 <p style={{ fontSize: '0.74rem', color: 'var(--text-muted)', margin: '4px 0 0', lineHeight: 1.5 }}>{u.note}</p>
@@ -401,7 +402,7 @@ export const TrigSolver: React.FC = () => {
               </div>
 
               {/* Big headline result: hypotenuse */}
-              <div style={{ background: 'var(--bg-primary)', padding: '18px', borderRadius: 'var(--radius-md)', border: '2px solid var(--accent-cyan)', textAlign: 'center', boxShadow: '0 15px 35px -10px rgba(244, 144, 44, 0.2)' }}>
+              <div style={{ background: 'var(--bg-primary)', padding: '18px', borderRadius: 'var(--radius-md)', border: '2px solid var(--accent)', textAlign: 'center', boxShadow: '0 15px 35px -10px rgba(244, 144, 44, 0.2)' }}>
                 <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '6px', fontWeight: 600 }}>
                   HYPOTENUSE c
                 </span>

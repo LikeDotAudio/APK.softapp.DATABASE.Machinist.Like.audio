@@ -16,7 +16,7 @@ const Line: React.FC<{ line: FormulaLine }> = ({ line }) => (
 export const FormulasTab: React.FC<{ onReturn: () => void }> = ({ onReturn }) => (
   <div className="glass-panel" style={{ padding: '40px', background: 'var(--bg-primary)' }}>
     <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-      <h2 style={{ fontSize: '1.8rem', fontWeight: 700, color: 'var(--accent-cyan)', marginBottom: '10px', borderBottom: '2px solid rgba(244, 144, 44, 0.3)', paddingBottom: '12px' }}>
+      <h2 style={{ fontSize: '1.8rem', fontWeight: 700, color: 'var(--accent)', marginBottom: '10px', borderBottom: '2px solid rgba(244, 144, 44, 0.3)', paddingBottom: '12px' }}>
         📐 Essential Machining & Metrology Formulas
       </h2>
       <p style={{ color: 'var(--text-secondary)', marginBottom: '30px', fontSize: '1.05rem', lineHeight: 1.6 }}>
@@ -53,7 +53,7 @@ export const FormulasTab: React.FC<{ onReturn: () => void }> = ({ onReturn }) =>
           onClick={onReturn}
           style={{
             padding: '12px 28px',
-            background: 'var(--accent-cyan)',
+            background: 'var(--accent)',
             color: '#000',
             border: 'none',
             borderRadius: '30px',

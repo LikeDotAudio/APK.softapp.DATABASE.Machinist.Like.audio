@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { toIn, toMm } from '../../lib/units';
 
 type ConvMode = 'p2r' | 'r2p';
 
@@ -35,8 +36,8 @@ export const PolarRectangular: React.FC = () => {
     const conv = (s: string): string => {
       const v = parseFloat(s) || 0;
       return unit === 'metric' && oldUnit === 'imperial'
-        ? (v * 25.4).toFixed(3)
-        : (v / 25.4).toFixed(4);
+        ? toMm(v).toFixed(3)
+        : toIn(v).toFixed(4);
     };
     setRadiusStr(conv(radiusStr));
     setXStr(conv(xStr));
@@ -119,7 +120,7 @@ export const PolarRectangular: React.FC = () => {
         padding: '12px',
         border: 'none',
         borderRadius: 'var(--radius-sm)',
-        background: mode === m ? 'var(--accent-cyan)' : 'transparent',
+        background: mode === m ? 'var(--accent)' : 'transparent',
         color: mode === m ? '#000' : 'var(--text-secondary)',
         fontWeight: 600,
         fontSize: '0.88rem',
@@ -144,7 +145,7 @@ export const PolarRectangular: React.FC = () => {
           onChange={(e) => onChange(e.target.value)}
           className="input-precision"
         />
-        <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+        <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
           {unitStr}
         </span>
       </div>
@@ -152,7 +153,7 @@ export const PolarRectangular: React.FC = () => {
   );
 
   const resultRow = (label: string, value: string, color = '#f4902c') => (
-    <div style={{ background: 'var(--bg-primary)', padding: '16px 20px', borderRadius: 'var(--radius-md)', border: '2px solid var(--accent-cyan)', textAlign: 'center', flex: 1, minWidth: '150px' }}>
+    <div style={{ background: 'var(--bg-primary)', padding: '16px 20px', borderRadius: 'var(--radius-md)', border: '2px solid var(--accent)', textAlign: 'center', flex: 1, minWidth: '150px' }}>
       <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '6px', fontWeight: 600 }}>
         {label}
       </span>
@@ -167,7 +168,7 @@ export const PolarRectangular: React.FC = () => {
       {/* Compact Title Bar */}
       <div style={{ marginBottom: '18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-          🧭 Polar ⇄ Rectangular <span style={{ color: 'var(--accent-cyan)', fontWeight: 400 }}>// Coordinate Converter</span>
+          🧭 Polar ⇄ Rectangular <span style={{ color: 'var(--accent)', fontWeight: 400 }}>// Coordinate Converter</span>
         </h2>
         <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'var(--bg-primary)', border: '1px solid var(--border-color)', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
           θ measured <strong style={{ color: '#00ff80' }}>CCW</strong> from <strong style={{ color: '#fff' }}>+X (3 o'clock)</strong>

@@ -185,7 +185,7 @@ export const Metallurgy: React.FC = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{ fontSize: '1.4rem' }}>🔥</span>
           <h1 style={{ fontSize: '1.3rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>Metallurgy & Thermal Properties Suite</h1>
-          <span style={{ fontSize: '0.75rem', background: 'rgba(244, 144, 44, 0.15)', color: 'var(--accent-cyan)', padding: '2px 10px', borderRadius: '12px', fontWeight: 700, border: '1px solid rgba(244, 144, 44, 0.3)' }}>Phase Transitions</span>
+          <span style={{ fontSize: '0.75rem', background: 'rgba(244, 144, 44, 0.15)', color: 'var(--accent)', padding: '2px 10px', borderRadius: '12px', fontWeight: 700, border: '1px solid rgba(244, 144, 44, 0.3)' }}>Phase Transitions</span>
         </div>
         <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
           Heating, melting, casting superheat & shrink-fitting
@@ -210,8 +210,8 @@ export const Metallurgy: React.FC = () => {
                 onClick={() => setSelectedCategory(cat.id as any)}
                 style={{
                   background: selectedCategory === cat.id ? 'rgba(244, 144, 44, 0.2)' : 'var(--bg-primary)',
-                  color: selectedCategory === cat.id ? 'var(--accent-cyan)' : 'var(--text-secondary)',
-                  border: `1px solid ${selectedCategory === cat.id ? 'var(--accent-cyan)' : 'var(--border-color)'}`,
+                  color: selectedCategory === cat.id ? 'var(--accent)' : 'var(--text-secondary)',
+                  border: `1px solid ${selectedCategory === cat.id ? 'var(--accent)' : 'var(--border-color)'}`,
                   padding: '6px 14px',
                   borderRadius: '20px',
                   fontSize: '0.82rem',
@@ -239,7 +239,7 @@ export const Metallurgy: React.FC = () => {
                       padding: '12px 14px',
                       borderRadius: '8px',
                       background: selectedMetalId === mat.id ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-primary)',
-                      border: `1px solid ${selectedMetalId === mat.id ? 'var(--accent-cyan)' : 'var(--border-color)'}`,
+                      border: `1px solid ${selectedMetalId === mat.id ? 'var(--accent)' : 'var(--border-color)'}`,
                       cursor: 'pointer',
                       transition: 'all 0.2s ease',
                       display: 'flex',
@@ -248,7 +248,7 @@ export const Metallurgy: React.FC = () => {
                     }}
                   >
                     <div>
-                      <div style={{ fontWeight: 700, color: selectedMetalId === mat.id ? 'var(--accent-cyan)' : 'var(--text-primary)', fontSize: '0.95rem' }}>
+                      <div style={{ fontWeight: 700, color: selectedMetalId === mat.id ? 'var(--accent)' : 'var(--text-primary)', fontSize: '0.95rem' }}>
                         {mat.name}
                       </div>
                       <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
@@ -264,11 +264,11 @@ export const Metallurgy: React.FC = () => {
             </div>
 
             {/* RIGHT: THERMAL DASHBOARD & THERMOMETER VISUALIZER */}
-            <div className="glass-panel" style={{ padding: '25px', borderTop: '3px solid var(--accent-cyan)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div className="glass-panel" style={{ padding: '25px', borderTop: '3px solid var(--accent)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
                   <div>
-                    <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--accent-cyan)', fontWeight: 700, letterSpacing: '1px' }}>
+                    <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--accent)', fontWeight: 700, letterSpacing: '1px' }}>
                       Selected Material Specification
                     </span>
                     <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff', margin: '4px 0' }}>
@@ -427,7 +427,7 @@ export const Metallurgy: React.FC = () => {
 
       {/* TAB 2: STOCK VOLUME & WEIGHT CALCULATOR */}
       {activeTab === 'stock_weight' && (
-        <div className="glass-panel" style={{ padding: '30px', borderTop: '3px solid var(--accent-cyan)' }}>
+        <div className="glass-panel" style={{ padding: '30px', borderTop: '3px solid var(--accent)' }}>
           <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '10px' }}>
             ⚖️ Raw Stock Volume & Weight Calculator
           </h3>
@@ -604,7 +604,7 @@ export const Metallurgy: React.FC = () => {
                 Estimated Stock Weight ({activeMetal.name})
               </div>
               <div style={{ fontSize: '3.6rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-mono)', lineHeight: 1.1 }}>
-                {stockCalc.weight.toFixed(2)} <span style={{ fontSize: '1.5rem', color: 'var(--accent-cyan)' }}>{stockCalc.weightUnit}</span>
+                {stockCalc.weight.toFixed(2)} <span style={{ fontSize: '1.5rem', color: 'var(--accent)' }}>{stockCalc.weightUnit}</span>
               </div>
 
               <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.1)', margin: '20px 0' }} />
@@ -626,7 +626,7 @@ export const Metallurgy: React.FC = () => {
 
       {/* TAB 3: THERMAL EXPANSION & SHRINK FITTING */}
       {activeTab === 'shrink_fitting' && (
-        <div className="glass-panel" style={{ padding: '30px', borderTop: '3px solid var(--accent-cyan)' }}>
+        <div className="glass-panel" style={{ padding: '30px', borderTop: '3px solid var(--accent)' }}>
           <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '10px' }}>
             🔧 Thermal Expansion Calculator (Shrink-Fitting & Wagon Tires)
           </h3>
@@ -686,7 +686,7 @@ export const Metallurgy: React.FC = () => {
                 Linear Thermal Growth (ΔL)
               </div>
               <div style={{ fontSize: '3.6rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-mono)', lineHeight: 1.1 }}>
-                +{shrinkCalc.expansion.toFixed(4)} <span style={{ fontSize: '1.5rem', color: 'var(--accent-cyan)' }}>{shrinkCalc.unitLabel}</span>
+                +{shrinkCalc.expansion.toFixed(4)} <span style={{ fontSize: '1.5rem', color: 'var(--accent)' }}>{shrinkCalc.unitLabel}</span>
               </div>
 
               <div style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}>
@@ -715,14 +715,14 @@ export const Metallurgy: React.FC = () => {
         flexWrap: 'wrap',
         zIndex: 1000
       }}>
-        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '1px', marginRight: '5px' }}>MODULE TOPICS:</span>
+        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px', marginRight: '5px' }}>MODULE TOPICS:</span>
         <button
           type="button"
           onClick={() => setActiveTab('thermal_explorer')}
           style={{
-            background: activeTab === 'thermal_explorer' ? 'var(--accent-cyan)' : 'rgba(255, 255, 255, 0.05)',
+            background: activeTab === 'thermal_explorer' ? 'var(--accent)' : 'rgba(255, 255, 255, 0.05)',
             color: activeTab === 'thermal_explorer' ? '#000' : 'var(--text-secondary)',
-            border: activeTab === 'thermal_explorer' ? '1px solid var(--accent-cyan)' : '1px solid var(--border-color)',
+            border: activeTab === 'thermal_explorer' ? '1px solid var(--accent)' : '1px solid var(--border-color)',
             padding: '7px 16px',
             borderRadius: '20px',
             fontWeight: 700,
@@ -741,9 +741,9 @@ export const Metallurgy: React.FC = () => {
           type="button"
           onClick={() => setActiveTab('stock_weight')}
           style={{
-            background: activeTab === 'stock_weight' ? 'var(--accent-cyan)' : 'rgba(255, 255, 255, 0.05)',
+            background: activeTab === 'stock_weight' ? 'var(--accent)' : 'rgba(255, 255, 255, 0.05)',
             color: activeTab === 'stock_weight' ? '#000' : 'var(--text-secondary)',
-            border: activeTab === 'stock_weight' ? '1px solid var(--accent-cyan)' : '1px solid var(--border-color)',
+            border: activeTab === 'stock_weight' ? '1px solid var(--accent)' : '1px solid var(--border-color)',
             padding: '7px 16px',
             borderRadius: '20px',
             fontWeight: 700,
@@ -762,9 +762,9 @@ export const Metallurgy: React.FC = () => {
           type="button"
           onClick={() => setActiveTab('shrink_fitting')}
           style={{
-            background: activeTab === 'shrink_fitting' ? 'var(--accent-cyan)' : 'rgba(255, 255, 255, 0.05)',
+            background: activeTab === 'shrink_fitting' ? 'var(--accent)' : 'rgba(255, 255, 255, 0.05)',
             color: activeTab === 'shrink_fitting' ? '#000' : 'var(--text-secondary)',
-            border: activeTab === 'shrink_fitting' ? '1px solid var(--accent-cyan)' : '1px solid var(--border-color)',
+            border: activeTab === 'shrink_fitting' ? '1px solid var(--accent)' : '1px solid var(--border-color)',
             padding: '7px 16px',
             borderRadius: '20px',
             fontWeight: 700,

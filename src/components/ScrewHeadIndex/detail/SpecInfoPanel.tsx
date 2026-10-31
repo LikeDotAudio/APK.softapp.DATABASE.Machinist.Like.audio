@@ -6,7 +6,7 @@ export const SpecInfoPanel: React.FC<{ spec: SpecInfo }> = ({ spec }) => (
   <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-color)', padding: '12px 14px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
     {spec.standard && (
       <div>
-        <div style={{ fontSize: '0.68rem', color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700, marginBottom: '2px' }}>
+        <div style={{ fontSize: '0.68rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700, marginBottom: '2px' }}>
           GOVERNING STANDARD
         </div>
         <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: '#fff', fontWeight: 700 }}>
@@ -15,7 +15,7 @@ export const SpecInfoPanel: React.FC<{ spec: SpecInfo }> = ({ spec }) => (
       </div>
     )}
     <div>
-      <div style={{ fontSize: '0.68rem', color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700, marginBottom: '2px' }}>
+      <div style={{ fontSize: '0.68rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700, marginBottom: '2px' }}>
         HOW IT'S MEASURED
       </div>
       <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.55 }}>
@@ -24,7 +24,7 @@ export const SpecInfoPanel: React.FC<{ spec: SpecInfo }> = ({ spec }) => (
     </div>
     {spec.sizes && (
       <div>
-        <div style={{ fontSize: '0.68rem', color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700, marginBottom: '6px' }}>
+        <div style={{ fontSize: '0.68rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700, marginBottom: '6px' }}>
           STANDARD SIZES
         </div>
         <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>

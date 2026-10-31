@@ -32,7 +32,7 @@ export const MaterialSpecPanel: React.FC<{ b: BendInputs }> = ({ b }) => {
               handleMaterialChange(e.target.value);
             }
           }}
-          style={{ width: '100%', background: 'var(--bg-primary)', color: 'var(--accent-cyan)', border: '1px solid var(--border-color)', padding: '10px 12px', borderRadius: '6px', fontSize: '0.95rem', fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}
+          style={{ width: '100%', background: 'var(--bg-primary)', color: 'var(--accent)', border: '1px solid var(--border-color)', padding: '10px 12px', borderRadius: '6px', fontSize: '0.95rem', fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-sans)' }}
         >
           {UNIQUE_MATERIALS.map(mat => (
             <option key={mat} value={mat}>{mat}</option>
@@ -64,7 +64,7 @@ export const MaterialSpecPanel: React.FC<{ b: BendInputs }> = ({ b }) => {
         </div>
       ) : (
         /* Custom Override Inputs */
-        <div style={{ background: 'var(--bg-primary)', padding: '15px', borderRadius: '8px', border: '1px dashed var(--accent-cyan)', marginBottom: '20px', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
+        <div style={{ background: 'var(--bg-primary)', padding: '15px', borderRadius: '8px', border: '1px dashed var(--accent)', marginBottom: '20px', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
           <div>
             <label style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '4px' }}>Thickness ({unitLabel})</label>
             <input
@@ -107,7 +107,7 @@ export const MaterialSpecPanel: React.FC<{ b: BendInputs }> = ({ b }) => {
       <div style={{ background: 'rgba(244, 144, 44, 0.05)', border: '1px solid rgba(244, 144, 44, 0.2)', borderRadius: '8px', padding: '12px 16px', marginBottom: '25px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', textAlign: 'center' }}>
         <div>
           <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>K-Factor</div>
-          <div style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>
+          <div style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
             {activeParams.kFactor.toFixed(2)}
           </div>
         </div>

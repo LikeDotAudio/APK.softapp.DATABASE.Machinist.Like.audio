@@ -37,7 +37,7 @@ export const FlatPatternStrip: React.FC<FlatPatternStripProps> = ({ calculations
 
         <g>
           {/* Blank outline */}
-          <rect x={margin} y={y0} width={availableW} height={h} fill="rgba(244, 144, 44, 0.15)" stroke="var(--accent-cyan)" strokeWidth="2" rx="2" />
+          <rect x={margin} y={y0} width={availableW} height={h} fill="rgba(244, 144, 44, 0.15)" stroke="var(--accent)" strokeWidth="2" rx="2" />
 
           {/* Overall dimension bar */}
           <line x1={margin} y1={25} x2={margin + availableW} y2={25} stroke="#fff" strokeWidth="1.5" />
@@ -82,7 +82,7 @@ export const FlatPatternStrip: React.FC<FlatPatternStripProps> = ({ calculations
           )}
 
           {/* Center Base Label */}
-          <text x={margin + availableW / 2} y={y0 + h / 2 + 5} fill="var(--accent-cyan)" fontSize="14" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+          <text x={margin + availableW / 2} y={y0 + h / 2 + 5} fill="var(--accent)" fontSize="14" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
             {activeParams.specName}
           </text>
         </g>

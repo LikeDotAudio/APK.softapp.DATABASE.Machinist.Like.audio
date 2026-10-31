@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { MM_PER_IN, toIn, toMm } from '../../lib/units';
 
 type ThreadSide = 'internal' | 'external';
 
@@ -30,19 +31,19 @@ export const ThreadMilling: React.FC = () => {
     const p = parseFloat(pitchInput) || 0;
 
     if (unit === 'metric' && oldUnit === 'imperial') {
-      setMajorDia((dm * 25.4).toFixed(3));
-      setCutterDia((dc * 25.4).toFixed(3));
-      setChipLoad((fz * 25.4).toFixed(3));
+      setMajorDia(toMm(dm).toFixed(3));
+      setCutterDia(toMm(dc).toFixed(3));
+      setChipLoad(toMm(fz).toFixed(3));
       setSurfSpeed((vs * 0.3048).toFixed(0));
-      setThreadDepth((dep * 25.4).toFixed(3));
-      setPitchInput(p > 0 ? (25.4 / p).toFixed(3) : '0'); // TPI -> pitch mm
+      setThreadDepth(toMm(dep).toFixed(3));
+      setPitchInput(p > 0 ? (MM_PER_IN / p).toFixed(3) : '0'); // TPI -> pitch mm
     } else if (unit === 'imperial' && oldUnit === 'metric') {
-      setMajorDia((dm / 25.4).toFixed(4));
-      setCutterDia((dc / 25.4).toFixed(4));
-      setChipLoad((fz / 25.4).toFixed(4));
+      setMajorDia(toIn(dm).toFixed(4));
+      setCutterDia(toIn(dc).toFixed(4));
+      setChipLoad(toIn(fz).toFixed(4));
       setSurfSpeed((vs / 0.3048).toFixed(0));
-      setThreadDepth((dep / 25.4).toFixed(4));
-      setPitchInput(p > 0 ? (25.4 / p).toFixed(1) : '0'); // pitch mm -> TPI
+      setThreadDepth(toIn(dep).toFixed(4));
+      setPitchInput(p > 0 ? (MM_PER_IN / p).toFixed(1) : '0'); // pitch mm -> TPI
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [unit]);
@@ -217,7 +218,7 @@ export const ThreadMilling: React.FC = () => {
           onChange={(e) => onChange(e.target.value)}
           className="input-precision"
         />
-        <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '0.82rem' }}>
+        <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '0.82rem' }}>
           {suffix}
         </span>
       </div>
@@ -229,7 +230,7 @@ export const ThreadMilling: React.FC = () => {
       {/* Compact Title Bar */}
       <div style={{ marginBottom: '18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-          🌀 Thread Milling <span style={{ color: 'var(--accent-cyan)', fontWeight: 400 }}>// Helical Interpolation Feeds & G-Code</span>
+          🌀 Thread Milling <span style={{ color: 'var(--accent)', fontWeight: 400 }}>// Helical Interpolation Feeds & G-Code</span>
         </h2>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'var(--bg-primary)', border: '1px solid var(--border-color)', fontSize: '0.78rem', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
@@ -271,7 +272,7 @@ export const ThreadMilling: React.FC = () => {
                   padding: '11px',
                   border: 'none',
                   borderRadius: 'var(--radius-sm)',
-                  background: side === s ? 'var(--accent-cyan)' : 'transparent',
+                  background: side === s ? 'var(--accent)' : 'transparent',
                   color: side === s ? '#000' : 'var(--text-secondary)',
                   fontWeight: 700,
                   fontSize: '0.85rem',
@@ -316,7 +317,7 @@ export const ThreadMilling: React.FC = () => {
             background: 'var(--bg-primary)',
             padding: '20px',
             borderRadius: 'var(--radius-md)',
-            border: '2px solid var(--accent-cyan)',
+            border: '2px solid var(--accent)',
             textAlign: 'center',
             boxShadow: '0 15px 35px -10px rgba(244, 144, 44, 0.2)',
           }}>

@@ -39,7 +39,7 @@ export const FormedProfile: React.FC<FormedProfileProps> = ({ activeParams, unit
 
   return (
     <div style={{ background: 'var(--bg-primary)', padding: '25px', borderRadius: '12px', border: '1px solid var(--border-color)', overflowX: 'auto' }}>
-      <h4 style={{ fontSize: '0.9rem', color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '15px' }}>
+      <h4 style={{ fontSize: '0.9rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '15px' }}>
         2. Formed Profile Preview (Side Elevation View @ {bendAngle}° Bends)
       </h4>
 
@@ -52,7 +52,7 @@ export const FormedProfile: React.FC<FormedProfileProps> = ({ activeParams, unit
 
         <g>
           {/* Base floor line */}
-          <line x1={x_left} y1={cy} x2={x_right} y2={cy} stroke="var(--accent-cyan)" strokeWidth="6" strokeLinecap="round" />
+          <line x1={x_left} y1={cy} x2={x_right} y2={cy} stroke="var(--accent)" strokeWidth="6" strokeLinecap="round" />
 
           {/* Left Flange */}
           {L_left > 0 && (

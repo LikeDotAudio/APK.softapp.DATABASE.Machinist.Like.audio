@@ -40,7 +40,7 @@ export const SpecsTableTab: React.FC<SpecsTableTabProps> = ({ unit, searchMateri
       <div style={{ overflowX: 'auto', maxHeight: '600px', border: '1px solid var(--border-color)', borderRadius: '8px' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.82rem', fontFamily: 'var(--font-mono)' }}>
           <thead>
-            <tr style={{ background: 'var(--bg-tertiary)', color: 'var(--accent-cyan)', borderBottom: '2px solid var(--border-color)', position: 'sticky', top: 0, zIndex: 10 }}>
+            <tr style={{ background: 'var(--bg-tertiary)', color: 'var(--accent)', borderBottom: '2px solid var(--border-color)', position: 'sticky', top: 0, zIndex: 10 }}>
               <th style={{ padding: '12px 14px' }}>Material Alloy</th>
               <th style={{ padding: '12px 14px' }}>Thickness</th>
               <th style={{ padding: '12px 14px' }}>K-Factor</th>
@@ -68,7 +68,7 @@ export const SpecsTableTab: React.FC<SpecsTableTabProps> = ({ unit, searchMateri
                 onMouseLeave={(e) => (e.currentTarget.style.background = idx % 2 === 0 ? 'rgba(255, 255, 255, 0.01)' : 'transparent')}
               >
                 <td style={{ padding: '10px 14px', fontWeight: 700, color: '#fff', fontFamily: 'var(--font-sans)' }}>{spec.material}</td>
-                <td style={{ padding: '10px 14px', color: 'var(--accent-cyan)' }}>
+                <td style={{ padding: '10px 14px', color: 'var(--accent)' }}>
                   {unit === 'in' ? `${spec.thicknessInches.toFixed(3)}"` : `${spec.thicknessMm} mm`}
                 </td>
                 <td style={{ padding: '10px 14px', color: '#f59e0b', fontWeight: 600 }}>{spec.kFactor}</td>
@@ -93,7 +93,7 @@ export const SpecsTableTab: React.FC<SpecsTableTabProps> = ({ unit, searchMateri
                     onClick={() => onUseSpec(spec)}
                     style={{
                       background: 'rgba(244, 144, 44, 0.15)',
-                      color: 'var(--accent-cyan)',
+                      color: 'var(--accent)',
                       border: '1px solid rgba(244, 144, 44, 0.4)',
                       padding: '4px 10px',
                       borderRadius: '4px',

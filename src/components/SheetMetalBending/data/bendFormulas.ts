@@ -68,7 +68,7 @@ export const BEND_FORMULAS: BendFormula[] = [
   },
   {
     title: '7. Flat Pattern Length (FL)',
-    color: 'var(--accent-cyan)',
+    color: 'var(--accent)',
     badge: 'Final Blank',
     badgeBg: 'rgba(244, 144, 44, 0.15)',
     formula: 'FL = L₁ + L₂ - BD',

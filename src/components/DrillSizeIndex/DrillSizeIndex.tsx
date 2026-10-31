@@ -469,7 +469,7 @@ export const DrillSizeIndex: React.FC = () => {
       {/* Compact Title Bar */}
       <div style={{ marginBottom: '18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-          🗂️ Drill Size Index <span style={{ color: 'var(--accent-cyan)', fontWeight: 400 }}>// Scale Chart</span>
+          🗂️ Drill Size Index <span style={{ color: 'var(--accent)', fontWeight: 400 }}>// Scale Chart</span>
         </h2>
         <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', background: 'var(--bg-secondary)', padding: '6px 14px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
           <strong style={{ color: '#fff' }}>{DRILL_DATABASE.length}</strong> Standard Drills
@@ -523,9 +523,9 @@ export const DrillSizeIndex: React.FC = () => {
                   padding: '6px 14px',
                   borderRadius: '20px',
                   border: '1px solid',
-                  borderColor: selectedCategory === cat ? (cat === 'All' ? 'var(--accent-cyan)' : CAT_COLORS[cat]) : 'var(--border-color)',
+                  borderColor: selectedCategory === cat ? (cat === 'All' ? 'var(--accent)' : CAT_COLORS[cat]) : 'var(--border-color)',
                   background: selectedCategory === cat ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-primary)',
-                  color: selectedCategory === cat ? (cat === 'All' ? 'var(--accent-cyan)' : CAT_COLORS[cat]) : 'var(--text-secondary)',
+                  color: selectedCategory === cat ? (cat === 'All' ? 'var(--accent)' : CAT_COLORS[cat]) : 'var(--text-secondary)',
                   fontWeight: 600,
                   fontSize: '0.82rem',
                   cursor: 'pointer',
@@ -615,13 +615,13 @@ export const DrillSizeIndex: React.FC = () => {
             <div style={{ display: 'flex', gap: '15px' }}>
               <span 
                 onClick={() => { setSortField('name'); setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc'); }}
-                style={{ cursor: 'pointer', color: sortField === 'name' ? 'var(--accent-cyan)' : 'inherit' }}
+                style={{ cursor: 'pointer', color: sortField === 'name' ? 'var(--accent)' : 'inherit' }}
               >
                 Name {sortField === 'name' ? (sortOrder === 'asc' ? '▲' : '▼') : ''}
               </span>
               <span 
                 onClick={() => { setSortField('diameter'); setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc'); }}
-                style={{ cursor: 'pointer', color: sortField === 'diameter' ? 'var(--accent-cyan)' : 'inherit' }}
+                style={{ cursor: 'pointer', color: sortField === 'diameter' ? 'var(--accent)' : 'inherit' }}
               >
                 Diameter {sortField === 'diameter' ? (sortOrder === 'asc' ? '▲' : '▼') : ''}
               </span>
@@ -660,7 +660,7 @@ export const DrillSizeIndex: React.FC = () => {
                       borderRadius: '6px',
                       background: isSelected ? 'linear-gradient(90deg, rgba(244, 144, 44, 0.2), rgba(0, 128, 255, 0.1))' : 'transparent',
                       border: '1px solid',
-                      borderColor: isSelected ? 'var(--accent-cyan)' : 'transparent',
+                      borderColor: isSelected ? 'var(--accent)' : 'transparent',
                       cursor: 'pointer',
                       transition: 'all 0.15s ease',
                       color: isSelected ? '#fff' : 'var(--text-primary)'
@@ -674,7 +674,7 @@ export const DrillSizeIndex: React.FC = () => {
                         width: '75px', 
                         fontWeight: 700, 
                         fontSize: '0.95rem', 
-                        color: isSelected ? 'var(--accent-cyan)' : '#fff' 
+                        color: isSelected ? 'var(--accent)' : '#fff' 
                       }}>
                         {drill.name}
                       </span>
@@ -683,10 +683,10 @@ export const DrillSizeIndex: React.FC = () => {
                       </span>
                     </div>
                     <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', display: 'flex', gap: '15px', fontWeight: 600 }}>
-                      <span style={{ color: unit === 'imperial' ? 'var(--accent-cyan)' : 'var(--text-secondary)' }}>
+                      <span style={{ color: unit === 'imperial' ? 'var(--accent)' : 'var(--text-secondary)' }}>
                         {drill.diameterIn.toFixed(4)}"
                       </span>
-                      <span style={{ color: unit === 'metric' ? 'var(--accent-cyan)' : 'var(--text-muted)', minWidth: '65px', textAlign: 'right' }}>
+                      <span style={{ color: unit === 'metric' ? 'var(--accent)' : 'var(--text-muted)', minWidth: '65px', textAlign: 'right' }}>
                         {drill.diameterMm.toFixed(3)} mm
                       </span>
                     </div>
@@ -706,11 +706,11 @@ export const DrillSizeIndex: React.FC = () => {
                 SCALED VISUAL INSPECTION
               </span>
               <h3 style={{ fontSize: '1.6rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-                {selectedDrill.name} <span style={{ fontSize: '1rem', color: 'var(--accent-cyan)', fontWeight: 400 }}>({selectedDrill.category} Drill)</span>
+                {selectedDrill.name} <span style={{ fontSize: '1rem', color: 'var(--accent)', fontWeight: 400 }}>({selectedDrill.category} Drill)</span>
               </h3>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '1.4rem', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--accent-cyan)' }}>
+              <div style={{ fontSize: '1.4rem', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--accent)' }}>
                 {unit === 'imperial' ? `${selectedDrill.diameterIn.toFixed(4)} in` : `${selectedDrill.diameterMm.toFixed(3)} mm`}
               </div>
               <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
@@ -723,7 +723,7 @@ export const DrillSizeIndex: React.FC = () => {
           <div style={{
             background: 'var(--bg-primary)',
             borderRadius: 'var(--radius-md)',
-            border: '2px solid var(--accent-cyan)',
+            border: '2px solid var(--accent)',
             padding: '30px 20px',
             display: 'flex',
             flexDirection: 'column',
@@ -803,11 +803,11 @@ export const DrillSizeIndex: React.FC = () => {
                 y1={70 - bitVisualHeightPx / 2 - 12} 
                 x2={150 - bitLengthPx / 2 + bitLengthPx * 0.4} 
                 y2={70 + bitVisualHeightPx / 2 + 12} 
-                stroke="var(--accent-cyan)" 
+                stroke="var(--accent)" 
                 strokeWidth="1" 
                 strokeDasharray="2 2"
               />
-              <text x={150} y={135} fill="var(--accent-cyan)" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="var(--font-mono)">
+              <text x={150} y={135} fill="var(--accent)" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="var(--font-mono)">
                 DIA: {unit === 'imperial' ? `${selectedDrill.diameterIn.toFixed(4)}"` : `${selectedDrill.diameterMm.toFixed(3)} mm`}
               </text>
             </svg>

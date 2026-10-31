@@ -1,0 +1,1 @@
+import{c as e,l as t}from"./index-DLp_m2vi.js";var n=t(e(),1);function r(e,t){let r=(0,n.useRef)(e),i=(0,n.useRef)(t);(0,n.useEffect)(()=>{i.current=t}),(0,n.useEffect)(()=>{if(r.current===e)return;let t=r.current;r.current=e,i.current(t,e)},[e])}export{r as t};

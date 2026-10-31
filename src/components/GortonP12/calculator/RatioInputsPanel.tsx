@@ -52,7 +52,7 @@ export const RatioInputsPanel: React.FC<RatioInputsPanelProps> = ({ r, unit }) =
 
       {/* Target Calculator Selector */}
       <div style={{ marginBottom: '20px', background: 'var(--bg-secondary)', padding: '15px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
-        <label style={{ display: 'block', marginBottom: '10px', fontWeight: 600, fontSize: '0.8rem', color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+        <label style={{ display: 'block', marginBottom: '10px', fontWeight: 600, fontSize: '0.8rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
           🔄 Select Variable To Calculate:
         </label>
         <SegmentedButtons
@@ -61,7 +61,7 @@ export const RatioInputsPanel: React.FC<RatioInputsPanelProps> = ({ r, unit }) =
           onChange={setCalcTarget}
           containerStyle={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}
           variant="filled"
-          activeColor="var(--accent-cyan)"
+          activeColor="var(--accent)"
           pad="8px"
           radius="4px"
           fontSize="0.8rem"
@@ -73,7 +73,7 @@ export const RatioInputsPanel: React.FC<RatioInputsPanelProps> = ({ r, unit }) =
         
         {/* Reduction Ratio Input */}
         <div>
-          <label style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontWeight: 600, fontSize: '0.85rem', color: calcTarget === 'ratio' ? 'var(--accent-cyan)' : 'var(--text-secondary)', textTransform: 'uppercase' }}>
+          <label style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontWeight: 600, fontSize: '0.85rem', color: calcTarget === 'ratio' ? 'var(--accent)' : 'var(--text-secondary)', textTransform: 'uppercase' }}>
             <span>Reduction Ratio (e.g. 5 for 5:1)</span>
             {calcTarget === 'ratio' && <span style={{ color: '#f4902c', fontWeight: 800 }}>[ CALCULATED ]</span>}
           </label>
@@ -99,7 +99,7 @@ export const RatioInputsPanel: React.FC<RatioInputsPanelProps> = ({ r, unit }) =
         {/* Master Copy Length */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
           <div>
-            <label style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontWeight: 600, fontSize: '0.8rem', color: calcTarget === 'copy' ? 'var(--accent-cyan)' : 'var(--text-secondary)', textTransform: 'uppercase' }}>
+            <label style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontWeight: 600, fontSize: '0.8rem', color: calcTarget === 'copy' ? 'var(--accent)' : 'var(--text-secondary)', textTransform: 'uppercase' }}>
               <span>Master Copy Length</span>
               {calcTarget === 'copy' && <span style={{ color: '#f4902c', fontWeight: 800 }}>[ CALC ]</span>}
             </label>
@@ -123,7 +123,7 @@ export const RatioInputsPanel: React.FC<RatioInputsPanelProps> = ({ r, unit }) =
 
           {/* Finished Workpiece Length */}
           <div>
-            <label style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontWeight: 600, fontSize: '0.8rem', color: calcTarget === 'work' ? 'var(--accent-cyan)' : 'var(--text-secondary)', textTransform: 'uppercase' }}>
+            <label style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontWeight: 600, fontSize: '0.8rem', color: calcTarget === 'work' ? 'var(--accent)' : 'var(--text-secondary)', textTransform: 'uppercase' }}>
               <span>Finished Work Size</span>
               {calcTarget === 'work' && <span style={{ color: '#f4902c', fontWeight: 800 }}>[ CALC ]</span>}
             </label>

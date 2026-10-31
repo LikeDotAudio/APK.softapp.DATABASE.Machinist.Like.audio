@@ -244,8 +244,8 @@ export const HardingeDividingHead: React.FC = () => {
                       onClick={() => setDivisionsStr(val.toString())}
                       style={{
                         background: isActive ? 'rgba(244, 144, 44, 0.2)' : 'rgba(255, 255, 255, 0.04)',
-                        border: `1px solid ${isActive ? 'var(--accent-cyan)' : 'var(--border-color)'}`,
-                        color: isActive ? 'var(--accent-cyan)' : 'var(--text-secondary)',
+                        border: `1px solid ${isActive ? 'var(--accent)' : 'var(--border-color)'}`,
+                        color: isActive ? 'var(--accent)' : 'var(--text-secondary)',
                         padding: '5px 10px',
                         borderRadius: '16px',
                         fontSize: '0.8rem',
@@ -286,7 +286,7 @@ export const HardingeDividingHead: React.FC = () => {
             </select>
 
             <div style={{ marginTop: '20px', padding: '16px', background: 'rgba(0,0,0,0.25)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-              <div style={{ fontSize: '0.8rem', color: 'var(--accent-cyan)', fontWeight: 600, marginBottom: '6px' }}>
+              <div style={{ fontSize: '0.8rem', color: 'var(--accent)', fontWeight: 600, marginBottom: '6px' }}>
                 ℹ️ Hardinge 4:1 vs Standard 40:1
               </div>
               <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: '1.5', margin: 0 }}>
@@ -305,19 +305,19 @@ export const HardingeDividingHead: React.FC = () => {
             <div style={{ display: 'flex', gap: '12px' }}>
               <button
                 onClick={() => handleSelectAll(true)}
-                style={{ background: 'none', border: 'none', color: 'var(--accent-cyan)', fontSize: '0.75rem', cursor: 'pointer', textDecoration: 'underline' }}
+                style={{ background: 'none', border: 'none', color: 'var(--accent)', fontSize: '0.75rem', cursor: 'pointer', textDecoration: 'underline' }}
               >
                 Select All
               </button>
               <button
                 onClick={() => handleSelectAll(false)}
-                style={{ background: 'none', border: 'none', color: 'var(--accent-cyan)', fontSize: '0.75rem', cursor: 'pointer', textDecoration: 'underline' }}
+                style={{ background: 'none', border: 'none', color: 'var(--accent)', fontSize: '0.75rem', cursor: 'pointer', textDecoration: 'underline' }}
               >
                 Deselect All
               </button>
               <button
                 onClick={handleSelectStandardOnly}
-                style={{ background: 'none', border: 'none', color: 'var(--accent-cyan)', fontSize: '0.75rem', cursor: 'pointer', textDecoration: 'underline' }}
+                style={{ background: 'none', border: 'none', color: 'var(--accent)', fontSize: '0.75rem', cursor: 'pointer', textDecoration: 'underline' }}
               >
                 Standard Hardinge Only
               </button>
@@ -336,7 +336,7 @@ export const HardingeDividingHead: React.FC = () => {
                     alignItems: 'center',
                     gap: '10px',
                     background: isChecked ? 'rgba(244, 144, 44, 0.08)' : 'rgba(255, 255, 255, 0.02)',
-                    border: `1px solid ${isChecked ? (isCustom ? 'var(--accent-gold)' : 'var(--accent-cyan)') : 'rgba(255, 255, 255, 0.08)'}`,
+                    border: `1px solid ${isChecked ? (isCustom ? 'var(--accent-gold)' : 'var(--accent)') : 'rgba(255, 255, 255, 0.08)'}`,
                     padding: '10px 14px',
                     borderRadius: 'var(--radius-sm)',
                     cursor: 'pointer',
@@ -355,9 +355,9 @@ export const HardingeDividingHead: React.FC = () => {
                       appearance: 'none',
                       width: '18px',
                       height: '18px',
-                      border: `2px solid ${isChecked ? (isCustom ? 'var(--accent-gold)' : 'var(--accent-cyan)') : 'var(--text-muted)'}`,
+                      border: `2px solid ${isChecked ? (isCustom ? 'var(--accent-gold)' : 'var(--accent)') : 'var(--text-muted)'}`,
                       borderRadius: '4px',
-                      background: isChecked ? (isCustom ? 'var(--accent-gold)' : 'var(--accent-cyan)') : 'transparent',
+                      background: isChecked ? (isCustom ? 'var(--accent-gold)' : 'var(--accent)') : 'transparent',
                       cursor: 'pointer',
                       position: 'relative',
                       display: 'flex',
@@ -380,12 +380,12 @@ export const HardingeDividingHead: React.FC = () => {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '15px', marginBottom: '30px' }}>
         <div className="glass-panel" style={{ padding: '18px 22px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
           <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.8px', fontWeight: 600 }}>Step Angle (Decimal)</span>
-          <span style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>{stepDeg.toFixed(4)}°</span>
+          <span style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>{stepDeg.toFixed(4)}°</span>
           <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{spindleTurn.toFixed(4)} Spindle Turns</span>
         </div>
         <div className="glass-panel" style={{ padding: '18px 22px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
           <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.8px', fontWeight: 600 }}>Step Angle (DMS)</span>
-          <span style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>{formatDMS(stepDeg)}</span>
+          <span style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>{formatDMS(stepDeg)}</span>
           <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Degrees, Minutes, Seconds</span>
         </div>
         <div className="glass-panel" style={{ padding: '18px 22px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -515,7 +515,7 @@ export const HardingeDividingHead: React.FC = () => {
                       <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>
                         Crank Handle Indexing Move
                       </div>
-                      <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>
+                      <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
                         {moveText}
                       </div>
                       <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
@@ -535,8 +535,8 @@ export const HardingeDividingHead: React.FC = () => {
                         window.scrollTo({ top: 350, behavior: 'smooth' });
                       }}
                       style={{
-                        background: activeVizMatch?.plateName === match.plateName && activeVizMatch?.circleHoles === match.circleHoles ? 'var(--accent-cyan)' : 'rgba(244, 144, 44, 0.15)',
-                        color: activeVizMatch?.plateName === match.plateName && activeVizMatch?.circleHoles === match.circleHoles ? '#000' : 'var(--accent-cyan)',
+                        background: activeVizMatch?.plateName === match.plateName && activeVizMatch?.circleHoles === match.circleHoles ? 'var(--accent)' : 'rgba(244, 144, 44, 0.15)',
+                        color: activeVizMatch?.plateName === match.plateName && activeVizMatch?.circleHoles === match.circleHoles ? '#000' : 'var(--accent)',
                         border: '1px solid rgba(244, 144, 44, 0.4)',
                         padding: '6px 12px',
                         borderRadius: '6px',
@@ -599,7 +599,7 @@ export const HardingeDividingHead: React.FC = () => {
                           <td style={{ padding: '14px 18px', fontSize: '0.95rem' }}>
                             <strong style={{ color: '#fff' }}>{app.plateName}</strong> — {app.circleHoles}-Hole Circle
                           </td>
-                          <td style={{ padding: '14px 18px', color: 'var(--accent-cyan)', fontWeight: 700 }}>{moveText}</td>
+                          <td style={{ padding: '14px 18px', color: 'var(--accent)', fontWeight: 700 }}>{moveText}</td>
                           <td style={{ padding: '14px 18px' }}>~{app.achievedDiv.toFixed(4)} divs</td>
                           <td style={{ padding: '14px 18px' }}>{formatDMS(app.achievedDeg)}</td>
                           <td style={{ padding: '14px 18px' }}>
@@ -614,8 +614,8 @@ export const HardingeDividingHead: React.FC = () => {
                                 window.scrollTo({ top: 350, behavior: 'smooth' });
                               }}
                               style={{
-                                background: activeVizMatch?.plateName === app.plateName && activeVizMatch?.circleHoles === app.circleHoles ? 'var(--accent-cyan)' : 'rgba(244, 144, 44, 0.15)',
-                                color: activeVizMatch?.plateName === app.plateName && activeVizMatch?.circleHoles === app.circleHoles ? '#000' : 'var(--accent-cyan)',
+                                background: activeVizMatch?.plateName === app.plateName && activeVizMatch?.circleHoles === app.circleHoles ? 'var(--accent)' : 'rgba(244, 144, 44, 0.15)',
+                                color: activeVizMatch?.plateName === app.plateName && activeVizMatch?.circleHoles === app.circleHoles ? '#000' : 'var(--accent)',
                                 border: '1px solid rgba(244, 144, 44, 0.4)',
                                 padding: '4px 10px',
                                 borderRadius: '4px',
@@ -663,7 +663,7 @@ export const HardingeDividingHead: React.FC = () => {
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <span style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--accent-cyan)' }}>{plate.name}</span>
+                <span style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--accent)' }}>{plate.name}</span>
                 {plate.type === 'Custom' && (
                   <span style={{ color: 'var(--accent-gold)', fontSize: '0.75rem', fontWeight: 700 }}>CUSTOM</span>
                 )}
@@ -767,14 +767,14 @@ export const HardingeDividingHead: React.FC = () => {
         boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.6)',
         flexWrap: 'wrap'
       }}>
-        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '1px', marginRight: '5px' }}>DIVIDING HEAD MODULES:</span>
+        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px', marginRight: '5px' }}>DIVIDING HEAD MODULES:</span>
         <button
           type="button"
           onClick={() => setActiveTab('calculator')}
           style={{
-            background: activeTab === 'calculator' ? 'var(--accent-cyan)' : 'rgba(255, 255, 255, 0.05)',
+            background: activeTab === 'calculator' ? 'var(--accent)' : 'rgba(255, 255, 255, 0.05)',
             color: activeTab === 'calculator' ? '#000' : 'var(--text-secondary)',
-            border: activeTab === 'calculator' ? '1px solid var(--accent-cyan)' : '1px solid var(--border-color)',
+            border: activeTab === 'calculator' ? '1px solid var(--accent)' : '1px solid var(--border-color)',
             padding: '7px 16px',
             borderRadius: '20px',
             fontWeight: 700,
@@ -793,9 +793,9 @@ export const HardingeDividingHead: React.FC = () => {
           type="button"
           onClick={() => setActiveTab('reference')}
           style={{
-            background: activeTab === 'reference' ? 'var(--accent-cyan)' : 'rgba(255, 255, 255, 0.05)',
+            background: activeTab === 'reference' ? 'var(--accent)' : 'rgba(255, 255, 255, 0.05)',
             color: activeTab === 'reference' ? '#000' : 'var(--text-secondary)',
-            border: activeTab === 'reference' ? '1px solid var(--accent-cyan)' : '1px solid var(--border-color)',
+            border: activeTab === 'reference' ? '1px solid var(--accent)' : '1px solid var(--border-color)',
             padding: '7px 16px',
             borderRadius: '20px',
             fontWeight: 700,
@@ -814,9 +814,9 @@ export const HardingeDividingHead: React.FC = () => {
           type="button"
           onClick={() => setActiveTab('formulas')}
           style={{
-            background: activeTab === 'formulas' ? 'var(--accent-cyan)' : 'rgba(255, 255, 255, 0.05)',
+            background: activeTab === 'formulas' ? 'var(--accent)' : 'rgba(255, 255, 255, 0.05)',
             color: activeTab === 'formulas' ? '#000' : 'var(--text-secondary)',
-            border: activeTab === 'formulas' ? '1px solid var(--accent-cyan)' : '1px solid var(--border-color)',
+            border: activeTab === 'formulas' ? '1px solid var(--accent)' : '1px solid var(--border-color)',
             padding: '7px 16px',
             borderRadius: '20px',
             fontWeight: 700,

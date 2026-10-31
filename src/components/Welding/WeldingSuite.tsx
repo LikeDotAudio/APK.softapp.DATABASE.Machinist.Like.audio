@@ -200,7 +200,7 @@ export const WeldingSuite: React.FC = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{ fontSize: '1.4rem' }}>🔥</span>
           <h1 style={{ fontSize: '1.3rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>Welding Mathematics Suite</h1>
-          <span style={{ fontSize: '0.75rem', background: 'rgba(244, 144, 44, 0.15)', color: 'var(--accent-cyan)', padding: '2px 10px', borderRadius: '12px', fontWeight: 700, border: '1px solid rgba(244, 144, 44, 0.3)' }}>6 Modular Sub-Pages</span>
+          <span style={{ fontSize: '0.75rem', background: 'rgba(244, 144, 44, 0.15)', color: 'var(--accent)', padding: '2px 10px', borderRadius: '12px', fontWeight: 700, border: '1px solid rgba(244, 144, 44, 0.3)' }}>6 Modular Sub-Pages</span>
         </div>
         <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
           Arc energy, deposition, CE preheat, volume & cost
@@ -209,7 +209,7 @@ export const WeldingSuite: React.FC = () => {
 
       {/* SUB-PAGE 1: HEAT INPUT */}
       {activeTab === 'heat_input' && (
-        <div className="glass-panel" style={{ padding: '30px', borderTop: '3px solid var(--accent-cyan)' }}>
+        <div className="glass-panel" style={{ padding: '30px', borderTop: '3px solid var(--accent)' }}>
           <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '10px' }}>
             🔥 Sub-Page 1: Heat Input & Arc Thermal Energy Calculator
           </h3>
@@ -242,11 +242,11 @@ export const WeldingSuite: React.FC = () => {
             </div>
 
             <div style={{ background: 'linear-gradient(135deg, rgba(244, 144, 44, 0.12), rgba(15, 23, 42, 0.6))', border: '2px solid rgba(244, 144, 44, 0.5)', borderRadius: '12px', padding: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.85rem', color: 'var(--accent-cyan)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '10px' }}>
+              <div style={{ fontSize: '0.85rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '10px' }}>
                 Total Heat Input ($HI$)
               </div>
               <div style={{ fontSize: '3.6rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-mono)', lineHeight: 1.1 }}>
-                {hiCalc.hi.toFixed(2)} <span style={{ fontSize: '1.5rem', color: 'var(--accent-cyan)' }}>{hiCalc.unitLabel}</span>
+                {hiCalc.hi.toFixed(2)} <span style={{ fontSize: '1.5rem', color: 'var(--accent)' }}>{hiCalc.unitLabel}</span>
               </div>
               <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '15px' }}>
                 Thermal Pulse Energy: {hiCalc.hi < 35 ? '❄️ Low / Rapid Quench Risk' : hiCalc.hi > 80 ? '🔥 High / HAZ Coarsening Risk' : '✅ Balanced Structural Zone'}
@@ -625,7 +625,7 @@ export const WeldingSuite: React.FC = () => {
         flexWrap: 'wrap',
         zIndex: 1000
       }}>
-        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '1px', marginRight: '5px' }}>MODULE TOPICS:</span>
+        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px', marginRight: '5px' }}>MODULE TOPICS:</span>
         {[
           { id: 'heat_input', label: '🔥 1. Heat Input' },
           { id: 'deposition_rate', label: '⚖️ 2. Deposition' },
@@ -639,9 +639,9 @@ export const WeldingSuite: React.FC = () => {
             type="button"
             onClick={() => setActiveTab(tab.id as any)}
             style={{
-              background: activeTab === tab.id ? 'var(--accent-cyan)' : 'rgba(255, 255, 255, 0.05)',
+              background: activeTab === tab.id ? 'var(--accent)' : 'rgba(255, 255, 255, 0.05)',
               color: activeTab === tab.id ? '#000' : 'var(--text-secondary)',
-              border: activeTab === tab.id ? '1px solid var(--accent-cyan)' : '1px solid var(--border-color)',
+              border: activeTab === tab.id ? '1px solid var(--accent)' : '1px solid var(--border-color)',
               padding: '7px 14px',
               borderRadius: '20px',
               fontWeight: 700,

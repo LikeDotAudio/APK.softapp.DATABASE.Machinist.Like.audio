@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { toIn, toMm } from '../../lib/units';
 
 // ---------------------------------------------------------------------------
 // Taper Angle Calculator — dimensions ⇄ taper-per-foot / ratio ⇄ angle
@@ -84,15 +85,15 @@ export const TaperAngle: React.FC = () => {
     const kVal = parseFloat(ratioK) || 0;
 
     if (unit === 'metric' && oldUnit === 'imperial') {
-      setLargeDia((dVal * 25.4).toFixed(3));
-      setSmallDia((sVal * 25.4).toFixed(3));
-      setTaperLen((lVal * 25.4).toFixed(3));
+      setLargeDia(toMm(dVal).toFixed(3));
+      setSmallDia(toMm(sVal).toFixed(3));
+      setTaperLen(toMm(lVal).toFixed(3));
       // TPF → equivalent metric ratio 1:k, k = 12/TPF
       if (tpfVal > 0) setRatioK((12 / tpfVal).toFixed(3));
     } else if (unit === 'imperial' && oldUnit === 'metric') {
-      setLargeDia((dVal / 25.4).toFixed(4));
-      setSmallDia((sVal / 25.4).toFixed(4));
-      setTaperLen((lVal / 25.4).toFixed(4));
+      setLargeDia(toIn(dVal).toFixed(4));
+      setSmallDia(toIn(sVal).toFixed(4));
+      setTaperLen(toIn(lVal).toFixed(4));
       // Ratio 1:k → equivalent TPF = 12/k
       if (kVal > 0) setTpfInput((12 / kVal).toFixed(4));
     }
@@ -170,7 +171,7 @@ export const TaperAngle: React.FC = () => {
     right: '15px',
     top: '50%',
     transform: 'translateY(-50%)',
-    color: 'var(--accent-cyan)',
+    color: 'var(--accent)',
     fontFamily: 'var(--font-mono)',
     fontWeight: 700,
   };
@@ -182,7 +183,7 @@ export const TaperAngle: React.FC = () => {
       {/* Compact Title Bar */}
       <div style={{ marginBottom: '18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-          📏 Taper Angle <span style={{ color: 'var(--accent-cyan)', fontWeight: 400 }}>// Dimensions ⇄ TPF ⇄ Angle</span>
+          📏 Taper Angle <span style={{ color: 'var(--accent)', fontWeight: 400 }}>// Dimensions ⇄ TPF ⇄ Angle</span>
         </h2>
         <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'var(--bg-primary)', border: '1px solid var(--border-color)', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
           Compound set to <strong style={{ color: '#f4902c', fontFamily: 'var(--font-mono)' }}>{halfDeg.toFixed(4)}°</strong>
@@ -210,7 +211,7 @@ export const TaperAngle: React.FC = () => {
                     padding: '9px 10px',
                     border: 'none',
                     borderRadius: '6px',
-                    background: active ? 'var(--accent-cyan)' : 'transparent',
+                    background: active ? 'var(--accent)' : 'transparent',
                     color: active ? '#000' : 'var(--text-secondary)',
                     fontWeight: 700,
                     fontSize: '0.8rem',
@@ -302,7 +303,7 @@ export const TaperAngle: React.FC = () => {
                 <div>
                   {inputLabel('Taper Ratio Denominator (k)')}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '1.1rem', color: 'var(--accent-cyan)' }}>1 :</span>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '1.1rem', color: 'var(--accent)' }}>1 :</span>
                     <div style={{ position: 'relative', flex: 1 }}>
                       <input
                         type="number"
@@ -330,10 +331,10 @@ export const TaperAngle: React.FC = () => {
                   Taper Angle
                 </label>
                 <div style={{ display: 'flex', gap: '10px', fontSize: '0.8rem' }}>
-                  <label style={{ cursor: 'pointer', color: angleType === 'included' ? 'var(--accent-cyan)' : 'var(--text-muted)' }}>
+                  <label style={{ cursor: 'pointer', color: angleType === 'included' ? 'var(--accent)' : 'var(--text-muted)' }}>
                     <input type="radio" checked={angleType === 'included'} onChange={() => setAngleType('included')} style={{ marginRight: '4px' }} /> Included
                   </label>
-                  <label style={{ cursor: 'pointer', color: angleType === 'half' ? 'var(--accent-cyan)' : 'var(--text-muted)' }}>
+                  <label style={{ cursor: 'pointer', color: angleType === 'half' ? 'var(--accent)' : 'var(--text-muted)' }}>
                     <input type="radio" checked={angleType === 'half'} onChange={() => setAngleType('half')} style={{ marginRight: '4px' }} /> Half (per side)
                   </label>
                 </div>
@@ -372,7 +373,7 @@ export const TaperAngle: React.FC = () => {
             background: 'var(--bg-primary)',
             padding: '20px',
             borderRadius: 'var(--radius-md)',
-            border: '2px solid var(--accent-cyan)',
+            border: '2px solid var(--accent)',
             textAlign: 'center',
             boxShadow: '0 15px 35px -10px rgba(244, 144, 44, 0.2)',
           }}>

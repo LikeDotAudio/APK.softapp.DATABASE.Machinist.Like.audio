@@ -36,7 +36,7 @@ export const FlatPatternResults: React.FC<FlatPatternResultsProps> = ({ b, onSho
             Required Flat Pattern Cut Length
           </div>
           <div style={{ fontSize: '3rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-mono)', lineHeight: 1.1 }}>
-            {calculations.flatLength.toFixed(3)} <span style={{ fontSize: '1.4rem', fontWeight: 500, color: 'var(--accent-cyan)' }}>{unitLabel}</span>
+            {calculations.flatLength.toFixed(3)} <span style={{ fontSize: '1.4rem', fontWeight: 500, color: 'var(--accent)' }}>{unitLabel}</span>
           </div>
           <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '8px' }}>
             Unbent blank size ready for laser or waterjet cutting before brake forming
@@ -49,7 +49,7 @@ export const FlatPatternResults: React.FC<FlatPatternResultsProps> = ({ b, onSho
           style={{
             width: '100%',
             padding: '14px',
-            background: 'linear-gradient(90deg, var(--accent-cyan), #00ff80)',
+            background: 'linear-gradient(90deg, var(--accent), #00ff80)',
             color: '#000',
             fontWeight: 800,
             fontSize: '1rem',
@@ -69,7 +69,7 @@ export const FlatPatternResults: React.FC<FlatPatternResultsProps> = ({ b, onSho
 
         {/* DETAILED FORMING PARAMETERS TABLE */}
         <div style={{ background: 'var(--bg-primary)', borderRadius: '8px', border: '1px solid var(--border-color)', padding: '16px', marginBottom: '20px' }}>
-          <h4 style={{ fontSize: '0.85rem', color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px' }}>
+          <h4 style={{ fontSize: '0.85rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px' }}>
             📊 Forming Metrology & Deduction Breakdown
           </h4>
 
@@ -101,7 +101,7 @@ export const FlatPatternResults: React.FC<FlatPatternResultsProps> = ({ b, onSho
               {(parseFloat(leftFlange) > 0) && (
                 <div style={{ background: 'var(--bg-primary)', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-color)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>From Left Blank Edge ➔ Bend Line 1</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
                     {calculations.leftBendLine.toFixed(3)} {unitLabel}
                   </div>
                 </div>
@@ -109,7 +109,7 @@ export const FlatPatternResults: React.FC<FlatPatternResultsProps> = ({ b, onSho
               {(parseFloat(rightFlange) > 0) && (
                 <div style={{ background: 'var(--bg-primary)', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-color)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>From Right Blank Edge ➔ Bend Line 2</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
                     {calculations.rightBendLine.toFixed(3)} {unitLabel}
                   </div>
                 </div>

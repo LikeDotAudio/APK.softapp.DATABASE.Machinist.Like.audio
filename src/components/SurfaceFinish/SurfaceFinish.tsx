@@ -198,7 +198,7 @@ export const SurfaceFinish: React.FC = () => {
       {/* Compact Title Bar */}
       <div style={{ marginBottom: '18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-          ✨ Surface Finish <span style={{ color: 'var(--accent-cyan)', fontWeight: 400 }}>// Ra · RMS · Rz · N Grade Conversion</span>
+          ✨ Surface Finish <span style={{ color: 'var(--accent)', fontWeight: 400 }}>// Ra · RMS · Rz · N Grade Conversion</span>
         </h2>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'rgba(244, 144, 44, 0.12)', border: '1px solid rgba(244, 144, 44, 0.35)', fontSize: '0.78rem', color: '#f4902c', fontFamily: 'var(--font-mono)' }}>
@@ -231,7 +231,7 @@ export const SurfaceFinish: React.FC = () => {
                     padding: '8px 13px',
                     border: 'none',
                     borderRadius: '6px',
-                    background: active ? 'var(--accent-cyan)' : 'transparent',
+                    background: active ? 'var(--accent)' : 'transparent',
                     color: active ? '#000' : 'var(--text-secondary)',
                     fontWeight: 700,
                     fontSize: '0.8rem',
@@ -278,7 +278,7 @@ export const SurfaceFinish: React.FC = () => {
                   className="input-precision"
                   style={{ width: '100%' }}
                 />
-                <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+                <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
                   {unitSuffix}
                 </span>
               </div>

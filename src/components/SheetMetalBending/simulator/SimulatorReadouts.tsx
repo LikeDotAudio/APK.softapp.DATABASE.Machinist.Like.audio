@@ -31,7 +31,7 @@ export const SimulatorReadouts: React.FC<{ simCalc: SimResults }> = ({ simCalc }
 
     <div style={{ marginTop: '20px', padding: '12px', background: 'var(--bg-primary)', borderRadius: '6px', border: '1px dashed var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600 }}>Neutral Axis Radius (r_neutral):</span>
-      <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent-cyan)', fontFamily: 'monospace' }}>{simCalc.r_neutral.toFixed(4)}"</span>
+      <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent)', fontFamily: 'monospace' }}>{simCalc.r_neutral.toFixed(4)}"</span>
     </div>
   </div>
 );

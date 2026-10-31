@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useUnit } from '../../context/UnitContext';
 import { FormulaSheet } from '../common/FormulaSheet';
+import { toIn, toMm } from '../../lib/units';
 
 // ---------------------------------------------------------------------------
 // Geometric-style 5/16" Die Head (D, DS, DSA, DJ) Chaser Database
@@ -251,15 +252,15 @@ export const GeometricDieHead: React.FC = () => {
   const blankMin = lim?.majorMin ?? sel.majorBasic - 0.15 * pitch;
 
   const dual = (native: number, decimals: { in: number; mm: number } = { in: 4, mm: 3 }) => {
-    const inches = isMetric ? native / 25.4 : native;
-    const mm = isMetric ? native : native * 25.4;
+    const inches = isMetric ? toIn(native) : native;
+    const mm = isMetric ? native : toMm(native);
     return unit === 'metric'
       ? `${mm.toFixed(decimals.mm)} mm`
       : `${inches.toFixed(decimals.in)}"`;
   };
   const dualSub = (native: number) => {
-    const inches = isMetric ? native / 25.4 : native;
-    const mm = isMetric ? native : native * 25.4;
+    const inches = isMetric ? toIn(native) : native;
+    const mm = isMetric ? native : toMm(native);
     return unit === 'metric' ? `${inches.toFixed(4)}"` : `${mm.toFixed(3)} mm`;
   };
 
@@ -333,7 +334,7 @@ export const GeometricDieHead: React.FC = () => {
       {/* Compact Title Bar */}
       <div style={{ marginBottom: '18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-          🔩 Geometric Die Head <span style={{ color: 'var(--accent-cyan)', fontWeight: 400 }}>// Chaser & Thread Limits</span>
+          🔩 Geometric Die Head <span style={{ color: 'var(--accent)', fontWeight: 400 }}>// Chaser & Thread Limits</span>
         </h2>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'var(--bg-primary)', border: '1px solid var(--border-color)', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
@@ -392,7 +393,7 @@ export const GeometricDieHead: React.FC = () => {
                           padding: '4px 12px',
                           border: 'none',
                           borderRadius: '4px',
-                          background: active ? 'var(--accent-cyan)' : 'transparent',
+                          background: active ? 'var(--accent)' : 'transparent',
                           color: active ? '#000' : has ? 'var(--text-secondary)' : 'rgba(255,255,255,0.15)',
                           fontWeight: 700,
                           fontSize: '0.78rem',
@@ -512,7 +513,7 @@ export const GeometricDieHead: React.FC = () => {
 
           {/* 3-Wire Measurement */}
           <div style={{ background: 'rgba(244, 144, 44, 0.05)', border: '1px solid rgba(244, 144, 44, 0.2)', padding: '12px 16px', borderRadius: '8px' }}>
-            <div style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '2px' }}>
+            <div style={{ fontSize: '0.72rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '2px' }}>
               3-WIRE PITCH Ø CHECK
             </div>
             {specRow('Best Wire Size (0.57735·P)', bestWire, { accent: '#f4902c' })}

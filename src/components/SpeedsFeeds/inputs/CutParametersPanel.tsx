@@ -59,7 +59,7 @@ export const CutParametersPanel: React.FC<CutParametersPanelProps> = ({ c, unit,
           value={inputs.toolDia}
           step={imperial ? '0.0625' : '1'}
           onChange={c.setToolDia}
-          inputStyle={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--accent-cyan)' }}
+          inputStyle={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--accent)' }}
         />
         <LabeledInput
           label="Flutes / Teeth Count"
@@ -77,7 +77,7 @@ export const CutParametersPanel: React.FC<CutParametersPanelProps> = ({ c, unit,
           label={`Surface Velocity (${imperial ? 'SFM' : 'M/Min'})`}
           value={inputs.customSpeed}
           onChange={(v) => { c.setCustomSpeed(v); setIsCustom(true); }}
-          inputStyle={{ borderColor: isCustom ? 'var(--accent-cyan)' : 'var(--border-color)', fontWeight: 700 }}
+          inputStyle={{ borderColor: isCustom ? 'var(--accent)' : 'var(--border-color)', fontWeight: 700 }}
         />
         <LabeledInput
           label={hem ? `Target Chip Load (${imperial ? 'IPT' : 'fz'})` : `Feed / Tooth (${imperial ? 'IPT' : 'fz'})`}

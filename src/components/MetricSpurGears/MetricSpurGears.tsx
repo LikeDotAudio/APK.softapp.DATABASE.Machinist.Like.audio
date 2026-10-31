@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useUnit } from '../../context/UnitContext';
 import { FormulaSheet } from '../common/FormulaSheet';
+import { MM_PER_IN, toIn, toMm } from '../../lib/units';
 
 // Hardinge Pre-Cut Gear Part Number Rule Generator
 // Encapsulates the exact table rules for B-Type and A-Type part numbers across modules 1 to 6
@@ -106,8 +107,8 @@ export const MetricSpurGears: React.FC = () => {
   const isDP = gearSystem === 'dp';
   // Module and DP are reciprocal tooth-size measures: DP = 25.4 / MOD.
   // In DP mode all geometry derives from the equivalent module 25.4/DP (i.e. PD = N/DP in inches).
-  const effModMm = isDP ? 25.4 / dpVal : modVal;
-  const equivDp = 25.4 / effModMm;
+  const effModMm = isDP ? MM_PER_IN / dpVal : modVal;
+  const equivDp = MM_PER_IN / effModMm;
 
   // Metrology Calculations (internal mm)
   const pcdMm = teethVal * effModMm;
@@ -115,7 +116,7 @@ export const MetricSpurGears: React.FC = () => {
   const addendumMm = effModMm;
   // Whole depth: metric DIN — 2.25·MOD (2.4·MOD fine); imperial AGMA 20° — 2.25/DP coarse, 2.2/DP + 0.002" fine (DP ≥ 20)
   const wholeDepthMm = isDP
-    ? (dpVal >= 20 ? (2.2 / dpVal + 0.002) * 25.4 : (2.25 / dpVal) * 25.4)
+    ? (dpVal >= 20 ? toMm(2.2 / dpVal + 0.002) : toMm(2.25 / dpVal))
     : (modVal < 1.25 ? 2.4 * modVal : 2.25 * modVal);
   const dedendumMm = wholeDepthMm - addendumMm;
   const rootDiaMm = odMm - 2 * wholeDepthMm;
@@ -129,7 +130,7 @@ export const MetricSpurGears: React.FC = () => {
 
   // Convert to display unit — DP mode defaults to inches (imperial-native), module mode follows the global unit
   const isImp = isDP || unit === 'imperial';
-  const toUnit = (valMm: number) => isImp ? (valMm / 25.4).toFixed(4) : valMm.toFixed(3);
+  const toUnit = (valMm: number) => isImp ? toIn(valMm).toFixed(4) : valMm.toFixed(3);
   const unitStr = isImp ? 'in' : 'mm';
   const sizeLabel = isDP ? `DP ${dpVal}` : `MOD ${modVal}`;
 
@@ -173,7 +174,7 @@ export const MetricSpurGears: React.FC = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{ fontSize: '1.4rem' }}>⚙️</span>
           <h1 style={{ fontSize: '1.3rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>Spur Gears Suite</h1>
-          <span style={{ fontSize: '0.75rem', background: 'rgba(56, 189, 248, 0.15)', color: 'var(--accent-cyan)', padding: '2px 10px', borderRadius: '12px', fontWeight: 700, border: '1px solid rgba(56, 189, 248, 0.3)' }}>Metric Module & DP</span>
+          <span style={{ fontSize: '0.75rem', background: 'rgba(56, 189, 248, 0.15)', color: 'var(--accent)', padding: '2px 10px', borderRadius: '12px', fontWeight: 700, border: '1px solid rgba(56, 189, 248, 0.3)' }}>Metric Module & DP</span>
         </div>
         <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
           Exact tooth profiles, center distances & Hardinge catalog
@@ -184,13 +185,13 @@ export const MetricSpurGears: React.FC = () => {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '25px', alignItems: 'start' }}>
         
         {/* TOP-LEFT PRIORITY: Interactive Vector Mesh Visualizer */}
-        <div className="glass-panel" style={{ padding: '25px', order: -1, borderTop: '3px solid var(--accent-cyan)' }}>
+        <div className="glass-panel" style={{ padding: '25px', order: -1, borderTop: '3px solid var(--accent)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
             <div>
               <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
                 2D Gear Mesh & Geometry Visualizer
               </h3>
-              <span style={{ fontSize: '0.8rem', color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>
+              <span style={{ fontSize: '0.8rem', color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
                 {sizeLabel} // {teethVal}T Pinion {enableMating ? `↔ ${matingTeethVal}T Gear` : ''}
               </span>
             </div>
@@ -231,14 +232,14 @@ export const MetricSpurGears: React.FC = () => {
               {/* Pinion Gear (Left / Center) */}
               <g transform={enableMating ? "translate(-55, 0)" : "translate(0, 0)"}>
                 {/* Blank OD Circle */}
-                <circle cx="0" cy="0" r={enableMating ? "52" : "85"} fill="url(#gearGrad1)" stroke="var(--accent-cyan)" strokeWidth="2" />
+                <circle cx="0" cy="0" r={enableMating ? "52" : "85"} fill="url(#gearGrad1)" stroke="var(--accent)" strokeWidth="2" />
                 {/* Pitch Circle Diameter (PCD) */}
                 <circle cx="0" cy="0" r={enableMating ? "46" : "75"} fill="none" stroke="#fff" strokeDasharray="5 3" strokeWidth="1.5" strokeOpacity="0.7" />
                 {/* Root Circle */}
-                <circle cx="0" cy="0" r={enableMating ? "38" : "62"} fill="none" stroke="var(--accent-cyan)" strokeDasharray="2 2" strokeWidth="1" strokeOpacity="0.4" />
+                <circle cx="0" cy="0" r={enableMating ? "38" : "62"} fill="none" stroke="var(--accent)" strokeDasharray="2 2" strokeWidth="1" strokeOpacity="0.4" />
                 {/* Bore Hub */}
-                <circle cx="0" cy="0" r={enableMating ? "12" : "20"} fill="#0a0d14" stroke="var(--accent-cyan)" strokeWidth="2" />
-                <circle cx="0" cy="0" r={enableMating ? "4" : "6"} fill="var(--accent-cyan)" />
+                <circle cx="0" cy="0" r={enableMating ? "12" : "20"} fill="#0a0d14" stroke="var(--accent)" strokeWidth="2" />
+                <circle cx="0" cy="0" r={enableMating ? "4" : "6"} fill="var(--accent)" />
 
                 {/* Stylized Teeth Representation */}
                 {Array.from({ length: Math.min(36, teethVal) }).map((_, i) => {
@@ -252,7 +253,7 @@ export const MetricSpurGears: React.FC = () => {
                       y1="0" 
                       x2={rOut * Math.cos((angleDeg * Math.PI) / 180)} 
                       y2={rOut * Math.sin((angleDeg * Math.PI) / 180)} 
-                      stroke="var(--accent-cyan)" 
+                      stroke="var(--accent)" 
                       strokeWidth={enableMating ? "3" : "4"} 
                       strokeLinecap="round"
                       strokeDasharray={`${rOut - rIn} ${rIn}`}
@@ -261,7 +262,7 @@ export const MetricSpurGears: React.FC = () => {
                   );
                 })}
 
-                <text x="0" y={enableMating ? "-60" : "-95"} fill="var(--accent-cyan)" fontSize="11" fontWeight="700" textAnchor="middle">
+                <text x="0" y={enableMating ? "-60" : "-95"} fill="var(--accent)" fontSize="11" fontWeight="700" textAnchor="middle">
                   PINION: {teethVal}T (OD: {toUnit(odMm)} {unitStr})
                 </text>
               </g>
@@ -345,7 +346,7 @@ export const MetricSpurGears: React.FC = () => {
                   onClick={() => setGearSystem('module')}
                   style={{
                     flex: 1, padding: '8px', border: 'none', borderRadius: '6px',
-                    background: !isDP ? 'var(--accent-cyan)' : 'transparent',
+                    background: !isDP ? 'var(--accent)' : 'transparent',
                     color: !isDP ? '#000' : 'var(--text-secondary)',
                     fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s ease'
                   }}
@@ -424,7 +425,7 @@ export const MetricSpurGears: React.FC = () => {
                     id="matingCheck"
                     checked={enableMating}
                     onChange={(e) => setEnableMating(e.target.checked)}
-                    style={{ width: '18px', height: '18px', accentColor: 'var(--accent-cyan)', cursor: 'pointer' }}
+                    style={{ width: '18px', height: '18px', accentColor: 'var(--accent)', cursor: 'pointer' }}
                   />
                   <label htmlFor="matingCheck" style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--text-primary)', cursor: 'pointer' }}>
                     Include Mating Gear Center Distance (C)
@@ -451,15 +452,15 @@ export const MetricSpurGears: React.FC = () => {
                 <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 700 }}>
                   {isDP ? 'Equivalent Module (25.4 / DP)' : 'Equivalent Diametral Pitch (25.4 / MOD)'}
                 </span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--accent-cyan)', fontSize: '1rem' }}>
-                  {isDP ? `MOD ${(25.4 / dpVal).toFixed(3)} mm` : `${equivDp.toFixed(2)} DP`}
+                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--accent)', fontSize: '1rem' }}>
+                  {isDP ? `MOD ${(MM_PER_IN / dpVal).toFixed(3)} mm` : `${equivDp.toFixed(2)} DP`}
                 </span>
               </div>
 
               {/* Results Table */}
               <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px', display: 'flex', justifyContent: 'space-between' }}>
                 <span>Machining Specifications {isDP ? '(20° AGMA, inches)' : '(DIN, metric)'}</span>
-                <span style={{ color: 'var(--accent-cyan)', fontSize: '0.8rem', textTransform: 'none' }}>Click value to copy</span>
+                <span style={{ color: 'var(--accent)', fontSize: '0.8rem', textTransform: 'none' }}>Click value to copy</span>
               </h4>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -496,7 +497,7 @@ export const MetricSpurGears: React.FC = () => {
                       <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', display: 'block', fontFamily: 'var(--font-mono)' }}>Formula: {row.form}</span>
                     </div>
                     <div style={{ textAlign: 'right' }}>
-                      <span style={{ fontSize: '1.05rem', fontWeight: 800, color: row.highlight ? 'var(--accent-cyan)' : 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
+                      <span style={{ fontSize: '1.05rem', fontWeight: 800, color: row.highlight ? 'var(--accent)' : 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
                         {row.val} <span style={{ fontSize: '0.8rem', fontWeight: 400 }}>{unitStr}</span>
                       </span>
                       {copied === row.label && (
@@ -585,7 +586,7 @@ export const MetricSpurGears: React.FC = () => {
                       >
                         <td style={{ padding: '10px', fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>{row.teeth}T</td>
                         <td style={{ padding: '10px', fontWeight: 600, color: '#f59e0b' }}>{row.mod}</td>
-                        <td style={{ padding: '10px', fontFamily: 'var(--font-mono)', color: row.bType !== '--' ? 'var(--accent-cyan)' : 'var(--text-muted)' }}>{row.bType}</td>
+                        <td style={{ padding: '10px', fontFamily: 'var(--font-mono)', color: row.bType !== '--' ? 'var(--accent)' : 'var(--text-muted)' }}>{row.bType}</td>
                         <td style={{ padding: '10px', fontFamily: 'var(--font-mono)', color: row.aType !== '--' ? '#10b981' : 'var(--text-muted)' }}>{row.aType}</td>
                         <td style={{ padding: '10px', fontFamily: 'var(--font-mono)' }}>{toUnit(row.odMm)}</td>
                         <td style={{ padding: '10px', fontFamily: 'var(--font-mono)' }}>{toUnit(row.pcdMm)}</td>
@@ -677,7 +678,7 @@ export const MetricSpurGears: React.FC = () => {
             name: 'Module Equivalence',
             formula: 'MOD = 25.4 ÷ DP',
             explanation: 'DP and module measure the same thing in opposite directions (density vs. size). Because 1 inch = 25.4 mm, the conversion is a simple reciprocal — which is why DP and metric gears never interchange on round numbers.',
-            worked: `MOD = 25.4 ÷ ${dpVal} = ${(25.4 / dpVal).toFixed(3)} mm`,
+            worked: `MOD = 25.4 ÷ ${dpVal} = ${(MM_PER_IN / dpVal).toFixed(3)} mm`,
           },
         ] : [
           {
@@ -722,18 +723,18 @@ export const MetricSpurGears: React.FC = () => {
             name: 'Diametral Pitch Equivalence',
             formula: 'DP = 25.4 ÷ MOD',
             explanation: 'Module and DP measure the same thing in opposite directions (size vs. density). Because 1 inch = 25.4 mm, the conversion is a simple reciprocal — which is why metric and DP gears never interchange on round numbers.',
-            worked: `DP = 25.4 ÷ ${modVal} = ${(25.4 / modVal).toFixed(2)} DP`,
+            worked: `DP = 25.4 ÷ ${modVal} = ${(MM_PER_IN / modVal).toFixed(2)} DP`,
           },
         ]}
       />
 
       {/* Footer: tool description (kept out of the header per site convention) */}
       <div className="glass-panel" style={{ marginTop: '25px', padding: '16px 22px' }}>
-        <div style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '6px' }}>
+        <div style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '6px' }}>
           Hardinge & DIN 13 T1 Metrology // AGMA 20° Diametral Pitch
         </div>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', margin: 0, lineHeight: 1.6 }}>
-          Calculate exact tooth profiles, blank outside diameters, and center distances in <strong style={{ color: 'var(--accent-cyan)' }}>metric module</strong> (tooth
+          Calculate exact tooth profiles, blank outside diameters, and center distances in <strong style={{ color: 'var(--accent)' }}>metric module</strong> (tooth
           size grows with MOD) or <strong style={{ color: '#f59e0b' }}>imperial diametral pitch</strong> (teeth per inch of pitch diameter — tooth size shrinks as DP grows;
           DP = 25.4 / MOD), or browse 2,800+ Hardinge pre-cut gear part numbers (Modules 1 to 6).
         </p>
@@ -757,14 +758,14 @@ export const MetricSpurGears: React.FC = () => {
         flexWrap: 'wrap',
         zIndex: 1000
       }}>
-        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '1px', marginRight: '5px' }}>MODULE TOPICS:</span>
+        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px', marginRight: '5px' }}>MODULE TOPICS:</span>
         <button
           type="button"
           onClick={() => setActiveTab('calculator')}
           style={{
-            background: activeTab === 'calculator' ? 'var(--accent-cyan)' : 'rgba(255, 255, 255, 0.05)',
+            background: activeTab === 'calculator' ? 'var(--accent)' : 'rgba(255, 255, 255, 0.05)',
             color: activeTab === 'calculator' ? '#000' : 'var(--text-secondary)',
-            border: activeTab === 'calculator' ? '1px solid var(--accent-cyan)' : '1px solid var(--border-color)',
+            border: activeTab === 'calculator' ? '1px solid var(--accent)' : '1px solid var(--border-color)',
             padding: '7px 16px',
             borderRadius: '20px',
             fontWeight: 700,
@@ -783,9 +784,9 @@ export const MetricSpurGears: React.FC = () => {
           type="button"
           onClick={() => setActiveTab('catalog')}
           style={{
-            background: activeTab === 'catalog' ? 'var(--accent-cyan)' : 'rgba(255, 255, 255, 0.05)',
+            background: activeTab === 'catalog' ? 'var(--accent)' : 'rgba(255, 255, 255, 0.05)',
             color: activeTab === 'catalog' ? '#000' : 'var(--text-secondary)',
-            border: activeTab === 'catalog' ? '1px solid var(--accent-cyan)' : '1px solid var(--border-color)',
+            border: activeTab === 'catalog' ? '1px solid var(--accent)' : '1px solid var(--border-color)',
             padding: '7px 16px',
             borderRadius: '20px',
             fontWeight: 700,

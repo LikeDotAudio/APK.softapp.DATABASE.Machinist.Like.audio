@@ -33,7 +33,7 @@ export const ScrewHeadIndex: React.FC = () => {
         />
       </div>
 
-      <ToolFooterNote heading="FASTENER IDENTIFICATION REFERENCE // SVG LIBRARY" color="var(--accent-cyan)" marginTop="25px">
+      <ToolFooterNote heading="FASTENER IDENTIFICATION REFERENCE // SVG LIBRARY" color="var(--accent)" marginTop="25px">
         Schematic SVG library of <strong style={{ color: GROUP_META.drive.color }}>drive recesses</strong> (top view),{' '}
         <strong style={{ color: GROUP_META.head.color }}>head shapes</strong> (side profile),{' '}
         <strong style={{ color: GROUP_META.screw.color }}>screw &amp; bolt types</strong> (full body) and{' '}

@@ -152,7 +152,7 @@ export const TapThreadIndex: React.FC = () => {
               padding: '8px 18px',
               border: 'none',
               borderRadius: '6px',
-              background: activeTab === 'metric' ? 'var(--accent-cyan)' : 'transparent',
+              background: activeTab === 'metric' ? 'var(--accent)' : 'transparent',
               color: activeTab === 'metric' ? '#000' : 'var(--text-secondary)',
               fontWeight: 700,
               fontSize: '0.9rem',
@@ -235,13 +235,13 @@ export const TapThreadIndex: React.FC = () => {
                       borderRadius: '6px',
                       background: isSelected ? 'linear-gradient(90deg, rgba(244, 144, 44, 0.2), rgba(0, 128, 255, 0.1))' : 'transparent',
                       border: '1px solid',
-                      borderColor: isSelected ? 'var(--accent-cyan)' : 'transparent',
+                      borderColor: isSelected ? 'var(--accent)' : 'transparent',
                       cursor: 'pointer',
                       transition: 'all 0.15s ease'
                     }}
                   >
                     <div>
-                      <strong style={{ fontSize: '1.05rem', color: isSelected ? 'var(--accent-cyan)' : '#fff' }}>{thr.nominal}</strong>
+                      <strong style={{ fontSize: '1.05rem', color: isSelected ? 'var(--accent)' : '#fff' }}>{thr.nominal}</strong>
                       <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginLeft: '10px' }}>Pitch: {thr.pitch} mm</span>
                     </div>
                     <div style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
@@ -300,7 +300,7 @@ export const TapThreadIndex: React.FC = () => {
             </div>
             <div style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
               <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block' }}>RECOMMENDED DRILL</span>
-              <strong style={{ fontSize: '1.4rem', color: activeTab === 'metric' ? 'var(--accent-cyan)' : '#fbbf24' }}>
+              <strong style={{ fontSize: '1.4rem', color: activeTab === 'metric' ? 'var(--accent)' : '#fbbf24' }}>
                 {activeTab === 'metric' ? `${selMetric.drillMm} mm` : `${selImperial.tapDrillName}`}
               </strong>
             </div>
@@ -311,7 +311,7 @@ export const TapThreadIndex: React.FC = () => {
             background: 'var(--bg-primary)',
             borderRadius: 'var(--radius-md)',
             border: '2px solid',
-            borderColor: activeTab === 'metric' ? 'var(--accent-cyan)' : '#fbbf24',
+            borderColor: activeTab === 'metric' ? 'var(--accent)' : '#fbbf24',
             padding: '25px',
             display: 'flex',
             flexDirection: 'column',
@@ -339,7 +339,7 @@ export const TapThreadIndex: React.FC = () => {
               <path
                 d="M 20 110 L 40 30 L 60 30 L 90 110 L 110 110 L 140 30 L 160 30 L 190 110 L 210 110 L 240 30 L 260 30 L 290 110 L 300 110 L 300 125 L 20 125 Z"
                 fill="url(#threadToothGrad)"
-                stroke={activeTab === 'metric' ? 'var(--accent-cyan)' : '#fbbf24'}
+                stroke={activeTab === 'metric' ? 'var(--accent)' : '#fbbf24'}
                 strokeWidth="2"
                 strokeLinejoin="round"
               />
@@ -390,7 +390,7 @@ export const TapThreadIndex: React.FC = () => {
                   </div>
                   <div>
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block' }}>THREAD HEIGHT (H3)</span>
-                    <strong style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)' }}>{selMetric.threadHeightH3} mm</strong>
+                    <strong style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)' }}>{selMetric.threadHeightH3} mm</strong>
                   </div>
                 </>
               ) : (

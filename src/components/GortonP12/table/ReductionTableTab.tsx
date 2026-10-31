@@ -19,7 +19,7 @@ export const ReductionTableTab: React.FC<ReductionTableTabProps> = ({ ratio, onL
           Standard calibration distances from Graduation "2" for Lower Bar and Upper Bar. Click any row to load settings into calculator!
         </p>
       </div>
-      <div style={{ fontSize: '0.85rem', color: 'var(--accent-cyan)', fontWeight: 700, background: 'rgba(244, 144, 44, 0.1)', padding: '6px 14px', borderRadius: '20px' }}>
+      <div style={{ fontSize: '0.85rem', color: 'var(--accent)', fontWeight: 700, background: 'rgba(244, 144, 44, 0.1)', padding: '6px 14px', borderRadius: '20px' }}>
         22 Standard Factory Ratios
       </div>
     </div>
@@ -57,7 +57,7 @@ export const ReductionTableTab: React.FC<ReductionTableTabProps> = ({ ratio, onL
                 <td style={{ padding: '12px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>{row.lowerMm.toFixed(2)} mm</td>
                 <td style={{ padding: '12px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>{row.upperMm.toFixed(2)} mm</td>
                 <td style={{ padding: '12px' }}>
-                  <span style={{ fontSize: '0.75rem', background: 'var(--accent-cyan)', color: '#000', padding: '3px 10px', borderRadius: '12px', fontWeight: 700 }}>
+                  <span style={{ fontSize: '0.75rem', background: 'var(--accent)', color: '#000', padding: '3px 10px', borderRadius: '12px', fontWeight: 700 }}>
                     Load Ratio ➔
                   </span>
                 </td>

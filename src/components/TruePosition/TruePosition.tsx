@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { toIn, toMm } from '../../lib/units';
 
 type EntryMode = 'deviations' | 'nominalActual';
 type FeatureType = 'hole' | 'pin';
@@ -37,8 +38,8 @@ export const TruePosition: React.FC = () => {
     const conv = (v: string): string => {
       const n = parseFloat(v) || 0;
       return unit === 'metric' && oldUnit === 'imperial'
-        ? (n * 25.4).toFixed(3)
-        : (n / 25.4).toFixed(4);
+        ? toMm(n).toFixed(3)
+        : toIn(n).toFixed(4);
     };
     setDevX(conv(devX));
     setDevY(conv(devY));
@@ -108,7 +109,7 @@ export const TruePosition: React.FC = () => {
         className="input-precision"
         style={{ width: '100%' }}
       />
-      <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '0.85rem' }}>
+      <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '0.85rem' }}>
         {suffix}
       </span>
     </div>
@@ -131,7 +132,7 @@ export const TruePosition: React.FC = () => {
     padding: '10px 12px',
     border: 'none',
     borderRadius: 'var(--radius-sm)',
-    background: active ? 'var(--accent-cyan)' : 'transparent',
+    background: active ? 'var(--accent)' : 'transparent',
     color: active ? '#000' : 'var(--text-secondary)',
     fontWeight: 600,
     fontSize: '0.82rem',
@@ -144,7 +145,7 @@ export const TruePosition: React.FC = () => {
       {/* Compact Title Bar */}
       <div style={{ marginBottom: '18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-          🎯 True Position <span style={{ color: 'var(--accent-cyan)', fontWeight: 400 }}>// GD&T Positional Tolerance</span>
+          🎯 True Position <span style={{ color: 'var(--accent)', fontWeight: 400 }}>// GD&T Positional Tolerance</span>
         </h2>
         <div style={{
           padding: '4px 12px',
@@ -299,7 +300,7 @@ export const TruePosition: React.FC = () => {
             background: 'var(--bg-primary)',
             padding: '20px',
             borderRadius: 'var(--radius-md)',
-            border: '2px solid var(--accent-cyan)',
+            border: '2px solid var(--accent)',
             textAlign: 'center',
             boxShadow: '0 15px 35px -10px rgba(244, 144, 44, 0.2)'
           }}>

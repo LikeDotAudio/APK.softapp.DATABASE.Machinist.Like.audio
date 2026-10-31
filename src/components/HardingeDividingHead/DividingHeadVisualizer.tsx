@@ -163,10 +163,10 @@ export const DividingHeadVisualizer: React.FC<DividingHeadVisualizerProps> = ({
   };
 
   return (
-    <div className="glass-panel" style={{ padding: '25px', marginTop: '30px', borderTop: '3px solid var(--accent-cyan)' }}>
+    <div className="glass-panel" style={{ padding: '25px', marginTop: '30px', borderTop: '3px solid var(--accent)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '15px', marginBottom: '20px' }}>
         <div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700 }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700 }}>
             ⚡ Real-Time Kinematic Simulation
           </div>
           <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', margin: '4px 0 0 0' }}>
@@ -205,7 +205,7 @@ export const DividingHeadVisualizer: React.FC<DividingHeadVisualizerProps> = ({
                 key={spd}
                 onClick={() => setAnimSpeed(spd)}
                 style={{
-                  background: animSpeed === spd ? 'var(--accent-cyan)' : 'transparent',
+                  background: animSpeed === spd ? 'var(--accent)' : 'transparent',
                   color: animSpeed === spd ? '#000' : 'var(--text-secondary)',
                   border: 'none',
                   padding: '6px 10px',
@@ -265,7 +265,7 @@ export const DividingHeadVisualizer: React.FC<DividingHeadVisualizerProps> = ({
                 Septer Span: {remainingHoles} Holes ({sectorAngleDeg.toFixed(1)}°)
               </div>
             )}
-            <div style={{ color: 'var(--accent-cyan)', fontWeight: 700, fontSize: '0.75rem', marginTop: '2px' }}>
+            <div style={{ color: 'var(--accent)', fontWeight: 700, fontSize: '0.75rem', marginTop: '2px' }}>
               Division {Math.min(stepIndex + 1, D)} / {D}
             </div>
           </div>
@@ -349,7 +349,7 @@ export const DividingHeadVisualizer: React.FC<DividingHeadVisualizerProps> = ({
                     cy="0"
                     r={r}
                     fill="none"
-                    stroke={isSelected ? 'var(--accent-cyan)' : '#334155'}
+                    stroke={isSelected ? 'var(--accent)' : '#334155'}
                     strokeWidth={isSelected ? 2 : 1}
                     strokeDasharray={isSelected ? undefined : '2 4'}
                     opacity={isSelected ? 0.7 : 0.4}
@@ -361,7 +361,7 @@ export const DividingHeadVisualizer: React.FC<DividingHeadVisualizerProps> = ({
                     x="0"
                     y={r + 14}
                     textAnchor="middle"
-                    fill={isSelected ? 'var(--accent-cyan)' : '#64748b'}
+                    fill={isSelected ? 'var(--accent)' : '#64748b'}
                     fontSize={isSelected ? '11px' : '9px'}
                     fontWeight={isSelected ? '800' : '500'}
                     fontFamily="var(--font-mono)"
@@ -419,7 +419,7 @@ export const DividingHeadVisualizer: React.FC<DividingHeadVisualizerProps> = ({
                 y1="0"
                 x2={handleX}
                 y2={handleY}
-                stroke="var(--accent-cyan)"
+                stroke="var(--accent)"
                 strokeWidth="3"
                 strokeLinecap="round"
               />
@@ -437,7 +437,7 @@ export const DividingHeadVisualizer: React.FC<DividingHeadVisualizerProps> = ({
                 cx={handleX}
                 cy={handleY}
                 r="6"
-                fill={pinEngaged ? '#00ff80' : 'var(--accent-cyan)'}
+                fill={pinEngaged ? '#00ff80' : 'var(--accent)'}
                 filter="url(#glowCyan)"
               />
             </g>
@@ -463,7 +463,7 @@ export const DividingHeadVisualizer: React.FC<DividingHeadVisualizerProps> = ({
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', fontFamily: 'var(--font-mono)' }}>
               <div>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Division:</div>
-                <div style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--accent-cyan)' }}>{Math.min(stepIndex + 1, D)} / {D}</div>
+                <div style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--accent)' }}>{Math.min(stepIndex + 1, D)} / {D}</div>
               </div>
               <div>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Work Rotation:</div>
@@ -481,7 +481,7 @@ export const DividingHeadVisualizer: React.FC<DividingHeadVisualizerProps> = ({
               </div>
               <div>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Total Crank Angle:</div>
-                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent-cyan)' }}>{currentRotationDeg.toFixed(1)}°</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent)' }}>{currentRotationDeg.toFixed(1)}°</div>
               </div>
               <div>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Plunger Status:</div>
@@ -506,7 +506,7 @@ export const DividingHeadVisualizer: React.FC<DividingHeadVisualizerProps> = ({
               <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff' }}>
                 🎚️ Manual Crank Override
               </span>
-              <span style={{ fontSize: '0.75rem', color: manualMode ? 'var(--accent-cyan)' : 'var(--text-muted)', fontWeight: 600 }}>
+              <span style={{ fontSize: '0.75rem', color: manualMode ? 'var(--accent)' : 'var(--text-muted)', fontWeight: 600 }}>
                 {manualMode ? 'MANUAL MODE ACTIVE' : 'DRAG TO SCRUB'}
               </span>
             </div>
@@ -521,7 +521,7 @@ export const DividingHeadVisualizer: React.FC<DividingHeadVisualizerProps> = ({
               style={{
                 width: '100%',
                 cursor: 'pointer',
-                accentColor: 'var(--accent-cyan)'
+                accentColor: 'var(--accent)'
               }}
             />
 

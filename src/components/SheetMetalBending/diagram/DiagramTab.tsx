@@ -17,7 +17,7 @@ interface DiagramTabProps {
 
 /** TAB 2: VISUAL DIAGRAMS (FLAT PATTERN & 2D FORMED PROFILE) */
 export const DiagramTab: React.FC<DiagramTabProps> = ({ calculations, activeParams, unit, unitLabel, bendAngle, baseLength, leftFlange, rightFlange, onBack }) => (
-  <div className="glass-panel" style={{ padding: '30px', borderTop: '3px solid var(--accent-cyan)' }}>
+  <div className="glass-panel" style={{ padding: '30px', borderTop: '3px solid var(--accent)' }}>
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
       <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text-primary)' }}>
         📐 Visual Flat Pattern Strip & Formed Profile Preview

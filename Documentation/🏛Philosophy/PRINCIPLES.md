@@ -5,7 +5,7 @@ Each principle with the code that keeps it. Ecosystem rules: the APK.audio root'
 | Principle | Kept by |
 |---|---|
 | **One unit setting, not one per panel.** Metric/imperial is app state, read by every tool that has units. | `src/context/UnitContext.tsx` `useUnit()`; 64 `useUnit` call sites under `src/`; the Screw Head library's `detail/SizeChipList.tsx` and `detail/RobertsonTable.tsx` |
-| **25.4 lives in one file.** | `src/lib/units.ts:4` `MM_PER_IN`, `toMm`, `toIn` |
+| **25.4 lives in one file.** Tools call `toMm`/`toIn`/`MM_PER_IN`; the literal appears only in data tables and prose. | `src/lib/units.ts:4` `MM_PER_IN`, `toMm`, `toIn`; `src/lib/units.test.ts` |
 | **Show the formula.** Tools carry their working beside the answer. | `src/components/common/FormulaSheet`, `ToolFooterNote`; the Speeds & Feeds formulas view |
 | **Thin shells over pure math.** Large tools split types, data, pure solvers and hooks under a thin page. | `SheetMetalBending/bend.math.ts`; `SpeedsFeeds/cutting.math.ts:8` `solveCut()`; `ScrewHeadIndex/{data,hooks,library}` |
 | **Nothing leaves the browser.** No `fetch`, no `localStorage`, no bus. | `grep -rln "fetch(\|localStorage\|mqtt" src` → nothing (2026-10-30) |
@@ -17,3 +17,5 @@ Each principle with the code that keeps it. Ecosystem rules: the APK.audio root'
 - `dist/` is committed by hand; `npm run check:dist` (`scripts/check-dist.mjs`) holds it to `src/`, run by the deploy workflow, not by a commit hook.
 - `oxlint` warns (`react-hooks/exhaustive-deps` in `Knurling.tsx`, `ThreadingChangeGears.tsx`; `only-export-components` in data-exporting components).
 - Installable but no service worker, so no offline mode.
+| **A calculator's value is its numbers.** Every `*.math.ts` has table tests against textbook values, run before deploy. | `src/**/*.math.test.ts`, `npm test`, `.github/workflows/deploy.yml` |
+| **The brand's accent, not a retyped hex.** The stylesheet reads `--apk-accent` from a held copy of the contracts tokens. | `src/vendor/apk-contracts/apk-tokens.css`, `src/index.css` | Inline accent literals remain in component styles and SVG attributes (Roadmap IMPROVEMENTS) |

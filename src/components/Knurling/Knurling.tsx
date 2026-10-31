@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { toIn, toMm } from '../../lib/units';
 
 interface KnurlPitchPreset {
   name: string;
@@ -39,10 +40,10 @@ export const Knurling: React.FC = () => {
 
     const diaVal = parseFloat(targetDiameter) || 0;
     if (unit === 'metric' && oldUnit === 'imperial') {
-      setTargetDiameter((diaVal * 25.4).toFixed(3));
+      setTargetDiameter(toMm(diaVal).toFixed(3));
       setSelectedPreset(4); // Metric Medium 1.0mm
     } else if (unit === 'imperial' && oldUnit === 'metric') {
-      setTargetDiameter((diaVal / 25.4).toFixed(4));
+      setTargetDiameter(toIn(diaVal).toFixed(4));
       setSelectedPreset(1); // Imperial Medium 21 TPI
     }
     setIsCustom(false);
@@ -137,7 +138,7 @@ export const Knurling: React.FC = () => {
               <line x1="0" y1="-130" x2="0" y2="130" stroke="#334155" strokeWidth="1" strokeDasharray="4,4" />
               
               {/* Workpiece Blank Circle */}
-              <circle cx="0" cy="20" r="80" fill="#1e293b" stroke="var(--accent-cyan)" strokeWidth="2" opacity="0.8" />
+              <circle cx="0" cy="20" r="80" fill="#1e293b" stroke="var(--accent)" strokeWidth="2" opacity="0.8" />
               <circle cx="0" cy="20" r="3" fill="#64748b" />
 
               {/* Workpiece Teeth Ticks around circumference */}
@@ -187,7 +188,7 @@ export const Knurling: React.FC = () => {
               <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', display: 'block' }}>
                 Circular Pitch (p)
               </span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent-cyan)' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent)' }}>
                 {pitchVal.toFixed(4)} {unitStr}
               </span>
             </div>
@@ -214,7 +215,7 @@ export const Knurling: React.FC = () => {
                 onChange={(e) => setTargetDiameter(e.target.value)}
                 className="input-precision"
               />
-              <span style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+              <span style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
                 {unitStr}
               </span>
             </div>
@@ -283,7 +284,7 @@ export const Knurling: React.FC = () => {
           <div style={{
             background: 'var(--bg-primary)',
             padding: '20px',
-            border: '1px solid var(--accent-cyan)',
+            border: '1px solid var(--accent)',
             textAlign: 'center',
             marginBottom: '15px'
           }}>
@@ -293,7 +294,7 @@ export const Knurling: React.FC = () => {
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: 800, color: '#f4902c' }}>
               {bestCandidate.diameter.toFixed(decPlaces)} <span style={{ fontSize: '1.1rem' }}>{unitStr}</span>
             </div>
-            <span style={{ display: 'inline-block', background: 'rgba(244, 144, 44, 0.15)', color: 'var(--accent-cyan)', padding: '4px 12px', fontSize: '0.82rem', fontWeight: 600, marginTop: '8px' }}>
+            <span style={{ display: 'inline-block', background: 'rgba(244, 144, 44, 0.15)', color: 'var(--accent)', padding: '4px 12px', fontSize: '0.82rem', fontWeight: 600, marginTop: '8px' }}>
               {bestCandidate.diffFromTarget >= 0 ? `+${bestCandidate.diffFromTarget.toFixed(decPlaces)}` : bestCandidate.diffFromTarget.toFixed(decPlaces)} {unitStr} from entered target
             </span>
           </div>
@@ -325,7 +326,7 @@ export const Knurling: React.FC = () => {
                   <td style={{ padding: '8px 12px', color: c.isBest ? '#00ff80' : 'var(--text-primary)' }}>
                     {c.isBest && '⭐ '} {c.teeth} teeth
                   </td>
-                  <td style={{ padding: '8px 12px', fontFamily: 'var(--font-mono)', color: c.isBest ? '#00ff80' : 'var(--accent-cyan)' }}>
+                  <td style={{ padding: '8px 12px', fontFamily: 'var(--font-mono)', color: c.isBest ? '#00ff80' : 'var(--accent)' }}>
                     {c.diameter.toFixed(decPlaces)} {unitStr}
                   </td>
                   <td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: c.diffFromTarget === 0 ? '#00ff80' : 'var(--text-secondary)' }}>
@@ -352,7 +353,7 @@ export const Knurling: React.FC = () => {
 
       {/* Footer: tool description */}
       <div className="glass-panel" style={{ marginTop: '25px', padding: '14px 20px' }}>
-        <div style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>
+        <div style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>
           Machinist Calculator #6 // Tool Guidance
         </div>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', margin: 0, lineHeight: 1.5 }}>

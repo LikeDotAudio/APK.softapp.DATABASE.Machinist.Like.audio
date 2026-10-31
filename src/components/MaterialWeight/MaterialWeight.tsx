@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { MM_PER_IN, toIn as mmToIn } from '../../lib/units';
 
 // ---------------------------------------------------------------------------
 // Material Weight Calculator — estimate weight, volume & cost of raw stock
@@ -88,21 +89,21 @@ export const MaterialWeight: React.FC = () => {
     };
 
     if (unit === 'metric' && oldUnit === 'imperial') {
-      setDia(p => conv(p, 25.4, 2));
-      setInnerDia(p => conv(p, 25.4, 2));
-      setWidth(p => conv(p, 25.4, 2));
-      setThick(p => conv(p, 25.4, 2));
-      setAf(p => conv(p, 25.4, 2));
-      setLength(p => conv(p, 25.4, 2));
+      setDia(p => conv(p, MM_PER_IN, 2));
+      setInnerDia(p => conv(p, MM_PER_IN, 2));
+      setWidth(p => conv(p, MM_PER_IN, 2));
+      setThick(p => conv(p, MM_PER_IN, 2));
+      setAf(p => conv(p, MM_PER_IN, 2));
+      setLength(p => conv(p, MM_PER_IN, 2));
       setCustomDensity(p => conv(p, DENSITY_FACTOR, 3)); // lb/in³ → g/cm³
       setPrice(p => (p.trim() === '' ? p : conv(p, LB_PER_KG, 2))); // $/lb → $/kg
     } else if (unit === 'imperial' && oldUnit === 'metric') {
-      setDia(p => conv(p, 1 / 25.4, 4));
-      setInnerDia(p => conv(p, 1 / 25.4, 4));
-      setWidth(p => conv(p, 1 / 25.4, 4));
-      setThick(p => conv(p, 1 / 25.4, 4));
-      setAf(p => conv(p, 1 / 25.4, 4));
-      setLength(p => conv(p, 1 / 25.4, 4));
+      setDia(p => conv(p, 1 / MM_PER_IN, 4));
+      setInnerDia(p => conv(p, 1 / MM_PER_IN, 4));
+      setWidth(p => conv(p, 1 / MM_PER_IN, 4));
+      setThick(p => conv(p, 1 / MM_PER_IN, 4));
+      setAf(p => conv(p, 1 / MM_PER_IN, 4));
+      setLength(p => conv(p, 1 / MM_PER_IN, 4));
       setCustomDensity(p => conv(p, 1 / DENSITY_FACTOR, 4)); // g/cm³ → lb/in³
       setPrice(p => (p.trim() === '' ? p : conv(p, KG_PER_LB, 2))); // $/kg → $/lb
     }
@@ -112,17 +113,17 @@ export const MaterialWeight: React.FC = () => {
   const unitStr = isMetric ? 'mm' : 'in';
 
   // Parse an input string as inches regardless of active unit system
-  const toIn = (s: string): number => {
+  const inchesOf = (s: string): number => {
     const v = parseFloat(s) || 0;
-    return isMetric ? v / 25.4 : v;
+    return isMetric ? mmToIn(v) : v;
   };
 
-  const D = toIn(dia);
-  const ID = toIn(innerDia);
-  const W = toIn(width);
-  const T = toIn(thick);
-  const AF = toIn(af);
-  const L = toIn(length);
+  const D = inchesOf(dia);
+  const ID = inchesOf(innerDia);
+  const W = inchesOf(width);
+  const T = inchesOf(thick);
+  const AF = inchesOf(af);
+  const L = inchesOf(length);
 
   let volumeIn3 = 0;
   let dimError: string | null = null;
@@ -187,7 +188,7 @@ export const MaterialWeight: React.FC = () => {
   // --- UI helpers ---
   const suffixStyle: React.CSSProperties = {
     position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)',
-    color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '0.85rem'
+    color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '0.85rem'
   };
 
   const dimInput = (label: string, value: string, setter: (v: string) => void, suffix?: string) => (
@@ -333,13 +334,13 @@ export const MaterialWeight: React.FC = () => {
       {/* Compact Title Bar */}
       <div style={{ marginBottom: '18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-          ⚖️ Material Weight <span style={{ color: 'var(--accent-cyan)', fontWeight: 400 }}>// Stock Weight, Volume & Cost</span>
+          ⚖️ Material Weight <span style={{ color: 'var(--accent)', fontWeight: 400 }}>// Stock Weight, Volume & Cost</span>
         </h2>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'var(--bg-primary)', border: '1px solid var(--border-color)', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
             <strong style={{ color: '#fff' }}>{MATERIALS.length}</strong> materials
           </div>
-          <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'rgba(244, 144, 44, 0.12)', border: '1px solid rgba(244, 144, 44, 0.35)', fontSize: '0.78rem', color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>
+          <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'rgba(244, 144, 44, 0.12)', border: '1px solid rgba(244, 144, 44, 0.35)', fontSize: '0.78rem', color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
             ρ = {isMetric ? `${densityGCm3.toFixed(2)} g/cm³` : `${densityLbIn3.toFixed(4)} lb/in³`}
           </div>
         </div>
@@ -369,9 +370,9 @@ export const MaterialWeight: React.FC = () => {
                       padding: '9px 6px',
                       borderRadius: '8px',
                       border: '1px solid',
-                      borderColor: active ? 'var(--accent-cyan)' : 'var(--border-color)',
+                      borderColor: active ? 'var(--accent)' : 'var(--border-color)',
                       background: active ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-primary)',
-                      color: active ? 'var(--accent-cyan)' : 'var(--text-secondary)',
+                      color: active ? 'var(--accent)' : 'var(--text-secondary)',
                       fontWeight: 700,
                       fontSize: '0.74rem',
                       cursor: 'pointer',
@@ -439,9 +440,9 @@ export const MaterialWeight: React.FC = () => {
               </div>
             )}
             <div style={{ marginTop: '8px', fontSize: '0.78rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-              ρ = <span style={{ color: 'var(--accent-cyan)', fontWeight: 700 }}>{densityLbIn3.toFixed(4)} lb/in³</span>
+              ρ = <span style={{ color: 'var(--accent)', fontWeight: 700 }}>{densityLbIn3.toFixed(4)} lb/in³</span>
               <span style={{ margin: '0 6px' }}>·</span>
-              <span style={{ color: 'var(--accent-cyan)', fontWeight: 700 }}>{densityGCm3.toFixed(2)} g/cm³</span>
+              <span style={{ color: 'var(--accent)', fontWeight: 700 }}>{densityGCm3.toFixed(2)} g/cm³</span>
             </div>
           </div>
 
@@ -509,7 +510,7 @@ export const MaterialWeight: React.FC = () => {
             background: 'var(--bg-primary)',
             padding: '20px',
             borderRadius: 'var(--radius-md)',
-            border: '2px solid var(--accent-cyan)',
+            border: '2px solid var(--accent)',
             textAlign: 'center',
             boxShadow: '0 15px 35px -10px rgba(244, 144, 44, 0.2)'
           }}>

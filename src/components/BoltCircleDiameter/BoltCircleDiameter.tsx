@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { toIn, toMm } from '../../lib/units';
 
 export const BoltCircleDiameter: React.FC = () => {
   const { unit } = useUnit();
@@ -25,13 +26,13 @@ export const BoltCircleDiameter: React.FC = () => {
     const diaVal = parseFloat(holeDia) || 0;
 
     if (unit === 'metric' && oldUnit === 'imperial') {
-      setAdjacentDist((adjVal * 25.4).toFixed(3));
-      setCaliperMeas((measVal * 25.4).toFixed(3));
-      setHoleDia((diaVal * 25.4).toFixed(3));
+      setAdjacentDist(toMm(adjVal).toFixed(3));
+      setCaliperMeas(toMm(measVal).toFixed(3));
+      setHoleDia(toMm(diaVal).toFixed(3));
     } else if (unit === 'imperial' && oldUnit === 'metric') {
-      setAdjacentDist((adjVal / 25.4).toFixed(4));
-      setCaliperMeas((measVal / 25.4).toFixed(4));
-      setHoleDia((diaVal / 25.4).toFixed(4));
+      setAdjacentDist(toIn(adjVal).toFixed(4));
+      setCaliperMeas(toIn(measVal).toFixed(4));
+      setHoleDia(toIn(diaVal).toFixed(4));
     }
   }, [unit]);
 
@@ -111,7 +112,7 @@ export const BoltCircleDiameter: React.FC = () => {
               <line x1="0" y1="-130" x2="0" y2="130" stroke="#334155" strokeWidth="1" strokeDasharray="4,4" />
               
               {/* Pitch Circle */}
-              <circle cx="0" cy="0" r="85" fill="none" stroke="var(--accent-cyan)" strokeWidth="1.5" strokeDasharray="6,4" opacity="0.7" />
+              <circle cx="0" cy="0" r="85" fill="none" stroke="var(--accent)" strokeWidth="1.5" strokeDasharray="6,4" opacity="0.7" />
               <circle cx="0" cy="0" r="3" fill="#64748b" />
 
               {/* Holes */}
@@ -158,7 +159,7 @@ export const BoltCircleDiameter: React.FC = () => {
               <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', display: 'block' }}>
                 Estimated BCD
               </span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent-cyan)' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent)' }}>
                 {bcd > 0 ? bcd.toFixed(decPlaces) : '---'} <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{unitStr}</span>
               </span>
             </div>
@@ -194,7 +195,7 @@ export const BoltCircleDiameter: React.FC = () => {
               style={{
                 padding: '10px 8px',
                 border: 'none',
-                background: method === 'caliper' ? 'var(--accent-cyan)' : 'transparent',
+                background: method === 'caliper' ? 'var(--accent)' : 'transparent',
                 color: method === 'caliper' ? '#000' : 'var(--text-secondary)',
                 fontWeight: 600,
                 fontSize: '0.85rem',
@@ -209,7 +210,7 @@ export const BoltCircleDiameter: React.FC = () => {
               style={{
                 padding: '10px 8px',
                 border: 'none',
-                background: method === 'adjacent' ? 'var(--accent-cyan)' : 'transparent',
+                background: method === 'adjacent' ? 'var(--accent)' : 'transparent',
                 color: method === 'adjacent' ? '#000' : 'var(--text-secondary)',
                 fontWeight: 600,
                 fontSize: '0.85rem',
@@ -251,8 +252,8 @@ export const BoltCircleDiameter: React.FC = () => {
                     style={{
                       padding: '8px',
                       background: caliperMode === 'outer' ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-tertiary)',
-                      border: `1px solid ${caliperMode === 'outer' ? 'var(--accent-cyan)' : 'var(--border-color)'}`,
-                      color: caliperMode === 'outer' ? 'var(--accent-cyan)' : 'var(--text-primary)',
+                      border: `1px solid ${caliperMode === 'outer' ? 'var(--accent)' : 'var(--border-color)'}`,
+                      color: caliperMode === 'outer' ? 'var(--accent)' : 'var(--text-primary)',
                       fontWeight: 600,
                       cursor: 'pointer',
                       fontSize: '0.82rem'
@@ -266,8 +267,8 @@ export const BoltCircleDiameter: React.FC = () => {
                     style={{
                       padding: '8px',
                       background: caliperMode === 'inner' ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-tertiary)',
-                      border: `1px solid ${caliperMode === 'inner' ? 'var(--accent-cyan)' : 'var(--border-color)'}`,
-                      color: caliperMode === 'inner' ? 'var(--accent-cyan)' : 'var(--text-primary)',
+                      border: `1px solid ${caliperMode === 'inner' ? 'var(--accent)' : 'var(--border-color)'}`,
+                      color: caliperMode === 'inner' ? 'var(--accent)' : 'var(--text-primary)',
                       fontWeight: 600,
                       cursor: 'pointer',
                       fontSize: '0.82rem'
@@ -341,7 +342,7 @@ export const BoltCircleDiameter: React.FC = () => {
           <div style={{
             background: 'var(--bg-primary)',
             padding: '20px',
-            border: '1px solid var(--accent-cyan)',
+            border: '1px solid var(--accent)',
             textAlign: 'center'
           }}>
             <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '6px', fontWeight: 600 }}>
@@ -402,7 +403,7 @@ export const BoltCircleDiameter: React.FC = () => {
 
       {/* Footer: tool description (kept out of the header per site convention) */}
       <div className="glass-panel" style={{ marginTop: '30px', padding: '16px 22px' }}>
-        <div style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '6px' }}>
+        <div style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '6px' }}>
           Machinist Calculator #3
         </div>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', margin: 0, lineHeight: 1.6 }}>

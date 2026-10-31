@@ -46,7 +46,7 @@ export const FastenerDetail: React.FC<{ sel: FastenerItem }> = ({ sel }) => {
 
       {/* Socket cap hex key sizes */}
       {showsHexKeys(sel.id) && (
-        <SizeChipList heading="SOCKET CAP — HEX KEY SIZES" color="var(--accent-cyan)" background="rgba(244, 144, 44, 0.06)" border="rgba(244, 144, 44, 0.25)" items={KEY_CHIPS} />
+        <SizeChipList heading="SOCKET CAP — HEX KEY SIZES" color="var(--accent)" background="rgba(244, 144, 44, 0.06)" border="rgba(244, 144, 44, 0.25)" items={KEY_CHIPS} />
       )}
     </div>
   );

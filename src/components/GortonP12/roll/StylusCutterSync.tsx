@@ -27,7 +27,7 @@ export const StylusCutterSync: React.FC<StylusCutterSyncProps> = ({
     </p>
 
     <div style={{ marginBottom: '20px', background: 'var(--bg-secondary)', padding: '15px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
-      <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, fontSize: '0.8rem', color: 'var(--accent-cyan)', textTransform: 'uppercase' }}>
+      <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, fontSize: '0.8rem', color: 'var(--accent)', textTransform: 'uppercase' }}>
         Select Variable To Calculate:
       </label>
       <SegmentedButtons

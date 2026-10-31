@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { toIn, toMm } from '../../lib/units';
 
 // ---------------------------------------------------------------------------
 // Drill Point Length Calculator
@@ -46,15 +47,15 @@ export const DrillPointLength: React.FC = () => {
     const fVal = parseFloat(fullDepth) || 0;
 
     if (unit === 'metric' && oldUnit === 'imperial') {
-      setDiameter((dVal * 25.4).toFixed(3));
-      setThickness((tVal * 25.4).toFixed(3));
-      setClearance(cVal === 0.01 ? '0.250' : (cVal * 25.4).toFixed(3));
-      setFullDepth((fVal * 25.4).toFixed(3));
+      setDiameter(toMm(dVal).toFixed(3));
+      setThickness(toMm(tVal).toFixed(3));
+      setClearance(cVal === 0.01 ? '0.250' : toMm(cVal).toFixed(3));
+      setFullDepth(toMm(fVal).toFixed(3));
     } else if (unit === 'imperial' && oldUnit === 'metric') {
-      setDiameter((dVal / 25.4).toFixed(4));
-      setThickness((tVal / 25.4).toFixed(4));
-      setClearance(cVal === 0.25 ? '0.0100' : (cVal / 25.4).toFixed(4));
-      setFullDepth((fVal / 25.4).toFixed(4));
+      setDiameter(toIn(dVal).toFixed(4));
+      setThickness(toIn(tVal).toFixed(4));
+      setClearance(cVal === 0.25 ? '0.0100' : toIn(cVal).toFixed(4));
+      setFullDepth(toIn(fVal).toFixed(4));
     }
   }, [unit, diameter, thickness, clearance, fullDepth]);
 
@@ -106,7 +107,7 @@ export const DrillPointLength: React.FC = () => {
     right: '15px',
     top: '50%',
     transform: 'translateY(-50%)',
-    color: 'var(--accent-cyan)',
+    color: 'var(--accent)',
     fontFamily: 'var(--font-mono)',
     fontWeight: 700,
   } as const;
@@ -125,7 +126,7 @@ export const DrillPointLength: React.FC = () => {
       {/* Compact Title Bar */}
       <div style={{ marginBottom: '18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-          🔻 Drill Point Length <span style={{ color: 'var(--accent-cyan)', fontWeight: 400 }}>// Through & Blind Hole Depth</span>
+          🔻 Drill Point Length <span style={{ color: 'var(--accent)', fontWeight: 400 }}>// Through & Blind Hole Depth</span>
         </h2>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'var(--bg-primary)', border: '1px solid var(--border-color)', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
@@ -271,7 +272,7 @@ export const DrillPointLength: React.FC = () => {
                 padding: '12px',
                 border: 'none',
                 borderRadius: 'var(--radius-sm)',
-                background: mode === 'through' ? 'var(--accent-cyan)' : 'transparent',
+                background: mode === 'through' ? 'var(--accent)' : 'transparent',
                 color: mode === 'through' ? '#000' : 'var(--text-secondary)',
                 fontWeight: 600,
                 fontSize: '0.88rem',
@@ -287,7 +288,7 @@ export const DrillPointLength: React.FC = () => {
                 padding: '12px',
                 border: 'none',
                 borderRadius: 'var(--radius-sm)',
-                background: mode === 'blind' ? 'var(--accent-cyan)' : 'transparent',
+                background: mode === 'blind' ? 'var(--accent)' : 'transparent',
                 color: mode === 'blind' ? '#000' : 'var(--text-secondary)',
                 fontWeight: 600,
                 fontSize: '0.88rem',
@@ -342,8 +343,8 @@ export const DrillPointLength: React.FC = () => {
                     title={p.note || undefined}
                     style={{
                       background: active ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-tertiary)',
-                      border: `1px solid ${active ? 'var(--accent-cyan)' : 'var(--border-color)'}`,
-                      color: active ? 'var(--accent-cyan)' : 'var(--text-primary)',
+                      border: `1px solid ${active ? 'var(--accent)' : 'var(--border-color)'}`,
+                      color: active ? 'var(--accent)' : 'var(--text-primary)',
                       padding: '4px 10px',
                       borderRadius: '4px',
                       fontSize: '0.8rem',
@@ -433,7 +434,7 @@ export const DrillPointLength: React.FC = () => {
             background: 'var(--bg-primary)',
             padding: '25px',
             borderRadius: 'var(--radius-md)',
-            border: '2px solid var(--accent-cyan)',
+            border: '2px solid var(--accent)',
             textAlign: 'center',
             boxShadow: '0 15px 35px -10px rgba(244, 144, 44, 0.2)'
           }}>

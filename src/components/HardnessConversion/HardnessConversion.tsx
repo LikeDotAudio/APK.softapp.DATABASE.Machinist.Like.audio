@@ -189,14 +189,14 @@ export const HardnessConversion: React.FC = () => {
       title={val === undefined ? note : undefined}
       style={{
         background: 'var(--bg-primary)',
-        border: `1px solid ${isInput ? 'var(--accent-cyan)' : 'var(--border-color)'}`,
+        border: `1px solid ${isInput ? 'var(--accent)' : 'var(--border-color)'}`,
         borderRadius: '8px',
         padding: '12px 14px',
         position: 'relative',
       }}
     >
       {isInput && (
-        <span style={{ position: 'absolute', top: '8px', right: '10px', fontSize: '0.58rem', fontWeight: 700, letterSpacing: '1px', color: 'var(--accent-cyan)' }}>
+        <span style={{ position: 'absolute', top: '8px', right: '10px', fontSize: '0.58rem', fontWeight: 700, letterSpacing: '1px', color: 'var(--accent)' }}>
           INPUT
         </span>
       )}
@@ -234,7 +234,7 @@ export const HardnessConversion: React.FC = () => {
       {/* Compact Title Bar */}
       <div style={{ marginBottom: '18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-          💎 Hardness Conversion <span style={{ color: 'var(--accent-cyan)', fontWeight: 400 }}>// HRC · HRB · Brinell · Vickers · Tensile</span>
+          💎 Hardness Conversion <span style={{ color: 'var(--accent)', fontWeight: 400 }}>// HRC · HRB · Brinell · Vickers · Tensile</span>
         </h2>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <div style={{ padding: '4px 12px', borderRadius: '8px', background: 'var(--bg-primary)', border: '1px solid var(--border-color)', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
@@ -272,7 +272,7 @@ export const HardnessConversion: React.FC = () => {
                       padding: '10px 6px',
                       border: 'none',
                       borderRadius: 'var(--radius-sm)',
-                      background: active ? 'var(--accent-cyan)' : 'transparent',
+                      background: active ? 'var(--accent)' : 'transparent',
                       color: active ? '#000' : 'var(--text-secondary)',
                       fontWeight: 700,
                       fontSize: '0.88rem',
@@ -303,7 +303,7 @@ export const HardnessConversion: React.FC = () => {
                 onChange={(e) => setValue(e.target.value)}
                 className="input-precision"
               />
-              <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+              <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
                 {scaleDef.label}
               </span>
             </div>
@@ -341,8 +341,8 @@ export const HardnessConversion: React.FC = () => {
                     onClick={() => applyPreset(p)}
                     style={{
                       background: active ? 'rgba(244, 144, 44, 0.15)' : 'var(--bg-tertiary)',
-                      border: `1px solid ${active ? 'var(--accent-cyan)' : 'var(--border-color)'}`,
-                      color: active ? 'var(--accent-cyan)' : 'var(--text-primary)',
+                      border: `1px solid ${active ? 'var(--accent)' : 'var(--border-color)'}`,
+                      color: active ? 'var(--accent)' : 'var(--text-primary)',
                       padding: '6px 12px',
                       borderRadius: '6px',
                       fontSize: '0.78rem',
@@ -381,7 +381,7 @@ export const HardnessConversion: React.FC = () => {
 
           {/* Tensile strength */}
           <div style={{ background: 'rgba(244, 144, 44, 0.06)', border: '1px solid rgba(244, 144, 44, 0.25)', borderRadius: '8px', padding: '14px 16px' }}>
-            <div style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', fontWeight: 700 }}>
+            <div style={{ fontSize: '0.72rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', fontWeight: 700 }}>
               Approx. Tensile Strength
             </div>
             {ksi !== undefined && mpa !== undefined ? (
@@ -411,7 +411,7 @@ export const HardnessConversion: React.FC = () => {
           <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>
             Hardness Spectrum — Soft → Hard
           </span>
-          <span style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)', fontWeight: 700 }}>
+          <span style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono)', color: 'var(--accent)', fontWeight: 700 }}>
             {pos !== undefined
               ? (conv.hrc !== undefined ? `● HRC ${conv.hrc.toFixed(1)}` : `● HRB ${conv.hrb!.toFixed(1)}`) + (conv.hv !== undefined ? ` · HV ${conv.hv.toFixed(0)}` : '')
               : '● No valid reading'}

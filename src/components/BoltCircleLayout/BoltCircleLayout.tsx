@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
+import { toIn, toMm } from '../../lib/units';
 
 interface HoleCoordinate {
   id: number;
@@ -28,13 +29,13 @@ export const BoltCircleLayout: React.FC = () => {
     const cyVal = parseFloat(centerY) || 0;
 
     if (unit === 'metric' && oldUnit === 'imperial') {
-      setBcd((bVal * 25.4).toFixed(3));
-      setCenterX((cxVal * 25.4).toFixed(3));
-      setCenterY((cyVal * 25.4).toFixed(3));
+      setBcd(toMm(bVal).toFixed(3));
+      setCenterX(toMm(cxVal).toFixed(3));
+      setCenterY(toMm(cyVal).toFixed(3));
     } else if (unit === 'imperial' && oldUnit === 'metric') {
-      setBcd((bVal / 25.4).toFixed(4));
-      setCenterX((cxVal / 25.4).toFixed(4));
-      setCenterY((cyVal / 25.4).toFixed(4));
+      setBcd(toIn(bVal).toFixed(4));
+      setCenterX(toIn(cxVal).toFixed(4));
+      setCenterY(toIn(cyVal).toFixed(4));
     }
   }, [unit]);
 
@@ -107,7 +108,7 @@ export const BoltCircleLayout: React.FC = () => {
               <line x1="0" y1="-130" x2="0" y2="130" stroke="#334155" strokeWidth="1" strokeDasharray="4,4" />
               
               {/* Bolt Circle Pitch Circle */}
-              <circle cx="0" cy="0" r="95" fill="none" stroke="var(--accent-cyan)" strokeWidth="1.5" strokeDasharray="6,4" opacity="0.7" />
+              <circle cx="0" cy="0" r="95" fill="none" stroke="var(--accent)" strokeWidth="1.5" strokeDasharray="6,4" opacity="0.7" />
               <circle cx="0" cy="0" r="3" fill="#64748b" />
 
               {/* Holes */}
@@ -144,7 +145,7 @@ export const BoltCircleLayout: React.FC = () => {
               <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', display: 'block' }}>
                 Adjacent Hole Distance
               </span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent-cyan)' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent)' }}>
                 {chordalDist.toFixed(decPlaces)} <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{unitStr}</span>
               </span>
             </div>
@@ -179,7 +180,7 @@ export const BoltCircleLayout: React.FC = () => {
                 onChange={(e) => setBcd(e.target.value)}
                 className="input-precision"
               />
-              <span style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+              <span style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
                 {unitStr}
               </span>
             </div>
@@ -291,7 +292,7 @@ export const BoltCircleLayout: React.FC = () => {
                   <td style={{ padding: '8px 12px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>
                     {h.angleDeg.toFixed(1)}°
                   </td>
-                  <td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--accent-cyan)' }}>
+                  <td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--accent)' }}>
                     {h.x >= 0 ? `+${h.x.toFixed(decPlaces)}` : h.x.toFixed(decPlaces)}
                   </td>
                   <td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#38bdf8' }}>
@@ -306,7 +307,7 @@ export const BoltCircleLayout: React.FC = () => {
 
       {/* Footer: tool description */}
       <div className="glass-panel" style={{ marginTop: '25px', padding: '14px 20px' }}>
-        <div style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>
+        <div style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>
           Machinist Calculator #2 // Tool Guidance
         </div>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', margin: 0, lineHeight: 1.5 }}>

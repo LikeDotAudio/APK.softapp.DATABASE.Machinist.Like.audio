@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import './index.css';
 
 interface BeforeInstallPromptEvent extends Event {
@@ -11,35 +11,38 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 import { JoBlockCalculator } from './components/HeightGauge';
-import { HardingeDividingHead } from './components/HardingeDividingHead';
-import { SpeedsFeeds } from './components/SpeedsFeeds/SpeedsFeeds';
-import { BoltCircleLayout } from './components/BoltCircleLayout/BoltCircleLayout';
-import { BoltCircleDiameter } from './components/BoltCircleDiameter/BoltCircleDiameter';
-import { SineBarVise } from './components/SineBarVise/SineBarVise';
-import { TapDrillDie } from './components/TapDrillDie/TapDrillDie';
-import { Knurling } from './components/Knurling/Knurling';
-import { ThreadingChangeGears } from './components/ThreadingChangeGears/ThreadingChangeGears';
-import { SheetMetalBending } from './components/SheetMetalBending/SheetMetalBending';
-import { GortonP12 } from './components/GortonP12/GortonP12';
-import { DrillSizeIndex } from './components/DrillSizeIndex/DrillSizeIndex';
-import { TapThreadIndex } from './components/TapThreadIndex/TapThreadIndex';
-import { GeometricDieHead } from './components/GeometricDieHead';
-import { MetricSpurGears } from './components/MetricSpurGears';
-import { ScrewHeadIndex } from './components/ScrewHeadIndex';
-import { DrillPointLength } from './components/DrillPointLength';
-import { ThreadMilling } from './components/ThreadMilling';
-import { TrigSolver } from './components/TrigSolver';
-import { PolarRectangular } from './components/PolarRectangular';
-import { TaperAngle } from './components/TaperAngle';
-import { TruePosition } from './components/TruePosition';
-import { FitsTolerances } from './components/FitsTolerances';
-import { SurfaceFinish } from './components/SurfaceFinish';
-import { HardnessConversion } from './components/HardnessConversion';
-import { MaterialWeight } from './components/MaterialWeight';
-import { Metallurgy } from './components/Metallurgy/Metallurgy';
-import { WeldingSuite } from './components/Welding/WeldingSuite';
 import { SplashScreen } from './components/SplashScreen/SplashScreen';
 import { useUnit } from './context/UnitContext';
+
+// One chunk per tool (KNOWN_ISSUES: a ~900 kB single chunk). The default tab, the Jo-block
+// stack, stays in the main chunk so the first paint needs no second request.
+const HardingeDividingHead = lazy(() => import('./components/HardingeDividingHead').then((m) => ({ default: m.HardingeDividingHead })));
+const SpeedsFeeds = lazy(() => import('./components/SpeedsFeeds/SpeedsFeeds').then((m) => ({ default: m.SpeedsFeeds })));
+const BoltCircleLayout = lazy(() => import('./components/BoltCircleLayout/BoltCircleLayout').then((m) => ({ default: m.BoltCircleLayout })));
+const BoltCircleDiameter = lazy(() => import('./components/BoltCircleDiameter/BoltCircleDiameter').then((m) => ({ default: m.BoltCircleDiameter })));
+const SineBarVise = lazy(() => import('./components/SineBarVise/SineBarVise').then((m) => ({ default: m.SineBarVise })));
+const TapDrillDie = lazy(() => import('./components/TapDrillDie/TapDrillDie').then((m) => ({ default: m.TapDrillDie })));
+const Knurling = lazy(() => import('./components/Knurling/Knurling').then((m) => ({ default: m.Knurling })));
+const ThreadingChangeGears = lazy(() => import('./components/ThreadingChangeGears/ThreadingChangeGears').then((m) => ({ default: m.ThreadingChangeGears })));
+const SheetMetalBending = lazy(() => import('./components/SheetMetalBending/SheetMetalBending').then((m) => ({ default: m.SheetMetalBending })));
+const GortonP12 = lazy(() => import('./components/GortonP12/GortonP12').then((m) => ({ default: m.GortonP12 })));
+const DrillSizeIndex = lazy(() => import('./components/DrillSizeIndex/DrillSizeIndex').then((m) => ({ default: m.DrillSizeIndex })));
+const TapThreadIndex = lazy(() => import('./components/TapThreadIndex/TapThreadIndex').then((m) => ({ default: m.TapThreadIndex })));
+const GeometricDieHead = lazy(() => import('./components/GeometricDieHead').then((m) => ({ default: m.GeometricDieHead })));
+const MetricSpurGears = lazy(() => import('./components/MetricSpurGears').then((m) => ({ default: m.MetricSpurGears })));
+const ScrewHeadIndex = lazy(() => import('./components/ScrewHeadIndex').then((m) => ({ default: m.ScrewHeadIndex })));
+const DrillPointLength = lazy(() => import('./components/DrillPointLength').then((m) => ({ default: m.DrillPointLength })));
+const ThreadMilling = lazy(() => import('./components/ThreadMilling').then((m) => ({ default: m.ThreadMilling })));
+const TrigSolver = lazy(() => import('./components/TrigSolver').then((m) => ({ default: m.TrigSolver })));
+const PolarRectangular = lazy(() => import('./components/PolarRectangular').then((m) => ({ default: m.PolarRectangular })));
+const TaperAngle = lazy(() => import('./components/TaperAngle').then((m) => ({ default: m.TaperAngle })));
+const TruePosition = lazy(() => import('./components/TruePosition').then((m) => ({ default: m.TruePosition })));
+const FitsTolerances = lazy(() => import('./components/FitsTolerances').then((m) => ({ default: m.FitsTolerances })));
+const SurfaceFinish = lazy(() => import('./components/SurfaceFinish').then((m) => ({ default: m.SurfaceFinish })));
+const HardnessConversion = lazy(() => import('./components/HardnessConversion').then((m) => ({ default: m.HardnessConversion })));
+const MaterialWeight = lazy(() => import('./components/MaterialWeight').then((m) => ({ default: m.MaterialWeight })));
+const Metallurgy = lazy(() => import('./components/Metallurgy/Metallurgy').then((m) => ({ default: m.Metallurgy })));
+const WeldingSuite = lazy(() => import('./components/Welding/WeldingSuite').then((m) => ({ default: m.WeldingSuite })));
 
 type TabType = 
   | 'calculator' 
@@ -244,7 +247,7 @@ export function App() {
                 <div style={{ 
                   fontSize: '0.72rem', 
                   background: 'var(--bg-primary)', 
-                  color: 'var(--accent-cyan)', 
+                  color: 'var(--accent)', 
                   padding: '3px 10px', 
                   borderRadius: '12px', 
                   fontWeight: 700, 
@@ -319,7 +322,7 @@ export function App() {
         flexWrap: 'wrap',
         zIndex: 1000
       }}>
-        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '1px', marginRight: '5px' }}>HUB CATEGORIES:</span>
+        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '1px', marginRight: '5px' }}>HUB CATEGORIES:</span>
         {HUB_CATEGORIES.map((cat) => {
           const isActive = hubCategory === cat.id;
           return (
@@ -328,9 +331,9 @@ export function App() {
               type="button"
               onClick={() => setHubCategory(cat.id)}
               style={{
-                background: isActive ? 'var(--accent-cyan)' : 'rgba(255, 255, 255, 0.05)',
+                background: isActive ? 'var(--accent)' : 'rgba(255, 255, 255, 0.05)',
                 color: isActive ? '#000' : 'var(--text-secondary)',
-                border: isActive ? '1px solid var(--accent-cyan)' : '1px solid var(--border-color)',
+                border: isActive ? '1px solid var(--accent)' : '1px solid var(--border-color)',
                 padding: '6px 14px',
                 borderRadius: '20px',
                 fontWeight: 700,
@@ -372,7 +375,7 @@ export function App() {
               width: '36px', 
               height: '36px', 
               borderRadius: '8px', 
-              background: 'linear-gradient(135deg, var(--accent-cyan), var(--accent-blue))',
+              background: 'linear-gradient(135deg, var(--accent), var(--accent-blue))',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -385,7 +388,7 @@ export function App() {
             </div>
             <div>
               <div style={{ fontSize: '1.15rem', fontWeight: 700, letterSpacing: '1.5px', color: '#fff' }}>
-                MACHINIST <span style={{ color: 'var(--accent-cyan)', fontWeight: 300 }}>// LIKE.AUDIO</span>
+                MACHINIST <span style={{ color: 'var(--accent)', fontWeight: 300 }}>// LIKE.AUDIO</span>
               </div>
               <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', letterSpacing: '0.5px' }}>
                 PRECISION METROLOGY & INDUSTRIAL CALCULATORS
@@ -424,7 +427,7 @@ export function App() {
                   alignItems: 'center',
                   gap: '6px',
                   padding: '5px 12px',
-                  background: 'linear-gradient(135deg, var(--accent-cyan), #00ff80)',
+                  background: 'linear-gradient(135deg, var(--accent), #00ff80)',
                   color: '#000',
                   fontWeight: 800,
                   fontSize: '0.78rem',
@@ -484,6 +487,7 @@ export function App() {
       </header>
 
       <main style={{ flex: 1, padding: '12px 20px 80px 20px' }}>
+        <Suspense fallback={<div className="glass-panel" style={{ padding: '40px', color: 'var(--text-secondary)' }}>Loading…</div>}>
         {activeTab === 'calculator' ? (
           <JoBlockCalculator initialTargetValue={stackTargetHeight} />
         ) : activeTab === 'dividing_head' ? (
@@ -556,7 +560,7 @@ export function App() {
               </p>
 
               <div style={{ background: 'var(--bg-primary)', padding: '20px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', marginBottom: '25px' }}>
-                <h4 style={{ color: 'var(--accent-cyan)', marginBottom: '10px', fontSize: '1rem' }}>⚙️ Technical Stack & Capabilities</h4>
+                <h4 style={{ color: 'var(--accent)', marginBottom: '10px', fontSize: '1rem' }}>⚙️ Technical Stack & Capabilities</h4>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '12px' }}>
                   Designed for high-precision metrology and industrial audio applications, the suite leverages modern web standards for instantaneous client-side computation:
                 </p>
@@ -587,6 +591,7 @@ export function App() {
             </div>
           </div>
         )}
+        </Suspense>
       </main>
 
       {/* Footer - Simplified to only include GitHub repo per user instructions */}
@@ -603,7 +608,7 @@ export function App() {
             © {new Date().getFullYear()} <strong style={{ color: 'var(--text-primary)' }}>Like.Audio</strong> // Engineered for Precision.
           </div>
           <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', alignItems: 'center' }}>
-            <a href="https://github.com/LikeDotAudio/machinist.like.audio" target="_blank" rel="noreferrer" style={{ color: 'var(--accent-cyan)', textDecoration: 'none', fontWeight: 600 }}>
+            <a href="https://github.com/LikeDotAudio/machinist.like.audio" target="_blank" rel="noreferrer" style={{ color: 'var(--accent)', textDecoration: 'none', fontWeight: 600 }}>
               🐙 GitHub Repository
             </a>
           </div>
@@ -630,7 +635,7 @@ export function App() {
             maxWidth: '550px',
             width: '100%',
             padding: '30px',
-            border: '1px solid var(--accent-cyan)',
+            border: '1px solid var(--accent)',
             boxShadow: '0 0 30px rgba(56, 189, 248, 0.25)',
             position: 'relative',
             animation: 'fadeIn 0.2s ease-out'
@@ -641,7 +646,7 @@ export function App() {
                 <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', margin: '0 0 4px 0' }}>
                   Install Machinist Hub
                 </h2>
-                <span style={{ fontSize: '0.8rem', color: 'var(--accent-cyan)', fontWeight: 600, letterSpacing: '1px' }}>
+                <span style={{ fontSize: '0.8rem', color: 'var(--accent)', fontWeight: 600, letterSpacing: '1px' }}>
                   STANDALONE BROWSER-FREE MODE
                 </span>
               </div>
@@ -656,7 +661,7 @@ export function App() {
               Run Machinist Hub as a native app directly on your shop floor computer, tablet, or smartphone without address bars, tabs, or browser clutter.
             </p>
 
-            <div style={{ background: 'var(--bg-primary)', padding: '16px', borderRadius: '8px', borderLeft: '4px solid var(--accent-cyan)', marginBottom: '16px' }}>
+            <div style={{ background: 'var(--bg-primary)', padding: '16px', borderRadius: '8px', borderLeft: '4px solid var(--accent)', marginBottom: '16px' }}>
               <div style={{ fontWeight: 700, color: '#fff', fontSize: '0.9rem', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <span>🖥️</span> Google Chrome / Edge (Desktop & Android)
               </div>
@@ -679,7 +684,7 @@ export function App() {
               style={{
                 width: '100%',
                 padding: '12px',
-                background: 'linear-gradient(135deg, var(--accent-cyan), var(--accent-blue))',
+                background: 'linear-gradient(135deg, var(--accent), var(--accent-blue))',
                 color: '#000',
                 fontWeight: 800,
                 fontSize: '1rem',

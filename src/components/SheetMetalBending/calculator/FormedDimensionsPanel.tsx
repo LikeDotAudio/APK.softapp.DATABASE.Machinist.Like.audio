@@ -21,7 +21,7 @@ export const FormedDimensionsPanel: React.FC<{ b: BendInputs }> = ({ b }) => {
           <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
             Bend Angle (Degrees)
           </label>
-          <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>
+          <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
             {bendAngle}°
           </span>
         </div>
@@ -32,12 +32,12 @@ export const FormedDimensionsPanel: React.FC<{ b: BendInputs }> = ({ b }) => {
           step="1"
           value={bendAngle}
           onChange={(e) => setBendAngle(parseInt(e.target.value) || 90)}
-          style={{ width: '100%', accentColor: 'var(--accent-cyan)', cursor: 'pointer' }}
+          style={{ width: '100%', accentColor: 'var(--accent)', cursor: 'pointer' }}
         />
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '4px' }}>
           <span onClick={() => setBendAngle(30)} style={{ cursor: 'pointer' }}>30° Acute</span>
           <span onClick={() => setBendAngle(45)} style={{ cursor: 'pointer' }}>45°</span>
-          <span onClick={() => setBendAngle(90)} style={{ cursor: 'pointer', color: bendAngle === 90 ? 'var(--accent-cyan)' : 'inherit', fontWeight: bendAngle === 90 ? 700 : 400 }}>90° Right Angle</span>
+          <span onClick={() => setBendAngle(90)} style={{ cursor: 'pointer', color: bendAngle === 90 ? 'var(--accent)' : 'inherit', fontWeight: bendAngle === 90 ? 700 : 400 }}>90° Right Angle</span>
           <span onClick={() => setBendAngle(120)} style={{ cursor: 'pointer' }}>120° Obtuse</span>
           <span onClick={() => setBendAngle(135)} style={{ cursor: 'pointer' }}>135°</span>
         </div>
