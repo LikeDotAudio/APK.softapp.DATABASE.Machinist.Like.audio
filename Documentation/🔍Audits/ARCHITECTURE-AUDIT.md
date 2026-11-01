@@ -11,7 +11,7 @@ machinist.like.audio: 28 shop calculators (dividing head, speeds & feeds, bolt c
 |---|---|---|
 | APK:OS Launch Pad (WEB.OsApi walker, WEB.Frontend-Assets snapshot) | `display.json` manifest | Published Language (manifest) — Conformist |
 | WEB.Frontend-Assets (web-static image) | the whole Softapps tree is `COPY`d into the image by the parent | Customer–Supplier (by design: Softapps are baked into one image) |
-| machinist.like.audio (FTPS host) | `.github/workflows/deploy.yml` → `SamKirkland/FTP-Deploy-Action@v4.4.0` | Customer–Supplier (deploy target) |
+| machinist.like.audio (FTPS host) | `.apk.scripts/deploy_all.py` on the owner's machine (the GitHub Actions `deploy.yml` was removed in 4e63581) | Customer–Supplier (deploy target) |
 | Google/npm toolchain | react, react-dom, vite, typescript, oxlint | Conformist |
 
 ## Scorecard
@@ -26,7 +26,7 @@ Score key: 3 meets the standard · 2 minor gaps · 1 significant gaps · 0 absen
 
 ## Findings
 1. GOOD — one unit setting for the whole app: [src/context/UnitContext.tsx](../../src/context/UnitContext.tsx) read by ~30 components, with helpers in [src/lib/units.ts](../../src/lib/units.ts).
-2. GOOD — [scripts/check-dist.mjs](../../scripts/check-dist.mjs) rebuilds into a temp dir and byte-compares with the committed `dist/`, and [.github/workflows/deploy.yml](../../.github/workflows/deploy.yml) runs it before deploying, so the APK:Softapps copy and the public site cannot silently diverge.
+2. GOOD — [scripts/check-dist.mjs](../../scripts/check-dist.mjs) rebuilds into a temp dir and byte-compares with the committed `dist/`, and the deploy (`deploy_all.py`, since 4e63581 removed `.github/workflows/deploy.yml`) runs it before deploying, so the APK:Softapps copy and the public site cannot silently diverge.
 3. **No release tag.** `package.json` is `1.0.0`; tagging a deploy is the owner's to publish.
 
 Delivered items were removed from this page; see [🌍Publishing/DELIVERY.md](../%F0%9F%8C%8DPublishing/DELIVERY.md#delivered-from-the-2026-10-30-audit).
