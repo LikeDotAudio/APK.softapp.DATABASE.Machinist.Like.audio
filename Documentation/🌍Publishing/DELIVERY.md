@@ -25,3 +25,6 @@
 - **Scaffold assets deleted** — `src/assets/hero.png`, `react.svg`, `vite.svg` (unreferenced).
 - **Versioned and code-split** — `package.json` `1.0.0`; every tool except the default Jo-block stack is `React.lazy` behind one `Suspense`, so the ~900 kB single chunk is now a ~250 kB main chunk plus 27 per-tool chunks. Verified: `npm run build`, `npm run check:dist` ("dist/ matches src/"), headless Chrome renders the default tab from `dist/`.
 - **WS-07 accent hard-coded throughout src/** (SDK/contracts audit; also the audit's remaining accent item) — the 132 `#f4902c` and 137 `rgba(244, 144, 44, …)` literals and 2 `"244, 144, 44"` rgb props in components now read `var(--accent)` / `rgba(var(--apk-accent-rgb), …)` / `var(--apk-accent-rgb)`; `grep -i f4902c src` finds only the vendored token file. var() in SVG `fill`/`stroke`/`stop-color` was checked in headless Chrome first (resolves to rgb(244, 144, 44)); no colour is used in JS arithmetic or canvas. Verified: `tsc -b`, `npm test` 43, `npm run build`, `check:dist` OK, headless Chrome renders `dist/`.
+
+## Releases
+- **Released `2.0.0`, tag `v2.0.0`** (2026-11-01, ROAD-3452, the owner's V2) — no SDK pin; every manifest says 2.0.0; GitHub release `v2.0.0`.
