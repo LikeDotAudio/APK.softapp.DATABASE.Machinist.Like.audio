@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { DividingHeadVisualizer } from './DividingHeadVisualizer';
 import { FormulaSheet } from '../common/FormulaSheet';
+import { ApkTable, h } from '../common/ApkTable';
 
 interface Plate {
   id: string;
@@ -576,64 +577,37 @@ export const HardingeDividingHead: React.FC = () => {
               <div style={{ padding: '16px 20px', background: 'rgba(255,255,255,0.03)', borderBottom: '1px solid var(--border-color)', fontWeight: 700, fontSize: '0.95rem', color: '#fff' }}>
                 🔍 Closest Approximations (Top 5 Circle Options)
               </div>
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-                  <thead>
-                    <tr style={{ background: 'rgba(255, 255, 255, 0.04)', borderBottom: '1px solid var(--border-color)' }}>
-                      <th style={{ padding: '14px 18px', fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Plate / Circle</th>
-                      <th style={{ padding: '14px 18px', fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Crank Movement</th>
-                      <th style={{ padding: '14px 18px', fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Achieved Divisions</th>
-                      <th style={{ padding: '14px 18px', fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Step Angle Achieved</th>
-                      <th style={{ padding: '14px 18px', fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Arcsecond Error</th>
-                      <th style={{ padding: '14px 18px', fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {approxMatches.slice(0, 5).map((app, i) => {
-                      const moveText = app.fullTurns > 0 ?
-                        `${app.fullTurns} Turn${app.fullTurns > 1 ? 's' : ''} + ${app.remainingHoles} Holes` :
-                        `${app.remainingHoles} Holes`;
-
-                      return (
-                        <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', fontFamily: 'var(--font-mono)' }}>
-                          <td style={{ padding: '14px 18px', fontSize: '0.95rem' }}>
-                            <strong style={{ color: '#fff' }}>{app.plateName}</strong> — {app.circleHoles}-Hole Circle
-                          </td>
-                          <td style={{ padding: '14px 18px', color: 'var(--accent)', fontWeight: 700 }}>{moveText}</td>
-                          <td style={{ padding: '14px 18px' }}>~{app.achievedDiv.toFixed(4)} divs</td>
-                          <td style={{ padding: '14px 18px' }}>{formatDMS(app.achievedDeg)}</td>
-                          <td style={{ padding: '14px 18px' }}>
-                            <span style={{ background: 'rgba(255, 170, 0, 0.15)', color: 'var(--accent-gold)', padding: '3px 8px', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 600 }}>
-                              ±{app.errorSec.toFixed(2)}" arcsec
-                            </span>
-                          </td>
-                          <td style={{ padding: '14px 18px' }}>
-                            <button
-                              onClick={() => {
-                                setSelectedVizMatch({ plateName: app.plateName, circleHoles: app.circleHoles, fullTurns: app.fullTurns, remainingHoles: app.remainingHoles, totalHoles: app.fullTurns * app.circleHoles + app.remainingHoles });
-                                window.scrollTo({ top: 350, behavior: 'smooth' });
-                              }}
-                              style={{
-                                background: activeVizMatch?.plateName === app.plateName && activeVizMatch?.circleHoles === app.circleHoles ? 'var(--accent)' : 'rgba(var(--apk-accent-rgb), 0.15)',
-                                color: activeVizMatch?.plateName === app.plateName && activeVizMatch?.circleHoles === app.circleHoles ? '#000' : 'var(--accent)',
-                                border: '1px solid rgba(var(--apk-accent-rgb), 0.4)',
-                                padding: '4px 10px',
-                                borderRadius: '4px',
-                                fontWeight: 700,
-                                fontSize: '0.75rem',
-                                cursor: 'pointer',
-                                fontFamily: 'var(--font-sans)'
-                              }}
-                            >
-                              {activeVizMatch?.plateName === app.plateName && activeVizMatch?.circleHoles === app.circleHoles ? '👁️ Active' : '👁️ Visualize'}
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
+              <ApkTable
+                id="machinist-dividing-head-approx"
+                style={{ fontFamily: 'var(--font-mono)' }}
+                rows={approxMatches.slice(0, 5)}
+                columns={[
+                  { key: 'plate', label: 'Plate / Circle', value: (app) => `${app.plateName} — ${app.circleHoles}-Hole Circle`, node: (app) => {
+                    const box = h('span', { fontSize: '0.95rem' });
+                    box.appendChild(h('strong', { color: '#fff' }, app.plateName));
+                    box.appendChild(document.createTextNode(` — ${app.circleHoles}-Hole Circle`));
+                    return box;
+                  } },
+                  { key: 'move', label: 'Crank Movement', value: (app) => (app.fullTurns > 0
+                    ? `${app.fullTurns} Turn${app.fullTurns > 1 ? 's' : ''} + ${app.remainingHoles} Holes` : `${app.remainingHoles} Holes`),
+                    style: () => ({ color: 'var(--accent)', fontWeight: '700' }) },
+                  { key: 'achievedDiv', label: 'Achieved Divisions', text: (app) => `~${app.achievedDiv.toFixed(4)} divs` },
+                  { key: 'achievedDeg', label: 'Step Angle Achieved', text: (app) => formatDMS(app.achievedDeg) },
+                  { key: 'errorSec', label: 'Arcsecond Error', node: (app) => h('span', { background: 'rgba(255, 170, 0, 0.15)', color: 'var(--accent-gold)', padding: '3px 8px', borderRadius: '4px', fontSize: '0.8rem', fontWeight: '600' }, `±${app.errorSec.toFixed(2)}" arcsec`) },
+                  { key: 'action', label: 'Action', value: () => '', node: (app) => {
+                    const on = activeVizMatch?.plateName === app.plateName && activeVizMatch?.circleHoles === app.circleHoles;
+                    const b = h('button', { background: on ? 'var(--accent)' : 'rgba(var(--apk-accent-rgb), 0.15)', color: on ? '#000' : 'var(--accent)',
+                      border: '1px solid rgba(var(--apk-accent-rgb), 0.4)', padding: '4px 10px', borderRadius: '4px', fontWeight: '700', fontSize: '0.75rem',
+                      cursor: 'pointer', fontFamily: 'var(--font-sans)' }, on ? '👁️ Active' : '👁️ Visualize') as HTMLButtonElement;
+                    b.type = 'button';
+                    b.onclick = () => {
+                      setSelectedVizMatch({ plateName: app.plateName, circleHoles: app.circleHoles, fullTurns: app.fullTurns, remainingHoles: app.remainingHoles, totalHoles: app.fullTurns * app.circleHoles + app.remainingHoles });
+                      window.scrollTo({ top: 350, behavior: 'smooth' });
+                    };
+                    return b;
+                  } },
+                ]}
+              />
             </div>
           </div>
         )}

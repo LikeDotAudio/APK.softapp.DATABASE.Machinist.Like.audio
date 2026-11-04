@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
 import { MM_PER_IN, toIn, toMm } from '../../lib/units';
+import { ApkTable, h } from '../common/ApkTable';
 
 interface GearCombination {
   type: 'simple' | 'compound';
@@ -300,58 +301,35 @@ export const ThreadingChangeGears: React.FC = () => {
               No valid gear combinations found within tolerance. Try adding gears or checking your lead screw specification!
             </div>
           ) : (
-            <div style={{ background: 'var(--bg-primary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', overflow: 'hidden', maxHeight: '480px', overflowY: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
-                <thead>
-                  <tr style={{ background: 'rgba(255, 255, 255, 0.04)', borderBottom: '1px solid var(--border-color)', position: 'sticky', top: 0, zIndex: 1, backdropFilter: 'blur(4px)' }}>
-                    <th style={{ padding: '10px 14px', color: 'var(--text-secondary)' }}>Train Type</th>
-                    <th style={{ padding: '10px 14px', color: 'var(--text-secondary)' }}>Gear Setup (Driver → Driven)</th>
-                    <th style={{ padding: '10px 14px', color: 'var(--text-secondary)', textAlign: 'right' }}>Generated Pitch</th>
-                    <th style={{ padding: '10px 14px', color: 'var(--text-secondary)', textAlign: 'right' }}>Error %</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {results.map((r, idx) => (
-                    <tr
-                      key={idx}
-                      style={{
-                        borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-                        background: r.errorPercent === 0 ? 'rgba(0, 255, 128, 0.12)' : r.errorPercent < 0.1 ? 'rgba(var(--apk-accent-rgb), 0.08)' : 'transparent',
-                        fontWeight: r.errorPercent === 0 ? 700 : 400
-                      }}
-                    >
-                      <td style={{ padding: '12px 14px' }}>
-                        <span style={{
-                          padding: '2px 8px',
-                          borderRadius: '12px',
-                          fontSize: '0.72rem',
-                          fontWeight: 700,
-                          textTransform: 'uppercase',
-                          background: r.type === 'simple' ? 'rgba(59, 130, 246, 0.2)' : 'rgba(168, 85, 247, 0.2)',
-                          color: r.type === 'simple' ? '#60a5fa' : '#c084fc',
-                          border: `1px solid ${r.type === 'simple' ? 'rgba(59, 130, 246, 0.4)' : 'rgba(168, 85, 247, 0.4)'}`
-                        }}>
-                          {r.type}
-                        </span>
-                      </td>
-                      <td style={{ padding: '12px 14px', fontFamily: 'var(--font-mono)', fontSize: '0.92rem', color: '#fff', fontWeight: 600 }}>
-                        {r.type === 'simple' ? (
-                          <span>Spindle <strong style={{ color: 'var(--accent)' }}>{r.gearA}T</strong> ➔ Lead Screw <strong style={{ color: '#00ff80' }}>{r.gearB}T</strong></span>
-                        ) : (
-                          <span>Spindle <strong style={{ color: 'var(--accent)' }}>{r.gearA}T</strong> ➔ Stud <strong style={{ color: '#f59e0b' }}>{r.gearB}T</strong> / <strong style={{ color: '#f59e0b' }}>{r.gearC}T</strong> ➔ LS <strong style={{ color: '#00ff80' }}>{r.gearD}T</strong></span>
-                        )}
-                      </td>
-                      <td style={{ padding: '12px 14px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: r.errorPercent === 0 ? '#00ff80' : 'var(--text-primary)' }}>
-                        {r.actualPitchVal.toFixed(4)} {targetUnit === 'tpi' ? 'TPI' : 'mm'}
-                      </td>
-                      <td style={{ padding: '12px 14px', textAlign: 'right', fontFamily: 'var(--font-mono)', fontWeight: 700, color: r.errorPercent === 0 ? '#00ff80' : r.errorPercent < 0.5 ? 'var(--accent)' : '#f59e0b' }}>
-                        {r.errorPercent === 0 ? 'EXACT 0.00%' : `${r.errorPercent.toFixed(3)}%`}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <ApkTable
+              id="machinist-change-gear-trains"
+              style={{ background: 'var(--bg-primary)', maxHeight: '480px', fontSize: '0.88rem' }}
+              rows={results}
+              rowClass={(r) => (r.errorPercent === 0 ? 'apk-row-best' : r.errorPercent < 0.1 ? 'apk-row-current' : '')}
+              columns={[
+                { key: 'type', label: 'Train Type', node: (r) => {
+                  const simple = r.type === 'simple';
+                  return h('span', { padding: '2px 8px', borderRadius: '12px', fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase',
+                    background: simple ? 'rgba(59, 130, 246, 0.2)' : 'rgba(168, 85, 247, 0.2)', color: simple ? '#60a5fa' : '#c084fc',
+                    border: `1px solid ${simple ? 'rgba(59, 130, 246, 0.4)' : 'rgba(168, 85, 247, 0.4)'}` }, r.type);
+                } },
+                { key: 'setup', label: 'Gear Setup (Driver → Driven)', mono: true,
+                  value: (r) => (r.type === 'simple' ? `Spindle ${r.gearA}T ➔ Lead Screw ${r.gearB}T` : `Spindle ${r.gearA}T ➔ Stud ${r.gearB}T / ${r.gearC}T ➔ LS ${r.gearD}T`),
+                  node: (r) => {
+                    const box = h('span', { fontSize: '0.92rem', color: '#fff', fontWeight: '600' });
+                    const add = (t: string, color?: string) => box.appendChild(color ? h('strong', { color }, t) : document.createTextNode(t));
+                    add('Spindle '); add(`${r.gearA}T`, 'var(--accent)');
+                    if (r.type === 'simple') { add(' ➔ Lead Screw '); add(`${r.gearB}T`, '#00ff80'); }
+                    else { add(' ➔ Stud '); add(`${r.gearB}T`, '#f59e0b'); add(' / '); add(`${r.gearC}T`, '#f59e0b'); add(' ➔ LS '); add(`${r.gearD}T`, '#00ff80'); }
+                    return box;
+                  } },
+                { key: 'actualPitchVal', label: 'Generated Pitch', align: 'right', mono: true,
+                  text: (r) => `${r.actualPitchVal.toFixed(4)} ${targetUnit === 'tpi' ? 'TPI' : 'mm'}`, style: (r) => ({ color: r.errorPercent === 0 ? '#00ff80' : 'var(--text-primary)' }) },
+                { key: 'errorPercent', label: 'Error %', align: 'right', mono: true,
+                  text: (r) => (r.errorPercent === 0 ? 'EXACT 0.00%' : `${r.errorPercent.toFixed(3)}%`),
+                  style: (r) => ({ fontWeight: '700', color: r.errorPercent === 0 ? '#00ff80' : r.errorPercent < 0.5 ? 'var(--accent)' : '#f59e0b' }) },
+              ]}
+            />
           )}
 
           {/* 127-Tooth Metric Transposing Gear Note */}

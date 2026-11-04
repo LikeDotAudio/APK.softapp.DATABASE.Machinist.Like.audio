@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
 import { toIn, toMm } from '../../lib/units';
+import { ApkTable, h } from '../common/ApkTable';
 
 interface Block {
   value: number;
@@ -360,37 +361,7 @@ export const HeightGauge: React.FC<HeightGaugeProps> = ({ initialTargetValue }) 
                 </div>
               </div>
 
-              <div style={{ background: 'var(--bg-primary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', overflow: 'hidden' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
-                  <thead>
-                    <tr style={{ background: 'rgba(255, 255, 255, 0.03)', borderBottom: '1px solid var(--border-color)' }}>
-                      <th style={{ padding: '10px 14px', color: 'var(--text-secondary)', fontWeight: 600 }}>Sequence</th>
-                      <th style={{ padding: '10px 14px', color: 'var(--text-secondary)', fontWeight: 600, textAlign: 'right' }}>Gage Block Size</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {imperialStack.blocks.map((b, idx) => (
-                      <tr key={idx} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
-                        <td style={{ padding: '10px 14px', color: 'var(--text-primary)', fontWeight: 500 }}>
-                          <span style={{ display: 'inline-block', width: '22px', height: '22px', borderRadius: '50%', background: 'rgba(59, 130, 246, 0.2)', color: '#60a5fa', textAlign: 'center', lineHeight: '22px', fontSize: '0.75rem', marginRight: '8px', fontWeight: 700 }}>
-                            {idx + 1}
-                          </span>
-                          Block {idx + 1}
-                        </td>
-                        <td style={{ padding: '10px 14px', textAlign: 'right', fontFamily: 'var(--font-mono)', fontWeight: 600, color: '#60a5fa' }}>
-                          {b.label} <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>in</span>
-                        </td>
-                      </tr>
-                    ))}
-                    <tr style={{ background: 'rgba(59, 130, 246, 0.1)', fontWeight: 700 }}>
-                      <td style={{ padding: '12px 14px', color: '#fff' }}>TOTAL STACK HEIGHT</td>
-                      <td style={{ padding: '12px 14px', textAlign: 'right', fontFamily: 'var(--font-mono)', fontSize: '1.05rem', color: '#60a5fa' }}>
-                        {imperialStack.total.toFixed(4)} <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>in</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <GageStackTable id="machinist-gage-stack-in" blocks={imperialStack.blocks} total={imperialStack.total.toFixed(4)} unitLabel="in" color="#60a5fa" tint="rgba(59, 130, 246, 0.2)" />
             </div>
           )}
         </div>
@@ -504,37 +475,7 @@ export const HeightGauge: React.FC<HeightGaugeProps> = ({ initialTargetValue }) 
                 </div>
               </div>
 
-              <div style={{ background: 'var(--bg-primary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', overflow: 'hidden' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
-                  <thead>
-                    <tr style={{ background: 'rgba(255, 255, 255, 0.03)', borderBottom: '1px solid var(--border-color)' }}>
-                      <th style={{ padding: '10px 14px', color: 'var(--text-secondary)', fontWeight: 600 }}>Sequence</th>
-                      <th style={{ padding: '10px 14px', color: 'var(--text-secondary)', fontWeight: 600, textAlign: 'right' }}>Gage Block Size</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {metricStack.blocks.map((b, idx) => (
-                      <tr key={idx} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
-                        <td style={{ padding: '10px 14px', color: 'var(--text-primary)', fontWeight: 500 }}>
-                          <span style={{ display: 'inline-block', width: '22px', height: '22px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.2)', color: '#34d399', textAlign: 'center', lineHeight: '22px', fontSize: '0.75rem', marginRight: '8px', fontWeight: 700 }}>
-                            {idx + 1}
-                          </span>
-                          Block {idx + 1}
-                        </td>
-                        <td style={{ padding: '10px 14px', textAlign: 'right', fontFamily: 'var(--font-mono)', fontWeight: 600, color: '#34d399' }}>
-                          {b.label} <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>mm</span>
-                        </td>
-                      </tr>
-                    ))}
-                    <tr style={{ background: 'rgba(16, 185, 129, 0.1)', fontWeight: 700 }}>
-                      <td style={{ padding: '12px 14px', color: '#fff' }}>TOTAL STACK HEIGHT</td>
-                      <td style={{ padding: '12px 14px', textAlign: 'right', fontFamily: 'var(--font-mono)', fontSize: '1.05rem', color: '#34d399' }}>
-                        {metricStack.total.toFixed(3)} <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>mm</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <GageStackTable id="machinist-gage-stack-mm" blocks={metricStack.blocks} total={metricStack.total.toFixed(3)} unitLabel="mm" color="#34d399" tint="rgba(16, 185, 129, 0.2)" />
             </div>
           )}
         </div>
@@ -555,3 +496,33 @@ export const HeightGauge: React.FC<HeightGaugeProps> = ({ initialTargetValue }) 
 };
 
 export const JoBlockCalculator = HeightGauge;
+
+/** A gage-block stack as THE ONE TABLE: one row per block, then the stack's total. */
+const GageStackTable: React.FC<{ id: string; blocks: { label: string }[]; total: string; unitLabel: string; color: string; tint: string }> = ({ id, blocks, total, unitLabel, color, tint }) => {
+  const rows = [...blocks.map((b, i) => ({ seq: i + 1, size: b.label, total: false })), { seq: 0, size: total, total: true }];
+  const sized = (v: string, big: boolean) => {
+    const box = h('span', { fontWeight: big ? '700' : '600', color, fontSize: big ? '1.05rem' : '' });
+    box.appendChild(document.createTextNode(v + ' '));
+    box.appendChild(h('span', { fontSize: big ? '0.8rem' : '0.75rem', color: big ? 'var(--text-secondary)' : 'var(--text-muted)' }, unitLabel));
+    return box;
+  };
+  return (
+    <ApkTable
+      id={id}
+      sortable={false}
+      style={{ background: 'var(--bg-primary)', fontSize: '0.88rem' }}
+      rows={rows}
+      rowClass={(r) => (r.total ? 'apk-row-total' : '')}
+      columns={[
+        { key: 'seq', label: 'Sequence', value: (r) => (r.total ? 'TOTAL STACK HEIGHT' : `Block ${r.seq}`), node: (r) => {
+          if (r.total) return h('span', { color: '#fff', fontWeight: '700' }, 'TOTAL STACK HEIGHT');
+          const box = h('span', { color: 'var(--text-primary)', fontWeight: '500' });
+          box.appendChild(h('span', { display: 'inline-block', width: '22px', height: '22px', borderRadius: '50%', background: tint, color, textAlign: 'center', lineHeight: '22px', fontSize: '0.75rem', marginRight: '8px', fontWeight: '700' }, r.seq));
+          box.appendChild(document.createTextNode(`Block ${r.seq}`));
+          return box;
+        } },
+        { key: 'size', label: 'Gage Block Size', align: 'right', mono: true, node: (r) => sized(r.size, r.total) },
+      ]}
+    />
+  );
+};

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
 import { toIn, toMm } from '../../lib/units';
+import { ApkTable } from '../common/ApkTable';
 
 interface KnurlPitchPreset {
   name: string;
@@ -305,37 +306,19 @@ export const Knurling: React.FC = () => {
           <div style={{ padding: '10px 14px', background: 'rgba(255, 255, 255, 0.03)', borderBottom: '1px solid var(--border-color)', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
             Recommended Blank Diameter Options
           </div>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
-            <thead>
-              <tr style={{ borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
-                <th style={{ padding: '8px 12px' }}>Teeth Count</th>
-                <th style={{ padding: '8px 12px' }}>Turned Blank Dia</th>
-                <th style={{ padding: '8px 12px', textAlign: 'right' }}>Offset from Target</th>
-              </tr>
-            </thead>
-            <tbody>
-              {candidates.map((c) => (
-                <tr
-                  key={c.teeth}
-                  style={{
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-                    background: c.isBest ? 'rgba(0, 255, 128, 0.12)' : 'transparent',
-                    fontWeight: c.isBest ? 700 : 400
-                  }}
-                >
-                  <td style={{ padding: '8px 12px', color: c.isBest ? '#00ff80' : 'var(--text-primary)' }}>
-                    {c.isBest && '⭐ '} {c.teeth} teeth
-                  </td>
-                  <td style={{ padding: '8px 12px', fontFamily: 'var(--font-mono)', color: c.isBest ? '#00ff80' : 'var(--accent)' }}>
-                    {c.diameter.toFixed(decPlaces)} {unitStr}
-                  </td>
-                  <td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: c.diffFromTarget === 0 ? '#00ff80' : 'var(--text-secondary)' }}>
-                    {c.diffFromTarget >= 0 ? `+${c.diffFromTarget.toFixed(decPlaces)}` : c.diffFromTarget.toFixed(decPlaces)} {unitStr}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <ApkTable
+            id="machinist-knurl-blanks"
+            style={{ fontSize: '0.88rem' }}
+            rows={candidates}
+            rowClass={(c) => (c.isBest ? 'apk-row-best' : '')}
+            columns={[
+              { key: 'teeth', label: 'Teeth Count', text: (c) => `${c.isBest ? '⭐ ' : ''}${c.teeth} teeth`, style: (c) => ({ color: c.isBest ? '#00ff80' : 'var(--text-primary)' }) },
+              { key: 'diameter', label: 'Turned Blank Dia', mono: true, text: (c) => `${c.diameter.toFixed(decPlaces)} ${unitStr}`, style: (c) => ({ color: c.isBest ? '#00ff80' : 'var(--accent)' }) },
+              { key: 'diffFromTarget', label: 'Offset from Target', align: 'right', mono: true,
+                text: (c) => `${c.diffFromTarget >= 0 ? `+${c.diffFromTarget.toFixed(decPlaces)}` : c.diffFromTarget.toFixed(decPlaces)} ${unitStr}`,
+                style: (c) => ({ color: c.diffFromTarget === 0 ? '#00ff80' : 'var(--text-secondary)' }) },
+            ]}
+          />
         </div>
 
         {/* Pro-Tip Alert */}

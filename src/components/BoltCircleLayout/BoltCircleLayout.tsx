@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
 import { toIn, toMm } from '../../lib/units';
+import { ApkTable, h } from '../common/ApkTable';
 
 interface HoleCoordinate {
   id: number;
@@ -46,6 +47,7 @@ export const BoltCircleLayout: React.FC = () => {
   const cy = parseFloat(centerY) || 0;
   const radius = diameter / 2;
   const decPlaces = unit === 'imperial' ? 4 : 3;
+  const signed = (n: number) => (n >= 0 ? `+${n.toFixed(decPlaces)}` : n.toFixed(decPlaces));
   const unitStr = unit === 'imperial' ? 'in' : 'mm';
 
   // Calculate coordinates
@@ -271,38 +273,17 @@ export const BoltCircleLayout: React.FC = () => {
         </div>
 
         {/* Coordinate Table */}
-        <div style={{ background: 'var(--bg-primary)', border: '1px solid var(--border-color)', maxHeight: '360px', overflowY: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
-            <thead>
-              <tr style={{ background: 'rgba(255, 255, 255, 0.04)', borderBottom: '1px solid var(--border-color)', position: 'sticky', top: 0, zIndex: 1, backdropFilter: 'blur(4px)' }}>
-                <th style={{ padding: '8px 12px', color: 'var(--text-secondary)', fontWeight: 600 }}>Hole</th>
-                <th style={{ padding: '8px 12px', color: 'var(--text-secondary)', fontWeight: 600 }}>Angle</th>
-                <th style={{ padding: '8px 12px', color: 'var(--text-secondary)', fontWeight: 600, textAlign: 'right' }}>X Coord ({unitStr})</th>
-                <th style={{ padding: '8px 12px', color: 'var(--text-secondary)', fontWeight: 600, textAlign: 'right' }}>Y Coord ({unitStr})</th>
-              </tr>
-            </thead>
-            <tbody>
-              {holeList.map((h) => (
-                <tr key={h.id} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
-                  <td style={{ padding: '8px 12px', color: 'var(--text-primary)', fontWeight: 600 }}>
-                    <span style={{ display: 'inline-block', width: '22px', height: '22px', background: 'rgba(0, 255, 128, 0.15)', color: '#00ff80', textAlign: 'center', lineHeight: '22px', fontSize: '0.75rem', marginRight: '6px' }}>
-                      {h.id}
-                    </span>
-                  </td>
-                  <td style={{ padding: '8px 12px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>
-                    {h.angleDeg.toFixed(1)}°
-                  </td>
-                  <td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--accent)' }}>
-                    {h.x >= 0 ? `+${h.x.toFixed(decPlaces)}` : h.x.toFixed(decPlaces)}
-                  </td>
-                  <td style={{ padding: '8px 12px', textAlign: 'right', fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#38bdf8' }}>
-                    {h.y >= 0 ? `+${h.y.toFixed(decPlaces)}` : h.y.toFixed(decPlaces)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <ApkTable
+          id="machinist-bolt-circle-holes"
+          style={{ background: 'var(--bg-primary)', maxHeight: '360px', fontSize: '0.88rem' }}
+          rows={holeList}
+          columns={[
+            { key: 'id', label: 'Hole', node: (hole) => h('span', { display: 'inline-block', width: '22px', height: '22px', background: 'rgba(0, 255, 128, 0.15)', color: '#00ff80', textAlign: 'center', lineHeight: '22px', fontSize: '0.75rem', marginRight: '6px' }, hole.id) },
+            { key: 'angleDeg', label: 'Angle', mono: true, text: (hole) => `${hole.angleDeg.toFixed(1)}°`, style: () => ({ color: 'var(--text-secondary)' }) },
+            { key: 'x', label: `X Coord (${unitStr})`, align: 'right', mono: true, text: (hole) => signed(hole.x), style: () => ({ fontWeight: '700', color: 'var(--accent)' }) },
+            { key: 'y', label: `Y Coord (${unitStr})`, align: 'right', mono: true, text: (hole) => signed(hole.y), style: () => ({ fontWeight: '700', color: '#38bdf8' }) },
+          ]}
+        />
       </div>
 
       {/* Footer: tool description */}

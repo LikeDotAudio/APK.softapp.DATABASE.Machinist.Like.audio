@@ -234,3 +234,11 @@ body {
 .animate-fade-in {
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* THE ONE TABLE (ROAD-3494): every table is an APKTable (components/common/ApkTable.tsx). */
+.apk-table-host { display: flex; flex-direction: column; }
+.apk-table-host tr.apk-row-click { cursor: pointer; }
+.apk-table-host tr.apk-row-current { background: rgba(var(--apk-accent-rgb), 0.12); }
+.apk-table-host tr.apk-row-current-green { background: rgba(16, 185, 129, 0.15); }
+.apk-table-host tr.apk-row-best { background: rgba(0, 255, 128, 0.12); font-weight: 700; }
+.apk-table-host tr.apk-row-total { background: rgba(255, 255, 255, 0.05); font-weight: 700; }

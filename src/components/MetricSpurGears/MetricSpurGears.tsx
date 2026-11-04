@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useUnit } from '../../context/UnitContext';
 import { FormulaSheet } from '../common/FormulaSheet';
 import { MM_PER_IN, toIn, toMm } from '../../lib/units';
+import { ApkTable, h } from '../common/ApkTable';
 
 // Hardinge Pre-Cut Gear Part Number Rule Generator
 // Encapsulates the exact table rules for B-Type and A-Type part numbers across modules 1 to 6
@@ -563,55 +564,26 @@ export const MetricSpurGears: React.FC = () => {
               </div>
 
               {/* Scrollable Table */}
-              <div style={{ maxHeight: '420px', overflowY: 'auto', border: '1px solid var(--border-color)', borderRadius: '6px' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
-                  <thead style={{ background: 'var(--bg-tertiary)', position: 'sticky', top: 0, zIndex: 10 }}>
-                    <tr>
-                      <th style={{ padding: '10px', color: 'var(--text-secondary)' }}>Teeth</th>
-                      <th style={{ padding: '10px', color: 'var(--text-secondary)' }}>MOD</th>
-                      <th style={{ padding: '10px', color: 'var(--text-secondary)' }}>B-Type #</th>
-                      <th style={{ padding: '10px', color: 'var(--text-secondary)' }}>A-Type #</th>
-                      <th style={{ padding: '10px', color: 'var(--text-secondary)' }}>OD ({unitStr})</th>
-                      <th style={{ padding: '10px', color: 'var(--text-secondary)' }}>PCD ({unitStr})</th>
-                      <th style={{ padding: '10px', textAlign: 'right', color: 'var(--text-secondary)' }}>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {catalogData.slice(0, 150).map((row, idx) => (
-                      <tr 
-                        key={idx} 
-                        style={{ borderBottom: '1px solid var(--border-color)', background: idx % 2 === 0 ? 'var(--bg-primary)' : 'transparent', transition: 'background 0.15s ease' }}
-                        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(245, 158, 11, 0.1)'}
-                        onMouseLeave={(e) => e.currentTarget.style.background = idx % 2 === 0 ? 'var(--bg-primary)' : 'transparent'}
-                      >
-                        <td style={{ padding: '10px', fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>{row.teeth}T</td>
-                        <td style={{ padding: '10px', fontWeight: 600, color: '#f59e0b' }}>{row.mod}</td>
-                        <td style={{ padding: '10px', fontFamily: 'var(--font-mono)', color: row.bType !== '--' ? 'var(--accent)' : 'var(--text-muted)' }}>{row.bType}</td>
-                        <td style={{ padding: '10px', fontFamily: 'var(--font-mono)', color: row.aType !== '--' ? '#10b981' : 'var(--text-muted)' }}>{row.aType}</td>
-                        <td style={{ padding: '10px', fontFamily: 'var(--font-mono)' }}>{toUnit(row.odMm)}</td>
-                        <td style={{ padding: '10px', fontFamily: 'var(--font-mono)' }}>{toUnit(row.pcdMm)}</td>
-                        <td style={{ padding: '10px', textAlign: 'right' }}>
-                          <button
-                            onClick={() => loadGearIntoCalculator(row.mod, row.teeth)}
-                            style={{
-                              background: 'transparent',
-                              border: '1px solid var(--border-color)',
-                              color: 'var(--text-primary)',
-                              padding: '4px 8px',
-                              borderRadius: '4px',
-                              fontSize: '0.75rem',
-                              cursor: 'pointer',
-                              fontWeight: 600
-                            }}
-                          >
-                            Load ➔
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <ApkTable
+                id="machinist-spur-gear-catalog"
+                style={{ maxHeight: '420px', fontSize: '0.85rem' }}
+                rows={catalogData.slice(0, 150)}
+                columns={[
+                  { key: 'teeth', label: 'Teeth', mono: true, text: (row) => `${row.teeth}T`, style: () => ({ fontWeight: '700', color: 'var(--text-primary)' }) },
+                  { key: 'mod', label: 'MOD', style: () => ({ fontWeight: '600', color: '#f59e0b' }) },
+                  { key: 'bType', label: 'B-Type #', mono: true, style: (row) => ({ color: row.bType !== '--' ? 'var(--accent)' : 'var(--text-muted)' }) },
+                  { key: 'aType', label: 'A-Type #', mono: true, style: (row) => ({ color: row.aType !== '--' ? '#10b981' : 'var(--text-muted)' }) },
+                  { key: 'odMm', label: `OD (${unitStr})`, mono: true, text: (row) => String(toUnit(row.odMm)) },
+                  { key: 'pcdMm', label: `PCD (${unitStr})`, mono: true, text: (row) => String(toUnit(row.pcdMm)) },
+                  { key: 'action', label: 'Action', align: 'right', value: () => '', node: (row) => {
+                    const b = h('button', { background: 'transparent', border: '1px solid var(--border-color)', color: 'var(--text-primary)', padding: '4px 8px',
+                      borderRadius: '4px', fontSize: '0.75rem', cursor: 'pointer', fontWeight: '600' }, 'Load ➔') as HTMLButtonElement;
+                    b.type = 'button';
+                    b.onclick = () => loadGearIntoCalculator(row.mod, row.teeth);
+                    return b;
+                  } },
+                ]}
+              />
               {catalogData.length > 150 && (
                 <div style={{ textAlign: 'center', padding: '10px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                   Showing first 150 of {catalogData.length} matching gears. Use search or filter to narrow down results.

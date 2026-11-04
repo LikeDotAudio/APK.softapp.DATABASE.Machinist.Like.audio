@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
 import { toIn, toMm } from '../../lib/units';
+import { ApkTable } from '../common/ApkTable';
 
 interface ThreadSpec {
   name: string;
@@ -187,45 +188,18 @@ export const TapDrillDie: React.FC = () => {
               </div>
 
               {/* Thread List Table */}
-              <div style={{ flex: 1, overflowY: 'auto', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', background: 'var(--bg-primary)' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
-                  <thead>
-                    <tr style={{ background: 'rgba(255, 255, 255, 0.04)', borderBottom: '1px solid var(--border-color)', position: 'sticky', top: 0, zIndex: 1, backdropFilter: 'blur(4px)' }}>
-                      <th style={{ padding: '10px 14px', color: 'var(--text-secondary)' }}>Thread Size</th>
-                      <th style={{ padding: '10px 14px', color: 'var(--text-secondary)' }}>Type</th>
-                      <th style={{ padding: '10px 14px', color: 'var(--text-secondary)', textAlign: 'right' }}>Standard Drill</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredThreads.map((t) => {
-                      const idx = THREAD_DATABASE.indexOf(t);
-                      const isSel = idx === selectedIdx && !isCustom;
-                      return (
-                        <tr
-                          key={t.name}
-                          onClick={() => handleSelectThread(idx)}
-                          style={{
-                            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-                            background: isSel ? 'rgba(var(--apk-accent-rgb), 0.15)' : 'transparent',
-                            cursor: 'pointer',
-                            transition: 'background 0.15s ease'
-                          }}
-                        >
-                          <td style={{ padding: '10px 14px', fontWeight: 700, color: isSel ? 'var(--accent)' : 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
-                            {t.name}
-                          </td>
-                          <td style={{ padding: '10px 14px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                            {t.type}
-                          </td>
-                          <td style={{ padding: '10px 14px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: '#00ff80', fontWeight: 600 }}>
-                            {t.standardDrill}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
+              <ApkTable
+                id="machinist-tap-drill-threads"
+                style={{ flex: 1, minHeight: 0, background: 'var(--bg-primary)', fontSize: '0.88rem' }}
+                rows={filteredThreads}
+                rowClass={(t) => (THREAD_DATABASE.indexOf(t) === selectedIdx && !isCustom ? 'apk-row-current' : '')}
+                onRowClick={(t) => handleSelectThread(THREAD_DATABASE.indexOf(t))}
+                columns={[
+                  { key: 'name', label: 'Thread Size', mono: true, style: (t) => ({ fontWeight: '700', color: THREAD_DATABASE.indexOf(t) === selectedIdx && !isCustom ? 'var(--accent)' : 'var(--text-primary)' }) },
+                  { key: 'type', label: 'Type', style: () => ({ fontSize: '0.8rem', color: 'var(--text-muted)' }) },
+                  { key: 'standardDrill', label: 'Standard Drill', align: 'right', mono: true, style: () => ({ color: '#00ff80', fontWeight: '600' }) },
+                ]}
+              />
             </>
           )}
 

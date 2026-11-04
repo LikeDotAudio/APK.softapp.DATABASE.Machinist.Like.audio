@@ -1,5 +1,6 @@
 import React from 'react';
 import { MATRIX_COLUMNS, SPEED_MATRIX } from '../data/speedMatrix';
+import { ApkTable } from '../../common/ApkTable';
 
 interface SpeedMatrixTableProps {
   sfmNum: number;
@@ -7,7 +8,9 @@ interface SpeedMatrixTableProps {
 }
 
 /** Bottom Section: Official Page 34 Speed Matrix Table, the current SFM row and diameter lit. */
-export const SpeedMatrixTable: React.FC<SpeedMatrixTableProps> = ({ sfmNum, speedCutterDia }) => (
+export const SpeedMatrixTable: React.FC<SpeedMatrixTableProps> = ({ sfmNum, speedCutterDia }) => {
+  const isCurrent = (sfm: number) => sfmNum > 0 && Math.abs(sfm - sfmNum) < 15;
+  return (
   <div className="glass-panel" style={{ padding: '35px', background: 'var(--bg-primary)' }}>
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '15px' }}>
       <div>
@@ -23,39 +26,23 @@ export const SpeedMatrixTable: React.FC<SpeedMatrixTableProps> = ({ sfmNum, spee
       </div>
     </div>
 
-    <div style={{ overflowX: 'auto', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-      <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center', fontSize: '0.9rem' }}>
-        <thead>
-          <tr style={{ background: 'var(--bg-secondary)', color: 'var(--text-muted)', textTransform: 'uppercase', fontSize: '0.75rem', letterSpacing: '0.5px' }}>
-            <th style={{ padding: '14px', borderBottom: '2px solid var(--border-color)', color: '#10b981' }}>Surface Ft. / Min (SFM)</th>
-            {MATRIX_COLUMNS.map(col => (
-              <th key={col.key} style={{ padding: '14px', borderBottom: '2px solid var(--border-color)' }}>{col.header}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {SPEED_MATRIX.map((row, idx) => {
-            const isCurrent = (sfmNum > 0 && Math.abs(row.sfm - sfmNum) < 15);
-            return (
-              <tr
-                key={row.sfm}
-                style={{
-                  background: isCurrent ? 'rgba(16, 185, 129, 0.15)' : idx % 2 === 0 ? 'var(--bg-primary)' : 'var(--bg-tertiary)',
-                  borderBottom: '1px solid rgba(255,255,255,0.05)',
-                  transition: 'background 0.2s ease'
-                }}
-              >
-                <td style={{ padding: '11px', fontWeight: 800, color: isCurrent ? '#10b981' : '#fff', background: isCurrent ? 'rgba(16, 185, 129, 0.2)' : 'transparent' }}>
-                  {row.sfm} SFM
-                </td>
-                {MATRIX_COLUMNS.map(col => (
-                  <td key={col.key} style={{ padding: '11px', fontFamily: 'var(--font-mono)', color: speedCutterDia === col.dia && isCurrent ? 'var(--accent)' : 'var(--text-secondary)', fontWeight: speedCutterDia === col.dia && isCurrent ? 800 : 400 }}>{row[col.key].toLocaleString()}</td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <ApkTable
+      id="machinist-gorton-speed-matrix"
+      rows={SPEED_MATRIX}
+      rowClass={(row) => (isCurrent(row.sfm) ? 'apk-row-current-green' : '')}
+      columns={[
+        { key: 'sfm', label: 'Surface Ft. / Min (SFM)', align: 'center', value: (row) => row.sfm,
+          text: (row) => `${row.sfm} SFM`,
+          style: (row) => ({ fontWeight: '800', color: isCurrent(row.sfm) ? '#10b981' : '#fff' }) },
+        ...MATRIX_COLUMNS.map(col => ({
+          key: col.key, label: col.header, align: 'center' as const, mono: true,
+          value: (row: typeof SPEED_MATRIX[number]) => row[col.key],
+          style: (row: typeof SPEED_MATRIX[number]) => (speedCutterDia === col.dia && isCurrent(row.sfm)
+            ? { color: 'var(--accent)', fontWeight: '800' } : { color: 'var(--text-secondary)' }),
+          text: (row: typeof SPEED_MATRIX[number]) => row[col.key].toLocaleString(),
+        })),
+      ]}
+    />
   </div>
 );
+};

@@ -2,6 +2,7 @@ import React from 'react';
 import { fmtInOrMm } from '../../../lib/units';
 import { SENDCUTSEND_BENDING_SPECS } from '../data/bendingSpecs';
 import type { BendingSpec, LengthUnit } from '../types';
+import { ApkTable, h } from '../../common/ApkTable';
 
 interface SpecsTableTabProps {
   unit: LengthUnit;
@@ -37,79 +38,37 @@ export const SpecsTableTab: React.FC<SpecsTableTabProps> = ({ unit, searchMateri
         />
       </div>
 
-      <div style={{ overflowX: 'auto', maxHeight: '600px', border: '1px solid var(--border-color)', borderRadius: '8px' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.82rem', fontFamily: 'var(--font-mono)' }}>
-          <thead>
-            <tr style={{ background: 'var(--bg-tertiary)', color: 'var(--accent)', borderBottom: '2px solid var(--border-color)', position: 'sticky', top: 0, zIndex: 10 }}>
-              <th style={{ padding: '12px 14px' }}>Material Alloy</th>
-              <th style={{ padding: '12px 14px' }}>Thickness</th>
-              <th style={{ padding: '12px 14px' }}>K-Factor</th>
-              <th style={{ padding: '12px 14px' }}>Bend Deduction (90°)</th>
-              <th style={{ padding: '12px 14px' }}>Effective Radius (90°)</th>
-              <th style={{ padding: '12px 14px' }}>Die Width</th>
-              <th style={{ padding: '12px 14px' }}>Min Flange @ 90°</th>
-              <th style={{ padding: '12px 14px' }}>Min Corner Relief</th>
-              <th style={{ padding: '12px 14px' }}>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {SENDCUTSEND_BENDING_SPECS.filter(s =>
-              s.material.toLowerCase().includes(searchMaterial.toLowerCase()) ||
-              s.thicknessInches.toString().includes(searchMaterial)
-            ).map((spec, idx) => (
-              <tr
-                key={idx}
-                style={{
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-                  background: idx % 2 === 0 ? 'rgba(255, 255, 255, 0.01)' : 'transparent',
-                  transition: 'background 0.15s ease'
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(var(--apk-accent-rgb), 0.08)')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = idx % 2 === 0 ? 'rgba(255, 255, 255, 0.01)' : 'transparent')}
-              >
-                <td style={{ padding: '10px 14px', fontWeight: 700, color: '#fff', fontFamily: 'var(--font-sans)' }}>{spec.material}</td>
-                <td style={{ padding: '10px 14px', color: 'var(--accent)' }}>
-                  {unit === 'in' ? `${spec.thicknessInches.toFixed(3)}"` : `${spec.thicknessMm} mm`}
-                </td>
-                <td style={{ padding: '10px 14px', color: '#f59e0b', fontWeight: 600 }}>{spec.kFactor}</td>
-                <td style={{ padding: '10px 14px', color: '#00ff80' }}>
-                  {fmtInOrMm(spec.bendDeduction90Inches, isMetric, 4, 3, '"', ' mm')}
-                </td>
-                <td style={{ padding: '10px 14px' }}>
-                  {fmtInOrMm(spec.effectiveRadius90Inches, isMetric, 3, 2, '"', ' mm')}
-                </td>
-                <td style={{ padding: '10px 14px' }}>
-                  {fmtInOrMm(spec.dieWidthInches, isMetric, 3, 2, '"', ' mm')}
-                </td>
-                <td style={{ padding: '10px 14px', color: '#fff' }}>
-                  {fmtInOrMm(spec.minFlangeLength90Inches, isMetric, 3, 2, '"', ' mm')}
-                </td>
-                <td style={{ padding: '10px 14px', color: 'var(--text-muted)' }}>
-                  {fmtInOrMm(spec.minCornerReliefInches, isMetric, 3, 2, '"', ' mm')}
-                </td>
-                <td style={{ padding: '10px 14px' }}>
-                  <button
-                    type="button"
-                    onClick={() => onUseSpec(spec)}
-                    style={{
-                      background: 'rgba(var(--apk-accent-rgb), 0.15)',
-                      color: 'var(--accent)',
-                      border: '1px solid rgba(var(--apk-accent-rgb), 0.4)',
-                      padding: '4px 10px',
-                      borderRadius: '4px',
-                      fontSize: '0.72rem',
-                      cursor: 'pointer',
-                      fontWeight: 600
-                    }}
-                  >
-                    Use Spec ➔
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <ApkTable
+        id="machinist-bending-specs"
+        style={{ maxHeight: '600px', fontFamily: 'var(--font-mono)', fontSize: '0.82rem' }}
+        rows={SENDCUTSEND_BENDING_SPECS.filter(s =>
+          s.material.toLowerCase().includes(searchMaterial.toLowerCase()) ||
+          s.thicknessInches.toString().includes(searchMaterial)
+        )}
+        columns={[
+          { key: 'material', label: 'Material Alloy', style: () => ({ fontWeight: '700', color: '#fff', fontFamily: 'var(--font-sans)' }) },
+          { key: 'thickness', label: 'Thickness', value: (spec) => spec.thicknessInches,
+            text: (spec) => (unit === 'in' ? `${spec.thicknessInches.toFixed(3)}"` : `${spec.thicknessMm} mm`), style: () => ({ color: 'var(--accent)' }) },
+          { key: 'kFactor', label: 'K-Factor', style: () => ({ color: '#f59e0b', fontWeight: '600' }) },
+          { key: 'bd', label: 'Bend Deduction (90°)', value: (spec) => spec.bendDeduction90Inches,
+            text: (spec) => fmtInOrMm(spec.bendDeduction90Inches, isMetric, 4, 3, '"', ' mm'), style: () => ({ color: '#00ff80' }) },
+          { key: 'er', label: 'Effective Radius (90°)', value: (spec) => spec.effectiveRadius90Inches,
+            text: (spec) => fmtInOrMm(spec.effectiveRadius90Inches, isMetric, 3, 2, '"', ' mm') },
+          { key: 'die', label: 'Die Width', value: (spec) => spec.dieWidthInches,
+            text: (spec) => fmtInOrMm(spec.dieWidthInches, isMetric, 3, 2, '"', ' mm') },
+          { key: 'flange', label: 'Min Flange @ 90°', value: (spec) => spec.minFlangeLength90Inches,
+            text: (spec) => fmtInOrMm(spec.minFlangeLength90Inches, isMetric, 3, 2, '"', ' mm'), style: () => ({ color: '#fff' }) },
+          { key: 'relief', label: 'Min Corner Relief', value: (spec) => spec.minCornerReliefInches,
+            text: (spec) => fmtInOrMm(spec.minCornerReliefInches, isMetric, 3, 2, '"', ' mm'), style: () => ({ color: 'var(--text-muted)' }) },
+          { key: 'action', label: 'Action', value: () => '', node: (spec) => {
+            const b = h('button', { background: 'rgba(var(--apk-accent-rgb), 0.15)', color: 'var(--accent)', border: '1px solid rgba(var(--apk-accent-rgb), 0.4)',
+              padding: '4px 10px', borderRadius: '4px', fontSize: '0.72rem', cursor: 'pointer', fontWeight: '600' }, 'Use Spec ➔') as HTMLButtonElement;
+            b.type = 'button';
+            b.onclick = () => onUseSpec(spec);
+            return b;
+          } },
+        ]}
+      />
     </div>
   );
 };

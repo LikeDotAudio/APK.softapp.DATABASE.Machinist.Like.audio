@@ -1,5 +1,8 @@
 import React from 'react';
 import { FACTORY_TABLE } from '../data/factoryTable';
+import { ApkTable, h } from '../../common/ApkTable';
+
+const ratioOf = (label: string) => parseFloat(label.split(' ')[0]);
 
 interface ReductionTableTabProps {
   ratio: number;
@@ -8,7 +11,9 @@ interface ReductionTableTabProps {
 }
 
 /** MAIN VIEW 4: FACTORY REDUCTION TABLE (Pages 31-33) */
-export const ReductionTableTab: React.FC<ReductionTableTabProps> = ({ ratio, onLoadRatio }) => (
+export const ReductionTableTab: React.FC<ReductionTableTabProps> = ({ ratio, onLoadRatio }) => {
+  const isCurrent = (label: string) => Math.abs(ratioOf(label) - ratio) < 0.05;
+  return (
   <div className="glass-panel" style={{ padding: '35px', background: 'var(--bg-primary)' }}>
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '15px' }}>
       <div>
@@ -24,48 +29,21 @@ export const ReductionTableTab: React.FC<ReductionTableTabProps> = ({ ratio, onL
       </div>
     </div>
 
-    <div style={{ overflowX: 'auto', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-      <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center', fontSize: '0.92rem' }}>
-        <thead>
-          <tr style={{ background: 'var(--bg-secondary)', color: 'var(--text-muted)', textTransform: 'uppercase', fontSize: '0.75rem', letterSpacing: '0.5px' }}>
-            <th style={{ padding: '14px', borderBottom: '2px solid var(--border-color)' }}>Reduction Ratio</th>
-            <th style={{ padding: '14px', borderBottom: '2px solid var(--border-color)' }}>Lower Bar (Inches)</th>
-            <th style={{ padding: '14px', borderBottom: '2px solid var(--border-color)' }}>Upper Bar (Inches)</th>
-            <th style={{ padding: '14px', borderBottom: '2px solid var(--border-color)' }}>Lower Bar (mm)</th>
-            <th style={{ padding: '14px', borderBottom: '2px solid var(--border-color)' }}>Upper Bar (mm)</th>
-            <th style={{ padding: '14px', borderBottom: '2px solid var(--border-color)' }}>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {FACTORY_TABLE.map((row, idx) => {
-            const numVal = parseFloat(row.ratio.split(' ')[0]);
-            const isCurrent = Math.abs(numVal - ratio) < 0.05;
-            return (
-              <tr 
-                key={row.ratio}
-                style={{ 
-                  background: isCurrent ? 'rgba(var(--apk-accent-rgb), 0.12)' : idx % 2 === 0 ? 'var(--bg-primary)' : 'var(--bg-tertiary)',
-                  borderBottom: '1px solid rgba(255,255,255,0.05)',
-                  transition: 'background 0.2s ease',
-                  cursor: 'pointer'
-                }}
-                onClick={() => onLoadRatio(numVal.toString())}
-              >
-                <td style={{ padding: '12px', fontWeight: 700, color: isCurrent ? 'var(--accent)' : '#fff' }}>{row.ratio}</td>
-                <td style={{ padding: '12px', fontFamily: 'var(--font-mono)', color: '#38bdf8' }}>{row.lowerInches.toFixed(3)}"</td>
-                <td style={{ padding: '12px', fontFamily: 'var(--font-mono)', color: '#f59e0b' }}>{row.upperInches.toFixed(3)}"</td>
-                <td style={{ padding: '12px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>{row.lowerMm.toFixed(2)} mm</td>
-                <td style={{ padding: '12px', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>{row.upperMm.toFixed(2)} mm</td>
-                <td style={{ padding: '12px' }}>
-                  <span style={{ fontSize: '0.75rem', background: 'var(--accent)', color: '#000', padding: '3px 10px', borderRadius: '12px', fontWeight: 700 }}>
-                    Load Ratio ➔
-                  </span>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <ApkTable
+      id="machinist-gorton-reduction"
+      rows={FACTORY_TABLE}
+      rowClass={(row) => (isCurrent(row.ratio) ? 'apk-row-current' : '')}
+      onRowClick={(row) => onLoadRatio(ratioOf(row.ratio).toString())}
+      columns={[
+        { key: 'ratio', label: 'Reduction Ratio', align: 'center', style: (row) => ({ fontWeight: '700', color: isCurrent(row.ratio) ? 'var(--accent)' : '#fff' }) },
+        { key: 'lowerInches', label: 'Lower Bar (Inches)', align: 'center', mono: true, text: (row) => `${row.lowerInches.toFixed(3)}"`, style: () => ({ color: '#38bdf8' }) },
+        { key: 'upperInches', label: 'Upper Bar (Inches)', align: 'center', mono: true, text: (row) => `${row.upperInches.toFixed(3)}"`, style: () => ({ color: '#f59e0b' }) },
+        { key: 'lowerMm', label: 'Lower Bar (mm)', align: 'center', mono: true, text: (row) => `${row.lowerMm.toFixed(2)} mm`, style: () => ({ color: 'var(--text-secondary)' }) },
+        { key: 'upperMm', label: 'Upper Bar (mm)', align: 'center', mono: true, text: (row) => `${row.upperMm.toFixed(2)} mm`, style: () => ({ color: 'var(--text-secondary)' }) },
+        { key: 'action', label: 'Action', align: 'center', value: () => '',
+          node: () => h('span', { fontSize: '0.75rem', background: 'var(--accent)', color: '#000', padding: '3px 10px', borderRadius: '12px', fontWeight: '700' }, 'Load Ratio ➔') },
+      ]}
+    />
   </div>
 );
+};
