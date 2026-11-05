@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
 import { toIn, toMm } from '../../lib/units';
 import { ApkTable, h } from '../common/ApkTable';
+import { copyText } from '../../lib/softapp';
 
 interface HoleCoordinate {
   id: number;
@@ -73,9 +74,11 @@ export const BoltCircleLayout: React.FC = () => {
   const copyTableToClipboard = () => {
     const header = `Bolt Circle Coordinates (BCD: ${diameter.toFixed(decPlaces)} ${unitStr}, Holes: ${count})\nID\tAngle (°)\tX (${unitStr})\tY (${unitStr})`;
     const rows = holeList.map(h => `${h.id}\t${h.angleDeg.toFixed(2)}°\t${h.x.toFixed(decPlaces)}\t${h.y.toFixed(decPlaces)}`).join('\n');
-    navigator.clipboard.writeText(`${header}\n${rows}\nChordal Distance: ${chordalDist.toFixed(decPlaces)} ${unitStr}`);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    void copyText(`${header}\n${rows}\nChordal Distance: ${chordalDist.toFixed(decPlaces)} ${unitStr}`, 'Bolt circle coordinates').then((ok) => {
+      if (!ok) return;
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   };
 
   return (

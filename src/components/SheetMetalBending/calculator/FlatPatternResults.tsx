@@ -1,6 +1,7 @@
 import React from 'react';
 import type { BendInputs } from '../hooks/useBendInputs';
 import { buildBendReport } from './bendReport';
+import { copyText } from '../../../lib/softapp';
 
 interface FlatPatternResultsProps {
   b: BendInputs;
@@ -137,8 +138,7 @@ export const FlatPatternResults: React.FC<FlatPatternResultsProps> = ({ b, onSho
           type="button"
           onClick={() => {
             const summary = buildBendReport(activeParams, calculations, unitLabel);
-            navigator.clipboard.writeText(summary);
-            alert('Bending summary copied to clipboard!');
+            copyText(summary, 'Bending summary').then((ok) => { if (ok) alert('Bending summary copied to clipboard!'); });
           }}
           className="btn-precision"
           style={{ width: '100%', padding: '12px', fontSize: '0.9rem' }}

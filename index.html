@@ -19,6 +19,9 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- THE SDK (public/vendor, copied into dist/vendor by the build; check.sh webshared holds them to the source) -->
+    <script src="./vendor/apk-contracts/apk-contracts.global.js"></script>
+    <script src="./vendor/apk-softapp/apk-softapp.js"></script>
     <script type="module" src="/src/main.tsx"></script>
     <script>
       // Served as a plain file (the OS launcher, apk.audio, a node's image) this page is the Vite

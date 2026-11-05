@@ -3,6 +3,7 @@ import { useUnit } from '../../context/UnitContext';
 import { FormulaSheet } from '../common/FormulaSheet';
 import { MM_PER_IN, toIn, toMm } from '../../lib/units';
 import { ApkTable, h } from '../common/ApkTable';
+import { copyText } from '../../lib/softapp';
 
 // Hardinge Pre-Cut Gear Part Number Rule Generator
 // Encapsulates the exact table rules for B-Type and A-Type part numbers across modules 1 to 6
@@ -94,9 +95,11 @@ export const MetricSpurGears: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const copyToClipboard = (text: string, label: string) => {
-    navigator.clipboard.writeText(text);
-    setCopied(label);
-    setTimeout(() => setCopied(null), 2000);
+    void copyText(text, label).then((ok) => {
+      if (!ok) return;
+      setCopied(label);
+      setTimeout(() => setCopied(null), 2000);
+    });
   };
 
   // Parse numeric values

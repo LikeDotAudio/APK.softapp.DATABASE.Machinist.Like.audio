@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useUnit } from '../../context/UnitContext';
 import { toIn, toMm } from '../../lib/units';
 import { ApkTable, h } from '../common/ApkTable';
+import { copyText } from '../../lib/softapp';
 
 interface Block {
   value: number;
@@ -169,9 +170,11 @@ export const HeightGauge: React.FC<HeightGaugeProps> = ({ initialTargetValue }) 
     const text = stack.blocks
       .map((b, i) => `Block ${i + 1}: ${b.label} ${unit}`)
       .join('\n') + `\nTotal Stack: ${stack.total.toFixed(unit === 'in' ? 4 : 3)} ${unit}`;
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    void copyText(text, 'Gage block stack').then((ok) => {
+      if (!ok) return;
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   };
 
   useEffect(() => {
