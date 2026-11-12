@@ -34,6 +34,11 @@ From this repository's own commits (the commit message is the record):
 - vendor/apk-softapp: re-vendored — every problem card is reported through the SDK (ROAD-3695 step 2) (`5c16afa`)
 - vendor: apk-contracts web bundle refreshed from contracts/generated/web (five report codes, ROAD-3695; unit-gate, ROAD-3684) (`ff41104`)
 - re-vendor apk-contracts web bundle: contracts 2.4.0 retires APK.audio/Tests/{suite} (ROAD-3729) (`ab627cc`)
+- wiki: lanes, README and smoke result refreshed (wiki.py + smoke.py) (`be0f5f1`)
+- dist: rebuilt from src (check:dist had drifted 71 files, which stopped the deploy — ROAD-3669) (`c60794c`)
+- vendor: apk-contracts re-vendored (contracts gained the youtube_audio problem codes, root f013ba68a) (`0dd0b31`)
+- vendor/apk-contracts: refresh to contracts/generated/web after ROAD-3759 (contracts split; CHAT_TOPIC origin note) (`cf5aae2`)
+- vendor: apk-softapp / apk-table re-joined from their parts (one GENERATED banner line; ROAD-3762) (`4326f02`)
 
 ## Releases
 - **Released `2.0.0`, tag `v2.0.0`** (2026-11-01, ROAD-3452, the owner's V2) — no SDK pin; every manifest says 2.0.0; GitHub release `v2.0.0`.
