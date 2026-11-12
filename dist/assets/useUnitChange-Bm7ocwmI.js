@@ -1,1 +1,0 @@
-import{d as e,f as t}from"./index-8p944aBg.js";var n=t(e(),1);function r(e,t){let r=(0,n.useRef)(e),i=(0,n.useRef)(t);(0,n.useEffect)(()=>{i.current=t}),(0,n.useEffect)(()=>{if(r.current===e)return;let t=r.current;r.current=e,i.current(t,e)},[e])}export{r as t};
